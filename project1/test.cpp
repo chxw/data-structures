@@ -3,13 +3,14 @@
 #include <string>
 
 #include "Card.hpp"
-#include "CardDeck.hpp"
+// #include "CardDeck.hpp"
 
 void test1(){
   Card card("SPADE", 1);
-  std::string name = card.toString();
+  // card.toString();
+  // std::string name = card.toString();
 
-  assert(name == "SA");
+  // assert(name == "SA");
 }
 
 int main(){

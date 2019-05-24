@@ -13,10 +13,11 @@ public:
   std::string getSuit() const;
   int getNumber() const;
   bool equals(Card card) const;
-  std::string toString() const;
+  // std::string toString() const;
 
 private:
-  //Your design choice
+	std::string suit;
+	int number;
 };
 
 #endif
