@@ -1,4 +1,7 @@
 #include "Card.hpp"
+#include <map>
+
+typedef std::map<int, std::string> BasePairMap;
 
 //default constructor
 Card::Card(){
@@ -7,7 +10,7 @@ Card::Card(){
 }
 
 //non-default constructor
-void Card::Card(std::string suit, int number){
+Card::Card(std::string suit, int number){
 	this->suit = suit;
 	this->number = number;
 }
@@ -36,11 +39,33 @@ int Card::getNumber() const{
 }
 
 bool Card::equals(Card card) const{
-	if this->suit == card->suit and this->number == card->number:
+	if (this->suit == card.suit and this->number == card.number){
 		return true;
+	}
 	return false;
 }
 
-// std::string Card::toString() const{
-// 	cout << this->suit[0] << endl;
-// }
+std::string Card::toString() const{
+	std::string sn;
+	BasePairMap m;
+
+	//map number to card rank
+	m[1] = "A";
+	m[2] = "2";
+	m[3] = "3";
+	m[4] = "4";
+	m[5] = "5";
+	m[6] = "6";
+	m[7] = "7";
+	m[8] = "8";
+	m[9] = "9";
+	m[10] = "X";
+	m[11] = "J";
+	m[12] = "Q";
+	m[13] = "K";
+
+	//string concatenation for sn format
+	sn = this->suit.at(0)+m[this->number];
+
+	return sn;
+}
