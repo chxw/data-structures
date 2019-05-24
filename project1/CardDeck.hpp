@@ -1,18 +1,29 @@
-#ifndef CARD_HPP
-#define CARD_HPP
-
 #include <string>
+#include "Card.hpp"
 
-class Card{
+class CardDeck{
 public:
-  Card();
-  Card(std::string suit, int number);
-  Card(const Card& other);
-  Card& operator=(const Card& other);
+  CardDeck();
+  CardDeck(const CardDeck& other);
+  CardDeck& operator=(const CardDeck& other);
+  ~CardDeck();
 
-  std::string getSuit() const;
-  int getNumber() const;
-  bool equals(Card card) const;
+  int getSize() const;
+  int getCapacity() const;
+
+  Card at(int index) const;
+  bool isEmpty() const;
+
+  void add(Card card);
+  void insert(Card card, int at);
+  void replace(Card card, int at);
+  void remove(int index);
+  void swap(int i, int j);
+
+  bool has(Card card) const;
+  int count(Card card) const;
+
+  CardDeck take(int n);
   std::string toString() const;
 
 private:
