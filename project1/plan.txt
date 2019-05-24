@@ -1,0 +1,7 @@
+Chelsea Wang
+
+5/23 - Read through P1 requirements, copy code skeletons, look through header files and test.cpp
+5/24 - First-try implement of Card.cpp
+	- Error check before first-try implement of toString(). Continue to toString() if error check successful.
+5/25 - First-try implement of CardDeck.cpp
+	- Error check before first-try of 
