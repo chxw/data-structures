@@ -2,6 +2,7 @@
 #define CARD_HPP
 
 #include <string>
+#include <iostream>
 
 class Card{
 public:
@@ -13,7 +14,7 @@ public:
   std::string getSuit() const;
   int getNumber() const;
   bool equals(Card card) const;
-  // std::string toString() const;
+  std::string toString() const;
 
 private:
 	std::string suit;
