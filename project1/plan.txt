@@ -4,4 +4,10 @@ Chelsea Wang
 5/24 - First-try implement of Card.cpp
 	- Error check before first-try implement of toString(). Continue to toString() if error check successful.
 5/25 - First-try implement of CardDeck.cpp
-	- Error check before first-try of 
+	- Error check before first-try of void add(Card card)
+	- Error check before first-try of bool has(Card card) const
+	- Error check before first-try of CardDeck take
+5/26 or 5/27 - create rigorous test.cpp to test Card and CardDeck classes together
+5/27 to 5/29 - ask any remaining questions to classmates, TA, prof
+5/29 - turn in assignment
+	-> I will be out of town 5/30-6/3, so this is why I'm turning this in early
