@@ -2,48 +2,72 @@
 
 //default constructor
 CardDeck::CardDeck(){
-	capacity = 13
-	size = 0
-	cards = new Card[capacity]
+	capacity = 13;
+	size = 0;
+	cards = new Card[capacity];
 }
 
 //non-default constructor
 CardDeck::CardDeck(const CardDeck& other) {
-	capacity = other.getCapacity()
-	size = other.getSize()
-	cards = new Card[capacity]
+	capacity = other.getCapacity();
+	size = other.getSize();
+	cards = new Card[capacity];
 	for(int i=0; i<size; i++){
-		cards.append(other.at(i))
+		cards[i] = other.at(i);
 	}
 }
 
 //copy constructor
 CardDeck& CardDeck::operator=(const CardDeck& other){
-	capacity = other.getCapacity()
-	size = other.getSize()
-	cards = new Card[capacity]
+	capacity = other.getCapacity();
+	size = other.getSize();
+	cards = new Card[capacity];
 	for(int i=0; i<size; i++){
-		cards.append(other.at(i))
+		cards[i] = other.at(i);
 	}
+	return (*this);
 }
 
 
-~CardDeck();
+CardDeck::~CardDeck(){
+	delete [] cards;
+}
 
-int getSize() const;
-int getCapacity() const;
+int CardDeck::getSize() const{
+	return size;
+}
 
-Card at(int index) const;
-bool isEmpty() const;
+int CardDeck::getCapacity() const{
+	return capacity;
+}
 
-void add(Card card);
-void insert(Card card, int at);
-void replace(Card card, int at);
-void remove(int index);
-void swap(int i, int j);
+Card CardDeck::at(int index) const{
+	return cards[index];
+}
 
-bool has(Card card) const;
-int count(Card card) const;
+bool isEmpty() const{
+	if (size == 0){
+		return true;
+	}
+	return false;
+}
 
-CardDeck take(int n);
-std::string toString() const;
+void add(Card card){
+	cards[size] = card;
+	size++;
+}
+
+void insert(Card card, int at){
+	cards[at] = card;
+	size++; 
+}
+
+// void replace(Card card, int at);
+// void remove(int index);
+// void swap(int i, int j);
+
+// bool has(Card card) const;
+// int count(Card card) const;
+
+// CardDeck take(int n);
+// std::string toString() const;

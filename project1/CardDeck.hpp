@@ -1,3 +1,7 @@
+#ifndef CARDDECK_HPP
+#define CARDDECK_HPP
+
+
 #include <string>
 #include "Card.hpp"
 
@@ -12,22 +16,24 @@ public:
   int getCapacity() const;
 
   Card at(int index) const;
-  bool isEmpty() const;
+  // bool isEmpty() const;
 
-  void add(Card card);
-  void insert(Card card, int at);
-  void replace(Card card, int at);
-  void remove(int index);
-  void swap(int i, int j);
+  // void add(Card card);
+  // void insert(Card card, int at);
+  // void replace(Card card, int at);
+  // void remove(int index);
+  // void swap(int i, int j);
 
-  bool has(Card card) const;
-  int count(Card card) const;
+  // bool has(Card card) const;
+  // int count(Card card) const;
 
-  CardDeck take(int n);
-  std::string toString() const;
+  // CardDeck take(int n);
+  // std::string toString() const;
 
 private:
-  //Your design choice
+  int capacity;
+  int size;
+  Card* cards;
 };
 
 #endif

@@ -51,7 +51,7 @@ int Array::getSize() const{
 }
 
 void Array::add(int i){
-  numbers[size] = 1;
+  numbers[size] = i;
   ++size
 }
 
