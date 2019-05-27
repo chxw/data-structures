@@ -1,9 +1,8 @@
 #ifndef CARDDECK_HPP
 #define CARDDECK_HPP
 
-
 #include <string>
-#include "Card.hpp"
+#include <iostream>
 
 class CardDeck{
 public:
@@ -16,10 +15,10 @@ public:
   int getCapacity() const;
 
   Card at(int index) const;
-  // bool isEmpty() const;
+  bool isEmpty() const;
 
-  // void add(Card card);
-  // void insert(Card card, int at);
+  void add(Card card);
+  void insert(Card card, int at);
   // void replace(Card card, int at);
   // void remove(int index);
   // void swap(int i, int j);
