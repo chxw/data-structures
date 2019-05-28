@@ -39,7 +39,7 @@ int Card::getNumber() const{
 }
 
 bool Card::equals(Card card) const{
-	if (this->suit == card.suit and this->number == card.number){
+	if (this->suit == card.getSuit() and this->number == card.getNumber()){
 		return true;
 	}
 	return false;
