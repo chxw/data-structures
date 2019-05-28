@@ -144,23 +144,14 @@ int CardDeck::count(Card card) const{
 
 CardDeck CardDeck::take(int n){
 	CardDeck first_n;
-	Card *temp = new Card[size-n];
 
-	for(int i = 0; i < size; i++){
-		std::cout << i << " ";
-		std::cout << cards[i].toString() << std::endl;
-	}
-
-	for(int i = n; i < size; i++){
-		temp[i] = cards[i];
-	}
 	for(int i = 0; i < n; i++){
 		first_n.add(cards[i]);
 	}
 
-	delete[] cards;
-	cards = temp;
-	temp = NULL;
+	for(int i = 0; i < n; i++){
+		this->remove(0);
+	}
 
 	return first_n;
 }
@@ -170,7 +161,6 @@ std::string CardDeck::toString() const{
 
 	for(int i = 0; i < size; i++){
 		sn_deck += cards[i].toString();
-		// std::cout << sn_deck << std::endl;
 		if(i != size-1) { sn_deck += ", "; }
 	}
 	return sn_deck;
