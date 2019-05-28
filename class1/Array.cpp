@@ -29,7 +29,7 @@ Array& Array::operator=(const Array& other){
   if (&other != this){
     capacity = other.getCapacity();
     size = other.getSize();
-    numbers = newint[capacity];
+    numbers = new int[capacity];
     for(int i = 0; i < size; i++){
       numbers[i] =other.at(i);
     }

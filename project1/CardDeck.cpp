@@ -7,27 +7,35 @@ CardDeck::CardDeck(){
 	Card *cards = new Card[size];
 }
 
-//non-default constructor
+//copy constructor
 CardDeck::CardDeck(const CardDeck& other) {
-	std::cout << "here" << std::endl;
 	capacity = other.getCapacity();
 	size = other.getSize();
-	std::cout << size << std::endl;
 	Card *cards = new Card[size];
+
 	for(int i=0; i<size; i++){
-		std::cout << i << std::endl;
-		std::cout << (other.at(i)).toString() << std::endl;
+		// std::cout << (other.at(i)).toString() << std::endl;
 		cards[i] = other.at(i);
+		// std::cout << (cards[i]).toString() << std::endl;
 	}
+
+	std::cout << (cards[0]).toString() << std::endl;
+	std::cout << (cards[1]).toString() << std::endl;
+	std::cout << (cards[2]).toString() << std::endl;
+	std::cout << (cards[3]).toString() << std::endl;
 }
 
-//copy constructor
+//assignment operator
 CardDeck& CardDeck::operator=(const CardDeck& other){
-	capacity = other.getCapacity();
-	size = other.getSize();
-	Card *cards = new Card[size];
-	for(int i=0; i<size; i++){
-		cards[i] = other.at(i);
+	if (&other != this){
+		delete[] cards;
+		capacity = other.getCapacity();
+		size = other.getSize();
+		Card *cards = new Card[size];
+
+		for(int i=0; i<size; i++){
+			cards[i] = other.at(i);
+		}
 	}
 	return (*this);
 }

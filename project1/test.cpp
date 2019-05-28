@@ -48,9 +48,9 @@ void test1(){
 
 	// card1, card2, card3
 
-	std::cout << deck.getSize() << std::endl;
-	std::cout << deck.getCapacity() << std::endl;
-	std::cout << deck.isEmpty() << std::endl;
+	// std::cout << deck.getSize() << std::endl;
+	// std::cout << deck.getCapacity() << std::endl;
+	// std::cout << deck.isEmpty() << std::endl;
 
 	deck.insert(card2, 0);
 
@@ -61,21 +61,21 @@ void test1(){
 		std::cout << (deck.at(i)).toString() << std::endl;
 	}
 
+	// CardDeck non-default constructor testing
 	CardDeck deck2(deck);
 
 	std::cout << deck.getSize() << std::endl;
 	std::cout << deck.getCapacity() << std::endl;
 	std::cout << deck.isEmpty() << std::endl;
 
-	for(int i = 0; i < deck2.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck2.at(i)).toString() << std::endl;
-	}
+	std::cout << deck2.getSize() << std::endl;
+	std::cout << deck2.getCapacity() << std::endl;
+	std::cout << deck2.isEmpty() << std::endl;
 
-
-	// std::cout << (deck.at(0)).toString() << std::endl;
-	// std::cout << (deck.at(1)).toString() << std::endl;
-
+	std::cout << (deck2.at(0)).toString() << std::endl;
+	std::cout << (deck2.at(1)).toString() << std::endl;
+	std::cout << (deck2.at(2)).toString() << std::endl;
+	std::cout << (deck2.at(3)).toString() << std::endl;
 
 	// assert(name == "SA");
 }
