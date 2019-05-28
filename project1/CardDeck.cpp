@@ -144,10 +144,18 @@ int CardDeck::count(Card card) const{
 
 CardDeck CardDeck::take(int n){
 	CardDeck first_n;
+	Card *temp = new Card[size-n];
 
 	for(int i = 0; i < n; i++){
 		first_n.add(cards[i]);
 	}
+	for(int i = n; i < size; i++){
+		temp[i] = cards[i];
+	}
+
+	delete[] cards;
+	cards = temp;
+	temp = NULL;
 
 	return first_n;
 }
