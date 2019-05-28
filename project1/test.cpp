@@ -171,6 +171,26 @@ void test1(){
 		std::cout << i << " ";
 		std::cout << (deck3.at(i)).toString() << std::endl;
 	}
+
+	// take() testing
+	deck4.add(card1);
+	deck4.add(card2);
+	deck4.add(card3);
+	deck4.add(card4);
+	deck4.add(card5);
+	std::cout << "\n DECK 4 : \n" << std::endl;
+	for(int i = 0; i < deck4.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck4.at(i)).toString() << std::endl;
+	}
+
+	CardDeck deck6 = deck4.take(3);
+	std::cout << "\n DECK 6 : \n" << std::endl;
+	for(int i = 0; i < deck6.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck6.at(i)).toString() << std::endl;
+	}
+
 }
 
 int main(){

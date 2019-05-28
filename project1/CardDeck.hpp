@@ -23,10 +23,10 @@ public:
   void remove(int index);
   void swap(int i, int j);
 
-  // bool has(Card card) const;
-  // int count(Card card) const;
+  bool has(Card card) const;
+  int count(Card card) const;
 
-  // CardDeck take(int n);
+  CardDeck take(int n);
   // std::string toString() const;
 
 private:

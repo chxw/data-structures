@@ -122,31 +122,31 @@ void CardDeck::swap(int i, int j){
 	cards[j] = i_card;
 }
 
-bool has(Card card) const{
+bool CardDeck::has(Card card) const{
 	for(int i = 0; i < size; i++){
-		if (cards[i] == card){
-			return true
+		if (cards[i].equals(card)){
+			return true;
 		}
 	}
 	return false;
 }
 
-int count(Card card) const{
+int CardDeck::count(Card card) const{
 	int count = 0;
 
 	for(int i = 0; i < size; i++){
-		if (cards[i] == card){
+		if (cards[i].equals(card)){
 			count++;
 		}
 	}
 	return count;
 }
 
-CardDeck take(int n){
-	Card *first_n = new Card[n];
+CardDeck CardDeck::take(int n){
+	CardDeck first_n;
 
-	for(int i = 0; i < n-1; i++){
-		first_n[i] = cards[i];
+	for(int i = 0; i < n; i++){
+		first_n.add(cards[i]);
 	}
 
 	return first_n;
