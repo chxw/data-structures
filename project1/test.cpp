@@ -2,12 +2,14 @@
 #include <iostream>
 #include <string>
 
-// #include "Card.hpp"
 #include "Card.cpp"
 #include "CardDeck.cpp"
 
 void test1(){
 	// Card class testing
+
+	// Card default constructor
+	std::cout << "\n ~~Initialize card1, card2, card3, card4~~ \n" << std::endl;
 	Card card1;
 	std::string name1 = card1.toString();
 	// std::cout << card1.getSuit() << std::endl;
@@ -15,6 +17,7 @@ void test1(){
 	std::cout << "card 1 : ";
 	std::cout << name1 << std::endl;
 
+	// Card non-default constructor testing
 	Card card2("CLUB", 11);
 	std::string name2 = card2.toString();
 	// std::cout << card2.getSuit() << std::endl;
@@ -27,6 +30,7 @@ void test1(){
 	std::string name3 = card3.toString();
 	std::cout << name3 << std::endl;
 
+	// Card copy constructor testing
 	Card card4 = card3;
 	std::string name4 = card4.toString();
 	// std::cout << card2.getSuit() << std::endl;
@@ -35,49 +39,138 @@ void test1(){
 	std::cout << name4 << std::endl;
 
 	// CardDeck class testing
-
 	CardDeck deck;
 
-	// std::cout << deck.getSize() << std::endl;
-	// std::cout << deck.getCapacity() << std::endl;
-	// std::cout << deck.isEmpty() << std::endl;
+	std::cout << "\n ~~Deck initialized, no cards added~~ \n" << std::endl;
+	std::cout << "\n DECK : \n" << std::endl;
+	std::cout << "deck.getSize() : ";
+	std::cout << deck.getSize() << std::endl;
+	std::cout << "deck.getCapacity() : ";
+	std::cout << deck.getCapacity() << std::endl;
+	std::cout << "deck.isEmpty() : ";
+	std::cout << deck.isEmpty() << std::endl;
 
+	// add() testing
+	std::cout << "\n ~~Adding 3 cards to deck~~ \n" << std::endl; // card1, card2, card3
 	deck.add(card1); 
 	deck.add(card2); 
 	deck.add(card3);
 
-	// card1, card2, card3
+	std::cout << "\n DECK : \n" << std::endl;
+	std::cout << "deck.getSize() : ";
+	std::cout << deck.getSize() << std::endl;
+	std::cout << "deck.getCapacity() : ";
+	std::cout << deck.getCapacity() << std::endl;
+	std::cout << "deck.isEmpty() : ";
+	std::cout << deck.isEmpty() << std::endl;
 
-	// std::cout << deck.getSize() << std::endl;
-	// std::cout << deck.getCapacity() << std::endl;
-	// std::cout << deck.isEmpty() << std::endl;
-
+	std::cout << "\n ~~Insert card2 to deck at index 0~~ \n" << std::endl; // card2, card1, card2, card3
 	deck.insert(card2, 0);
 
-	// card2, card1, card2, card3
-
+	std::cout << "\n DECK : \n" << std::endl;
 	for(int i = 0; i < deck.getSize(); i++){
 		std::cout << i << " ";
 		std::cout << (deck.at(i)).toString() << std::endl;
 	}
 
-	// CardDeck non-default constructor testing
+	// copy constructor testing
+	std::cout << "\n ~~Initializing deck2 using deck~~ \n" << std::endl;
 	CardDeck deck2(deck);
 
-	std::cout << deck.getSize() << std::endl;
-	std::cout << deck.getCapacity() << std::endl;
-	std::cout << deck.isEmpty() << std::endl;
-
+	std::cout << "\n DECK 2 : \n" << std::endl;
+	std::cout << "deck2.getSize() : ";
 	std::cout << deck2.getSize() << std::endl;
+	std::cout << "deck2.getCapacity() : ";
 	std::cout << deck2.getCapacity() << std::endl;
+	std::cout << "deck2.isEmpty() : ";
 	std::cout << deck2.isEmpty() << std::endl;
 
-	std::cout << (deck2.at(0)).toString() << std::endl;
-	std::cout << (deck2.at(1)).toString() << std::endl;
-	std::cout << (deck2.at(2)).toString() << std::endl;
-	std::cout << (deck2.at(3)).toString() << std::endl;
+	for(int i = 0; i < deck2.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck2.at(i)).toString() << std::endl;
+	}
 
-	// assert(name == "SA");
+	// CardDeck copy constructor testing
+	std::cout << "\n ~~Initializing deck3, deck4, deck5~~ \n" << std::endl;
+	CardDeck deck3, deck4, deck5;
+	std::cout << "\n ~~ deck3 = deck2; deck4 = deck5 ~~ \n" << std::endl;
+	deck3 = deck2;
+	deck4 = deck5;
+
+	std::cout << "\n DECK 3 : \n" << std::endl;
+	std::cout << "deck3.getSize() : ";
+	std::cout << deck3.getSize() << std::endl;
+	std::cout << "deck3.getCapacity() : ";
+	std::cout << deck3.getCapacity() << std::endl;
+	std::cout << "deck3.isEmpty() : ";
+	std::cout << deck3.isEmpty() << std::endl;
+
+	for(int i = 0; i < deck3.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck3.at(i)).toString() << std::endl;
+	}
+
+	std::cout << "\n DECK 4 : \n" << std::endl;
+	std::cout << "deck4.getSize() : ";
+	std::cout << deck4.getSize() << std::endl;
+	std::cout << "deck4.getCapacity() : ";
+	std::cout << deck4.getCapacity() << std::endl;
+	std::cout << "deck4.isEmpty() : ";
+	std::cout << deck4.isEmpty() << std::endl;
+
+	for(int i = 0; i < deck4.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck4.at(i)).toString() << std::endl;
+	}
+
+	std::cout << "\n DECK 5 : \n" << std::endl;
+	std::cout << "deck5.getSize() : ";
+	std::cout << deck5.getSize() << std::endl;
+	std::cout << "deck5.getCapacity() : ";
+	std::cout << deck5.getCapacity() << std::endl;
+	std::cout << "deck5.isEmpty() : ";
+	std::cout << deck5.isEmpty() << std::endl;
+
+	for(int i = 0; i < deck5.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck5.at(i)).toString() << std::endl;
+	}
+
+	// CardDeck replace() testing
+	std::cout << "\n ~~Initialize card 5~~ \n" << std::endl;
+	Card card5("HEART", 13);
+	std::string name5 = card5.toString();
+	// std::cout << card2.getSuit() << std::endl;
+	// std::cout << card2.getNumber() << std::endl;
+	std::cout << "card 5 : ";
+	std::cout << name5 << std::endl;
+
+	std::cout << "\n ~~deck3.replace(card5, 2)~~ \n" << std::endl;
+	deck3.replace(card5, 2);
+
+	std::cout << "\n DECK 3 : \n" << std::endl;
+	for(int i = 0; i < deck3.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck3.at(i)).toString() << std::endl;
+	}
+
+	// CardDeck remove testing
+	std::cout << "\n ~~deck3.remove(1)~~ \n" << std::endl;
+	deck3.remove(1);
+	std::cout << "\n DECK 3 : \n" << std::endl;
+	for(int i = 0; i < deck3.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck3.at(i)).toString() << std::endl;
+	}
+
+	// CardDeck swap testing
+	std::cout << "\n ~~deck3.swap(0,1)~~ \n" << std::endl;
+	deck3.swap(0,2);
+	std::cout << "\n DECK 3 : \n" << std::endl;
+	for(int i = 0; i < deck3.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck3.at(i)).toString() << std::endl;
+	}
 }
 
 int main(){

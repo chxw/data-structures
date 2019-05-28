@@ -4,37 +4,30 @@
 CardDeck::CardDeck(){
 	capacity = 13;
 	size = 0;
-	Card *cards = new Card[size];
+	cards = new Card[size];
 }
 
 //copy constructor
 CardDeck::CardDeck(const CardDeck& other) {
 	capacity = other.getCapacity();
 	size = other.getSize();
-	Card *cards = new Card[size];
+	cards = new Card[size];
 
 	for(int i=0; i<size; i++){
-		// std::cout << (other.at(i)).toString() << std::endl;
-		cards[i] = other.at(i);
-		// std::cout << (cards[i]).toString() << std::endl;
+		cards[i] = other.cards[i];
 	}
-
-	std::cout << (cards[0]).toString() << std::endl;
-	std::cout << (cards[1]).toString() << std::endl;
-	std::cout << (cards[2]).toString() << std::endl;
-	std::cout << (cards[3]).toString() << std::endl;
 }
 
 //assignment operator
 CardDeck& CardDeck::operator=(const CardDeck& other){
 	if (&other != this){
-		delete[] cards;
-		capacity = other.getCapacity();
+		delete [] cards;
+		capacity = other.getCapacity();	
 		size = other.getSize();
-		Card *cards = new Card[size];
+		cards = new Card[size];
 
 		for(int i=0; i<size; i++){
-			cards[i] = other.at(i);
+			cards[i] = other.cards[i];
 		}
 	}
 	return (*this);
@@ -99,12 +92,64 @@ void CardDeck::insert(Card card, int at){
 	size++;
 }
 
-// void replace(Card card, int at);
-// void remove(int index);
-// void swap(int i, int j);
+void CardDeck::replace(Card card, int at){
+	cards[at] = card;
+}
 
-// bool has(Card card) const;
-// int count(Card card) const;
+void CardDeck::remove(int index){
+	Card *temp = new Card[size-1];
 
-// CardDeck take(int n);
+	for(int i = 0; i < index; i++){
+		temp[i] = cards[i];
+	}
+
+	for(int i = index; i < size-1; i++){
+			temp[i] = cards[i+1];
+		}
+
+	delete[] cards;
+	cards = temp;
+	temp = NULL;
+
+	size--;
+}
+
+void CardDeck::swap(int i, int j){
+	Card i_card = cards[i];
+	Card j_card = cards[j];
+
+	cards[i] = j_card;
+	cards[j] = i_card;
+}
+
+bool has(Card card) const{
+	for(int i = 0; i < size; i++){
+		if (cards[i] == card){
+			return true
+		}
+	}
+	return false;
+}
+
+int count(Card card) const{
+	int count = 0;
+
+	for(int i = 0; i < size; i++){
+		if (cards[i] == card){
+			count++;
+		}
+	}
+	return count;
+}
+
+CardDeck take(int n){
+	Card *first_n = new Card[n];
+
+	for(int i = 0; i < n-1; i++){
+		first_n[i] = cards[i];
+	}
+
+	return first_n;
+}
+
 // std::string toString() const;

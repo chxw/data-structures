@@ -19,9 +19,9 @@ public:
 
   void add(Card card);
   void insert(Card card, int at);
-  // void replace(Card card, int at);
-  // void remove(int index);
-  // void swap(int i, int j);
+  void replace(Card card, int at);
+  void remove(int index);
+  void swap(int i, int j);
 
   // bool has(Card card) const;
   // int count(Card card) const;
@@ -32,7 +32,7 @@ public:
 private:
   int capacity;
   int size;
-  Card* cards;
+  Card *cards;
 };
 
 #endif
