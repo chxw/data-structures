@@ -58,6 +58,10 @@ bool CardDeck::isEmpty() const{
 }
 
 void CardDeck::add(Card card){
+	if (size == 13){
+		capacity += 13;
+	}
+	
 	Card *temp = new Card[size+1];
 
 	for (int i = 0; i < size; i++){

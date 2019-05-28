@@ -1,10 +1,14 @@
 #include <iostream>
 #include <string>
-
 #include <stdlib.h>     /* srand, rand */
 
 #include "Card.cpp"
 #include "CardDeck.cpp"
+
+std::string s = "SPADE";
+std::string h = "HEARTS";
+std::string c = "CLUBS";
+std::string d = "DIAMONDS";
 
 CardDeck create_suit(std::string s){
 	std::string suit = s;
@@ -34,35 +38,34 @@ CardDeck create_suit(std::string s){
 	return deck;
 }
 
-int main(){
-	CardDeck spades = create_suit("SPADE");
-	std::cout << spades.toString() << std::endl;
+CardDeck spades = create_suit(s);
+CardDeck hearts = create_suit(h);
+CardDeck clubs = create_suit(c);
+CardDeck diamonds = create_suit(d);
 
-	CardDeck hearts = create_suit("HEARTS");
-	std::cout << hearts.toString() << std::endl;
-
-	CardDeck clubs = create_suit("CLUBS");
-	std::cout << clubs.toString() << std::endl;
-
-	CardDeck diamonds = create_suit("DIAMONDS");
-	std::cout << diamonds.toString() << std::endl;
-
-	CardDeck deck1;
+CardDeck random_deck(){
+	CardDeck deck;
 
 	int count = 0;
 	while(count < 12){
 		int a = rand() % 13 + 1;
-		deck1.add(spades.at(a));
+		deck.add(spades.at(a));
 		int b = rand() % 13 + 1;
-		deck1.add(hearts.at(b));
+		deck.add(hearts.at(b));
 		int c = rand() % 13 + 1;
-		deck1.add(clubs.at(c));
+		deck.add(clubs.at(c));
 		int d = rand() % 13 + 1;
-		deck1.add(diamonds.at(d));
+		deck.add(diamonds.at(d));
 		count += 4;
 	}
 
-	std::cout << deck1.toString() << std::endl;
+	return deck;
+}
+
+int main(){
+	CardDeck deck1 = random_deck();
+	CardDeck deck2 = random_deck();
+	CardDeck deck3 = random_deck();
 
 	return 0;
 }
