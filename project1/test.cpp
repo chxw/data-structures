@@ -185,26 +185,13 @@ void test1(){
 	std::cout << "has " + card5.toString() + " : ";
 	std::cout <<  deck3.has(card5) << std::endl;
 
-	// take() testing
+	// count() testing
 	deck4.add(card1);
 	deck4.add(card2);
 	deck4.add(card3);
 	deck4.add(card4);
 	deck4.add(card5);
-	std::cout << "\n DECK 4 : \n" << std::endl;
-	for(int i = 0; i < deck4.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck4.at(i)).toString() << std::endl;
-	}
 
-	CardDeck deck6 = deck4.take(3);
-	std::cout << "\n DECK 6 : \n" << std::endl;
-	for(int i = 0; i < deck6.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck6.at(i)).toString() << std::endl;
-	}
-
-	// count() testing
 	std::cout << "\n ~~deck4.count() testing~~ \n" << std::endl;
 	std::cout << "count " + card1.toString() + " : ";
 	std::cout << deck4.count(card1) << std::endl;
@@ -215,7 +202,32 @@ void test1(){
 	std::cout << "count " + card4.toString() + " : ";
 	std::cout << deck4.count(card4) << std::endl;
 	std::cout << "count " + card5.toString() + " : ";
-	std::cout <<  deck4.count(card5) << std::endl;
+	std::cout << deck4.count(card5) << std::endl;
+
+	// take() testing
+	std::cout << "\n ~~take() testing~~ \n" << std::endl;
+	std::cout << "\n ~~before take(3)~~ \n" << std::endl;
+	std::cout << "\n DECK 4 : \n" << std::endl;
+	for(int i = 0; i < deck4.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck4.at(i)).toString() << std::endl;
+	}
+
+	std::cout << "\n ~~after take(3)~~ \n" << std::endl;
+	CardDeck deck6 = deck4.take(3);
+	std::cout << "\n DECK 6 : \n" << std::endl;
+	for(int i = 0; i < deck6.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck6.at(i)).toString() << std::endl;
+	}
+
+	std::cout << "\n DECK 4 : \n" << std::endl;
+	for(int i = 0; i < deck4.getSize(); i++){
+		std::cout << i << " ";
+		std::cout << (deck4.at(i)).toString() << std::endl;
+	}
+
+	// std::cout << deck4.toString();
 
 }
 

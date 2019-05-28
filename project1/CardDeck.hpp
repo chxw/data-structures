@@ -27,7 +27,7 @@ public:
   int count(Card card) const;
 
   CardDeck take(int n);
-  // std::string toString() const;
+  std::string toString() const;
 
 private:
   int capacity;

@@ -60,7 +60,7 @@ bool CardDeck::isEmpty() const{
 void CardDeck::add(Card card){
 	Card *temp = new Card[size+1];
 
-	for (int i = 0; i<size; i++){
+	for (int i = 0; i < size; i++){
 		temp[i] = cards[i];
 	}
 
@@ -146,11 +146,16 @@ CardDeck CardDeck::take(int n){
 	CardDeck first_n;
 	Card *temp = new Card[size-n];
 
-	for(int i = 0; i < n; i++){
-		first_n.add(cards[i]);
+	for(int i = 0; i < size; i++){
+		std::cout << i << " ";
+		std::cout << cards[i].toString() << std::endl;
 	}
+
 	for(int i = n; i < size; i++){
 		temp[i] = cards[i];
+	}
+	for(int i = 0; i < n; i++){
+		first_n.add(cards[i]);
 	}
 
 	delete[] cards;
@@ -160,4 +165,13 @@ CardDeck CardDeck::take(int n){
 	return first_n;
 }
 
-// std::string toString() const;
+std::string CardDeck::toString() const{
+	std::string sn_deck;
+
+	for(int i = 0; i < size; i++){
+		sn_deck += cards[i].toString();
+		// std::cout << sn_deck << std::endl;
+		if(i != size-1) { sn_deck += ", "; }
+	}
+	return sn_deck;
+}
