@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 #include <string>
 #include <stdlib.h>     /* srand, rand */
 
@@ -62,10 +63,102 @@ CardDeck random_deck(){
 	return deck;
 }
 
+void card_test(std::string s, int r){
+	Card card1;
+
+	std::cout << "\n ====== Card testing ======" << std::endl;
+
+	std::cout << "\n **** Default contructor :" << std::endl;	
+	std::cout << "toString() : ";
+	std:: string name1 = card1.toString();
+	std::cout << name1 << std::endl;
+	std::cout << "getSuit() + getNumber() : ";
+	std::cout << card1.getSuit();
+	std::cout << card1.getNumber() << std::endl;
+
+	std::cout << "\n **** Non-default contructor :" << std::endl;	
+	Card card2(s, r);
+	std::cout << "toString() : ";
+	std:: string name2 = card2.toString();
+	std::cout << name2 << std::endl;
+	std::cout << "getSuit() + getNumber() : ";
+	std::cout << card2.getSuit();
+	std::cout << card2.getNumber() << std::endl;
+
+	std::cout << "\n **** Copy constructor :" << std::endl;	
+	Card card3(card2);
+	std::cout << "toString() : ";
+	std:: string name3 = card3.toString();
+	std::cout << name3 << std::endl;
+	std::cout << "getSuit() + getNumber() : ";
+	std::cout << card3.getSuit();
+	std::cout << card3.getNumber() << std::endl;
+	assert(card3.equals(card2));
+
+	std::cout << "\n **** Assignment operator :" << std::endl;	
+	Card card4;
+	card4 = card1;
+	std::cout << "toString() : ";
+	std:: string name4 = card4.toString();
+	std::cout << name4 << std::endl;
+	std::cout << "getSuit() + getNumber() : ";
+	std::cout << card4.getSuit();
+	std::cout << card4.getNumber() << std::endl;
+	assert(card4.equals(card1));
+}
+
+void carddeck_test(CardDeck deck){
+	CardDeck deck1;
+	CardDeck deck2(deck);
+	CardDeck deck3;
+	deck3 = deck;
+
+	std::cout << "\n ====== CardDeck testing ======" << std::endl;
+
+	std::cout << "\n **** Empty deck :" << std::endl;
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+
+	std::cout << "\n **** User input deck :" << std::endl;
+	std::cout << "deck.getSize() : ";
+	std::cout << deck.getSize() << std::endl;
+	std::cout << "deck.getCapacity() : ";
+	std::cout << deck.getCapacity() << std::endl;
+	std::cout << "deck.isEmpty() : ";
+	std::cout << deck.isEmpty() << std::endl;
+
+	std::cout << "\n **** Deck using copy constructor :" << std::endl;
+	std::cout << "deck2.getSize() : ";
+	std::cout << deck2.getSize() << std::endl;
+	std::cout << "deck2.getCapacity() : ";
+	std::cout << deck2.getCapacity() << std::endl;
+	std::cout << "deck2.isEmpty() : ";
+	std::cout << deck2.isEmpty() << std::endl;
+
+	std::cout << "\n **** Deck using assignment operator" << std::endl;
+	std::cout << "deck3.getSize() : ";
+	std::cout << deck3.getSize() << std::endl;
+	std::cout << "deck3.getCapacity() : ";
+	std::cout << deck3.getCapacity() << std::endl;
+	std::cout << "deck3.isEmpty() : ";
+	std::cout << deck3.isEmpty() << std::endl;
+}
+
+
 int main(){
 	CardDeck deck1 = random_deck();
 	CardDeck deck2 = random_deck();
 	CardDeck deck3 = random_deck();
+
+	card_test("CLUB", 11);
+
+	carddeck_test(deck1);
+	carddeck_test(deck2);
+	carddeck_test(deck3);
 
 	return 0;
 }
