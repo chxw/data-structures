@@ -44,20 +44,22 @@ CardDeck hearts = create_suit(h);
 CardDeck clubs = create_suit(c);
 CardDeck diamonds = create_suit(d);
 
-CardDeck random_deck(){
+CardDeck random_deck(int size){
 	CardDeck deck;
 
-	int count = 0;
-	while(count < 12){
-		int a = rand() % 13 + 1;
+	while(deck.getSize() < size){
+		if (deck.getSize() == size){ break; }
+		int a = rand() % 12 + 1;
 		deck.add(spades.at(a));
-		int b = rand() % 13 + 1;
+		if (deck.getSize() == size){ break; }
+		int b = rand() % 12 + 1;
 		deck.add(hearts.at(b));
-		int c = rand() % 13 + 1;
+		if (deck.getSize() == size){ break; }
+		int c = rand() % 12 + 1;
 		deck.add(clubs.at(c));
-		int d = rand() % 13 + 1;
+		if (deck.getSize() == size){ break; }
+		int d = rand() % 12 + 1;
 		deck.add(diamonds.at(d));
-		count += 4;
 	}
 
 	return deck;
@@ -107,13 +109,13 @@ void card_test(std::string s, int r){
 	assert(card4.equals(card1));
 }
 
-void carddeck_test(CardDeck deck){
+void carddeck_constructors_test(CardDeck deck){
 	CardDeck deck1;
 	CardDeck deck2(deck);
 	CardDeck deck3;
 	deck3 = deck;
 
-	std::cout << "\n ====== CardDeck testing ======" << std::endl;
+	std::cout << "\n ====== CardDeck constructors testing ======" << std::endl;
 
 	std::cout << "\n **** Empty deck :" << std::endl;
 	std::cout << "deck1.getSize() : ";
@@ -122,6 +124,8 @@ void carddeck_test(CardDeck deck){
 	std::cout << deck1.getCapacity() << std::endl;
 	std::cout << "deck1.isEmpty() : ";
 	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
 
 	std::cout << "\n **** User input deck :" << std::endl;
 	std::cout << "deck.getSize() : ";
@@ -130,6 +134,8 @@ void carddeck_test(CardDeck deck){
 	std::cout << deck.getCapacity() << std::endl;
 	std::cout << "deck.isEmpty() : ";
 	std::cout << deck.isEmpty() << std::endl;
+	std::cout << "deck.toString() : ";
+	std::cout << deck.toString() << std::endl;
 
 	std::cout << "\n **** Deck using copy constructor :" << std::endl;
 	std::cout << "deck2.getSize() : ";
@@ -138,6 +144,9 @@ void carddeck_test(CardDeck deck){
 	std::cout << deck2.getCapacity() << std::endl;
 	std::cout << "deck2.isEmpty() : ";
 	std::cout << deck2.isEmpty() << std::endl;
+	std::cout << "deck2.toString() : ";
+	std::cout << deck2.toString() << std::endl;
+	assert(deck2.toString() == deck.toString());
 
 	std::cout << "\n **** Deck using assignment operator" << std::endl;
 	std::cout << "deck3.getSize() : ";
@@ -146,19 +155,32 @@ void carddeck_test(CardDeck deck){
 	std::cout << deck3.getCapacity() << std::endl;
 	std::cout << "deck3.isEmpty() : ";
 	std::cout << deck3.isEmpty() << std::endl;
+	std::cout << "deck3.toString() : ";
+	std::cout << deck3.toString() << std::endl;
+	assert(deck3.toString() == deck.toString());
+
 }
 
+void carddeck_methods_test(CardDeck deck){
+	Card card("DIAMONDS", 12);
+
+	std::cout << "\n ====== CardDeck methods testing ======" << std::endl;
+
+	// deck.insert(card, 2);
+	// deck.insert(card, deck.getSize());
+
+}
 
 int main(){
-	CardDeck deck1 = random_deck();
-	CardDeck deck2 = random_deck();
-	CardDeck deck3 = random_deck();
+	CardDeck deck1 = random_deck(13);
+	CardDeck deck2 = random_deck(13);
+	CardDeck deck3 = random_deck(13);
 
 	card_test("CLUB", 11);
 
-	carddeck_test(deck1);
-	carddeck_test(deck2);
-	carddeck_test(deck3);
+	carddeck_constructors_test(deck1);
+	carddeck_constructors_test(deck2);
+	carddeck_constructors_test(deck3);
 
 	return 0;
 }

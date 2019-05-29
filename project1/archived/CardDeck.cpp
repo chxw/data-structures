@@ -4,14 +4,14 @@
 CardDeck::CardDeck(){
 	capacity = 13;
 	size = 0;
-	cards = new Card[capacity];
+	cards = new Card[size];
 }
 
 //copy constructor
 CardDeck::CardDeck(const CardDeck& other) {
 	capacity = other.getCapacity();
 	size = other.getSize();
-	cards = new Card[capacity];
+	cards = new Card[size];
 
 	for(int i=0; i<size; i++){
 		cards[i] = other.cards[i];
@@ -24,7 +24,7 @@ CardDeck& CardDeck::operator=(const CardDeck& other){
 		delete [] cards;
 		capacity = other.getCapacity();	
 		size = other.getSize();
-		cards = new Card[capacity];
+		cards = new Card[size];
 
 		for(int i=0; i<size; i++){
 			cards[i] = other.cards[i];
@@ -58,24 +58,25 @@ bool CardDeck::isEmpty() const{
 }
 
 void CardDeck::add(Card card){
-	if (size == capacity){
+	if (size == 13){
 		capacity += 13;
-		
-		Card *temp = new Card[capacity];
-		delete[] cards;
-		cards = temp;
-		temp = NULL;
 	}
+	
+	Card *temp = new Card[size+1];
+
+	for (int i = 0; i < size; i++){
+		temp[i] = cards[i];
+	}
+
+	delete[] cards;
+	cards = temp;
+	temp = NULL;
 
 	cards[size] = card;
 	size++;
 }
 
 void CardDeck::insert(Card card, int at){
-	if (size == 13){
-		capacity += 13;
-	}
-
 	if (size == 0) {
 		cards[at] = card;
 		return;
@@ -100,7 +101,7 @@ void CardDeck::replace(Card card, int at){
 }
 
 void CardDeck::remove(int index){
-	Card *temp = new Card[capacity];
+	Card *temp = new Card[size-1];
 
 	for(int i = 0; i < index; i++){
 		temp[i] = cards[i];
@@ -108,11 +109,12 @@ void CardDeck::remove(int index){
 
 	for(int i = index; i < size-1; i++){
 			temp[i] = cards[i+1];
-	}
+		}
 
 	delete[] cards;
 	cards = temp;
 	temp = NULL;
+
 	size--;
 }
 
@@ -163,7 +165,6 @@ std::string CardDeck::toString() const{
 
 	for(int i = 0; i < size; i++){
 		sn_deck += cards[i].toString();
-		// std::cout << sn_deck << std::endl;
 		if(i != size-1) { sn_deck += ", "; }
 	}
 	return sn_deck;
