@@ -190,10 +190,18 @@ void carddeck_methods_test(){
 	std::cout << deck1.toString() << std::endl;
 
 	std::cout << "\n **** Testing insert():" << std::endl;
-	std::cout << "\n -> Insert random_spade at index 2" << std::endl;
+	std::cout << "\n Standard cases -> Insert " + random_spade.toString() + " at index 2" << std::endl;
 	deck1.insert(random_spade, 2);
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
 
-	std::cout << "\n HEDGE CASES -> Insert random_diamond at index 0 and index getSize()" << std::endl;
+	std::cout << "\n Hedge cases -> Insert " + random_diamond.toString() + " at index 0 and index getSize()" << std::endl;
 
 	deck1.insert(random_diamond, 0);
 	deck1.insert(random_diamond, deck1.getSize());
@@ -206,8 +214,21 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
+	std::cout << "\n Hedge cases -> Insert " + random_heart.toString() + " at index getSize()+1" << std::endl;
+
+	deck1.insert(random_heart, deck1.getSize()+1);
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+	assert((deck1.at(30)).toString() == random_heart.toString());
+
 	std::cout << "\n **** Testing replace():" << std::endl;
-	std::cout << "\n -> Replace every card in deck with KA" << std::endl;
+	std::cout << "\n Standard cases -> Replace every card in deck with " + KA.toString() << std::endl;
 	
 	for (int i = 0; i < deck1.getSize(); i++){
 		deck1.replace(KA, i);

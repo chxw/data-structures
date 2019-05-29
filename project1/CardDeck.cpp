@@ -84,24 +84,25 @@ void CardDeck::insert(Card card, int at){
 
 	if (size == capacity){
 		capacity += 13;
+	}
 
-		Card *temp = new Card[capacity];
+	Card *temp = new Card[capacity];
 
+	if (at <= size){
+		for(int i = 0; i < at; i++){
+			temp[i] = cards[i];
+		}
+		temp[at] = card;
+		for(int i = at+1; i < size+1; i++){
+			temp[i] = cards[i-1];
+		}
+	}
+
+	if (at > size){
 		for(int i = 0; i < size; i++){
 			temp[i] = cards[i];
 		}
-		
-		delete[] cards;
-		cards = temp;
-		temp = NULL;
-	}
-	Card *temp = new Card[capacity];
-	for(int i = 0; i < at; i++){
-		temp[i] = cards[i];
-	}
-	temp[at] = card;
-	for(int i = at+1; i < size+1; i++){
-		temp[i] = cards[i-1];
+		temp[at] = card;
 	}
 
 	delete[] cards;
@@ -178,7 +179,6 @@ std::string CardDeck::toString() const{
 
 	for(int i = 0; i < size; i++){
 		sn_deck += cards[i].toString();
-		// std::cout << sn_deck << std::endl;
 		if(i != size-1) { sn_deck += ", "; }
 	}
 	return sn_deck;
