@@ -60,8 +60,13 @@ bool CardDeck::isEmpty() const{
 void CardDeck::add(Card card){
 	if (size == capacity){
 		capacity += 13;
-		
+
 		Card *temp = new Card[capacity];
+
+		for(int i = 0; i < size; i++){
+			temp[i] = cards[i];
+		}
+
 		delete[] cards;
 		cards = temp;
 		temp = NULL;
@@ -72,13 +77,23 @@ void CardDeck::add(Card card){
 }
 
 void CardDeck::insert(Card card, int at){
-	if (size == 13){
-		capacity += 13;
-	}
-
 	if (size == 0) {
 		cards[at] = card;
 		return;
+	}
+
+	if (size == capacity){
+		capacity += 13;
+
+		Card *temp = new Card[capacity];
+
+		for(int i = 0; i < size; i++){
+			temp[i] = cards[i];
+		}
+		
+		delete[] cards;
+		cards = temp;
+		temp = NULL;
 	}
 	Card *temp = new Card[capacity];
 	for(int i = 0; i < at; i++){

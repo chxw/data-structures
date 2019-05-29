@@ -48,17 +48,18 @@ CardDeck random_deck(int size){
 	CardDeck deck;
 
 	while(deck.getSize() < size){
-		if (deck.getSize() == size){ break; }
 		int a = rand() % 12 + 1;
+		int b = rand() % 12 + 1;
+		int c = rand() % 12 + 1;
+		int d = rand() % 12 + 1;
+
+		if (deck.getSize() == size){ break; }
 		deck.add(spades.at(a));
 		if (deck.getSize() == size){ break; }
-		int b = rand() % 12 + 1;
 		deck.add(hearts.at(b));
 		if (deck.getSize() == size){ break; }
-		int c = rand() % 12 + 1;
 		deck.add(clubs.at(c));
 		if (deck.getSize() == size){ break; }
-		int d = rand() % 12 + 1;
 		deck.add(diamonds.at(d));
 	}
 
@@ -161,13 +162,65 @@ void carddeck_constructors_test(CardDeck deck){
 
 }
 
-void carddeck_methods_test(CardDeck deck){
-	Card card("DIAMONDS", 12);
+void carddeck_methods_test(){
+	int a = rand() % 12 + 1;
+	int b = rand() % 12 + 1;
+	int c = rand() % 12 + 1;
+	int d = rand() % 12 + 1;
+
+	Card random_spade = spades.at(a);
+	Card random_heart = hearts.at(b);
+	Card random_club = clubs.at(c);
+	Card random_diamond = diamonds.at(d);
+
+	Card KA("KING",1); 
 
 	std::cout << "\n ====== CardDeck methods testing ======" << std::endl;
 
-	// deck.insert(card, 2);
-	// deck.insert(card, deck.getSize());
+	std::cout << "\n **** Testing hitting capacity:" << std::endl;
+
+	CardDeck deck1 = random_deck(26);
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+
+	std::cout << "\n **** Testing insert():" << std::endl;
+	std::cout << "\n -> Insert random_spade at index 2" << std::endl;
+	deck1.insert(random_spade, 2);
+
+	std::cout << "\n HEDGE CASES -> Insert random_diamond at index 0 and index getSize()" << std::endl;
+
+	deck1.insert(random_diamond, 0);
+	deck1.insert(random_diamond, deck1.getSize());
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+
+	std::cout << "\n **** Testing replace():" << std::endl;
+	std::cout << "\n -> Replace every card in deck with KA" << std::endl;
+	
+	for (int i = 0; i < deck1.getSize(); i++){
+		deck1.replace(KA, i);
+	}
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+
 
 }
 
@@ -181,6 +234,8 @@ int main(){
 	carddeck_constructors_test(deck1);
 	carddeck_constructors_test(deck2);
 	carddeck_constructors_test(deck3);
+
+	carddeck_methods_test();
 
 	return 0;
 }
