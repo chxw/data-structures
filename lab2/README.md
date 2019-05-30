@@ -25,3 +25,6 @@ To run program, enter this: `./test`
 
 ## References:
 [Geeks for Geeks](https://www.geeksforgeeks.org/data-structures/linked-list/)
+
+[juanchopanza from StackOverflow](https://stackoverflow.com/questions/10152150/c-linked-list-memory-leak)
+
