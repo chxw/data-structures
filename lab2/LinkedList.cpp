@@ -16,6 +16,8 @@ LinkedList::~LinkedList(){
 		delete current;
 		current = next;
 	}
+	delete next;
+	next = nullptr;
 }
 
 void LinkedList::addToFront(int data){
