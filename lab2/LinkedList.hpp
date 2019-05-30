@@ -10,7 +10,7 @@ public:
   LinkedList();
   //LinkedList(const LinkedList& other);
   //LinkedList& operator=(const LinkedList& other);
-  ~LinkedList();
+  // ~LinkedList();
 
   void addToFront(int data);
   void removeFront();

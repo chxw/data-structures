@@ -12,6 +12,8 @@ int main(){
     linkedList.addToFront(i);
   }
 
+  std::cout << linkedList.toString() << std::endl;
+
   std::string expected1 = "10->9->8->7->6->5->4->3->2->1->|";
   assert(linkedList.toString() == expected1);
 
@@ -19,6 +21,8 @@ int main(){
   for(int i = 0; i < t; i++){
     linkedList.removeFront();
   }
+
+  std::cout << linkedList.toString() << std::endl;
 
   std::string expected2 = "5->4->3->2->1->|";
   assert(linkedList.toString() == expected2);
