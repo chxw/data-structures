@@ -77,8 +77,8 @@ void CardDeck::add(Card card){
 }
 
 void CardDeck::insert(Card card, int at){
-	if (size == 0) {
-		cards[at] = card;
+	if (size == 0 or at == size) {
+		this->add(card);
 		return;
 	}
 
@@ -100,6 +100,7 @@ void CardDeck::insert(Card card, int at){
 	cards = temp;
 	temp = NULL;
 	size++;
+
 }
 
 void CardDeck::replace(Card card, int at){

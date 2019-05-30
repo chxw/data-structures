@@ -5,33 +5,6 @@
 #include "Card.cpp"
 #include "CardDeck.cpp"
 
-void test1(){
-	// take() testing
-	std::cout << "\n ~~take() testing~~ \n" << std::endl;
-	std::cout << "\n ~~before take(3)~~ \n" << std::endl;
-	std::cout << "\n DECK 4 : \n" << std::endl;
-	for(int i = 0; i < deck4.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck4.at(i)).toString() << std::endl;
-	}
-
-	std::cout << "\n ~~after take(3)~~ \n" << std::endl;
-	CardDeck deck6 = deck4.take(3);
-	std::cout << "\n DECK 6 : \n" << std::endl;
-	for(int i = 0; i < deck6.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck6.at(i)).toString() << std::endl;
-	}
-
-	std::cout << "\n DECK 4 : \n" << std::endl;
-	for(int i = 0; i < deck4.getSize(); i++){
-		std::cout << i << " ";
-		std::cout << (deck4.at(i)).toString() << std::endl;
-	}
-
-	// std::cout << deck4.toString();
-
-}
 
 void carddeck_methods_test(){
 	std::cout << "\n Hedge cases -> Insert " + random_heart.toString() + " at index getSize()+1" << std::endl;

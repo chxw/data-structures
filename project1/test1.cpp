@@ -200,9 +200,9 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
-	std::cout << "\n Hedge cases -> Insert " + random_diamond.toString() + " at index 0 and index getSize()" << std::endl;
-	deck1.insert(random_diamond, 0);
+	std::cout << "\n Hedge cases -> Insert " + random_diamond.toString() + " at index getSize() and then at index 0" << std::endl;
 	deck1.insert(random_diamond, deck1.getSize());
+	deck1.insert(random_diamond, 0);
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
 	std::cout << "deck1.getCapacity() : ";
@@ -213,10 +213,10 @@ void carddeck_methods_test(){
 	std::cout << deck1.toString() << std::endl;
 
 	std::cout << "\n **** Testing replace():" << std::endl;
-	std::cout << "\n Standard cases -> Replace every card in deck with " + KA.toString() << std::endl;
-	CardDeck deck2(deck1)
-	for (int i = 0; i < deck1.getSize(); i++){
-		deck1.replace(KA, i);
+	std::cout << "\n Standard cases -> Copy deck1 to deck2 and replace every card in deck2 with " + KA.toString() << std::endl;
+	CardDeck deck2(deck1);
+	for (int i = 0; i < deck2.getSize(); i++){
+		deck2.replace(KA, i);
 	}
 	std::cout << "deck2.getSize() : ";
 	std::cout << deck2.getSize() << std::endl;
@@ -228,10 +228,8 @@ void carddeck_methods_test(){
 	std::cout << deck2.toString() << std::endl;
 
 	std::cout << "\n **** Testing remove():" << std::endl;
-	std::cout << "\n Standard cases -> Remove element at index 1, 3, 6" << std::endl;
-	deck1.remove(1);
-	deck1.remove(3);
-	deck1.remove(6);
+	std::cout << "\n Standard cases -> Remove element at index 20" << std::endl;
+	deck1.remove(20);
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
 	std::cout << "deck1.getCapacity() : ";
@@ -241,9 +239,9 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
-	std::cout << "\n Hedge cases -> Remove element at index 0 and getSize()" << std::endl;
+	std::cout << "\n Hedge cases -> Remove element at index getSize() - 1 then index 0" << std::endl;
+	deck1.remove(deck1.getSize()-1);
 	deck1.remove(0);
-	deck1.remove(deck1.getSize());
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
 	std::cout << "deck1.getCapacity() : ";
@@ -265,8 +263,8 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
-	std::cout << "\n Hedge cases -> swap elements at index 0 and getSize()" << std::endl;
-	deck1.swap(0, getSize());
+	std::cout << "\n Hedge cases -> swap elements at index 0 and getSize()-1" << std::endl;
+	deck1.swap(0, deck1.getSize()-1);
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
 	std::cout << "deck1.getCapacity() : ";
@@ -304,8 +302,8 @@ void carddeck_methods_test(){
 	std::cout << "\n **** Testing take():" << std::endl;
 	std::cout << "Before take(5) deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
-	std::cout << "After take(5) deck3.toString() : ";
 	CardDeck deck3 = deck1.take(5);
+	std::cout << "After take(5) deck3.toString() : ";
 	std::cout << deck3.toString() << std::endl;
 	std::cout << "After take(5) deck.toString() : ";
 	std::cout << deck1.toString() << std::endl;
