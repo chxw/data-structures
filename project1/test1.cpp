@@ -178,7 +178,6 @@ void carddeck_methods_test(){
 	std::cout << "\n ====== CardDeck methods testing ======" << std::endl;
 
 	std::cout << "\n **** Testing hitting capacity:" << std::endl;
-
 	CardDeck deck1 = random_deck(26);
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
@@ -202,7 +201,6 @@ void carddeck_methods_test(){
 	std::cout << deck1.toString() << std::endl;
 
 	std::cout << "\n Hedge cases -> Insert " + random_diamond.toString() + " at index 0 and index getSize()" << std::endl;
-
 	deck1.insert(random_diamond, 0);
 	deck1.insert(random_diamond, deck1.getSize());
 	std::cout << "deck1.getSize() : ";
@@ -214,25 +212,26 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
-	std::cout << "\n Hedge cases -> Insert " + random_heart.toString() + " at index getSize()+1" << std::endl;
-
-	deck1.insert(random_heart, deck1.getSize()+1);
-	std::cout << "deck1.getSize() : ";
-	std::cout << deck1.getSize() << std::endl;
-	std::cout << "deck1.getCapacity() : ";
-	std::cout << deck1.getCapacity() << std::endl;
-	std::cout << "deck1.isEmpty() : ";
-	std::cout << deck1.isEmpty() << std::endl;
-	std::cout << "deck1.toString() : ";
-	std::cout << deck1.toString() << std::endl;
-	assert((deck1.at(30)).toString() == random_heart.toString());
-
 	std::cout << "\n **** Testing replace():" << std::endl;
 	std::cout << "\n Standard cases -> Replace every card in deck with " + KA.toString() << std::endl;
-	
+	CardDeck deck2(deck1)
 	for (int i = 0; i < deck1.getSize(); i++){
 		deck1.replace(KA, i);
 	}
+	std::cout << "deck2.getSize() : ";
+	std::cout << deck2.getSize() << std::endl;
+	std::cout << "deck2.getCapacity() : ";
+	std::cout << deck2.getCapacity() << std::endl;
+	std::cout << "deck2.isEmpty() : ";
+	std::cout << deck2.isEmpty() << std::endl;
+	std::cout << "deck2.toString() : ";
+	std::cout << deck2.toString() << std::endl;
+
+	std::cout << "\n **** Testing remove():" << std::endl;
+	std::cout << "\n Standard cases -> Remove element at index 1, 3, 6" << std::endl;
+	deck1.remove(1);
+	deck1.remove(3);
+	deck1.remove(6);
 	std::cout << "deck1.getSize() : ";
 	std::cout << deck1.getSize() << std::endl;
 	std::cout << "deck1.getCapacity() : ";
@@ -242,7 +241,74 @@ void carddeck_methods_test(){
 	std::cout << "deck1.toString() : ";
 	std::cout << deck1.toString() << std::endl;
 
+	std::cout << "\n Hedge cases -> Remove element at index 0 and getSize()" << std::endl;
+	deck1.remove(0);
+	deck1.remove(deck1.getSize());
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
 
+	std::cout << "\n **** Testing swap():" << std::endl;
+	std::cout << "\n Standard cases -> swap elements at index 1 and 5" << std::endl;
+	deck1.swap(1, 5);
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+
+	std::cout << "\n Hedge cases -> swap elements at index 0 and getSize()" << std::endl;
+	deck1.swap(0, getSize());
+	std::cout << "deck1.getSize() : ";
+	std::cout << deck1.getSize() << std::endl;
+	std::cout << "deck1.getCapacity() : ";
+	std::cout << deck1.getCapacity() << std::endl;
+	std::cout << "deck1.isEmpty() : ";
+	std::cout << deck1.isEmpty() << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+
+	std::cout << "\n **** Testing has():" << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+	std::cout << "has " + random_spade.toString() + " : ";
+	std::cout << deck1.has(random_spade) << std::endl;
+	std::cout << "has " + random_heart.toString() + " : ";
+	std::cout << deck1.has(random_heart) << std::endl;
+	std::cout << "has " + random_club.toString() + " : ";
+	std::cout << deck1.has(random_club) << std::endl;
+	std::cout << "has " + random_diamond.toString() + " : ";
+	std::cout << deck1.has(random_diamond) << std::endl;
+
+
+	std::cout << "\n **** Testing count():" << std::endl;
+	std::cout << "deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+	std::cout << "count " + random_spade.toString() + " : ";
+	std::cout << deck1.count(random_spade) << std::endl;
+	std::cout << "count " + random_heart.toString() + " : ";
+	std::cout << deck1.count(random_heart) << std::endl;
+	std::cout << "count " + random_club.toString() + " : ";
+	std::cout << deck1.count(random_club) << std::endl;
+	std::cout << "count " + random_diamond.toString() + " : ";
+	std::cout << deck1.count(random_diamond) << std::endl;
+
+	std::cout << "\n **** Testing take():" << std::endl;
+	std::cout << "Before take(5) deck1.toString() : ";
+	std::cout << deck1.toString() << std::endl;
+	std::cout << "After take(5) deck3.toString() : ";
+	CardDeck deck3 = deck1.take(5);
+	std::cout << deck3.toString() << std::endl;
+	std::cout << "After take(5) deck.toString() : ";
+	std::cout << deck1.toString() << std::endl;
 }
 
 int main(){

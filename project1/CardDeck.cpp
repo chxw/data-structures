@@ -88,21 +88,12 @@ void CardDeck::insert(Card card, int at){
 
 	Card *temp = new Card[capacity];
 
-	if (at <= size){
-		for(int i = 0; i < at; i++){
-			temp[i] = cards[i];
-		}
-		temp[at] = card;
-		for(int i = at+1; i < size+1; i++){
-			temp[i] = cards[i-1];
-		}
+	for(int i = 0; i < at; i++){
+		temp[i] = cards[i];
 	}
-
-	if (at > size){
-		for(int i = 0; i < size; i++){
-			temp[i] = cards[i];
-		}
-		temp[at] = card;
+	temp[at] = card;
+	for(int i = at+1; i < size+1; i++){
+		temp[i] = cards[i-1];
 	}
 
 	delete[] cards;
