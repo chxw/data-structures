@@ -9,13 +9,14 @@ LinkedList::LinkedList(){
 	this->head = nullptr;
 }
 
-// LinkedList::~LinkedList(){
-// 	Node* current = head;
-// 	while(current->getNext() != nullptr){
-// 		delete current;
-// 		current->getNext();
-// 	}
-// }
+LinkedList::~LinkedList(){
+	Node* current = head;
+	while(current != nullptr){
+		Node* next = current->getNext();
+		delete current;
+		current = next;
+	}
+}
 
 void LinkedList::addToFront(int data){
 	Node* newbie = new Node(data);
