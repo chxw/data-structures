@@ -16,7 +16,6 @@ LinkedList::~LinkedList(){
 		delete current;
 		current = next;
 	}
-	current = nullptr;
 }
 
 void LinkedList::addToFront(int data){
@@ -29,7 +28,6 @@ void LinkedList::addToFront(int data){
 		newbie->setNext(head);
 		this->head = newbie;
 	}
-	delete newbie;
 }
 
 std::string LinkedList::toString() const{
@@ -45,5 +43,7 @@ std::string LinkedList::toString() const{
 }
 
 void LinkedList::removeFront(){
+	Node* temp = this->head;
 	this->head = this->head->getNext();
+	delete temp;
 }
