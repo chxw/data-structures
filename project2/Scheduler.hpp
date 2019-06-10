@@ -21,7 +21,7 @@ public:
 
   // int getNumberOfEventsOn(int day) const;
   // int getNumberOfEvents() const;
-  // bool isEmpty() const;
+  bool isEmpty() const;
 
   int getYear() const;
   int getMonth() const;
@@ -30,6 +30,7 @@ public:
 private:
   int year;
   int month;
+  int num_events;
   Node* head;
 };
 

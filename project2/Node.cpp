@@ -2,8 +2,8 @@
 #include <iostream>
 
 Node::Node(){
-	data = NULL;
-	next = NULL;
+	data = nullptr;
+	next = nullptr;
 }
 Node::Node(Event* d){
 	data = new Event;

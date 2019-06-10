@@ -7,12 +7,14 @@ typedef std::map<int, std::string> BasePairMap;
 Scheduler::Scheduler(){
   year = 2019;
   month = 6;
+  num_events = 0;
   this->head = nullptr;
 }
 
 Scheduler::Scheduler(int y, int m){
   year = y;
   month = m;
+  num_events = 0;
   this->head = nullptr;
 }
 
@@ -35,17 +37,14 @@ Scheduler::Scheduler(const Scheduler& other){
   }
 }
 
+// FIX THIS
+
 // Scheduler& Scheduler::operator=(const Scheduler& other){
 //   if(&other != this){
-//     y = other.getYear();
-//     m = other.getMonth();
-//     if (other.isEmpty()){
-//       this->head = nullptr;
-//     }
-//     else{
-//       this->head = other.getFirstEventAfter(-1, -1, -1);
-//     }
+//     year = other.getYear();
+//     month = other.getMonth();
 //   }
+//   return(*this);
 // }
 
 // Scheduler::~Scheduler(){
@@ -58,21 +57,46 @@ Scheduler::Scheduler(const Scheduler& other){
 // }
 
 void Scheduler::add(Event* event){
+  Node* previous = nullptr;
   Node* temp = head;
-  Node* n = new Node;
-  Node node(event);
-  n = &node;
 
-  if (temp != NULL){
-    while(temp != nullptr){
-      temp = temp->getNext();
-    }
-    temp->setNext(n);
-    n = nullptr;
+  Node* newbie = new Node(event);
+  newbie->setNext(nullptr);
+
+  // add to front
+  // if (this->head == nullptr){
+  //   this->head = newbie;
+  //   newbie->setNext(nullptr);
+  // }
+  // else {
+  //   newbie->setNext(head);
+  //   this->head = newbie;
+  // }
+
+  // ordering
+  if (this->isEmpty()){
+    head = newbie;
+  }
+  else if (event->startBefore(head->getData())){
+    newbie->setNext(head);
+    head = newbie;
+  }
+  else if (head->getNext() == nullptr and event->startAfter(head->getData())){
+    head = newbie;
+    newbie->setNext(nullptr);
   }
   else{
-    head = n;
+    while(temp != nullptr){
+      if (event->startBefore(temp->getData())){
+        previous->setNext(newbie);
+        newbie->setNext(temp);
+      }
+      previous = temp;
+      temp = temp->getNext();
+    }
   }
+
+  num_events += 1;
 }
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
@@ -88,7 +112,13 @@ void Scheduler::add(Event* event){
 
 // int getNumberOfEventsOn(int day) const;
 // int getNumberOfEvents() const;
-// bool isEmpty() const;
+
+bool Scheduler::isEmpty() const{
+  if (num_events == 0){
+    return true;
+  }
+  return false;
+}
 
 int Scheduler::getYear() const{
 	return year;
@@ -100,11 +130,11 @@ int Scheduler::getMonth() const{
 
 std::string Scheduler::toString() const{
   std::string s;
-  Node* temp = head;
+  Node* temp = this->head;
 
   BasePairMap m;
 
-  //map number to card rank
+  //map number to month name
   m[1] = "Jan";
   m[2] = "Feb";
   m[3] = "Mar";
@@ -124,21 +154,10 @@ std::string Scheduler::toString() const{
   s += ".";
   s += "\n";
 
-  //fix this
-  if (temp->getNext() == NULL){
+  while(temp != nullptr){
     s += (temp->getData())->toString();
     s += "\n";
-  }
-  else if (temp->getNext() != NULL){
-    while(temp != nullptr){
-      s += (temp->getData())->toString();
-      s += "\n";
-      temp = temp->getNext();
-    }
-  }
-  else {
-    s += (head->getData())->toString();
-    s += "\n";
+    temp = temp->getNext();
   }
 
   return s;
