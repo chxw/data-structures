@@ -12,6 +12,9 @@ Scheduler::Scheduler(){
 }
 
 Scheduler::Scheduler(int y, int m){
+  if (y < 0 or m > 12 or m < 1){
+    throw std::range_error("Out of Range");
+  }
   year = y;
   month = m;
   num_events = 0;
@@ -37,13 +40,27 @@ Scheduler::Scheduler(const Scheduler& other){
   }
 }
 
-// Scheduler& Scheduler::operator=(const Scheduler& other){
-//   if(&other != this){
-//     year = other.getYear();
-//     month = other.getMonth();
-//   }
-//   return(*this);
-// }
+Scheduler& Scheduler::operator=(const Scheduler& other){
+  if(&other != this){
+    year = other.getYear();
+    month = other.getMonth();
+    if(other.head == nullptr){
+      this->head = nullptr;
+    }
+    else if((other.head)->getNext() == nullptr){
+      this->head = other.head;
+    }
+    else{
+      Node* current = other.head;
+      while(current != nullptr){
+        Node* next = current->getNext();
+        this->add(current->getData());
+        current = next;
+      }
+    }
+  }
+  return(*this);
+}
 
 // Scheduler::~Scheduler(){
 //   Node* current = head;
@@ -57,44 +74,28 @@ Scheduler::Scheduler(const Scheduler& other){
 void Scheduler::add(Event* event){
   Node* previous = nullptr;
   Node* temp = head;
-
   Node* newbie = new Node(event);
   newbie->setNext(nullptr);
-
-  // add to front
-  // if (this->head == nullptr){
-  //   this->head = newbie;
-  //   newbie->setNext(nullptr);
-  // }
-  // else {
-  //   newbie->setNext(head);
-  //   this->head = newbie;
-  // }
 
   // ordering
   if (this->isEmpty()){
     head = newbie;
-    newbie->setNext(nullptr);
     num_events += 1;
   }
   else if (event->startAtSameTime(head->getData())){
     throw std::range_error("Event Time Conflict");
   }
-  // <=
   else if (event->startBefore(head->getData())){
     newbie->setNext(head);
     head = newbie;
     num_events += 1;
   }
-  // >
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
     head->setNext(newbie);
-    newbie->setNext(nullptr);
     num_events += 1;
   }
   else{
     while(temp != nullptr){
-      // <=
       if (event->startAtSameTime(temp->getData())){
         throw std::range_error("Event Time Conflict");
       }
@@ -108,7 +109,6 @@ void Scheduler::add(Event* event){
       temp = temp->getNext();
     }
     previous->setNext(newbie);
-    newbie->setNext(nullptr);
     num_events += 1;
   }
 }
@@ -118,7 +118,9 @@ void Scheduler::add(Event* event){
 // void removeAllEvents();
 
 // int getNumberOfEventsOn(int day) const;
-// int getNumberOfEvents() const;
+int Scheduler::getNumberOfEvents() const{
+  return num_events;
+}
 
 bool Scheduler::isEmpty() const{
   if (num_events == 0){

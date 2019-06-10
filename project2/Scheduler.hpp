@@ -10,7 +10,7 @@ public:
   Scheduler();
   Scheduler(int y, int m);
   Scheduler(const Scheduler& other);
-  // Scheduler& operator=(const Scheduler& other);
+  Scheduler& operator=(const Scheduler& other);
   // ~Scheduler();
 
   void add(Event* event);
@@ -20,7 +20,7 @@ public:
   // void removeAllEvents();
 
   // int getNumberOfEventsOn(int day) const;
-  // int getNumberOfEvents() const;
+  int getNumberOfEvents() const;
   bool isEmpty() const;
 
   int getYear() const;
