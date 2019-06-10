@@ -1,5 +1,7 @@
 #include <cassert>
+#include <climits>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 #include "Scheduler.hpp"
@@ -53,8 +55,24 @@ void test1(){
   Scheduler s1;
   s1.add(e);
   s1.add(e2);
-  s1.add(e3);
+
+  std::string message;
+  try {
+    s1.add(e3);
+  }
+  catch(std::range_error& e){
+    message = e.what();
+
+  }
+  assert(message == "Event Time Conflict");
+
   s1.add(e4);
+
+  std::cout << "events: " << std::endl;
+  // std::cout << e->toString() << std::endl;
+  // std::cout << e2->toString() << std::endl;
+  // std::cout << e3->toString() << std::endl;
+  // std::cout << e4->toString() << std::endl;
 
   Scheduler s2(s1);
   // Scheduler s3;

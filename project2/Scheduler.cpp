@@ -74,21 +74,31 @@ void Scheduler::add(Event* event){
   // ordering
   if (this->isEmpty()){
     head = newbie;
+    newbie->setNext(nullptr);
+    num_events += 1;
+  }
+  else if (event->startAtSameTime(head->getData())){
+    throw std::range_error("Event Time Conflict");
   }
   // <=
-  else if (event->startBefore(head->getData()) or event->startAtSameTime(head->getData())){
+  else if (event->startBefore(head->getData())){
     newbie->setNext(head);
     head = newbie;
+    num_events += 1;
   }
   // >
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
-    head = newbie;
+    head->setNext(newbie);
     newbie->setNext(nullptr);
+    num_events += 1;
   }
   else{
     while(temp != nullptr){
       // <=
-      if (event->startBefore(temp->getData()) or event->startAtSameTime(temp->getData())){
+      if (event->startAtSameTime(temp->getData())){
+        throw std::range_error("Event Time Conflict");
+      }
+      else if (event->startBefore(temp->getData()) or event->startAtSameTime(temp->getData())){
         previous->setNext(newbie);
         newbie->setNext(temp);
         num_events += 1;
@@ -99,8 +109,8 @@ void Scheduler::add(Event* event){
     }
     previous->setNext(newbie);
     newbie->setNext(nullptr);
+    num_events += 1;
   }
-  num_events += 1;
 }
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
