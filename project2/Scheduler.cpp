@@ -37,8 +37,6 @@ Scheduler::Scheduler(const Scheduler& other){
   }
 }
 
-// FIX THIS
-
 // Scheduler& Scheduler::operator=(const Scheduler& other){
 //   if(&other != this){
 //     year = other.getYear();
@@ -77,36 +75,35 @@ void Scheduler::add(Event* event){
   if (this->isEmpty()){
     head = newbie;
   }
-  else if (event->startBefore(head->getData())){
+  // <=
+  else if (event->startBefore(head->getData()) or event->startAtSameTime(head->getData())){
     newbie->setNext(head);
     head = newbie;
   }
+  // >
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
     head = newbie;
     newbie->setNext(nullptr);
   }
   else{
     while(temp != nullptr){
-      if (event->startBefore(temp->getData())){
+      // <=
+      if (event->startBefore(temp->getData()) or event->startAtSameTime(temp->getData())){
         previous->setNext(newbie);
         newbie->setNext(temp);
+        num_events += 1;
+        return;
       }
       previous = temp;
       temp = temp->getNext();
     }
+    previous->setNext(newbie);
+    newbie->setNext(nullptr);
   }
-
   num_events += 1;
 }
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
-//   Node* current = head;
-//   while(current != nullptr){
-//     Node* next = current->getNext();
-//     delete current;
-//     current = next;
-// }
-
 // void removeAllEventsOn(int day);
 // void removeAllEvents();
 
