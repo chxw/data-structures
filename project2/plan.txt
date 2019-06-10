@@ -1,0 +1,22 @@
+Chelsea Wang
+
+6/7: Read through requirements, draw out design to understand what each class is meant to do. First try implement of Event class, testing all the way.
+= Constructors & Destructors
+= All get_____() functions
+= toString() function
+
+6/8 - 6/9: Finish Event class, testing all the way.
+= All bool functions
+
+6/9 - 6/10: First try implement of Node class, testing all the way.
+= All functions
+= Test for memory leaks
+
+6/10 - 6/16: First try implement of Scheduler class. 
+6/10 = Constructors & Destructors
+6/10 = add() function, fulfilling requirements
+6/11 - 6/12 = get_____() functions, bool functions
+6/12 - 6/14 = remove____() functions
+6/14 = Test for memory leaks
+6/15 = toString() function
+6/15 = finish test.cpp
