@@ -16,21 +16,24 @@ Scheduler::Scheduler(int y, int m){
   this->head = nullptr;
 }
 
-// Scheduler::Scheduler(const Scheduler& other){
-//   year = other.getYear();
-//   month = other.getMonth();
-//   if(other.head == nullptr){
-//     this->head = nullptr;
-//   }
-//   else{
-//     Node* current = other.head;
-//     while(current != nullptr){
-//       Node* next = current->getNext();
-//       this->add(current.getData());
-//       current = next;
-//     }
-//   }
-// }
+Scheduler::Scheduler(const Scheduler& other){
+  year = other.getYear();
+  month = other.getMonth();
+  if(other.head == nullptr){
+    this->head = nullptr;
+  }
+  else if((other.head)->getNext() == nullptr){
+  	this->head = other.head;
+  }
+  else{
+    Node* current = other.head;
+    while(current != nullptr){
+      Node* next = current->getNext();
+      this->add(current->getData());
+      current = next;
+    }
+  }
+}
 
 // Scheduler& Scheduler::operator=(const Scheduler& other){
 //   if(&other != this){
@@ -87,8 +90,13 @@ void Scheduler::add(Event* event){
 // int getNumberOfEvents() const;
 // bool isEmpty() const;
 
-// int getYear() const;
-// int getMonth() const;
+int Scheduler::getYear() const{
+	return year;
+}
+
+int Scheduler::getMonth() const{
+	return month;
+}
 
 std::string Scheduler::toString() const{
   std::string s;
@@ -114,20 +122,23 @@ std::string Scheduler::toString() const{
   s += " ";
   s += m[month];
   s += ".";
+  s += "\n";
 
-  s += (head->getData()->toString());
-
+  //fix this
   if (temp->getNext() == NULL){
     s += (temp->getData())->toString();
+    s += "\n";
   }
   else if (temp->getNext() != NULL){
     while(temp != nullptr){
       s += (temp->getData())->toString();
+      s += "\n";
       temp = temp->getNext();
     }
   }
   else {
     s += (head->getData())->toString();
+    s += "\n";
   }
 
   return s;

@@ -3,7 +3,6 @@
 #include <string>
 
 #include "Scheduler.hpp"
-#include "Node.cpp"
 
 void test1(){
   Event* e;
@@ -49,6 +48,8 @@ void test1(){
 
   Scheduler s1;
   s1.add(e);
+
+  Scheduler s2(s1);
 
   std::cout << s1.toString() << std::endl;
 }

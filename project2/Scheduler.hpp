@@ -23,8 +23,8 @@ public:
   // int getNumberOfEvents() const;
   // bool isEmpty() const;
 
-  // int getYear() const;
-  // int getMonth() const;
+  int getYear() const;
+  int getMonth() const;
   std::string toString() const;
 
 private:
