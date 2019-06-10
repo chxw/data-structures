@@ -1,6 +1,7 @@
 #ifndef CARDDECK_HPP
 #define CARDDECK_HPP
 
+#include "Card.hpp"
 #include <string>
 #include <iostream>
 

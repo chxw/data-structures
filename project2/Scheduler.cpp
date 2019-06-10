@@ -70,7 +70,6 @@ void Scheduler::add(Event* event){
   else{
     head = n;
   }
-
 }
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
@@ -93,7 +92,7 @@ void Scheduler::add(Event* event){
 
 std::string Scheduler::toString() const{
   std::string s;
-  // Node* temp = head;
+  Node* temp = head;
 
   BasePairMap m;
 
@@ -113,23 +112,23 @@ std::string Scheduler::toString() const{
 
   s += std::to_string(year);
   s += " ";
-  s += std::to_string(month);
+  s += m[month];
   s += ".";
 
   s += (head->getData()->toString());
 
-  // if (temp->getNext() == NULL){
-  //   s += (temp->getData())->toString();
-  // }
-  // else if (temp != NULL){
-  //   while(temp != nullptr){
-  //     s += (temp->getData())->toString();
-  //     temp = temp->getNext();
-  //   }
-  // }
-  // else {
-  //   s += (head->getData())->toString();
-  // }
+  if (temp->getNext() == NULL){
+    s += (temp->getData())->toString();
+  }
+  else if (temp->getNext() != NULL){
+    while(temp != nullptr){
+      s += (temp->getData())->toString();
+      temp = temp->getNext();
+    }
+  }
+  else {
+    s += (head->getData())->toString();
+  }
 
   return s;
 }

@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Scheduler.hpp"
+#include "Node.cpp"
 
 void test1(){
   Event* e;
