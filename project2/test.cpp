@@ -61,12 +61,8 @@ void test1(){
   Scheduler* s1 = new Scheduler;
   s1->add(e);
   Scheduler s2(*s1);
-  std::cout << s1->toString() << std::endl;
-  std::cout << s2.toString() << std::endl;
   s1->add(e2);
-  std::cout << s1->toString() << std::endl;
   Scheduler s3(*s1);
-  std::cout << s3.toString() << std::endl;
 
   std::string message;
   try {
@@ -79,13 +75,12 @@ void test1(){
 
   s1->add(e4);
   Scheduler s4(*s1);
-  std::cout << s4.toString() << std::endl;
 
   delete s1;
 
-  std::cout << s2.toString() << std::endl;
-  std::cout << s3.toString() << std::endl;
-  std::cout << s4.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
 
   Event* e5;
   Event event5(32,60,-1, "");
@@ -105,7 +100,7 @@ void test1(){
   e6 = &event6;
 
   s4.add(e6);
-  s4.toString();
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
   std::cout << "number of events on day 10 : ";
   std::cout << s4.getNumberOfEventsOn(10) << std::endl;
 }

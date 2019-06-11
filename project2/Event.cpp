@@ -125,12 +125,12 @@ std::string Event::toString() const{
 	}
 	s += std::to_string(dd);
 	s += " ";
-	if (dd < 10){
+	if (HH < 10){
 		s += "0";
 	}
 	s += std::to_string(HH);
 	s += ":";
-	if (dd < 10){
+	if (MM < 10){
 		s += "0";
 	}
 	s += std::to_string(MM);
