@@ -153,8 +153,26 @@ void Scheduler::add(Event* event){
 }
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
-// void removeAllEventsOn(int day);
-// void removeAllEvents();
+
+void Scheduler::removeAllEventsOn(int day){
+  Node* current = this->head;
+  while(current != nullptr){
+    Node* next = current->getNext();
+    if (current->getData()->getDay() == day){
+      delete current;
+    }
+    current = next;
+  }
+}
+
+void Scheduler::removeAllEvents(){
+  Node* current = this->head;
+  while(current != nullptr){
+    Node* next = current->getNext();
+    delete current;
+    current = next;
+  }
+}
 
 int Scheduler::getNumberOfEventsOn(int day) const{
 	Node* temp = this->head;

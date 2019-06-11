@@ -103,6 +103,12 @@ void test1(){
   std::cout << "s4 : \n" + s4.toString() << std::endl;
   std::cout << "number of events on day 10 : ";
   std::cout << s4.getNumberOfEventsOn(10) << std::endl;
+
+  // s4.removeAllEventsOn(10);
+  // std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  s4.removeAllEvents();
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
 }
 
 int main(){
