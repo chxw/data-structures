@@ -156,7 +156,21 @@ void Scheduler::add(Event* event){
 // void removeAllEventsOn(int day);
 // void removeAllEvents();
 
-// int getNumberOfEventsOn(int day) const;
+int Scheduler::getNumberOfEventsOn(int day) const{
+	Node* temp = this->head;
+
+	int count = 0;
+
+	while(temp != nullptr){
+      if (temp->getData()->getDay() == day){
+      	count++;
+      }
+      temp = temp->getNext();
+  	}
+
+  	return count;
+}
+
 int Scheduler::getNumberOfEvents() const{
   return num_events;
 }

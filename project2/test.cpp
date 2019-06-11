@@ -93,12 +93,21 @@ void test1(){
 
   std::string message2;
   try {
-    s4->add(e5);
+    s4.add(e5);
   }
-  catch(std::range_error& e){
+  catch(std::runtime_error& e){
     message2 = e.what();
   }
   assert(message2 == "Not Legal Event");
+
+  Event* e6;
+  Event event6(10, 1, 2, "shopping");
+  e6 = &event6;
+
+  s4.add(e6);
+  s4.toString();
+  std::cout << "number of events on day 10 : ";
+  std::cout << s4.getNumberOfEventsOn(10) << std::endl;
 }
 
 int main(){

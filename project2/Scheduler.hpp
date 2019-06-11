@@ -19,7 +19,7 @@ public:
   // void removeAllEventsOn(int day);
   // void removeAllEvents();
 
-  // int getNumberOfEventsOn(int day) const;
+  int getNumberOfEventsOn(int day) const;
   int getNumberOfEvents() const;
   bool isEmpty() const;
 
