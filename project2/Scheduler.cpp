@@ -31,6 +31,7 @@ Scheduler::Scheduler(const Scheduler& other){
   	Event* event = new Event(*((other.head)->getData()));
   	Node* newbie = new Node(event);
   	this->head = newbie;
+    newbie->setNext(nullptr);
   }
   else{
     Node* current = other.head;
@@ -38,7 +39,6 @@ Scheduler::Scheduler(const Scheduler& other){
       Node* next = current->getNext();
       Event* event = new Event(*(current->getData()));
       this->add(event);
-      event = nullptr;
       current = next;
     }
   }
@@ -56,6 +56,7 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
   	  Event* event = new Event(*(other.head)->getData());
   	  Node* newbie = new Node(event);
   	  this->head = newbie;
+      newbie->setNext(nullptr);
     }
     else{
       Node* current = other.head;
@@ -77,6 +78,7 @@ Scheduler::~Scheduler(){
     delete current;
     current = next;
   }
+  head = nullptr;
 }
 
 void Scheduler::add(Event* event){
@@ -154,24 +156,29 @@ void Scheduler::add(Event* event){
 
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 
-void Scheduler::removeAllEventsOn(int day){
-  Node* current = this->head;
-  while(current != nullptr){
-    Node* next = current->getNext();
-    if (current->getData()->getDay() == day){
-      delete current;
-    }
-    current = next;
-  }
-}
+
+// this is not so easy chelsea!!!!! will take time
+// void Scheduler::removeAllEventsOn(int day){
+//   Node* previous = nullptr;
+//   Node* current = head;
+//   while(current != nullptr){
+//     previous = current;
+//     current = current->getNext();
+//     if (current->getData()->getDay() == day){
+//       delete current;
+//     }
+//     current = next;
+//   }
+// }
 
 void Scheduler::removeAllEvents(){
-  Node* current = this->head;
+  Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
     delete current;
     current = next;
   }
+  head = nullptr;
 }
 
 int Scheduler::getNumberOfEventsOn(int day) const{
