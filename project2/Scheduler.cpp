@@ -24,17 +24,22 @@ Scheduler::Scheduler(int y, int m){
 Scheduler::Scheduler(const Scheduler& other){
   year = other.getYear();
   month = other.getMonth();
+  num_events = 0;
   if(other.head == nullptr){
     this->head = nullptr;
   }
   else if((other.head)->getNext() == nullptr){
-  	this->head = other.head;
+  	Event* event = new Event(*((other.head)->getData()));
+  	Node* newbie = new Node(event);
+  	this->head = newbie;
   }
   else{
     Node* current = other.head;
     while(current != nullptr){
       Node* next = current->getNext();
-      this->add(current->getData());
+      Event* event = new Event(*(current->getData()));
+      this->add(event);
+      event = nullptr;
       current = next;
     }
   }
@@ -44,17 +49,21 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
   if(&other != this){
     year = other.getYear();
     month = other.getMonth();
+    num_events = 0;
     if(other.head == nullptr){
       this->head = nullptr;
     }
     else if((other.head)->getNext() == nullptr){
-      this->head = other.head;
+  	  Event* event = new Event(*(other.head)->getData());
+  	  Node* newbie = new Node(event);
+  	  this->head = newbie;
     }
     else{
       Node* current = other.head;
       while(current != nullptr){
         Node* next = current->getNext();
-        this->add(current->getData());
+        Event* event = new Event(*(current)->getData());
+  	    this->add(event);
         current = next;
       }
     }

@@ -52,35 +52,40 @@ void test1(){
   std::string sample7 = ((n2.getNext())->getData())->toString();
   assert(sample7 == sample2);
 
-  Scheduler s1;
-  s1.add(e);
-  s1.add(e2);
+  std::cout << "Events in order: " << std::endl;
+  std::cout << e->toString() << std::endl;
+  std::cout << e2->toString() << std::endl;
+  std::cout << e3->toString() << std::endl;
+  std::cout << e4->toString() + "\n" << std::endl;
+
+  Scheduler* s1 = new Scheduler;
+  s1->add(e);
+  Scheduler s2(*s1);
+  std::cout << s1->toString() << std::endl;
+  std::cout << s2.toString() << std::endl;
+  s1->add(e2);
+  std::cout << s1->toString() << std::endl;
+  Scheduler s3(*s1);
+  std::cout << s3.toString() << std::endl;
 
   std::string message;
   try {
-    s1.add(e3);
+    s1->add(e3);
   }
   catch(std::range_error& e){
     message = e.what();
-
   }
   assert(message == "Event Time Conflict");
 
-  s1.add(e4);
+  s1->add(e4);
+  Scheduler s4(*s1);
+  std::cout << s4.toString() << std::endl;
 
-  // std::cout << "events: " << std::endl;
-  // std::cout << e->toString() << std::endl;
-  // std::cout << e2->toString() << std::endl;
-  // std::cout << e3->toString() << std::endl;
-  // std::cout << e4->toString() << std::endl;
+  delete s1;
 
-  Scheduler s2(s1);
-  Scheduler s3;
-  s3 = s1;
-
-  std::cout << s1.toString() << std::endl;
   std::cout << s2.toString() << std::endl;
-  std::cout << s3.toString() << std::endl;  
+  std::cout << s3.toString() << std::endl;
+  std::cout << s4.toString() << std::endl;
 }
 
 int main(){
