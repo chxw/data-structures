@@ -86,6 +86,19 @@ void test1(){
   std::cout << s2.toString() << std::endl;
   std::cout << s3.toString() << std::endl;
   std::cout << s4.toString() << std::endl;
+
+  Event* e5;
+  Event event5(32,60,-1, "");
+  e5 = &event5;
+
+  std::string message2;
+  try {
+    s4->add(e5);
+  }
+  catch(std::range_error& e){
+    message2 = e.what();
+  }
+  assert(message2 == "Not Legal Event");
 }
 
 int main(){

@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <map>
-typedef std::map<int, std::string> BasePairMap;
 
 Scheduler::Scheduler(){
   year = 2019;
@@ -71,20 +70,51 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
   return(*this);
 }
 
-// Scheduler::~Scheduler(){
-//   Node* current = head;
-//   while(current != nullptr){
-//     Node* next = current->getNext();
-//     delete current;
-//     current = next;
-//   }
-// }
+Scheduler::~Scheduler(){
+  Node* current = head;
+  while(current != nullptr){
+    Node* next = current->getNext();
+    delete current;
+    current = next;
+  }
+}
 
 void Scheduler::add(Event* event){
   Node* previous = nullptr;
   Node* temp = head;
   Node* newbie = new Node(event);
   newbie->setNext(nullptr);
+
+  typedef std::map<int, int> BasePairMap;
+
+  BasePairMap m;
+
+  //map month number to number of days
+  m[1] = 31;
+  // take into account leap years
+  if (year % 4 == 0){
+  	if (year % 100 == 0 and year % 400 == 0){
+  		m[2] = 29;
+  	}
+  }
+  else{
+  	m[2] = 28;
+  }
+  m[3] = 31;
+  m[4] = 30;
+  m[5] = 31;
+  m[6] = 30;
+  m[7] = 31;
+  m[8] = 31;
+  m[9] = 30;
+  m[10] = 31;
+  m[11] = 30;
+  m[12] = 31;
+
+  if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
+  	event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
+  	throw std::runtime_error("Not Legal Event");
+  }
 
   // ordering
   if (this->isEmpty()){
@@ -149,6 +179,8 @@ int Scheduler::getMonth() const{
 std::string Scheduler::toString() const{
   std::string s;
   Node* temp = this->head;
+
+  typedef std::map<int, std::string> BasePairMap;
 
   BasePairMap m;
 

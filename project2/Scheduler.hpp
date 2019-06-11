@@ -11,7 +11,7 @@ public:
   Scheduler(int y, int m);
   Scheduler(const Scheduler& other);
   Scheduler& operator=(const Scheduler& other);
-  // ~Scheduler();
+  ~Scheduler();
 
   void add(Event* event);
   // std::string getFirstEventAfter(int day, int hour, int minute) const;
