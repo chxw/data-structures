@@ -13,5 +13,9 @@ public:
 	int top();
 
 private:
-	//
+	Array *array;
+
+	LinkedList *ll;
 };
+
+#endif
