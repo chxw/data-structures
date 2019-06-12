@@ -104,6 +104,9 @@ void test1(){
   std::cout << "number of events on day 10 : ";
   std::cout << s4.getNumberOfEventsOn(10) << std::endl;
 
+  std::cout << "first event after [10 00:00] : ";
+  std::cout << s4.getFirstEventAfter(10, 0, 0) << std::endl;
+
   s4.removeAllEventsOn(10);
   std::cout << "s4 : \n" + s4.toString() << std::endl;
 

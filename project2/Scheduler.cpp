@@ -154,7 +154,27 @@ void Scheduler::add(Event* event){
   }
 }
 
-// std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
+std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
+	Node* current = head;
+	if (head == nullptr){
+		return "No Event Found";
+	}
+	else if (head->getNext() == nullptr){
+		if (head->getData()->startAfter(day, hour, minute)){
+			return head->getData()->toString();
+		}
+		return "No Event Found";
+	}
+	else {
+		while(current != nullptr){
+			if(current->getData()->startBefore(day, hour, minute) and current->getNext()->getData()->startAfter(day, hour, minute)){
+				return current->getNext()->getData()->toString();
+			}
+			current = current->getNext();
+		}
+		return "No Event Found";
+	}
+}
 
 
 void Scheduler::removeAllEventsOn(int day){

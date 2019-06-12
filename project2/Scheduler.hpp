@@ -14,7 +14,7 @@ public:
   ~Scheduler();
 
   void add(Event* event);
-  // std::string getFirstEventAfter(int day, int hour, int minute) const;
+  std::string getFirstEventAfter(int day, int hour, int minute) const;
 
   void removeAllEventsOn(int day);
   void removeAllEvents();
