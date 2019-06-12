@@ -157,19 +157,30 @@ void Scheduler::add(Event* event){
 // std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 
 
-// this is not so easy chelsea!!!!! will take time
-// void Scheduler::removeAllEventsOn(int day){
-//   Node* previous = nullptr;
-//   Node* current = head;
-//   while(current != nullptr){
-//     previous = current;
-//     current = current->getNext();
-//     if (current->getData()->getDay() == day){
-//       delete current;
-//     }
-//     current = next;
-//   }
-// }
+void Scheduler::removeAllEventsOn(int day){
+  if (head != nullptr){
+	  if (head->getData()->getDay() == day){
+	  	delete head;
+	  	head = nullptr;
+	  }
+	  else{
+	  	  Node* previous = head;
+ 		  Node* current = head->getNext();
+		  while(current != nullptr){
+		    if (current->getData()->getDay() == day){
+		    	previous->setNext(current->getNext());
+		    	delete current;
+		    	current = previous->getNext();
+
+		    }
+		    else {
+			    previous = current;
+			    current = current->getNext();
+			}
+		  }
+	  }
+  }
+}
 
 void Scheduler::removeAllEvents(){
   Node* current = head;
