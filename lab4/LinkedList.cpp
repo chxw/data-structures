@@ -96,26 +96,23 @@ std::string LinkedList::toStringInReverseOrder() const{
     return "|";
   }
   Node* current = head;
-  s = toString(s, current);
-  return reverseString(s);
+  s += toString(s, current);
+  s.insert(0, "|<-");
+  return s;
 }
 
 
 std::string LinkedList::toString(std::string s, Node* current) const{
   if(current == nullptr){
-    s+="-<|";
     return s;
   }
-  s+="-<";
-  s+=current->toString();
-  return toString(s, current->getNext());
-}
-
-std::string LinkedList::reverseString(std::string s) const{
-  std::string reversed;
-
-  for(int i = s.length() - 1; i > -1; i--){
-    reversed += s[i];
+  else if (current == head){
+    s.insert(0, current->toString());
+    return toString(s, current->getNext());
   }
-  return reversed;
+  else {
+    s.insert(0, current->toString()+"<-");
+    return toString(s, current->getNext());
+  }
 }
+

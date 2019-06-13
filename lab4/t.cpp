@@ -17,5 +17,9 @@ int main(){
 
   std::cout << ll.toStringInReverseOrder() << std::endl;
 
+  ll.removeBack();
+
+  std::cout << ll.toStringInReverseOrder() << std::endl;
+
   return 0;
 }
