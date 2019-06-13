@@ -17,6 +17,7 @@ Node::Node(const Node& other){
 }
 
 Node& Node::operator=(const Node& other){
+	throw std::runtime_error("Not Implemented");
 	if(&other != this){
 		data = other.getData();
 		next = other.getNext();

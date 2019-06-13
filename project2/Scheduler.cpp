@@ -276,7 +276,9 @@ std::string Scheduler::toString() const{
 
   while(temp != nullptr){
     s += (temp->getData())->toString();
-    s += "\n";
+    if (temp->getNext() == nullptr){
+      s += "\n";
+    }
     temp = temp->getNext();
   }
 
