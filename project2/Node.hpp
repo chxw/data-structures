@@ -1,6 +1,7 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <string>
 #include "Event.hpp"
 
 class Node{
