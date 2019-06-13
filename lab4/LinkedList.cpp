@@ -24,10 +24,21 @@ void LinkedList::addToBack(int data){
   if (head == nullptr){
     head = newbie;
   }
+  else if (head->getNext() == nullptr){
+    head->setNext(newbie);
+  }
   else{
     Node* current = head;
     add(current, newbie);
   }
+}
+
+void LinkedList::add(Node* current, Node* newbie){
+  if (current->getNext() == nullptr){
+    current->setNext(newbie);
+    return;
+  }
+  add(current->getNext(), newbie);
 }
 
 int LinkedList::getSize() const{
@@ -39,7 +50,6 @@ int LinkedList::getSize() const{
   }
   else{
     Node* current = head;
-
     return count(current, 0);
   }
 }
@@ -52,12 +62,32 @@ int LinkedList::count(Node* current, int total) const{
   return count(current, total+1);
 }
 
-void LinkedList::add(Node* current, Node* newbie){
-  if (current->getNext() == nullptr){
-    current->setNext(newbie);
+void LinkedList::removeBack(){
+  if (head == nullptr){
     return;
   }
-  add(current->getNext(), newbie);
+  else if (head->getNext() == nullptr){
+    delete head;
+    head = nullptr;
+    return;
+  }
+  else{
+    Node* previous = head;
+    Node* current = head->getNext();
+    remove(previous, current);
+    return;
+  }
+}
+
+void LinkedList::remove(Node* previous, Node* current){
+  if (current->getNext() == nullptr){
+    delete current;
+    previous->setNext(nullptr);
+    return;
+  }
+  previous = current;
+  current = current->getNext();
+  remove(previous, current);
 }
 
 std::string LinkedList::toStringInReverseOrder() const{
@@ -66,15 +96,26 @@ std::string LinkedList::toStringInReverseOrder() const{
     return "|";
   }
   Node* current = head;
-  return toString(s, current);
+  s = toString(s, current);
+  return reverseString(s);
 }
+
 
 std::string LinkedList::toString(std::string s, Node* current) const{
   if(current == nullptr){
-    s+="|<-";
+    s+="-<|";
     return s;
   }
-  s+="<-";
+  s+="-<";
   s+=current->toString();
   return toString(s, current->getNext());
+}
+
+std::string LinkedList::reverseString(std::string s) const{
+  std::string reversed;
+
+  for(int i = s.length() - 1; i > -1; i--){
+    reversed += s[i];
+  }
+  return reversed;
 }
