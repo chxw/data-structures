@@ -7,31 +7,23 @@
 #include "Scheduler.hpp"
 
 void test1(){
-  Event* e;
-  Event event;
-  e = &event;
-  std::string sample = event.toString();
+  Event* e = new Event();
+  std::string sample = e->toString();
 
-  Event* e2;
-  Event event2(30,23,59, "feed dog");
-  e2 = &event2;
-  std:: string sample2 = event2.toString();
+  Event* e2 = new Event(30,23,59, "feed dog");
+  std:: string sample2 = e2->toString();
 
-  Event* e3;
-  Event event3;
-  e3 = &event3;
-  std::string sample3 = event3.toString();
+  Event* e3 = new Event();
+  std::string sample3 = e3->toString();
 
-  Event* e4;
-  Event event4(10,10,10, "dance");
-  e4 = &event4;
+  Event* e4 = new Event(10,10,10, "dance");
 
-  assert(event.startBefore(e2));
-  assert(event2.startAfter(e));
-  assert(event3.startAtSameTime(e));
-  assert(event.startBefore(30,23,59));
-  assert(event2.startAfter(29,22,58));
-  assert(event2.startAt(30,23,59));
+  assert(e->startBefore(e2));
+  assert(e2->startAfter(e));
+  assert(e3->startAtSameTime(e));
+  assert(e->startBefore(30,23,59));
+  assert(e2->startAfter(29,22,58));
+  assert(e2->startAt(30,23,59));
 
   Node n1;
   n1.getData();
@@ -82,9 +74,7 @@ void test1(){
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
 
-  Event* e5;
-  Event event5(32,60,-1, "");
-  e5 = &event5;
+  Event* e5 = new Event(32,60,-1, "");
 
   std::string message2;
   try {
@@ -95,9 +85,7 @@ void test1(){
   }
   assert(message2 == "Not Legal Event");
 
-  Event* e6;
-  Event event6(10, 1, 2, "shopping");
-  e6 = &event6;
+  Event* e6 = new Event(10, 1, 2, "shopping");
 
   s4.add(e6);
   std::cout << "s4 : \n" + s4.toString() << std::endl;
