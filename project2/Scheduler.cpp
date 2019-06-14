@@ -29,9 +29,7 @@ Scheduler::Scheduler(const Scheduler& other){
   }
   else if((other.head)->getNext() == nullptr){
   	Event* event = new Event(*((other.head)->getData()));
-  	Node* newbie = new Node(event);
-  	this->head = newbie;
-    newbie->setNext(nullptr);
+  	this->add(event);
   }
   else{
     Node* current = other.head;
@@ -41,7 +39,6 @@ Scheduler::Scheduler(const Scheduler& other){
       this->add(event);
       current = next;
     }
-    
   }
 }
 
@@ -55,9 +52,7 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
     }
     else if((other.head)->getNext() == nullptr){
   	  Event* event = new Event(*(other.head)->getData());
-  	  Node* newbie = new Node(event);
-  	  this->head = newbie;
-      newbie->setNext(nullptr);
+  	  this->add(event);
     }
     else{
       Node* current = other.head;

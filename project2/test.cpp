@@ -85,9 +85,12 @@ void test1(){
   }
   assert(message2 == "Not Legal Event");
 
+  delete e5;
+
   Event* e6 = new Event(10, 1, 2, "shopping");
 
   s4.add(e6);
+
   std::cout << "s4 : \n" + s4.toString() << std::endl;
   std::cout << "number of events on day 10 : ";
   std::cout << s4.getNumberOfEventsOn(10) << std::endl;
