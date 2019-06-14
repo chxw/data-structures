@@ -83,11 +83,6 @@ Scheduler::~Scheduler(){
 }
 
 void Scheduler::add(Event* event){
-  Node* previous = nullptr;
-  Node* temp = head;
-  Node* newbie = new Node(event);
-  newbie->setNext(nullptr);
-
   typedef std::map<int, int> BasePairMap;
 
   BasePairMap m;
@@ -121,6 +116,8 @@ void Scheduler::add(Event* event){
 
   // ordering
   if (this->isEmpty()){
+    Node* newbie = new Node(event);
+    newbie->setNext(nullptr);
     head = newbie;
     num_events += 1;
   }
@@ -128,15 +125,21 @@ void Scheduler::add(Event* event){
     throw std::range_error("Event Time Conflict");
   }
   else if (event->startBefore(head->getData())){
+    Node* newbie = new Node(event);
     newbie->setNext(head);
     head = newbie;
     num_events += 1;
   }
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
+    Node* newbie = new Node(event);
     head->setNext(newbie);
     num_events += 1;
   }
   else{
+    Node* previous = nullptr;
+    Node* temp = head;
+    Node* newbie = new Node(event);
+    newbie->setNext(nullptr);
     while(temp != nullptr){
       if (event->startAtSameTime(temp->getData())){
         throw std::range_error("Event Time Conflict");
@@ -185,7 +188,7 @@ void Scheduler::removeAllEventsOn(int day){
 	  	head = nullptr;
 	  }
 	  else{
-	  	  Node* previous = head;
+	  	Node* previous = head;
  		  Node* current = head->getNext();
 		  while(current != nullptr){
 		    if (current->getData()->getDay() == day){
