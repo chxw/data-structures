@@ -51,6 +51,7 @@ void test1(){
   Scheduler s4(*s1);
 
   delete s1;
+  s1 = nullptr;
 
   std::cout << "s2 : \n" + s2.toString() << std::endl;
   std::cout << "s3 : \n" + s3.toString() << std::endl;
