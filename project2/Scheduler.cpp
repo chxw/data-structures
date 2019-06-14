@@ -38,6 +38,7 @@ Scheduler::Scheduler(const Scheduler& other){
     while(current != nullptr){
       Node* next = current->getNext();
       Event* event = new Event(*(current->getData()));
+      Node* newbie = new Node(event);
       this->add(event);
       current = next;
     }
@@ -63,6 +64,7 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
       while(current != nullptr){
         Node* next = current->getNext();
         Event* event = new Event(*(current)->getData());
+        Node* newbie = new Node(event);
   	    this->add(event);
         current = next;
       }
