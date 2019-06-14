@@ -41,6 +41,7 @@ Scheduler::Scheduler(const Scheduler& other){
       this->add(event);
       current = next;
     }
+    
   }
 }
 

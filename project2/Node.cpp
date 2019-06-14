@@ -6,7 +6,7 @@ Node::Node(){
 	next = nullptr;
 }
 Node::Node(Event* d){
-	data = new Event(*d);
+	data = d;
 	next = nullptr;
 }
 
