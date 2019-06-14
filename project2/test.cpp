@@ -50,7 +50,7 @@ void test1(){
   std::cout << e3->toString() << std::endl;
   std::cout << e4->toString() + "\n" << std::endl;
 
-  Scheduler* s1 = new Scheduler;
+  Scheduler* s1 = new Scheduler();
   s1->add(e);
   Scheduler s2(*s1);
   s1->add(e2);
@@ -64,6 +64,7 @@ void test1(){
     message = e.what();
   }
   assert(message == "Event Time Conflict");
+  delete e3;
 
   s1->add(e4);
   Scheduler s4(*s1);
@@ -84,11 +85,9 @@ void test1(){
     message2 = e.what();
   }
   assert(message2 == "Not Legal Event");
-
   delete e5;
 
   Event* e6 = new Event(10, 1, 2, "shopping");
-
   s4.add(e6);
 
   std::cout << "s4 : \n" + s4.toString() << std::endl;
