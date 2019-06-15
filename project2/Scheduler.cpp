@@ -71,7 +71,6 @@ Scheduler::~Scheduler(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
-    delete current->getData();
     delete current;
     current = next;
   }

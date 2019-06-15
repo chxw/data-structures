@@ -24,7 +24,8 @@ Node& Node::operator=(const Node& other){
 }
 
 Node::~Node(){
-
+	delete data;
+	data = nullptr;
 }
 
 Event* Node::getData() const{
