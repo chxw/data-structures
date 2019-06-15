@@ -71,6 +71,7 @@ Scheduler::~Scheduler(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
+    std::cout << "\n" + current->getData()->toString() + " being deleted \n";
     delete current;
     current = next;
   }

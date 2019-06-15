@@ -106,6 +106,13 @@ void test1(){
 
   s4.removeAllEvents();
   std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  delete e;
+  delete e2;
+  delete e4;
+  delete e5;
+  delete e6;
+  delete e8;
 }
 
 int main(){
