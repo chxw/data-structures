@@ -112,7 +112,8 @@ void Scheduler::add(Event* event){
 
   // ordering
   if (this->isEmpty()){
-    Node* newbie = new Node(event);
+    Event* e_newbie = new Event(*event);
+    Node* newbie = new Node(e_newbie);
     newbie->setNext(nullptr);
     head = newbie;
     num_events += 1;
@@ -121,13 +122,15 @@ void Scheduler::add(Event* event){
     throw std::range_error("Event Time Conflict");
   }
   else if (event->startBefore(head->getData())){
-    Node* newbie = new Node(event);
+    Event* e_newbie = new Event(*event);
+    Node* newbie = new Node(e_newbie);
     newbie->setNext(head);
     head = newbie;
     num_events += 1;
   }
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
-    Node* newbie = new Node(event);
+    Event* e_newbie = new Event(*event);
+    Node* newbie = new Node(e_newbie);
     head->setNext(newbie);
     num_events += 1;
   }
@@ -139,7 +142,8 @@ void Scheduler::add(Event* event){
         throw std::range_error("Event Time Conflict");
       }
       else if (event->startBefore(temp->getData()) or event->startAtSameTime(temp->getData())){
-        Node* newbie = new Node(event);
+        Event* e_newbie = new Event(*event);
+        Node* newbie = new Node(e_newbie);
         newbie->setNext(nullptr);
         previous->setNext(newbie);
         newbie->setNext(temp);
@@ -149,7 +153,8 @@ void Scheduler::add(Event* event){
       previous = temp;
       temp = temp->getNext();
     }
-    Node* newbie = new Node(event);
+    Event* e_newbie = new Event(*event);
+    Node* newbie = new Node(e_newbie);
     newbie->setNext(nullptr);
     previous->setNext(newbie);
     num_events += 1;
