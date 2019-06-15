@@ -64,6 +64,9 @@ void test1(){
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
 
+  Scheduler* s1_copy = new Scheduler(s1);
+  delete s1_copy;
+  
   s1.removeAllEvents();
 
   std::cout << "\n Remove events in s1 \n";
