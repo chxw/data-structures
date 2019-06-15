@@ -29,14 +29,14 @@ Scheduler::Scheduler(const Scheduler& other){
   }
   else if((other.head)->getNext() == nullptr){
   	// Event* event = new Event(*((other.head)->getData()));
-  	this->add(event);
+  	this->add(other.head->getData());
   }
   else{
     Node* current = other.head;
     while(current != nullptr){
       Node* next = current->getNext();
       // Event* event = new Event(*(current->getData()));
-      this->add(event);
+      this->add(current->getData());
       current = next;
     }
   }
@@ -52,14 +52,14 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
     }
     else if((other.head)->getNext() == nullptr){
   	  // Event* event = new Event(*(other.head)->getData());
-  	  this->add(event);
+  	  this->add(other.head->getData());
     }
     else{
       Node* current = other.head;
       while(current != nullptr){
         Node* next = current->getNext();
         // Event* event = new Event(*(current)->getData());
-  	    this->add(event);
+  	    this->add(current->getData());
         current = next;
       }
     }
