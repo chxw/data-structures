@@ -39,7 +39,7 @@ void test1(){
   s1.add(e);
   Scheduler s2(s1);
   s1.add(e2);
-  Scheduler s3(s1);
+  Scheduler s3 = s1;
 
   std::string message;
   try {
@@ -56,6 +56,17 @@ void test1(){
 
   s1.add(e5);
   s1.add(e6);
+
+  std::cout << "\n Deep copy test \n";
+
+  std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  s1.removeAllEvents();
+
+  std::cout << "\n Remove events in s1 \n";
 
   std::cout << "s1 : \n" + s1.toString() << std::endl;
   std::cout << "s2 : \n" + s2.toString() << std::endl;
