@@ -209,6 +209,7 @@ void Scheduler::removeAllEventsOn(int day){
 		  while(current != nullptr){
 		    if (current->getData()->getDay() == day){
 		    	previous->setNext(current->getNext());
+          delete current->getData();
 		    	delete current;
 		    	current = previous->getNext();
 
