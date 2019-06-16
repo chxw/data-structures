@@ -76,9 +76,13 @@ void deep_copy(){
   std::cout << "s2 : \n" + s2.toString() << std::endl;
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  std::cout << "\n ================ End of deep copy test ================ \n";
 }
 
 void logic_test(){
+  std::cout << "\n Logic test \n" << std::endl;
+
   Event* e = new Event();
   Event* e2 = new Event(30,23,59, "feed dog");
   Event* e3 = new Event();
@@ -119,6 +123,7 @@ void logic_test(){
   s4.add(e8);
 
   std::cout << "s4 : \n" + s4.toString() << std::endl;
+
   std::cout << "\n number of events on day 10 : ";
   std::cout << s4.getNumberOfEventsOn(10) << std::endl;
 
@@ -139,6 +144,8 @@ void logic_test(){
   std::cout << "\n remove all events on 0 : ";
   s4.removeAllEventsOn(0);
   std::cout << "\n s4 : \n" + s4.toString() << std::endl;
+
+  std::cout << "\n ================ End of logic test ================ \n"; 
 }
 
 int main(){
