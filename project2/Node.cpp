@@ -1,5 +1,6 @@
 #include "Node.hpp"
 #include <iostream>
+#include <stdexcept>
 
 Node::Node(){
 	data = nullptr;
