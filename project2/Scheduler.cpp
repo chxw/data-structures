@@ -28,15 +28,15 @@ Scheduler::Scheduler(const Scheduler& other){
     this->head = nullptr;
   }
   else if((other.head)->getNext() == nullptr){
-  	// Event* event = new Event(*((other.head)->getData()));
-  	this->add(other.head->getData());
+  	Event* event = new Event(*((other.head)->getData()));
+  	this->add(event);
   }
   else{
     Node* current = other.head;
     while(current != nullptr){
       Node* next = current->getNext();
-      // Event* event = new Event(*(current->getData()));
-      this->add(current->getData());
+      Event* event = new Event(*(current->getData()));
+      this->add(event);
       current = next;
     }
   }
@@ -51,15 +51,15 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
       this->head = nullptr;
     }
     else if((other.head)->getNext() == nullptr){
-  	  // Event* event = new Event(*(other.head)->getData());
-  	  this->add(other.head->getData());
+  	  Event* event = new Event(*(other.head)->getData());
+  	  this->add(event);
     }
     else{
       Node* current = other.head;
       while(current != nullptr){
         Node* next = current->getNext();
-        // Event* event = new Event(*(current)->getData());
-  	    this->add(current->getData());
+        Event* event = new Event(*(current)->getData());
+  	    this->add(event);
         current = next;
       }
     }
@@ -71,7 +71,7 @@ Scheduler::~Scheduler(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
-    std::cout << "\n" + current->getData()->toString() + " being deleted \n";
+    delete current->getData();
     delete current;
     current = next;
   }
@@ -79,13 +79,13 @@ Scheduler::~Scheduler(){
 }
 
 void Scheduler::add(Event* event){
+  ////// requirements check
+  // map month to number of days in that month
   typedef std::map<int, int> BasePairMap;
-
   BasePairMap m;
 
-  //map month number to number of days
   m[1] = 31;
-  // take into account leap years
+  // for leap years
   if (year % 4 == 0){
   	if (year % 100 == 0 and year % 400 == 0){
   		m[2] = 29;
@@ -105,50 +105,66 @@ void Scheduler::add(Event* event){
   m[11] = 30;
   m[12] = 31;
 
+  // given event must be in range, description must be at least one char long
   if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
   	event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
   	throw std::runtime_error("Not Legal Event");
   }
 
-  // ordering
+  ////// ordering
+  // empty list
   if (this->isEmpty()){
     Node* newbie = new Node(event);
     newbie->setNext(nullptr);
+
     head = newbie;
+
     num_events += 1;
   }
+  // time conflict with head
   else if (event->startAtSameTime(head->getData())){
     throw std::range_error("Event Time Conflict");
   }
+  // event before head
   else if (event->startBefore(head->getData())){
     Node* newbie = new Node(event);
     newbie->setNext(head);
+
     head = newbie;
+
     num_events += 1;
   }
+  // event after head
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
     Node* newbie = new Node(event);
     head->setNext(newbie);
+
     num_events += 1;
   }
+  // traverse through
   else{
     Node* previous = nullptr;
     Node* temp = head;
+
     while(temp != nullptr){
+      // ∃ event that conflicts with given event
       if (event->startAtSameTime(temp->getData())){
         throw std::range_error("Event Time Conflict");
       }
-      else if (event->startBefore(temp->getData()) or event->startAtSameTime(temp->getData())){
+      // place event before first event it starts before (given each events always added this way)
+      else if (event->startBefore(temp->getData())) {
         Node* newbie = new Node(event);
-        newbie->setNext(nullptr);
+
         previous->setNext(newbie);
         newbie->setNext(temp);
+
         num_events += 1;
         return;
       }
       previous = temp;
       temp = temp->getNext();
     }
+    // place event at end if it never starts before an already existing event
     Node* newbie = new Node(event);
     newbie->setNext(nullptr);
     previous->setNext(newbie);
@@ -157,17 +173,20 @@ void Scheduler::add(Event* event){
 }
 
 std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
-	Node* current = head;
+  // check empty
 	if (head == nullptr){
 		return "No Event Found";
 	}
+  // check only head
 	else if (head->getNext() == nullptr){
 		if (head->getData()->startAfter(day, hour, minute)){
 			return head->getData()->toString();
 		}
 		return "No Event Found";
 	}
+  // traverse through
 	else {
+    Node* current = head;
 		while(current != nullptr){
 			if(current->getData()->startBefore(day, hour, minute) and current->getNext()->getData()->startAfter(day, hour, minute)){
 				return current->getNext()->getData()->toString();
@@ -177,7 +196,6 @@ std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 		return "No Event Found";
 	}
 }
-
 
 void Scheduler::removeAllEventsOn(int day){
   if (head != nullptr){
@@ -208,6 +226,7 @@ void Scheduler::removeAllEvents(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
+    delete current->getData();
     delete current;
     current = next;
   }
@@ -216,7 +235,6 @@ void Scheduler::removeAllEvents(){
 
 int Scheduler::getNumberOfEventsOn(int day) const{
 	Node* temp = this->head;
-
 	int count = 0;
 
 	while(temp != nullptr){
@@ -225,8 +243,7 @@ int Scheduler::getNumberOfEventsOn(int day) const{
       }
       temp = temp->getNext();
   	}
-
-  	return count;
+  return count;
 }
 
 int Scheduler::getNumberOfEvents() const{
@@ -253,7 +270,6 @@ std::string Scheduler::toString() const{
   Node* temp = this->head;
 
   typedef std::map<int, std::string> BasePairMap;
-
   BasePairMap m;
 
   //map number to month name

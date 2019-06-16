@@ -40,6 +40,7 @@ bool Event::startBefore(const Event* another) const{
 	if(another == nullptr)	{
 		return false;
 	}
+	// return true if other event starts after this event
 	else if(another->getDay() > dd){
 		return true;
 	}
@@ -60,6 +61,7 @@ bool Event::startAfter(const Event* another) const{
 	if(another == nullptr){
 		return false;
 	}
+	// return true if other event starts before this event
 	else if(another->startBefore(this)){
 		return true;
 	}

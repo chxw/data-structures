@@ -6,7 +6,7 @@ Node::Node(){
 	next = nullptr;
 }
 Node::Node(Event* d){
-	data = new Event(*d);
+	data = d;
 	next = nullptr;
 }
 
@@ -16,16 +16,11 @@ Node::Node(const Node& other){
 }
 
 Node& Node::operator=(const Node& other){
-	if(&other != this){
-		data = other.getData();
-		next = other.getNext();
-	}
-	return(*this);
+	throw std::runtime_error("Not Implemented");
 }
 
 Node::~Node(){
-	delete data;
-	data = nullptr;
+
 }
 
 Event* Node::getData() const{
