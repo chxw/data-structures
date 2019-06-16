@@ -57,19 +57,20 @@ void deep_copy(){
   s1.add(e5);
   s1.add(e6);
 
+  Scheduler* s1_copy = new Scheduler(s1);
+
   std::cout << "\n Deep copy test \n";
 
   std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s1_copy : \n" + s1_copy->toString() << std::endl;
   std::cout << "s2 : \n" + s2.toString() << std::endl;
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
-
-  Scheduler* s1_copy = new Scheduler(s1);
-  delete s1_copy;
   
+  delete s1_copy;
   s1.removeAllEvents();
 
-  std::cout << "\n Remove events in s1 \n";
+  std::cout << "\n Remove events in s1 && delete s1_copy \n";
 
   std::cout << "s1 : \n" + s1.toString() << std::endl;
   std::cout << "s2 : \n" + s2.toString() << std::endl;
@@ -114,6 +115,7 @@ void logic_test(){
   }
   assert(message2 == "Not Legal Event");
   delete e7;
+
   s4.add(e8);
 
   std::cout << "s4 : \n" + s4.toString() << std::endl;
