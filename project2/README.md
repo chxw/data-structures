@@ -54,4 +54,6 @@ Various authors (26 September 2015) *can I call destructor in move assignment op
 	- understanding how to find where memory leaks are located from `valgrind`
 	- learning the difference between **heap** and **stack**
 	- further understanding of **copy constructor** and **assignment operator**
-	- 
+2. Implementing the requirements, the logic tests (boolean functions) went smoothly. 
+
+3. I hope to find ways to implement functions in cleaner ways. I do feel like the functions I wrote for this project were clunky. 
