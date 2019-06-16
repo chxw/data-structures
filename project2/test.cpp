@@ -104,7 +104,6 @@ void logic_test(){
     message = e.what();
   }
   assert(message == "Event Time Conflict");
-  delete e3;
 
   s4.add(e4);
   s4.add(e5);
@@ -118,7 +117,6 @@ void logic_test(){
     message2 = e.what();
   }
   assert(message2 == "Not Legal Event");
-  delete e7;
 
   s4.add(e8);
 
@@ -145,6 +143,11 @@ void logic_test(){
   s4.removeAllEventsOn(0);
   std::cout << "\n s4 : \n" + s4.toString() << std::endl;
 
+  // delete events that were unsuccessfully added to free memory
+  delete e3;
+  e3 = nullptr;
+  delete e7;
+  e7 = nullptr;
   std::cout << "\n ================ End of logic test ================ \n"; 
 }
 
