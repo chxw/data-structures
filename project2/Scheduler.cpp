@@ -44,6 +44,7 @@ Scheduler::Scheduler(const Scheduler& other){
 
 Scheduler& Scheduler::operator=(const Scheduler& other){
   if(&other != this){
+    this->removeAllEvents();
     year = other.getYear();
     month = other.getMonth();
     num_events = 0;
