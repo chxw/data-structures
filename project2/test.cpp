@@ -77,6 +77,49 @@ void deep_copy(){
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
 
+  std::cout << "\n Add events to s1 again && remove events in s3 (assignment operator) && remove events in s4 (copy constructor)";
+  Event* e7 = new Event(30,23,59, "feed dog");
+  Event* e8 = new Event();
+  Event* e9 = new Event(10,10,10, "dance");
+  Event* e10 = new Event(6, 9, 0, "get drink");
+
+  s1.add(e7);
+  s1.add(e8);
+  s1.add(e9);
+  s1.add(e10);
+
+  s3.removeAllEvents();
+  s4.removeAllEvents();
+
+  std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  std::cout << "\n Add events to s3 (assignment operator) and s4 (copy constructor) again" << std::endl;
+  Event* e11 = new Event(30,23,59, "feed dog");
+  Event* e12 = new Event();
+  Event* e13 = new Event(10,10,10, "dance");
+  Event* e14 = new Event(6, 9, 0, "get drink");
+
+  s3.add(e11);
+  s3.add(e12);
+  s3.add(e13);
+  s3.add(e14);
+
+  Event* e15 = new Event(30,23,59, "feed dog");
+  Event* e16 = new Event();
+  Event* e17 = new Event(10,10,10, "dance");
+  Event* e18 = new Event(6, 9, 0, "get drink");
+  s4.add(e15);
+  s4.add(e16);
+  s4.add(e17);
+  s4.add(e18);
+
+  std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
   std::cout << "\n ================ End of deep copy test ================ \n";
 }
 
@@ -219,6 +262,8 @@ void get_first(){
   std::cout << s.getFirstEventAfter(10, 0, 0) << std::endl;
   std::cout << "\n first event after [30 23:59] : ";
   std::cout << s.getFirstEventAfter(30, 23, 59) << std::endl;
+  std::cout << "\n first event after [31 00:00] : ";
+  std::cout << s.getFirstEventAfter(31, 0, 0) << std::endl;
   std::cout << "\n ================ End of get first test ================ \n";
 }
 

@@ -189,7 +189,7 @@ std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 	}
   // check only head
 	else if (head->getNext() == nullptr){
-		if (head->getData()->startAfter(day, hour, minute)){
+		if (head->getData()->startAfter(day, hour, minute) or head->getData()->startAt(day, hour, minute)){
 			return head->getData()->toString();
 		}
 		return "No Event Found";
@@ -198,7 +198,7 @@ std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 	else {
     Node* current = head;
 		while(current != nullptr){
-			if(current->getData()->startAfter(day, hour, minute)){
+			if(current->getData()->startAfter(day, hour, minute) or current->getData()->startAt(day, hour, minute)){
 				return current->getData()->toString();
 			}
 			current = current->getNext();
@@ -212,6 +212,7 @@ void Scheduler::removeAllEventsOn(int day){
 	  if (head->getData()->getDay() == day){
 	  	delete head;
 	  	head = nullptr;
+      num_events--;
 	  }
 	  else{
 	  	Node* previous = head;
@@ -221,8 +222,8 @@ void Scheduler::removeAllEventsOn(int day){
 		    	previous->setNext(current->getNext());
           delete current->getData();
 		    	delete current;
+          num_events--;
 		    	current = previous->getNext();
-
 		    }
 		    else {
 			    previous = current;
@@ -237,11 +238,13 @@ void Scheduler::removeAllEvents(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
+    // std::cout << "\n deleting : " + current->getData()->toString() << std::endl;
     delete current->getData();
     delete current;
     current = next;
   }
   head = nullptr;
+  num_events = 0;
 }
 
 int Scheduler::getNumberOfEventsOn(int day) const{
