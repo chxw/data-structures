@@ -168,6 +168,8 @@ void leap_year() {
     message = e.what();
   }
   assert(message == "Not Legal Event");
+  delete e1;
+
   std::cout << "\n s1 : \n" + s1.toString() << std::endl;
   std::cout << "\n ================ End of leap year test ================ \n"; 
 }
