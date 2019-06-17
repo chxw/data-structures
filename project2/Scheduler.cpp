@@ -27,6 +27,7 @@ Scheduler::Scheduler(const Scheduler& other){
   if(other.head == nullptr){
     this->head = nullptr;
   }
+
   else if((other.head)->getNext() == nullptr){
   	Event* event = new Event(*((other.head)->getData()));
   	this->add(event);
@@ -88,7 +89,10 @@ void Scheduler::add(Event* event){
   m[1] = 31;
   // for leap years
   if (year % 4 == 0){
-  	if (year % 100 == 0 and year % 400 == 0){
+    if (year % 100 != 0){
+      m[2] = 29;
+    }
+  	else if (year % 100 == 0 and year % 400 == 0){
   		m[2] = 29;
   	}
   }
@@ -106,8 +110,12 @@ void Scheduler::add(Event* event){
   m[11] = 30;
   m[12] = 31;
 
+
   // given event must be in range, description must be at least one char long
-  if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
+  if (event == nullptr){
+    return;
+  }
+  else if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
   	event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
   	throw std::runtime_error("Not Legal Event");
   }
@@ -139,6 +147,7 @@ void Scheduler::add(Event* event){
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
     Node* newbie = new Node(event);
     head->setNext(newbie);
+    newbie->setNext(nullptr);
 
     num_events += 1;
   }
@@ -189,8 +198,8 @@ std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 	else {
     Node* current = head;
 		while(current != nullptr){
-			if(current->getData()->startBefore(day, hour, minute) and current->getNext()->getData()->startAfter(day, hour, minute)){
-				return current->getNext()->getData()->toString();
+			if(current->getData()->startAfter(day, hour, minute)){
+				return current->getData()->toString();
 			}
 			current = current->getNext();
 		}
