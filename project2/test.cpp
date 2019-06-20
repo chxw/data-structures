@@ -77,6 +77,49 @@ void deep_copy(){
   std::cout << "s3 : \n" + s3.toString() << std::endl;
   std::cout << "s4 : \n" + s4.toString() << std::endl;
 
+  std::cout << "\n Add events to s1 again && remove events in s3 (assignment operator) && remove events in s4 (copy constructor)";
+  Event* e7 = new Event(30,23,59, "feed dog");
+  Event* e8 = new Event();
+  Event* e9 = new Event(10,10,10, "dance");
+  Event* e10 = new Event(6, 9, 0, "get drink");
+
+  s1.add(e7);
+  s1.add(e8);
+  s1.add(e9);
+  s1.add(e10);
+
+  s3.removeAllEvents();
+  s4.removeAllEvents();
+
+  std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
+
+  std::cout << "\n Add events to s3 (assignment operator) and s4 (copy constructor) again" << std::endl;
+  Event* e11 = new Event(30,23,59, "feed dog");
+  Event* e12 = new Event();
+  Event* e13 = new Event(10,10,10, "dance");
+  Event* e14 = new Event(6, 9, 0, "get drink");
+
+  s3.add(e11);
+  s3.add(e12);
+  s3.add(e13);
+  s3.add(e14);
+
+  Event* e15 = new Event(30,23,59, "feed dog");
+  Event* e16 = new Event();
+  Event* e17 = new Event(10,10,10, "dance");
+  Event* e18 = new Event(6, 9, 0, "get drink");
+  s4.add(e15);
+  s4.add(e16);
+  s4.add(e17);
+  s4.add(e18);
+
+  std::cout << "s1 : \n" + s1.toString() << std::endl;
+  std::cout << "s2 : \n" + s2.toString() << std::endl;
+  std::cout << "s3 : \n" + s3.toString() << std::endl;
+  std::cout << "s4 : \n" + s4.toString() << std::endl;
   std::cout << "\n ================ End of deep copy test ================ \n";
 }
 
@@ -157,8 +200,107 @@ void logic_test(){
   std::cout << "\n ================ End of logic test ================ \n"; 
 }
 
+void leap_year() {
+  Event* e = new Event(29, 10, 0, "leap year!");
+  Scheduler s(2016, 2);
+  s.add(e);
+  std::cout << "\n s : \n" + s.toString() << std::endl;
+
+  Event* e1 = new Event(29, 10, 0, "Not a leap year!");
+  Scheduler s1(2017, 2);
+
+  std::string message;
+  try{
+    s1.add(e1);
+  }
+  catch (std::runtime_error& e){
+    message = e.what();
+  }
+  assert(message == "Not Legal Event");
+  delete e1;
+
+  std::cout << "\n s1 : \n" + s1.toString() << std::endl;
+  std::cout << "\n ================ End of leap year test ================ \n"; 
+}
+
+void add_test(){
+  Event* e = new Event(30,23,59, "feed dog");
+  Event* e1 = new Event();
+  Event* e2 = new Event(10,10,10, "dance");
+  Event* e3 = new Event(6, 9, 0, "get drink");
+  Event* e4 = nullptr;
+
+  Scheduler s;
+  s.add(e);
+  s.add(e4);
+  s.add(e2);
+  s.add(e3);
+  s.add(e1);
+  std::cout << "\n s : \n" + s.toString() << std::endl;
+  std::cout << "\n ================ End of add test ================ \n";
+}
+
+void get_first(){
+  Event* e = new Event(30,23,59, "feed dog");
+  Event* e1 = new Event();
+  Event* e2 = new Event(10,10,10, "dance");
+  Event* e3 = new Event(6, 9, 0, "get drink");
+  Event* e4 = new Event(1, 1, 1, "cry");
+
+  Scheduler s;
+  s.add(e);
+  s.add(e4);
+  s.add(e2);
+  s.add(e3);
+  s.add(e1);
+
+  std::cout << "\n s : \n" + s.toString() << std::endl;
+
+  std::cout << "\n first event after [00 00:00] : ";
+  std::cout << s.getFirstEventAfter(0, 0, 0) << std::endl;
+  std::cout << "\n first event after [01 00:00] : ";
+  std::cout << s.getFirstEventAfter(1, 0, 0) << std::endl;
+  std::cout << "\n first event after [05 00:00] : ";
+  std::cout << s.getFirstEventAfter(5, 0, 0) << std::endl;
+  std::cout << "\n first event after [06 08:59] : ";
+  std::cout << s.getFirstEventAfter(6, 8, 59) << std::endl;
+  std::cout << "\n first event after [10 00:00] : ";
+  std::cout << s.getFirstEventAfter(10, 0, 0) << std::endl;
+  std::cout << "\n first event after [30 23:59] : ";
+  std::cout << s.getFirstEventAfter(30, 23, 59) << std::endl;
+  std::cout << "\n first event after [31 00:00] : ";
+  std::cout << s.getFirstEventAfter(31, 0, 0) << std::endl;
+  std::cout << "\n ================ End of get first test ================ \n";
+}
+
+void remove_all(){
+  Event* e = new Event(30,23,59, "feed dog");
+  Event* e1 = new Event();
+  Event* e2 = new Event(10,10,10, "dance");
+  Event* e3 = new Event(6, 9, 0, "get drink");
+  Event* e4 = new Event(1, 1, 1, "cry");
+  Event* e5 = new Event(8, 9, 10, "work on P2");
+
+  Scheduler s;
+  s.add(e);
+  s.add(e1);
+  s.add(e2);
+  s.add(e3);
+  s.add(e4);
+  s.add(e5);
+
+  s.removeAllEvents();
+
+  std::cout << "\n s : \n" + s.toString() << std::endl;
+  std::cout << "\n ================ End of remove all test ================ \n";
+}
+
 int main(){
   deep_copy();
   logic_test();
+  leap_year();
+  add_test();
+  get_first();
+  remove_all();
   return 0;
 }
