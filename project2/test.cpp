@@ -128,6 +128,12 @@ void logic_test(){
   std::cout << "\n first event after [10 00:00] : ";
   std::cout << s4.getFirstEventAfter(10, 0, 0) << std::endl;
 
+  std::cout << "\n first event after [00 00:00] : ";
+  std::cout << s4.getFirstEventAfter(0, 0, 0) << std::endl;
+
+  std::cout << "\n first event after [10 02:00] : ";
+  std::cout << s4.getFirstEventAfter(10, 2, 0) << std::endl;
+
   std::cout << "\n remove all events on 10 : ";
   s4.removeAllEventsOn(10);
   std::cout << "\n s4 : \n" + s4.toString() << std::endl;

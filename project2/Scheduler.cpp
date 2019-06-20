@@ -107,6 +107,9 @@ void Scheduler::add(Event* event){
   m[12] = 31;
 
   // given event must be in range, description must be at least one char long
+  if (event == nullptr){
+    return;
+  }
   if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
   	event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
   	throw std::runtime_error("Not Legal Event");
@@ -114,7 +117,7 @@ void Scheduler::add(Event* event){
 
   ////// ordering
   // empty list
-  if (this->isEmpty()){
+  else if (this->isEmpty()){
     Node* newbie = new Node(event);
     newbie->setNext(nullptr);
 
@@ -178,11 +181,12 @@ std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
 	if (head == nullptr){
 		return "No Event Found";
 	}
-  // check only head
-	else if (head->getNext() == nullptr){
-		if (head->getData()->startAfter(day, hour, minute)){
-			return head->getData()->toString();
-		}
+  // check head
+  else if (head->getData()->startAfter(day, hour, minute)){
+    return head->getData()->toString();
+  }
+  // check if only head
+	else if (head->getData()->startBefore(day, hour, minute) and head->getNext() == nullptr){
 		return "No Event Found";
 	}
   // traverse through
