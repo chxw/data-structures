@@ -2,9 +2,10 @@
 #include <cassert>
 #include <string>
 #include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
 
-#include "Card.cpp"
-#include "CardDeck.cpp"
+#include "CardDeck.hpp"
 
 CardDeck create_suit(std::string s){
 	std::string suit = s;
@@ -67,6 +68,8 @@ CardDeck create_full_deck(){
 }
 
 Card random_card(CardDeck deck){
+	srand(time(NULL));
+
 	int a = rand() % 51 + 1;
 
 	return deck.at(a);
@@ -96,29 +99,24 @@ int main(){
 	player_deck.add(random_card(full_deck));
 	player_deck.add(random_card(full_deck));
 
-	int player_sum = sum(player_deck);
+	int player_sum = display_hand(player_deck, "Your");
 
 	CardDeck dealer_deck;
 	dealer_deck.add(random_card(full_deck));
 	dealer_deck.add(random_card(full_deck));
 
-	int dealer_sum = sum(dealer_deck);
+	int dealer_sum = display_hand(dealer_deck, "Dealer");
 	
 	while(player_sum <= 21 or dealer_sum <= 21){
-		if (player_deck.getSize() == 2){
-			player_sum = display_hand(player_deck, "Your");
-			dealer_sum = display_hand(dealer_deck, "Dealer");
-		}
-
 		if(player_sum == 21 or dealer_sum == 21){
 			break;
 		}
 
 		std::string user;
-		std::cout << "Hit or hold? " << std::endl;
+		std::cout << "Hit (1) or hold (2)? " << std::endl;
 		std::cin >> user;
 
-		if (user == "hit" or user == "HIT" or user == "Hit" or user == "HIt"){
+		if (user == "1"){
 			player_deck.add(random_card(full_deck));
 			player_sum = display_hand(player_deck, "Your");
 		}
