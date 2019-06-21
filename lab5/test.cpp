@@ -14,15 +14,18 @@ bool isBalanced(std::string parentheses){
     return false;
   }
 
-  std::cout << "beginning: " << std::endl;
   for (size_t i = 0; i < parentheses.length(); i++){
-    std::cout << i << std::endl;
-    std::cout << parentheses.at(i) << std::endl;
     if (parentheses.at(i) == '('){
       s.push(parentheses.at(i));
     }
     else if (parentheses.at(i) == ')'){
+      if (s.isEmpty()){
+      	return false;
+      }
       s.pop();
+    }
+    else {
+    	return false;
     }
   }
   if (s.isEmpty()){
