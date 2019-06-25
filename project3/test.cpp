@@ -102,11 +102,11 @@ void unordered_60(){
   delete [] array;
 }
 
-void unordered_90(){
+void unordered_70(){
   time_t t;
   srand((unsigned) time(&t));
 
-  int size = 90;
+  int size = 70;
   int* array = new int[size];
   for(int i = 0; i < size; i++)
     array[i] = (rand()%100)+1;
@@ -119,11 +119,11 @@ void unordered_90(){
   delete [] array;
 }
 
-void unordered_120(){
+void unordered_90(){
   time_t t;
   srand((unsigned) time(&t));
 
-  int size = 120;
+  int size = 90;
   int* array = new int[size];
   for(int i = 0; i < size; i++)
     array[i] = (rand()%100)+1;
@@ -143,6 +143,7 @@ int main(){
   test3();
   unordered_30();
   unordered_60();
+  unordered_70();
   unordered_90();
   return 0;
 }
