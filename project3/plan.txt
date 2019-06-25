@@ -1,0 +1,13 @@
+6/21 - 6/22: Learn the sorting techniques thoroughly (drawing, using the cards, thinking through) before starting. Read requirements thoroughly. Set up `project3` folder (i.e. copy skeleton files). 
+
+6/22 - 6/24: isSorted() in `test.cpp`, Sorter(), Sorter(Mode mode). Copy constructor and assignment operator, if non-trivial. 
+
+6/24: Insertion sort and testing until it's correct. 
+
+6/25: Merge sort and testing until it's correct.
+
+6/26: Quick sort and testing until it's correct.
+
+6/27 - 6/28: Destructor, void sort (x2), void set(), Mode getMode(). 
+
+6/28 - 6/30: Rigorous testing of all aspects. 
