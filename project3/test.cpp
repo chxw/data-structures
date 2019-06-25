@@ -23,18 +23,6 @@ bool isSorted(int* const array, int size){
 //   assert(mode == Mode::INSERTION_SORT);
 // }
 
-void print_array(int* const array, int size){
-  for (int i = 0; i < size; i++){
-    std::cout << array[i];
-    if(i == size - 1){
-      std::cout << "\n";
-    }
-    else{
-      std::cout << ", ";
-    }
-  }
-}
-
 void test2(){
   int size = 100;
   int* array = new int[size];

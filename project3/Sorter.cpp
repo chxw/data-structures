@@ -1,4 +1,6 @@
 #include "Sorter.hpp"
+#include <iostream>
+#include <algorithm>
 
 // Sorter();
 // Sorter(Mode mode);
@@ -28,20 +30,23 @@ void Sorter::traverse(int* const array, int key) const{
 			return;
 		}
 		else if(array[key] < array[i]){
-			int hold = array[i];
-			array[i] = array[key];
-			array[key] = hold;
+			std::swap(array[i], array[key]);
+			// int hold = array[i];
+			// array[i] = array[key];
+			// array[key] = hold;
 		}
 		key--;
 		i--;
 	}
 }
 
-int Sorter::divide(int* const array, int size) const{
+int* Sorter::divide(int* const array, int size) const{
+	std::cout << "size: ";
+	std::cout << size << std::endl;
+	print_array(array,size); 
+
 	if (size == 1){
-		int end = array[0]
-		delete array;
-		return end;
+		return array;
 	}
 
 	int* a = new int[size/2];
@@ -51,14 +56,37 @@ int Sorter::divide(int* const array, int size) const{
 		a[i] = array[i];
 	}
 
-	for (int i = 0; i < size/2; i++){
-		a[i] = array[i + size/2];
+	for (int i = size/2; i < size; i++){
+		a[i-size/2] = array[i];
 	}
 
 	delete array;
 
-	divide(a);
-	divide(b);
+	int* a_end = divide(a, size/2);
+	int* b_end = divide(b, size/2);
+
+	// int* merged = new int[2];
+
+	// if (a_end < b_end){
+	// 	merged[0] = a_end;
+	// 	merged[1] = b_end;
+	// }
+	// else {
+	// 	merged[0] = b_end;
+	// 	merged[1] = a_end;
+	// }
+}
+
+void Sorter::print_array(int* const array, int size) const{
+  for (int i = 0; i < size; i++){
+    std::cout << array[i];
+    if(i == size - 1){
+      std::cout << "\n";
+    }
+    else{
+      std::cout << ", ";
+    }
+  }
 }
 
 // void sort(int* const array, int size, Mode mode) const;

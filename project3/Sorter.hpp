@@ -24,6 +24,8 @@ public:
 private:
   //your design
   void traverse(int* const array, int key) const;
+  void print_array(int* const array, int size) const;
+  int* divide(int* const array, int size) const;
 };
 
 #endif
