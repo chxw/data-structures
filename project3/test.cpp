@@ -11,6 +11,8 @@
 bool isSorted(int* const array, int size){
   for (int i = 0; i < size; i++){
     if (array[i] > array[i+1]){
+      std::cout << "array[i]: ";
+      std::cout << array[i] << std::endl;
       return false;
     }
   }
