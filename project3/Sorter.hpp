@@ -9,20 +9,21 @@ enum class Mode{
 
 class Sorter{
 public:
-  Sorter();
-  Sorter(Mode mode);
-  Sorter(const Sorter& other);
-  Sorter& operator=(const Sorter& other);
-  ~Sorter();
+  // Sorter();
+  // Sorter(Mode mode);
+  // Sorter(const Sorter& other);
+  // Sorter& operator=(const Sorter& other);
+  // ~Sorter();
 
   void sort(int* const array, int size) const;
-  void sort(int* const array, int size, Mode mode) const;
+  // void sort(int* const array, int size, Mode mode) const;
 
-  void set(Mode mode);
-  Mode getMode() const;
+  // void set(Mode mode);
+  // Mode getMode() const;
 
 private:
   //your design
+  void traverse(int* const array, int key) const;
 };
 
 #endif
