@@ -27,7 +27,7 @@ private:
   void print_array(int* const array, int size) const;
   int* divide(int* const array, int size) const;
   int* merge(int* a, int* b) const;
-
+  
 };
 
 #endif

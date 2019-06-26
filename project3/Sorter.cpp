@@ -2,8 +2,6 @@
 #include <iostream>
 #include <algorithm>
 
-#include <vector>
-
 // Sorter();
 // Sorter(Mode mode);
 // Sorter(const Sorter& other);
@@ -22,9 +20,10 @@ void Sorter::sort(int* const array, int size) const{
 	// }
 
 	// MERGE_SORT
-	divide(array, size);
+	int* final;
+	final = divide(array, size);
 	std::cout << "final" << std::endl;
-	print_array(array, 600);
+	print_array(final, 600);
 }
 
 void Sorter::traverse(int* const array, int key) const{
@@ -73,17 +72,18 @@ int* Sorter::divide(int* const array, int size) const{
 }
 
 int* Sorter::merge(int* a, int* b) const{
-	int a_size = 1;
-	int b_size = 1;
+	int a_size = 1; // this is the issue
+	int b_size = 1; // this is the issue
 	int merged_size = 0;
 	int merged_capacity = a_size + b_size;
 
-	int* merged = new int[merged_size];
+	int* merged = new int[merged_capacity];
 
 	while (a_size != 0 and b_size != 0){
 		if(a[0] <= b[0]){
 			if(merged_size == merged_capacity)
 			{
+				// dynamically expand merged array
 				merged_capacity++;
 				int* temp = new int[merged_capacity];
 				delete[] merged;
@@ -92,9 +92,11 @@ int* Sorter::merge(int* a, int* b) const{
 
 			}
 
+			// add a[0] to merged
 			merged[merged_size] = a[0];
 			merged_size++;
 
+			// remove a[0] from a
 			int* temp = new int[a_size--];
 			for (int i = 0; i < a_size-1; i++){
 				temp[i] = a[i+1];
@@ -106,6 +108,7 @@ int* Sorter::merge(int* a, int* b) const{
 		else{
 			if(merged_size == merged_capacity)
 			{
+				// dynamically expand merged array
 				merged_capacity++;
 				int* temp = new int[merged_capacity];
 				delete[] merged;
@@ -114,9 +117,11 @@ int* Sorter::merge(int* a, int* b) const{
 
 			}
 
+			// add b[0] to merged
 			merged[merged_size] = b[0];
 			merged_size++;
 
+			//remove b[0] from b
 			int* temp = new int[b_size--];
 			for (int i = 0; i < b_size-1; i++){
 				temp[i] = b[i+1];
@@ -126,8 +131,6 @@ int* Sorter::merge(int* a, int* b) const{
 			temp = nullptr;
 		}
 	}
-
-	print_array(merged, merged_size);
 
 	return merged;
 }
