@@ -52,8 +52,10 @@ int* Sorter::divide(int* const array, int size) const{
 		return array;
 	}
 
-	int* a = new int[size/2];
-	int* b = new int[size/2];
+	int a[size/2];
+	int* a_ptr = a;
+	int b[size/2];
+	int* b_ptr = b;
 
 	for (int i = 0; i < size/2; i++){
 		a[i] = array[i];
@@ -65,15 +67,16 @@ int* Sorter::divide(int* const array, int size) const{
 
 	// delete array;
 
-	a = divide(a, size/2);
-	b = divide(b, size/2);
+	a_ptr = divide(a, size/2);
+	b_ptr = divide(b, size/2);
 
-	return merge(a, b);
+	std::size_t a_size = sizeof(a)/sizeof(a[0]);
+	std::size_t b_size = sizeof(b)/sizeof(b[0]);
+
+	return merge(a_ptr, a_size, b_ptr, b_size);
 }
 
-int* Sorter::merge(int* a, int* b) const{
-	int a_size = 1; // this is the issue
-	int b_size = 1; // this is the issue
+int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 	int merged_size = 0;
 	int merged_capacity = a_size + b_size;
 
@@ -101,7 +104,7 @@ int* Sorter::merge(int* a, int* b) const{
 			for (int i = 0; i < a_size-1; i++){
 				temp[i] = a[i+1];
 			}
-			delete[] a;
+			// delete[] a;
 			a = temp;
 			temp = nullptr;
 		}
@@ -126,11 +129,12 @@ int* Sorter::merge(int* a, int* b) const{
 			for (int i = 0; i < b_size-1; i++){
 				temp[i] = b[i+1];
 			}
-			delete[] b;
+			// delete[] b;
 			b = temp;
 			temp = nullptr;
 		}
 	}
+	print_array(merged, merged_size);
 
 	return merged;
 }

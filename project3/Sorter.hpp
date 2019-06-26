@@ -26,7 +26,7 @@ private:
   void traverse(int* const array, int key) const;
   void print_array(int* const array, int size) const;
   int* divide(int* const array, int size) const;
-  int* merge(int* a, int* b) const;
+  int* merge(int* a, int a_size, int* b, int b_size) const;
   
 };
 
