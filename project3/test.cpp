@@ -25,7 +25,7 @@ bool isSorted(int* const array, int size){
 //   assert(mode == Mode::INSERTION_SORT);
 // }
 
-void test2(){
+void ordered(){
   int size = 100;
   int* array = new int[size];
   for(int i = 0; i < size; i++)
@@ -39,7 +39,7 @@ void test2(){
   delete [] array;
 }
 
-void test3(){
+void custom(){
   int size = 6;
   int* a = new int[size];
 
@@ -58,11 +58,10 @@ void test3(){
   delete [] a;
 }
 
-void unordered_30(){
+void unordered(int size){
   time_t t;
   srand((unsigned) time(&t));
 
-  int size = 30;
   int* array = new int[size];
   for(int i = 0; i < size; i++)
     array[i] = (rand()%100)+1;
@@ -74,66 +73,19 @@ void unordered_30(){
   assert(b == true);
   delete [] array;
 }
-
-void unordered_60(){
-  time_t t;
-  srand((unsigned) time(&t));
-
-  int size = 60;
-  int* array = new int[size];
-  for(int i = 0; i < size; i++)
-    array[i] = (rand()%100)+1;
-
-  Sorter sorter;
-  sorter.sort(array, size);
-
-  bool b = isSorted(array, size);
-  assert(b == true);
-  delete [] array;
-}
-
-void unordered_70(){
-  time_t t;
-  srand((unsigned) time(&t));
-
-  int size = 70;
-  int* array = new int[size];
-  for(int i = 0; i < size; i++)
-    array[i] = (rand()%100)+1;
-
-  Sorter sorter;
-  sorter.sort(array, size);
-
-  bool b = isSorted(array, size);
-  assert(b == true);
-  delete [] array;
-}
-
-void unordered_90(){
-  time_t t;
-  srand((unsigned) time(&t));
-
-  int size = 90;
-  int* array = new int[size];
-  for(int i = 0; i < size; i++)
-    array[i] = (rand()%100)+1;
-
-  Sorter sorter;
-  sorter.sort(array, size);
-
-  bool b = isSorted(array, size);
-  assert(b == true);
-  delete [] array;
-}
-
 
 int main(){
   // test1();
-  test2();
-  test3();
-  unordered_30();
-  unordered_60();
-  unordered_70();
-  unordered_90();
+  ordered();
+  custom();
+  unordered(5);
+  unordered(30);
+  unordered(40);
+  unordered(50);
+  unordered(60);
+  unordered(70);
+  unordered(80);
+  unordered(90);
+
   return 0;
 }

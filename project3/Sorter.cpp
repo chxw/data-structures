@@ -44,42 +44,39 @@ void Sorter::traverse(int* const array, int key) const{
 }
 
 int* Sorter::divide(int* const array, int size) const{
-	std::cout << "size: ";
-	std::cout << size << std::endl;
-	print_array(array,size); 
-
 	if (size <= 1){
 		return array;
 	}
 
-	int a[size/2];
+	int mid = size/2;
+
+	int a[mid];
 	int* a_ptr = a;
-	int b[size/2];
+	int b[mid];
 	int* b_ptr = b;
 
-	for (int i = 0; i < size/2; i++){
+	for (int i = 0; i < mid; i++){
 		a[i] = array[i];
 	}
 
-	for (int i = size/2; i < size; i++){
-		b[i-size/2] = array[i];
+	for (int i = mid; i < size; i++){
+		b[i-mid] = array[i];
 	}
 
 	// delete array;
 
-	a_ptr = divide(a, size/2);
-	b_ptr = divide(b, size/2);
+	a_ptr = divide(a_ptr, mid);
+	b_ptr = divide(b_ptr, mid);
 
-	std::size_t a_size = sizeof(a)/sizeof(a[0]);
-	std::size_t b_size = sizeof(b)/sizeof(b[0]);
-
+	int a_size = sizeof(a)/sizeof(a[0]);
+	int b_size = sizeof(a)/sizeof(a[0]);
+	
 	return merge(a_ptr, a_size, b_ptr, b_size);
 }
 
 int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 	int merged_size = 0;
 	int merged_capacity = a_size + b_size;
-
 	int* merged = new int[merged_capacity];
 
 	while (a_size != 0 and b_size != 0){
@@ -92,7 +89,6 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 				delete[] merged;
 				merged = temp;
 				temp = nullptr;
-
 			}
 
 			// add a[0] to merged
@@ -100,13 +96,16 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 			merged_size++;
 
 			// remove a[0] from a
-			int* temp = new int[a_size--];
-			for (int i = 0; i < a_size-1; i++){
+			a_size--;
+			int* temp = new int[a_size];
+			for (int i = 0; i < a_size; i++){
 				temp[i] = a[i+1];
 			}
 			// delete[] a;
 			a = temp;
 			temp = nullptr;
+			std::cout << "merged (0): ";
+			print_array(merged, merged_size);
 		}
 		else{
 			if(merged_size == merged_capacity)
@@ -117,7 +116,6 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 				delete[] merged;
 				merged = temp;
 				temp = nullptr;
-
 			}
 
 			// add b[0] to merged
@@ -125,15 +123,76 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 			merged_size++;
 
 			//remove b[0] from b
-			int* temp = new int[b_size--];
-			for (int i = 0; i < b_size-1; i++){
+			b_size--;
+			int* temp = new int[b_size];
+			for (int i = 0; i < b_size; i++){
 				temp[i] = b[i+1];
 			}
 			// delete[] b;
 			b = temp;
 			temp = nullptr;
+			std::cout << "merged (1): ";
+			print_array(merged, merged_size);
 		}
 	}
+	
+	while (a_size != 0){
+		if(merged_size == merged_capacity)
+			{
+				// dynamically expand merged array
+				merged_capacity++;
+				int* temp = new int[merged_capacity];
+				delete[] merged;
+				merged = temp;
+				temp = nullptr;
+			}
+
+		// add a[0] to merged
+		merged[merged_size] = a[0];
+		merged_size++;
+
+		// remove a[0] from a
+		a_size--;
+		int* temp = new int[a_size];
+		for (int i = 0; i < a_size; i++){
+			temp[i] = a[i+1];
+		}
+		// delete[] a;
+		a = temp;
+		temp = nullptr;
+		std::cout << "merged (2): ";
+		print_array(merged, merged_size);
+	}
+	while (b_size != 0){
+		if(merged_size == merged_capacity)
+			{
+				// dynamically expand merged array
+				merged_capacity++;
+				int* temp = new int[merged_capacity];
+				delete[] merged;
+				merged = temp;
+				temp = nullptr;
+			}
+
+		// add b[0] to merged
+		merged[merged_size] = b[0];
+		merged_size++;
+
+		//remove b[0] from b
+		b_size--;
+		int* temp = new int[b_size];
+		for (int i = 0; i < b_size; i++){
+			temp[i] = b[i+1];
+		}
+		// delete[] b;
+		b = temp;
+		temp = nullptr;
+
+		std::cout << "merged (3): ";
+		print_array(merged, merged_size);
+	}
+
+	std::cout << "merged (4): ";
 	print_array(merged, merged_size);
 
 	return merged;
