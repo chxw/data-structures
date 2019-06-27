@@ -52,10 +52,8 @@ int* Sorter::divide(int* const array, int size) const{
 	std::cout << "mid: ";
 	std::cout << mid << std::endl;
 
-	int a[mid];
-	int* a_ptr = a;
-	int b[mid];
-	int* b_ptr = b;
+	int* a = new int[mid];
+	int* b = new int[mid];
 
 	for (int i = 0; i < mid; i++){
 		a[i] = array[i];
@@ -65,13 +63,18 @@ int* Sorter::divide(int* const array, int size) const{
 		b[i-mid] = array[i];
 	}
 
-	a_ptr = divide(a_ptr, mid);
-	b_ptr = divide(b_ptr, mid);
+	a = divide(a, mid);
+	b = divide(b, mid);
 
-	int a_size = sizeof(a)/sizeof(a[0]);
-	int b_size = sizeof(a)/sizeof(a[0]);
+	int a_size = mid/2;
+	int b_size = mid/2;
+
+	if (mid/2 < 1){
+		a_size = 1;
+		b_size = 1;
+	}
 	
-	return merge(a_ptr, a_size, b_ptr, b_size);
+	return merge(a, a_size, b, b_size);
 }
 
 int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
@@ -101,7 +104,7 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 			for (int i = 0; i < a_size; i++){
 				temp[i] = a[i+1];
 			}
-			// delete[] a;
+			delete[] a;
 			a = temp;
 			temp = nullptr;
 			std::cout << "merged (0): ";
@@ -128,7 +131,7 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 			for (int i = 0; i < b_size; i++){
 				temp[i] = b[i+1];
 			}
-			// delete[] b;
+			delete[] b;
 			b = temp;
 			temp = nullptr;
 			std::cout << "merged (1): ";
@@ -157,7 +160,7 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 		for (int i = 0; i < a_size; i++){
 			temp[i] = a[i+1];
 		}
-		// delete[] a;
+		delete[] a;
 		a = temp;
 		temp = nullptr;
 		std::cout << "merged (2): ";
@@ -184,7 +187,7 @@ int* Sorter::merge(int* a, int a_size, int* b, int b_size) const{
 		for (int i = 0; i < b_size; i++){
 			temp[i] = b[i+1];
 		}
-		// delete[] b;
+		delete[] b;
 		b = temp;
 		temp = nullptr;
 
