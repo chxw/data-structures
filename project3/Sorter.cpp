@@ -49,6 +49,8 @@ int* Sorter::divide(int* const array, int size) const{
 	}
 
 	int mid = size/2;
+	std::cout << "mid: ";
+	std::cout << mid << std::endl;
 
 	int a[mid];
 	int* a_ptr = a;
@@ -62,8 +64,6 @@ int* Sorter::divide(int* const array, int size) const{
 	for (int i = mid; i < size; i++){
 		b[i-mid] = array[i];
 	}
-
-	// delete array;
 
 	a_ptr = divide(a_ptr, mid);
 	b_ptr = divide(b_ptr, mid);

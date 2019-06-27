@@ -25,20 +25,6 @@ bool isSorted(int* const array, int size){
 //   assert(mode == Mode::INSERTION_SORT);
 // }
 
-void ordered(){
-  int size = 100;
-  int* array = new int[size];
-  for(int i = 0; i < size; i++)
-    array[i] = i;
-
-  Sorter sorter;
-  sorter.sort(array, size);
-
-  bool b = isSorted(array, size);
-  assert(b == true);
-  delete [] array;
-}
-
 void custom(){
   int size = 6;
   int* a = new int[size];
@@ -74,9 +60,22 @@ void unordered(int size){
   delete [] array;
 }
 
+void ordered(){
+  int size = 100;
+  int* array = new int[size];
+  for(int i = 0; i < size; i++)
+    array[i] = i;
+
+  Sorter sorter;
+  sorter.sort(array, size);
+
+  bool b = isSorted(array, size);
+  assert(b == true);
+  delete [] array;
+}
+
 int main(){
   // test1();
-  ordered();
   custom();
   unordered(5);
   unordered(30);
@@ -86,6 +85,7 @@ int main(){
   unordered(70);
   unordered(80);
   unordered(90);
+  ordered();
 
   return 0;
 }
