@@ -6,10 +6,10 @@
 
 class Stack{
 public:
-  Stack();
+  // Stack();
   //  Stack(const Stack& other);
   //  Stack& operator=(const Stack& other);
-  ~Stack();
+  // ~Stack();
 
   void push(State* item);
   void pop();
@@ -18,6 +18,7 @@ public:
 
 private:
   //Your choice
+  LinkedList ll;
 };
 
 #endif

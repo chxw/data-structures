@@ -18,6 +18,8 @@ public:
 
 private:
   //your design
+  Node* head;
+  int size;
 };
 
 #endif
