@@ -24,9 +24,10 @@ public:
 private:
   //your design
   void traverse(int* const array, int key) const;
+  void swap(int &a, int &b) const;
   void print_array(int* const array, int size) const;
-  int* divide(int* const array, int size) const;
-  int* merge(int* a, int a_size, int* b, int b_size)  const;
+  void divide(int* const array, int front, int end) const;
+  void merge(int* const array, int front, int mid, int end) const;
   
 };
 

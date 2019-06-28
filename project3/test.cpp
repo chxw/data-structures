@@ -34,7 +34,7 @@ void custom(){
   a[2] = -5;
   a[3] = -1996;
   a[4] = 10;
-  a[5] = 99999;
+  a[5] = 8;
 
   Sorter sorter;
   sorter.sort(a, size);
@@ -50,7 +50,7 @@ void unordered(int size){
 
   int* array = new int[size];
   for(int i = 0; i < size; i++)
-    array[i] = (rand()%100)+1;
+    array[i] = (rand() % size) + 1;
 
   Sorter sorter;
   sorter.sort(array, size);
@@ -60,10 +60,22 @@ void unordered(int size){
   delete [] array;
 }
 
-void ordered(){
-  int size = 100;
+void ordered(int size){
   int* array = new int[size];
   for(int i = 0; i < size; i++)
+    array[i] = i;
+
+  Sorter sorter;
+  sorter.sort(array, size);
+
+  bool b = isSorted(array, size);
+  assert(b == true);
+  delete [] array;
+}
+
+void reverse_ordered(int size){
+  int* array = new int[size];
+  for(int i = size - 1; i > 0; i--)
     array[i] = i;
 
   Sorter sorter;
@@ -82,10 +94,12 @@ int main(){
   unordered(40);
   unordered(50);
   unordered(60);
-  unordered(70);
   unordered(80);
-  unordered(90);
-  ordered();
+  // unordered(80);
+  // unordered(90);
+  // unordered(100000000);
+  reverse_ordered(100);
+  ordered(100);
 
   return 0;
 }
