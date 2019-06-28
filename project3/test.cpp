@@ -10,9 +10,10 @@
 
 bool isSorted(int* const array, int size){
   for (int i = 0; i < size; i++){
+    if (i == size - 1){
+      break;
+    }
     if (array[i] > array[i+1]){
-      std::cout << "array[i]: ";
-      std::cout << array[i] << std::endl;
       return false;
     }
   }
@@ -24,6 +25,18 @@ bool isSorted(int* const array, int size){
 //   Mode mode = sorter.getMode();
 //   assert(mode == Mode::INSERTION_SORT);
 // }
+
+void print_array(int* const array, int size){
+  for (int i = 0; i < size; i++){
+    std::cout << array[i];
+    if(i == size - 1){
+      std::cout << "\n";
+    }
+    else{
+      std::cout << ", ";
+    }
+  }
+}
 
 void custom(){
   int size = 6;
@@ -95,7 +108,6 @@ int main(){
   unordered(50);
   unordered(60);
   unordered(80);
-  // unordered(80);
   // unordered(90);
   // unordered(100000000);
   reverse_ordered(100);

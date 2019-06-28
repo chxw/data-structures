@@ -9,37 +9,34 @@
 
 void Sorter::sort(int* const array, int size) const{
 	// INSERTION_SORT
-	int key = 1;
+	// int key; 
 
-	for (int i = 0; i < size; i++){
-		if(array[key] < array[i]){
-			traverse(array, key);
-		}
-		key++;
-	}
-	std::cout << "here" << std::endl;
+	// for (int i = 0; i < size; i++){
+	// 	key = i+1;
+	// 	if (key == size){
+	// 		return;
+	// 	}
+	// 	if(array[key] < array[i]){
+	// 		traverse(array, key);
+	// 	}
+	// }
 
 	// // MERGE_SORT
-	// divide(array, 0, size-1);
+	divide(array, 0, size-1);
 }
 
 void Sorter::traverse(int* const array, int key) const{
 	int i = key - 1;
+
 	while(array[key] < array[i]){
-		std::cout << "key = ";
-		std::cout << key << std::endl;
-
-		std::cout << "i = ";
-		std::cout << i << std::endl;
-
-		if(key == 0){
-			return;
-		}
-		else if(array[key] < array[i]){
+		if(array[key] < array[i]){
 			swap(array[i], array[key]);
 		}
 		key--;
 		i--;
+		if(i < 0){
+			return;
+		}
 	}
 }
 
