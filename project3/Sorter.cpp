@@ -9,20 +9,20 @@
 
 void Sorter::sort(int* const array, int size) const{
 	// INSERTION_SORT
-	// int key; 
+	int key; 
 
-	// for (int i = 0; i < size; i++){
-	// 	key = i+1;
-	// 	if (key == size){
-	// 		return;
-	// 	}
-	// 	if(array[key] < array[i]){
-	// 		traverse(array, key);
-	// 	}
-	// }
+	for (int i = 0; i < size; i++){
+		key = i+1;
+		if (key == size){
+			return;
+		}
+		if(array[key] < array[i]){
+			traverse(array, key);
+		}
+	}
 
-	// // MERGE_SORT
-	divide(array, 0, size-1);
+	// MERGE_SORT
+	// divide(array, 0, size-1);
 }
 
 void Sorter::traverse(int* const array, int key) const{
@@ -60,10 +60,10 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 	// merge front->mid of array with mid->end of array
 	// we know end = array size -1
 
-	int front_arr[mid+1];
+	int front_arr[mid-front+1];
 	int end_arr[end-mid+1];
 
-	for (int i = 0; i < mid; i++){
+	for (int i = front; i < mid; i++){
 		front_arr[i] = array[i];
 	}
 
@@ -72,13 +72,20 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 	}
 
 	std::cout << "front int: ";
-	std::cout << front << s;
+	std::cout << front << std::endl;
+
+	std::cout << "mid int: ";
+	std::cout << mid << std::endl;
+
 
 	std::cout << "front: ";
-	print_array(array, end+1);
+	print_array(front_arr, end+1);
+
+	std::cout << "end int: ";
+	std::cout << end << std::endl;
 
 	std::cout << "end: ";
-	print_array(array, end+1);
+	print_array(end_arr, end+1);
 
 	std::cout << "before: ";
 	print_array(array, end+1);
