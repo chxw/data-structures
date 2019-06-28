@@ -60,42 +60,32 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 	// merge front->mid of array with mid->end of array
 	// we know end = array size -1
 
-	// int temp[end+1];
+	int front_arr[mid+1];
+	int end_arr[end-mid+1];
 
-	// for (int i = 0; i < end; i++){
-	// 	temp[i] = array[i];
-	// }
+	for (int i = 0; i < mid; i++){
+		front_arr[i] = array[i];
+	}
+
+	for (int i = mid; i < end; i++){
+		end_arr[i-mid] = array[i];
+	}
+
+	std::cout << "front int: ";
+	std::cout << front << s;
+
+	std::cout << "front: ";
+	print_array(array, end+1);
+
+	std::cout << "end: ";
+	print_array(array, end+1);
 
 	std::cout << "before: ";
 	print_array(array, end+1);
 
-	int top = front;
-	int point = mid;
 
-	for (int i = mid; i < end; i++){
-		top = front;
-		while (top <= mid){
-			if (array[top] > array[point]){
-				swap(array[top], array[point]);
-				top++;
-			}
-			top++;
-		}
-	}
-
-	for (int i = 0; i < mid; i++){
-		point = mid;
-		while (point <= end){
-			if (array[top] > array[point]){
-				swap(array[top], array[point]);
-				point++;
-			}
-			point++;
-		}
-	}
-
-	std::cout << "after: ";
-	print_array(array, end+1);
+	// std::cout << "after: ";
+	// print_array(array, end+1);
 
 }
 

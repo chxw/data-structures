@@ -280,3 +280,42 @@ void Sorter::merge(int* const array, int mid, int end) const {
 		temp = nullptr;
 	}
 }
+
+///////////////////////////
+void Sorter::merge(int* const array, int front, int mid, int end) const {
+	int temp[end + 1];
+	int index = 0;
+
+	for (int i = 0; i < end; i++){
+		temp[i] = array[i];
+	}
+
+	std::cout << "before: ";
+	print_array(array, end+1);
+
+	int top = front;
+	int point = mid;
+
+	while (top <= mid){
+		top = front;
+		point = mid;
+		while (point <= end){
+			if(temp[top] <= temp[point]){
+				array[index] = temp[top];
+				index++;
+				point++;
+			}
+			else{
+				array[index] = temp[top];
+				index++;
+				point++;
+			}
+		}
+		top++;
+	}
+
+
+	std::cout << "after: ";
+	print_array(array, end+1);
+
+}
