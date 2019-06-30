@@ -14,9 +14,21 @@ Sorter::Sorter(Mode m){
 		case Mode::QUICK_SORT: mode = Mode::QUICK_SORT;
 	}
 }
-// Sorter(const Sorter& other);
-// Sorter& operator=(const Sorter& other);
-// ~Sorter();
+
+Sorter::Sorter(const Sorter& other){
+	mode = other.mode;
+}
+
+Sorter& Sorter::operator=(const Sorter& other){
+	if(&other != this){
+		mode = other.mode;
+	}
+	return(*this);
+}
+
+Sorter::~Sorter(){
+
+}
 
 void Sorter::sort(int* const array, int size) const{
 	if (mode == Mode::INSERTION_SORT){
@@ -71,15 +83,12 @@ void Sorter::insertion_sort(int* const array, int size) const{
 void Sorter::traverse(int* const array, int key) const{
 	int i = key - 1;
 
-	while(array[key] < array[i]){
+	while(array[key] < array[i] and i > 0){
 		if(array[key] < array[i]){
 			swap(array[i], array[key]);
 		}
 		key--;
 		i--;
-		if(i < 0){
-			return;
-		}
 	}
 }
 
@@ -92,17 +101,20 @@ void Sorter::swap(int &a, int &b) const{
 void Sorter::divide(int* const array, int front, int end) const{
 	if (front < end){
 		int mid = (front+end)/2;
+		// divide 1st half of array
 		divide(array, front, mid);
+		// divide 2nd half of array
 		divide(array, mid+1, end);
+		// go back up contiously merging
 		merge(array, front, mid, end);
 	}
 }
 
 void Sorter::merge(int* const array, int front, int mid, int end) const {
-	// loop through {front, mid}
+	// loop through {front, mid}, top goes toward mid
 	int top = front;
 
-	// loop through {mid + 1, end}
+	// loop through {mid + 1, end}, point goes toward end
 	int point = mid + 1;
 
 	// index for appending to merged
@@ -113,6 +125,7 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 
 	// merge front->mid of array with mid+1->end of array
 	while (top <= mid and point <= end){
+		// compare first elements of front arr and end arr and append lesser to front of merged arr
 		if(array[top] <= array[point]){
 			merged[i] = array[top];
 			top++;
@@ -124,7 +137,7 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 		i++;
 	}
 
-	// catch all front and end elements
+	// catch all elements that remain in front arr or end arr
 	while (top <= mid){
 		merged[i] = array[top];
 		top++;
@@ -141,7 +154,6 @@ void Sorter::merge(int* const array, int front, int mid, int end) const {
 	for (i = front; i <= end; i++){
 		array[i] = merged[i-front];
 	}
-
 }
 
 
@@ -162,9 +174,9 @@ void Sorter::quick_sort(int* const array, int left, int right) const{
 		return;
 	}
 
-	int p = (left+right)/2;
+	// int p = (left+right)/2;
 
-	// int p = find_pivot(array, left, right);
+	int p = find_pivot(array, left, right);
 	int partition = pivot(array, left, right, p);
 
 	// pivot again for {left, partition-1}
@@ -177,30 +189,44 @@ int Sorter::pivot(int* const array, int low, int high, int p) const{
 	int left = low;
 	int right = high;
 
+	int pivot = array[p];
+
 	// swap wherever pivot it is with mid elem in array
 	swap(array[p], array[(low+high)/2]);
 
-	int pivot = array[p];
+	// while (left <= right){
+	// 	// move left until you find next elem that needs to swap
+	// 	while(array[left] < pivot){
+	// 		left++;
+	// 	}
+	// 	// move right until you find next elem that needs to swap
+	// 	while(array[right] > pivot){
+	// 		right--;
+	// 	}
+	// 	// check if left and right have crossed partition, otherwise swap
+	// 	if(left <= right){
+	// 		swap(array[left], array[right]);
+	// 		left++;
+	// 		right--;
+	// 	}
+	// }
+	// return left;
 
 	while (left <= right){
-		// move left until you find next elem that needs to swap
-		while(array[left] < pivot){
+		while (array[left] < pivot){
 			left++;
 		}
-		// move right until you find next elem that needs to swap
-		while(array[right] > pivot){
+		while (array[right] > pivot){
 			right--;
 		}
-		// check if left and right have crossed partition, otherwise swap
-		if(left <= right){
+		if (left <= right){
 			swap(array[left], array[right]);
 			left++;
 			right--;
 		}
 	}
-
+	
 	return left;
-
 }
 
 int Sorter::find_pivot(int* const array, int l, int r) const{

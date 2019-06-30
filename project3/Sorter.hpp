@@ -11,9 +11,9 @@ class Sorter{
 public:
   Sorter();
   Sorter(Mode mode);
-  // Sorter(const Sorter& other);
-  // Sorter& operator=(const Sorter& other);
-  // ~Sorter();
+  Sorter(const Sorter& other);
+  Sorter& operator=(const Sorter& other);
+  ~Sorter();
 
   void sort(int* const array, int size) const;
   void sort(int* const array, int size, Mode mode) const;

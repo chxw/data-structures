@@ -35,7 +35,7 @@ void print_array(int* const array, int size){
   }
 }
 
-void custom(){
+void custom(Mode m){
   int size = 11;
   int* a = new int[size];
 
@@ -51,7 +51,7 @@ void custom(){
   a[9] = 22;
   a[10] = 46;
 
-  Sorter sorter;
+  Sorter sorter(m);
   sorter.sort(a, size);
 
   bool b = isSorted(a, size);
@@ -59,7 +59,7 @@ void custom(){
   delete [] a;
 }
 
-void unordered(int size){
+void unordered(int size, Mode m){
   time_t t;
   srand((unsigned) time(&t));
 
@@ -67,7 +67,7 @@ void unordered(int size){
   for(int i = 0; i < size; i++)
     array[i] = (rand() % size) + 1;
 
-  Sorter sorter;
+  Sorter sorter(m);
   sorter.sort(array, size);
 
   bool b = isSorted(array, size);
@@ -75,12 +75,12 @@ void unordered(int size){
   delete [] array;
 }
 
-void ordered(int size){
+void ordered(int size, Mode m){
   int* array = new int[size];
   for(int i = 0; i < size; i++)
     array[i] = i;
 
-  Sorter sorter;
+  Sorter sorter(m);
   sorter.sort(array, size);
 
   bool b = isSorted(array, size);
@@ -88,7 +88,7 @@ void ordered(int size){
   delete [] array;
 }
 
-void almost_ordered(int size){
+void almost_ordered(int size, Mode m){
   time_t t;
   srand((unsigned) time(&t));
 
@@ -102,7 +102,7 @@ void almost_ordered(int size){
     }
   }
 
-  Sorter sorter;
+  Sorter sorter(m);
   sorter.sort(array, size);
 
   bool b = isSorted(array, size);
@@ -110,12 +110,12 @@ void almost_ordered(int size){
   delete [] array;
 }
 
-void reverse_ordered(int size){
+void reverse_ordered(int size, Mode m){
   int* array = new int[size];
   for(int i = size - 1; i > 0; i--)
     array[i] = i;
 
-  Sorter sorter;
+  Sorter sorter(m);
   sorter.sort(array, size);
 
   bool b = isSorted(array, size);
@@ -125,19 +125,66 @@ void reverse_ordered(int size){
 
 int main(){
   enum_test();
-  custom();
-  unordered(5);
-  unordered(6);
-  unordered(30);
-  unordered(40);
-  unordered(50);
-  unordered(60);
-  unordered(80);
-  unordered(90);
-  almost_ordered(90);
-  // unordered(2000000);
-  reverse_ordered(100);
-  ordered(100);
+
+  Mode i = Mode::INSERTION_SORT;
+  Mode m = Mode::MERGE_SORT;
+  Mode q  = Mode::QUICK_SORT;
+
+  // insertion sort
+  custom(i);
+  unordered(5, i);
+  unordered(6, i);
+  unordered(30, i);
+  unordered(40, i);
+  unordered(50, i);
+  unordered(60, i);
+  unordered(80, i);
+  unordered(90, i);
+  unordered(95, i);
+  almost_ordered(100, i);
+  almost_ordered(10000000, i);
+  unordered(10000000, i);
+  reverse_ordered(100, i);
+  reverse_ordered(10000000, i);
+  ordered(100, i);
+  ordered(10000000, i);
+
+  // merge sort
+  custom(m);
+  unordered(5, m);
+  unordered(6, m);
+  unordered(30, m);
+  unordered(40, m);
+  unordered(50, m);
+  unordered(60, m);
+  unordered(80, m);
+  unordered(90, m);
+  almost_ordered(100, m);
+  almost_ordered(10000000, m);
+  unordered(10000000, m);
+  reverse_ordered(100, m);
+  reverse_ordered(10000000, m);
+  ordered(100, m);
+  ordered(10000000, m);
+
+  // quick sort
+  custom(q);
+  unordered(5, q);
+  unordered(6, q);
+  unordered(30, q);
+  unordered(40, q);
+  unordered(50, q);
+  unordered(60, q);
+  unordered(80, q);
+  unordered(90, q);
+  almost_ordered(100, q);
+  almost_ordered(10000000, q);
+  unordered(10000000, q);
+  reverse_ordered(100, q);
+  reverse_ordered(10000000, q);
+  ordered(100, q);
+  ordered(10000000, q);
+
 
   return 0;
 }
