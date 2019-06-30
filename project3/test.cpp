@@ -6,7 +6,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include<chrono>
+
 #include <iostream>
+
+using namespace std;
+using namespace std::chrono;
 
 bool isSorted(int* const array, int size){
   for (int i = 1; i < size; i++){
@@ -19,8 +24,39 @@ bool isSorted(int* const array, int size){
 
 void enum_test(){
   Sorter sorter;
+
+  Mode insertion = Mode::INSERTION_SORT;
+  Mode merge = Mode::MERGE_SORT;
+  Mode quick = Mode::QUICK_SORT;
+
+  int size = 5;
+  int* a = new int[size];
+
+  a[0] = 4;
+  a[1] = -2;
+  a[2] = 16;
+  a[3] = 48;
+  a[4] = -52;
+
   Mode mode = sorter.getMode();
-  assert(mode == Mode::INSERTION_SORT);
+  assert(mode == insertion);
+
+  sorter.sort(a, size, merge);
+
+  sorter.set(merge);
+  Mode mode2 = sorter.getMode();
+  assert(mode2 == merge);
+
+  sorter.sort(a, size, quick);
+
+
+  sorter.set(quick);
+  Mode mode3 = sorter.getMode();
+  assert(mode3 == quick);
+
+  sorter.sort(a, size, insertion);
+
+  delete[] a;
 }
 
 void print_array(int* const array, int size){
@@ -123,6 +159,72 @@ void reverse_ordered(int size, Mode m){
   delete [] array;
 }
 
+void time_test(Mode m){
+  high_resolution_clock::time_point t1 = high_resolution_clock::now();
+  unordered(5, m);
+  high_resolution_clock::time_point t2 = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(t2-t1).count();
+  cout << "unordered (small N): ";
+  cout << duration;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t3 = high_resolution_clock::now();
+  unordered(2000000, m);
+  high_resolution_clock::time_point t4 = high_resolution_clock::now();
+  auto duration1 = duration_cast<microseconds>(t4-t3).count();
+  cout << "unordered (large N): ";
+  cout << duration1;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t5 = high_resolution_clock::now();
+  almost_ordered(5, m);
+  high_resolution_clock::time_point t6 = high_resolution_clock::now();
+  auto duration2 = duration_cast<microseconds>(t6-t5).count();
+  cout << "almost_ordered (small N): ";
+  cout << duration2;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t7 = high_resolution_clock::now();
+  almost_ordered(2000000, m);
+  high_resolution_clock::time_point t8 = high_resolution_clock::now();
+  auto duration3 = duration_cast<microseconds>(t8-t7).count();
+  cout << "almost_ordered (large N): ";
+  cout << duration3;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t9 = high_resolution_clock::now();
+  reverse_ordered(5, m);
+  high_resolution_clock::time_point t10 = high_resolution_clock::now();
+  auto duration4 = duration_cast<microseconds>(t10-t9).count();
+  cout << "reverse_ordered (small N): ";
+  cout << duration4;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t11 = high_resolution_clock::now();
+  reverse_ordered(2000000, m);
+  high_resolution_clock::time_point t12 = high_resolution_clock::now();
+  auto duration5 = duration_cast<microseconds>(t12-t11).count();
+  cout << "reverese_ordered (large N): ";
+  cout << duration5;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t13 = high_resolution_clock::now();
+  ordered(5, m);
+  high_resolution_clock::time_point t14 = high_resolution_clock::now();
+  auto duration6 = duration_cast<microseconds>(t14-t13).count();
+  cout << "already_ordered (small N): ";
+  cout << duration6;
+  cout << " ms" << endl;
+
+  high_resolution_clock::time_point t15 = high_resolution_clock::now();
+  ordered(2000000, m);
+  high_resolution_clock::time_point t16 = high_resolution_clock::now();
+  auto duration7 = duration_cast<microseconds>(t16-t15).count();
+  cout << "already_ordered (large N): ";
+  cout << duration7;
+  cout << " ms" << endl;
+}
+
 int main(){
   enum_test();
 
@@ -142,12 +244,15 @@ int main(){
   unordered(90, i);
   unordered(95, i);
   almost_ordered(100, i);
-  almost_ordered(10000000, i);
-  unordered(10000000, i);
+  almost_ordered(2000000, i);
+  unordered(2000000, i);
   reverse_ordered(100, i);
-  reverse_ordered(10000000, i);
+  reverse_ordered(2000000, i);
   ordered(100, i);
-  ordered(10000000, i);
+  ordered(2000000, i);
+
+  cout << "INSERTION_SORT*****************" << endl;
+  time_test(i);
 
   // merge sort
   custom(m);
@@ -160,12 +265,15 @@ int main(){
   unordered(80, m);
   unordered(90, m);
   almost_ordered(100, m);
-  almost_ordered(10000000, m);
-  unordered(10000000, m);
+  almost_ordered(2000000, m);
+  unordered(2000000, m);
   reverse_ordered(100, m);
-  reverse_ordered(10000000, m);
+  reverse_ordered(2000000, m);
   ordered(100, m);
-  ordered(10000000, m);
+  ordered(2000000, m);
+
+  cout << "MERGE_SORT*****************" << endl;
+  time_test(m);
 
   // quick sort
   custom(q);
@@ -178,13 +286,15 @@ int main(){
   unordered(80, q);
   unordered(90, q);
   almost_ordered(100, q);
-  almost_ordered(10000000, q);
-  unordered(10000000, q);
+  almost_ordered(2000000, q);
+  unordered(2000000, q);
   reverse_ordered(100, q);
-  reverse_ordered(10000000, q);
+  reverse_ordered(2000000, q);
   ordered(100, q);
-  ordered(10000000, q);
+  ordered(2000000, q);
 
+  cout << "QUICK_SORT*****************" << endl;
+  time_test(q);
 
   return 0;
 }
