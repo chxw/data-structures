@@ -23,87 +23,55 @@ void Sorter::sort(int* const array, int size) const{
 	// }
 
 	// MERGE_SORT
-	// divide(array, 0, size-1);
+	divide(array, 0, size-1);
 
 	// QUICK_SORT
-	quicksort(array, 0, size - 1);
+	// quicksort(array, 0, size - 1);
 
 }
 
-void Sorter::quicksort(int* const array, int low, int high) const{
-	if (low >= high){
+void Sorter::quicksort(int* const array, int left, int right) const{
+	if (left >= right){
 		return;
 	}
 
-	int mid = (low+high)/2;
+	int p = (left+right)/2;
+	int partition = pivot(array, left, right, p);
 
-	print_array(array, high+1);
-
-	int p = find_pivot(array, low, mid, high);
-
-	std::cout << "low: ";
-	std::cout << low << std::endl;
-
-	std::cout << "mid: ";
-	std::cout << mid << std::endl;
-
-	std::cout << "high: ";
-	std::cout << high << std::endl;
-
-	std::cout << "pivot: ";
-	std::cout << p << std::endl;
-
-	int partition = pivot(array, low, mid, high, p);
-
-	std::cout << "partition: ";
-	std::cout << partition << std::endl;
-
-	// pivot again for {left, p_index-1}
-	quicksort(array, low, partition - 1);
-	// pivot again for {p_index, right}
-	quicksort(array, partition, high);
+	// pivot again for {left, partition-1}
+	quicksort(array, left, partition - 1);
+	// pivot again for {partition, right}
+	quicksort(array, partition, right);
 }
 
-int Sorter::pivot(int* const array, int low, int mid, int high, int p) const{
+int Sorter::pivot(int* const array, int low, int high, int p) const{
 	int left = low;
 	int right = high;
-	int mid = 0;
 
 	// if (p == low){
 	// 	left = p+1;
 	// 	right = high;
 	// }
-	// else if (p == mid){
-	// 	left = low;
-	// 	right = high;
-	// }
-	// else{
+	// else if (p == high){
 	// 	left = low;
 	// 	right = p-1;
 	// }
+	// else {
+	// 	left = low;
+	// 	right = high;
+	// }
+
+	int pivot = array[p];
 
 	while (left <= right){
-		if (array[left] > array[p] and array[right] < array[p]){
+		while(array[left] < pivot){
+			left++;
+		}
+		while(array[right] > pivot){
+			right--;
+		}
+		if(left <= right){
 			swap(array[left], array[right]);
-			left++;
-			right--;
-
-			std::cout << "enter if statement: ";
-			print_array(array, high + 1);
-		}
-		else if (array[left] > array[p]){
-			std::cout << "enter first else if: ";
-			print_array(array, high + 1);
-			right--;
-		}
-		else if (array[right] < array[p]){
-			std::cout << "enter second else if: ";
-			print_array(array, high + 1);
-			left++;
-		}
-		else{
-			std::cout << "enter else: ";
-			print_array(array, high + 1);
 			left++;
 			right--;
 		}
@@ -113,12 +81,14 @@ int Sorter::pivot(int* const array, int low, int mid, int high, int p) const{
 
 }
 
-int Sorter::find_pivot(int* const array, int l, int m, int h) const{
-	if (l == m or m == h){
+int Sorter::find_pivot(int* const array, int l, int r) const{
+	int m = (l+r)/2;
+
+	if (l == m or m == r){
 		return l;
 	}
 
-	int med = median(array[l], array[m], array[h]);
+	int med = median(array[l], array[m], array[r]);
 	int p;
 
 	if (med == array[l]){
@@ -128,7 +98,7 @@ int Sorter::find_pivot(int* const array, int l, int m, int h) const{
 		p = m;
 	}
 	else{
-		p = h;
+		p = r;
 	}
 	return p;
 }
@@ -176,9 +146,6 @@ void Sorter::divide(int* const array, int front, int end) const{
 }
 
 void Sorter::merge(int* const array, int front, int mid, int end) const {
-	std::cout << "before: ";
-	print_array(array, end+1);
-
 	// loop through {front, mid}
 	int top = front;
 

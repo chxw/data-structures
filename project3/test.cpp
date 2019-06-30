@@ -95,14 +95,12 @@ void almost_ordered(int size){
   int* array = new int[size];
   for(int i = 0; i < size; i++){
     if (i == (rand()%size +1) and i > 0){
-      array[i] = array[i-1] + (rand()%size + 1) - 2;
+      array[i] = array[i-1] + (rand()%size + 1);
     }
     else {
       array[i] = i;
     }
   }
-
-  print_array(array, size);
 
   Sorter sorter;
   sorter.sort(array, size);
@@ -129,6 +127,7 @@ int main(){
   // test1();
   custom();
   unordered(5);
+  unordered(6);
   unordered(30);
   unordered(40);
   unordered(50);
@@ -136,7 +135,7 @@ int main(){
   unordered(80);
   unordered(90);
   almost_ordered(90);
-  // unordered(2000000);
+  unordered(2000000);
   reverse_ordered(100);
   ordered(100);
 

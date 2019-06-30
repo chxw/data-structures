@@ -24,8 +24,8 @@ public:
 private:
   //your design
   void quicksort(int* const array, int low, int high) const;
-  int pivot(int* const array, int low, int mid, int high, int p) const;
-  int find_pivot(int* const array, int l, int m, int h) const;
+  int pivot(int* const array, int low, int high, int p) const;
+  int find_pivot(int* const array, int l, int h) const;
   int median(int a, int b, int c) const;
   void traverse(int* const array, int key) const;
   void swap(int &a, int &b) const;
