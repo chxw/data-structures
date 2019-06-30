@@ -2,116 +2,70 @@
 #include <iostream>
 #include <stdio.h>
 
-// Sorter();
-// Sorter(Mode mode);
+Sorter::Sorter(){
+	mode = Mode::INSERTION_SORT;
+}
+
+Sorter::Sorter(Mode m){
+	switch(m)
+	{
+		case Mode::INSERTION_SORT: mode = Mode::INSERTION_SORT;
+		case Mode::MERGE_SORT: mode = Mode::MERGE_SORT;
+		case Mode::QUICK_SORT: mode = Mode::QUICK_SORT;
+	}
+}
 // Sorter(const Sorter& other);
 // Sorter& operator=(const Sorter& other);
 // ~Sorter();
 
 void Sorter::sort(int* const array, int size) const{
-	// INSERTION_SORT
-	// int key; 
-
-	// for (int i = 0; i < size; i++){
-	// 	key = i+1;
-	// 	if (key == size){
-	// 		return;
-	// 	}
-	// 	if(array[key] < array[i]){
-	// 		traverse(array, key);
-	// 	}
-	// }
-
-	// MERGE_SORT
-	divide(array, 0, size-1);
-
-	// QUICK_SORT
-	// quicksort(array, 0, size - 1);
-
-}
-
-void Sorter::quicksort(int* const array, int left, int right) const{
-	if (left >= right){
-		return;
+	if (mode == Mode::INSERTION_SORT){
+		insertion_sort(array, size);
 	}
 
-	int p = (left+right)/2;
-	int partition = pivot(array, left, right, p);
+	if (mode == Mode::MERGE_SORT){
+		divide(array, 0, size-1);
+	}
 
-	// pivot again for {left, partition-1}
-	quicksort(array, left, partition - 1);
-	// pivot again for {partition, right}
-	quicksort(array, partition, right);
+	if (mode == Mode::QUICK_SORT){
+		quick_sort(array, 0, size - 1);
+	}
 }
 
-int Sorter::pivot(int* const array, int low, int high, int p) const{
-	int left = low;
-	int right = high;
+void Sorter::sort(int* const array, int size, Mode m) const{
+	if (m == Mode::INSERTION_SORT){
+		insertion_sort(array, size);
+	}
 
-	// if (p == low){
-	// 	left = p+1;
-	// 	right = high;
-	// }
-	// else if (p == high){
-	// 	left = low;
-	// 	right = p-1;
-	// }
-	// else {
-	// 	left = low;
-	// 	right = high;
-	// }
+	if (m == Mode::MERGE_SORT){
+		divide(array, 0, size-1);
+	}
 
-	int pivot = array[p];
+	if (m == Mode::QUICK_SORT){
+		quick_sort(array, 0, size - 1);
+	}
+}
 
-	while (left <= right){
-		while(array[left] < pivot){
-			left++;
+void Sorter::set(Mode m) {
+	mode = m;
+}
+
+Mode Sorter::getMode() const{
+	return mode;
+}
+
+void Sorter::insertion_sort(int* const array, int size) const{
+	int key; 
+
+	for (int i = 0; i < size; i++){
+		key = i+1;
+		if (key == size){
+			return;
 		}
-		while(array[right] > pivot){
-			right--;
-		}
-		if(left <= right){
-			swap(array[left], array[right]);
-			left++;
-			right--;
+		if(array[key] < array[i]){
+			traverse(array, key);
 		}
 	}
-
-	return left;
-
-}
-
-int Sorter::find_pivot(int* const array, int l, int r) const{
-	int m = (l+r)/2;
-
-	if (l == m or m == r){
-		return l;
-	}
-
-	int med = median(array[l], array[m], array[r]);
-	int p;
-
-	if (med == array[l]){
-		p = l;
-	}
-	else if (med == array[m]){
-		p = m;
-	}
-	else{
-		p = r;
-	}
-	return p;
-}
-
-int Sorter::median(int a, int b, int c) const{ 
-	if ((a < b and b < c) or (c < b and b < a)){
-		return b;
-	}
-	else if ((b < a and a < c) or (c < a and a < b)){
-		return a;
-	}
-	else
-		return c;
 }
 
 void Sorter::traverse(int* const array, int key) const{
@@ -134,7 +88,6 @@ void Sorter::swap(int &a, int &b) const{
 	a = b;
 	b = hold;
 }
-
 
 void Sorter::divide(int* const array, int front, int end) const{
 	if (front < end){
@@ -204,7 +157,81 @@ void Sorter::print_array(int* const array, int size) const{
   }
 }
 
-// void sort(int* const array, int size, Mode mode) const;
+void Sorter::quick_sort(int* const array, int left, int right) const{
+	if (left >= right){
+		return;
+	}
 
-// void set(Mode mode);
-// Mode getMode() const;
+	int p = (left+right)/2;
+
+	// int p = find_pivot(array, left, right);
+	int partition = pivot(array, left, right, p);
+
+	// pivot again for {left, partition-1}
+	quick_sort(array, left, partition - 1);
+	// pivot again for {partition, right}
+	quick_sort(array, partition, right);
+}
+
+int Sorter::pivot(int* const array, int low, int high, int p) const{
+	int left = low;
+	int right = high;
+
+	// swap wherever pivot it is with mid elem in array
+	swap(array[p], array[(low+high)/2]);
+
+	int pivot = array[p];
+
+	while (left <= right){
+		// move left until you find next elem that needs to swap
+		while(array[left] < pivot){
+			left++;
+		}
+		// move right until you find next elem that needs to swap
+		while(array[right] > pivot){
+			right--;
+		}
+		// check if left and right have crossed partition, otherwise swap
+		if(left <= right){
+			swap(array[left], array[right]);
+			left++;
+			right--;
+		}
+	}
+
+	return left;
+
+}
+
+int Sorter::find_pivot(int* const array, int l, int r) const{
+	int m = (l+r)/2;
+
+	if (l == m or m == r){
+		return l;
+	}
+
+	int med = median(array[l], array[m], array[r]);
+	int p;
+
+	if (med == array[l]){
+		p = l;
+	}
+	else if (med == array[m]){
+		p = m;
+	}
+	else{
+		p = r;
+	}
+	return p;
+}
+
+int Sorter::median(int a, int b, int c) const{ 
+	if ((a < b and b < c) or (c < b and b < a)){
+		return b;
+	}
+	else if ((b < a and a < c) or (c < a and a < b)){
+		return a;
+	}
+	else
+		return c;
+}

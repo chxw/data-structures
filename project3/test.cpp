@@ -17,11 +17,11 @@ bool isSorted(int* const array, int size){
   return true;
 }
 
-// void test1(){
-//   Sorter sorter;
-//   Mode mode = sorter.getMode();
-//   assert(mode == Mode::INSERTION_SORT);
-// }
+void enum_test(){
+  Sorter sorter;
+  Mode mode = sorter.getMode();
+  assert(mode == Mode::INSERTION_SORT);
+}
 
 void print_array(int* const array, int size){
   for (int i = 0; i < size; i++){
@@ -124,7 +124,7 @@ void reverse_ordered(int size){
 }
 
 int main(){
-  // test1();
+  enum_test();
   custom();
   unordered(5);
   unordered(6);
@@ -135,7 +135,7 @@ int main(){
   unordered(80);
   unordered(90);
   almost_ordered(90);
-  unordered(2000000);
+  // unordered(2000000);
   reverse_ordered(100);
   ordered(100);
 

@@ -9,21 +9,24 @@ enum class Mode{
 
 class Sorter{
 public:
-  // Sorter();
-  // Sorter(Mode mode);
+  Sorter();
+  Sorter(Mode mode);
   // Sorter(const Sorter& other);
   // Sorter& operator=(const Sorter& other);
   // ~Sorter();
 
   void sort(int* const array, int size) const;
-  // void sort(int* const array, int size, Mode mode) const;
+  void sort(int* const array, int size, Mode mode) const;
 
-  // void set(Mode mode);
-  // Mode getMode() const;
+  void set(Mode mode);
+  Mode getMode() const;
 
 private:
   //your design
-  void quicksort(int* const array, int low, int high) const;
+  Mode mode;
+
+  void insertion_sort(int* const array, int size) const;
+  void quick_sort(int* const array, int low, int high) const;
   int pivot(int* const array, int low, int high, int p) const;
   int find_pivot(int* const array, int l, int h) const;
   int median(int a, int b, int c) const;
