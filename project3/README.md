@@ -21,34 +21,48 @@ Run `clang++ -std=c++11 -Wall -Wextra -g Sorter.cpp Sorter.hpp test.cpp`.
 
 ## References:
 
-## Post evaluation on planning:
-Definitely a tough project. 
-
 N.A. (N.A.) *sizeof operator*. Retrieved from [https://en.cppreference.com/w/cpp/language/sizeof](ttps://en.cppreference.com/w/cpp/language/sizeof).
 
-dirkgently. (2010 August 30). *What is the behavior of integer division?*. Retrieved from [https://stackoverflow.com/questions/3602827/what-is-the-behavior-of-integer-division](https://stackoverflow.com/questions/3602827/what-is-the-behavior-of-integer-division).
+N.A. (N.A.) *Data Structures - Merge Sort Algorithm*. Retrieved from [https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm](https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm).
+
+N.A. (N.A.) *Merge Sort*. Retrieved from [https://www.geeksforgeeks.org/merge-sort/](https://www.geeksforgeeks.org/merge-sort/).
+
+N.A. (N.A.) *QuickSort*. Retrieved from [https://www.geeksforgeeks.org/quick-sort/](https://www.geeksforgeeks.org/quick-sort/).
+
+N.A. (N.A.) *How Insertion Sort Works?*. Retrieved from [https://www.tutorialspoint.com/data_structures_algorithms/insertion_sort_algorithm.htm](https://www.tutorialspoint.com/data_structures_algorithms/insertion_sort_algorithm.htm).
 
 John Zwinkc. (2014 March 22). *Is it possible to store 10 million numbers in array?*. Retrieved from [https://stackoverflow.com/questions/22578879/is-it-possible-to-store-10-million-numbers-in-array](https://stackoverflow.com/questions/22578879/is-it-possible-to-store-10-million-numbers-in-array).
 
+aichao. (2016 July 5). *C++ insertion sort not working for large arrays*. Retrieved from [https://stackoverflow.com/questions/38193980/c-insertion-sort-not-working-for-large-arrays](https://stackoverflow.com/questions/38193980/c-insertion-sort-not-working-for-large-arrays).
+
 Alex. (2019 April 23). *Enum classes*. Retrieved [https://www.learncpp.com/cpp-tutorial/4-5a-enum-classes/](https://www.learncpp.com/cpp-tutorial/4-5a-enum-classes/).
 
-Wikipedia contributors. (2019, June 11). Time complexity. In Wikipedia, The Free Encyclopedia. Retrieved from [https://en.wikipedia.org/wiki/Time_complexity](https://en.wikipedia.org/wiki/Time_complexity).
+AlgoRythmics. (2011 April 23). *Merge-sort with Transylvanian-saxon (German) folk dance* [Video file]. Retrieved from [https://www.youtube.com/watch?v=XaqR3G_NVoo](https://www.youtube.com/watch?v=XaqR3G_NVoo).
 
-https://en.wikipedia.org/wiki/Merge_sort
-https://www.youtube.com/watch?v=XaqR3G_NVoo
-https://www.youtube.com/watch?v=RZK6KVpaT3I
-https://appdividend.com/2019/04/30/merge-sort-in-cpp-tutorial-with-example-cpp-merge-sort-program/
-https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm
-https://www.geeksforgeeks.org/merge-sort/
+AlgoRythmics. (2011 May 2). *Quick-sort with Hungarian (Küküllőmenti legényes) folk dance)*. [Video file]. Retrieved from [https://www.youtube.com/watch?v=ywWBy6J5gz8](https://www.youtube.com/watch?v=ywWBy6J5gz8).
 
-https://en.wikipedia.org/wiki/Quicksort
-https://www.youtube.com/watch?v=ywWBy6J5gz8
-https://www.youtube.com/watch?v=MZaf_9IZCrc
-https://www.youtube.com/watch?v=ZHVk2blR45Q
-https://www.geeksforgeeks.org/quick-sort/
+Ankit Lathiya. (2019 April 30). *Merge Sort in C++ Tutorial With Example*. Retrieved from [https://appdividend.com/2019/04/30/merge-sort-in-cpp-tutorial-with-example-cpp-merge-sort-program/](https://appdividend.com/2019/04/30/merge-sort-in-cpp-tutorial-with-example-cpp-merge-sort-program/).
 
-https://en.wikipedia.org/wiki/Insertion_sort
-https://www.youtube.com/watch?v=pmDnM9gUxNc
-https://www.tutorialspoint.com/data_structures_algorithms/insertion_sort_algorithm.htm
-https://codereview.stackexchange.com/questions/64508/insert-sort-not-working-for-large-arrays
-https://stackoverflow.com/questions/38193980/c-insertion-sort-not-working-for-large-arrays
+CSRocks. (2017 April 6). *Insertion Sort Explained in 2 Minutes*. Retrieved from [https://www.youtube.com/watch?v=pmDnM9gUxNc](https://www.youtube.com/watch?v=pmDnM9gUxNc).
+
+dirkgently. (2010 August 30). *What is the behavior of integer division?*. Retrieved from [https://stackoverflow.com/questions/3602827/what-is-the-behavior-of-integer-division](https://stackoverflow.com/questions/3602827/what-is-the-behavior-of-integer-division).
+
+Dylan Sallee.(2017 March 24). *mergeSort(): A Graphical, Recursive, C++ Explanation* [Video file]. Retrieved from [https://www.youtube.com/watch?v=RZK6KVpaT3I](https://www.youtube.com/watch?v=RZK6KVpaT3I).
+
+KC Ang. (2014 October 16). *Quicksort: Partitioning an array*. [Video file]. Retrieved from [https://www.youtube.com/watch?v=MZaf_9IZCrc](https://www.youtube.com/watch?v=MZaf_9IZCrc).
+
+RobEdwardsSDSU. (2016 December 6). *Sorts 8 Quick Sort*. [Video file]. Retrieved from [https://www.youtube.com/watch?v=ZHVk2blR45Q](https://www.youtube.com/watch?v=ZHVk2blR45Q).
+
+rolfl. (2014 October 2). *Insert sort not working for large arrays*. Retrieved from [https://codereview.stackexchange.com/questions/64508/insert-sort-not-working-for-large-arrays](https://codereview.stackexchange.com/questions/64508/insert-sort-not-working-for-large-arrays).
+
+Wikipedia contributors. (2019, June 11). *Insertion sort*. Retrieved from [https://en.wikipedia.org/wiki/Insertion_sort](https://en.wikipedia.org/wiki/Insertion_sort).
+
+Wikipedia contributors. (2019, June 11). *Time complexity. In Wikipedia, The Free Encyclopedia*. Retrieved from [https://en.wikipedia.org/wiki/Time_complexity](https://en.wikipedia.org/wiki/Time_complexity).
+
+Wikipedia contributors. (2019, June 11). *Merge sort. In Wikipedia, The Free Encyclopedia*. Retrieved from [https://en.wikipedia.org/wiki/Merge_sort](https://en.wikipedia.org/wiki/Merge_sort).
+
+Wikipedia contributors. (2019, June 30). Quicksort. In Wikipedia, The Free Encyclopedia. Retrieved from [https://en.wikipedia.org/wiki/Quicksort](https://en.wikipedia.org/wiki/Quicksort).
+
+
+## Post evaluation on planning:
+Definitely a tough project. 
