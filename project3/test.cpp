@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include<stdexcept>
 #include<chrono>
 
 #include <iostream>
@@ -57,6 +58,31 @@ void enum_test(){
   sorter.sort(a, size, insertion);
 
   delete[] a;
+}
+
+void throw_test(){
+  Sorter sorter;
+
+  int* a = nullptr;
+  int* b = new int[5];
+
+  std::string message;
+  try {
+    sorter.sort(a, 1);
+  }
+  catch(std::range_error& e){
+    message = e.what();
+  }
+  assert(message == "Invalid Argument");
+
+  std::string message1;
+  try {
+    sorter.sort(b, 0);
+  }
+  catch(std::range_error& e){
+    message1 = e.what();
+  }
+  assert(message1 == "Invalid Argument");
 }
 
 void print_array(int* const array, int size){
@@ -227,6 +253,7 @@ void time_test(Mode m){
 
 int main(){
   enum_test();
+  throw_test();
 
   Mode i = Mode::INSERTION_SORT;
   Mode m = Mode::MERGE_SORT;

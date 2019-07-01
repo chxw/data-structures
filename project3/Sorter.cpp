@@ -31,6 +31,9 @@ Sorter::~Sorter(){
 }
 
 void Sorter::sort(int* const array, int size) const{
+	if(array == nullptr or size < 1){
+		throw std::range_error("Invalid Argument");
+	}
 	if (mode == Mode::INSERTION_SORT){
 		insertion_sort(array, size);
 	}
@@ -45,6 +48,9 @@ void Sorter::sort(int* const array, int size) const{
 }
 
 void Sorter::sort(int* const array, int size, Mode m) const{
+	if(array == nullptr or size < 1){
+		throw std::range_error("Invalid Argument");
+	}
 	if (m == Mode::INSERTION_SORT){
 		insertion_sort(array, size);
 	}
@@ -194,32 +200,17 @@ int Sorter::pivot(int* const array, int low, int high, int p) const{
 	// swap wherever pivot it is with mid elem in array
 	swap(array[p], array[(low+high)/2]);
 
-	// while (left <= right){
-	// 	// move left until you find next elem that needs to swap
-	// 	while(array[left] < pivot){
-	// 		left++;
-	// 	}
-	// 	// move right until you find next elem that needs to swap
-	// 	while(array[right] > pivot){
-	// 		right--;
-	// 	}
-	// 	// check if left and right have crossed partition, otherwise swap
-	// 	if(left <= right){
-	// 		swap(array[left], array[right]);
-	// 		left++;
-	// 		right--;
-	// 	}
-	// }
-	// return left;
-
 	while (left <= right){
-		while (array[left] < pivot){
+		// move left until you find next elem that needs to swap
+		while(array[left] < pivot){
 			left++;
 		}
-		while (array[right] > pivot){
+		// move right until you find next elem that needs to swap
+		while(array[right] > pivot){
 			right--;
 		}
-		if (left <= right){
+		// check if left and right have crossed partition, otherwise swap
+		if(left <= right){
 			swap(array[left], array[right]);
 			left++;
 			right--;
