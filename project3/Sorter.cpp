@@ -32,7 +32,7 @@ Sorter::~Sorter(){
 
 void Sorter::sort(int* const array, int size) const{
 	if(array == nullptr or size < 1){
-		throw std::range_error("Invalid Argument");
+		throw std::invalid_argument("Invalid Argument");
 	}
 	if (mode == Mode::INSERTION_SORT){
 		insertion_sort(array, size);
@@ -49,7 +49,7 @@ void Sorter::sort(int* const array, int size) const{
 
 void Sorter::sort(int* const array, int size, Mode m) const{
 	if(array == nullptr or size < 1){
-		throw std::range_error("Invalid Argument");
+		throw std::invalid_argument("Invalid Argument");
 	}
 	if (m == Mode::INSERTION_SORT){
 		insertion_sort(array, size);

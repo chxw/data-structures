@@ -63,6 +63,8 @@ void enum_test(){
 void throw_test(){
   Sorter sorter;
 
+  Mode m = Mode::MERGE_SORT;
+
   int* a = nullptr;
   int* b = new int[5];
 
@@ -70,7 +72,7 @@ void throw_test(){
   try {
     sorter.sort(a, 1);
   }
-  catch(std::range_error& e){
+  catch(std::invalid_argument& e){
     message = e.what();
   }
   assert(message == "Invalid Argument");
@@ -79,10 +81,28 @@ void throw_test(){
   try {
     sorter.sort(b, 0);
   }
-  catch(std::range_error& e){
+  catch(std::invalid_argument& e){
     message1 = e.what();
   }
   assert(message1 == "Invalid Argument");
+
+  std::string message3;
+  try {
+    sorter.sort(a, 1, m);
+  }
+  catch(std::invalid_argument& e){
+    message3 = e.what();
+  }
+  assert(message3 == "Invalid Argument");
+
+  std::string message4;
+  try {
+    sorter.sort(b, 0, m);
+  }
+  catch(std::invalid_argument& e){
+    message4 = e.what();
+  }
+  assert(message4 == "Invalid Argument");
 }
 
 void print_array(int* const array, int size){
