@@ -10,9 +10,14 @@
 #include<chrono>
 
 #include <iostream>
+#include <fstream>
+
+#include <string>
 
 using namespace std;
 using namespace std::chrono;
+
+typedef void (*test_funct)(int, Mode);
 
 bool isSorted(int* const array, int size){
   for (int i = 1; i < size; i++){
@@ -105,18 +110,6 @@ void throw_test(){
   assert(message4 == "Invalid Argument");
 }
 
-void print_array(int* const array, int size){
-  for (int i = 0; i < size; i++){
-    std::cout << array[i];
-    if(i == size - 1){
-      std::cout << "\n";
-    }
-    else{
-      std::cout << ", ";
-    }
-  }
-}
-
 void custom(Mode m){
   int size = 11;
   int* a = new int[size];
@@ -194,7 +187,7 @@ void almost_ordered(int size, Mode m){
 
 void reverse_ordered(int size, Mode m){
   int* array = new int[size];
-  for(int i = size - 1; i > 0; i--)
+  for(int i = size - 1; i >= 0; i--)
     array[i] = i;
 
   Sorter sorter(m);
@@ -205,70 +198,12 @@ void reverse_ordered(int size, Mode m){
   delete [] array;
 }
 
-void time_test(Mode m){
+int data_pt(test_funct f, Mode m, int size){
   high_resolution_clock::time_point t1 = high_resolution_clock::now();
-  unordered(5, m);
+  f(size, m);
   high_resolution_clock::time_point t2 = high_resolution_clock::now();
-  auto duration = duration_cast<microseconds>(t2-t1).count();
-  cout << "unordered (small N): ";
-  cout << duration;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t3 = high_resolution_clock::now();
-  unordered(2000000, m);
-  high_resolution_clock::time_point t4 = high_resolution_clock::now();
-  auto duration1 = duration_cast<microseconds>(t4-t3).count();
-  cout << "unordered (large N): ";
-  cout << duration1;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t5 = high_resolution_clock::now();
-  almost_ordered(5, m);
-  high_resolution_clock::time_point t6 = high_resolution_clock::now();
-  auto duration2 = duration_cast<microseconds>(t6-t5).count();
-  cout << "almost_ordered (small N): ";
-  cout << duration2;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t7 = high_resolution_clock::now();
-  almost_ordered(2000000, m);
-  high_resolution_clock::time_point t8 = high_resolution_clock::now();
-  auto duration3 = duration_cast<microseconds>(t8-t7).count();
-  cout << "almost_ordered (large N): ";
-  cout << duration3;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t9 = high_resolution_clock::now();
-  reverse_ordered(5, m);
-  high_resolution_clock::time_point t10 = high_resolution_clock::now();
-  auto duration4 = duration_cast<microseconds>(t10-t9).count();
-  cout << "reverse_ordered (small N): ";
-  cout << duration4;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t11 = high_resolution_clock::now();
-  reverse_ordered(2000000, m);
-  high_resolution_clock::time_point t12 = high_resolution_clock::now();
-  auto duration5 = duration_cast<microseconds>(t12-t11).count();
-  cout << "reverese_ordered (large N): ";
-  cout << duration5;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t13 = high_resolution_clock::now();
-  ordered(5, m);
-  high_resolution_clock::time_point t14 = high_resolution_clock::now();
-  auto duration6 = duration_cast<microseconds>(t14-t13).count();
-  cout << "already_ordered (small N): ";
-  cout << duration6;
-  cout << " ms" << endl;
-
-  high_resolution_clock::time_point t15 = high_resolution_clock::now();
-  ordered(2000000, m);
-  high_resolution_clock::time_point t16 = high_resolution_clock::now();
-  auto duration7 = duration_cast<microseconds>(t16-t15).count();
-  cout << "already_ordered (large N): ";
-  cout << duration7;
-  cout << " ms" << endl;
+  int result = duration_cast<microseconds>(t2-t1).count();
+  return result;
 }
 
 int main(){
@@ -279,69 +214,44 @@ int main(){
   Mode m = Mode::MERGE_SORT;
   Mode q  = Mode::QUICK_SORT;
 
-  // insertion sort
-  custom(i);
-  unordered(5, i);
-  unordered(6, i);
-  unordered(30, i);
-  unordered(40, i);
-  unordered(50, i);
-  unordered(60, i);
-  unordered(80, i);
-  unordered(90, i);
-  unordered(95, i);
-  almost_ordered(100, i);
-  almost_ordered(2000000, i);
-  unordered(2000000, i);
-  reverse_ordered(100, i);
-  reverse_ordered(2000000, i);
-  ordered(100, i);
-  ordered(2000000, i);
+  test_funct unorder = &unordered;
+  test_funct order = &ordered;
+  test_funct almost = &almost_ordered;
+  test_funct reverse = & reverse_ordered;
 
-  cout << "INSERTION_SORT*****************" << endl;
-  time_test(i);
+  ofstream merge ("merge_sort.csv");
+  ofstream insertion ("insertion_sort.csv");
+  ofstream quick ("quick_sort.csv"); 
 
-  // merge sort
-  custom(m);
-  unordered(5, m);
-  unordered(6, m);
-  unordered(30, m);
-  unordered(40, m);
-  unordered(50, m);
-  unordered(60, m);
-  unordered(80, m);
-  unordered(90, m);
-  almost_ordered(100, m);
-  almost_ordered(2000000, m);
-  unordered(2000000, m);
-  reverse_ordered(100, m);
-  reverse_ordered(2000000, m);
-  ordered(100, m);
-  ordered(2000000, m);
+  //insertion sort
+  insertion << "Size, Unordered, Ordered, Almost ordered, Reverse ordered \n";
+  for (int x = 1; x < 10000000; x+=20000){
+    insertion << to_string(x) + ",";
+    insertion << to_string(data_pt(unorder, i, x)) + ",";
+    insertion << to_string(data_pt(order, i, x)) + ",";
+    insertion << to_string(data_pt(almost, i, x)) + ",";
+    insertion << to_string(data_pt(reverse, i, x))+ ", \n";
+  }
 
-  cout << "MERGE_SORT*****************" << endl;
-  time_test(m);
+  //merge sort
+  merge << "Size, Unordered, Ordered, Almost ordered, Reverse ordered \n";
+  for (int x = 1; x < 10000000; x+=20000){
+    merge << to_string(x) + ",";
+    merge << to_string(data_pt(unorder, m, x)) + ",";
+    merge << to_string(data_pt(order, m, x)) + ",";
+    merge << to_string(data_pt(almost, m, x)) + ",";
+    merge << to_string(data_pt(reverse, m, x))+ ", \n";
+  }
 
-  // quick sort
-  custom(q);
-  unordered(5, q);
-  unordered(6, q);
-  unordered(30, q);
-  unordered(40, q);
-  unordered(50, q);
-  unordered(60, q);
-  unordered(80, q);
-  unordered(90, q);
-  almost_ordered(100, q);
-  almost_ordered(2000000, q);
-  unordered(2000000, q);
-  reverse_ordered(100, q);
-  reverse_ordered(2000000, q);
-  ordered(100, q);
-  ordered(2000000, q);
-
-  cout << "QUICK_SORT*****************" << endl;
-  time_test(q);
+  //quick sort
+  quick << "Size, Unordered, Ordered, Almost ordered, Reverse ordered \n";
+  for (int x = 1; x < 10000000; x+=20000){
+    quick << to_string(x) + ",";
+    quick << to_string(data_pt(unorder, q, x)) + ",";
+    quick << to_string(data_pt(order, q, x)) + ",";
+    quick << to_string(data_pt(almost, q, x)) + ",";
+    quick << to_string(data_pt(reverse, q, x))+ ", \n";
+  }
 
   return 0;
 }
