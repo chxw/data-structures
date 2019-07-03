@@ -1,3 +1,4 @@
+
 #include "Scheduler.hpp"
 
 #include <iostream>
@@ -27,10 +28,9 @@ Scheduler::Scheduler(const Scheduler& other){
   if(other.head == nullptr){
     this->head = nullptr;
   }
-
   else if((other.head)->getNext() == nullptr){
-  	Event* event = new Event(*((other.head)->getData()));
-  	this->add(event);
+    Event* event = new Event(*((other.head)->getData()));
+    this->add(event);
   }
   else{
     Node* current = other.head;
@@ -53,15 +53,15 @@ Scheduler& Scheduler::operator=(const Scheduler& other){
       this->head = nullptr;
     }
     else if((other.head)->getNext() == nullptr){
-  	  Event* event = new Event(*(other.head)->getData());
-  	  this->add(event);
+      Event* event = new Event(*(other.head)->getData());
+      this->add(event);
     }
     else{
       Node* current = other.head;
       while(current != nullptr){
         Node* next = current->getNext();
         Event* event = new Event(*(current)->getData());
-  	    this->add(event);
+        this->add(event);
         current = next;
       }
     }
@@ -81,7 +81,7 @@ Scheduler::~Scheduler(){
 }
 
 void Scheduler::add(Event* event){
-  ////// requirements check
+  //// requirements check
   // map month to number of days in that month
   typedef std::map<int, int> BasePairMap;
   BasePairMap m;
@@ -92,12 +92,12 @@ void Scheduler::add(Event* event){
     if (year % 100 != 0){
       m[2] = 29;
     }
-  	else if (year % 100 == 0 and year % 400 == 0){
-  		m[2] = 29;
-  	}
+    else if (year % 100 == 0 and year % 400 == 0){
+      m[2] = 29;
+    }
   }
   else{
-  	m[2] = 28;
+    m[2] = 28;
   }
   m[3] = 31;
   m[4] = 30;
@@ -110,23 +110,18 @@ void Scheduler::add(Event* event){
   m[11] = 30;
   m[12] = 31;
 
-
   // given event must be in range, description must be at least one char long
   if (event == nullptr){
     return;
   }
-<<<<<<< HEAD
-  if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
-=======
   else if(event->getDay() < 0 or event->getDay() > m[month] or event->getHour() < 0 or event->getHour() > 23 or 
->>>>>>> 2d4df3eca5cd9d2f924e2ba5ce65f3cc97f877e6
-  	event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
-  	throw std::runtime_error("Not Legal Event");
+    event->getMinute() < 0 or event->getMinute() > 59 or (event->getDescription()).length() < 1){
+    throw std::runtime_error("Not Legal Event");
   }
 
-  ////// ordering
+  //// ordering
   // empty list
-  else if (this->isEmpty()){
+  if (this->isEmpty()){
     Node* newbie = new Node(event);
     newbie->setNext(nullptr);
 
@@ -147,7 +142,7 @@ void Scheduler::add(Event* event){
 
     num_events += 1;
   }
-  // event after head
+  // event after head in 1-item scheduler
   else if (head->getNext() == nullptr and event->startAfter(head->getData())){
     Node* newbie = new Node(event);
     head->setNext(newbie);
@@ -187,63 +182,55 @@ void Scheduler::add(Event* event){
 }
 
 std::string Scheduler::getFirstEventAfter(int day, int hour, int minute) const{
-  // check empty
-	if (head == nullptr){
-		return "No Event Found";
-	}
-<<<<<<< HEAD
-  // check head
-  else if (head->getData()->startAfter(day, hour, minute)){
-    return head->getData()->toString();
+    // check empty
+  if (head == nullptr){
+    return "No Event Found";
   }
-  // check if only head
-	else if (head->getData()->startBefore(day, hour, minute) and head->getNext() == nullptr){
-=======
-  // check only head
-	else if (head->getNext() == nullptr){
-		if (head->getData()->startAfter(day, hour, minute) or head->getData()->startAt(day, hour, minute)){
-			return head->getData()->toString();
-		}
->>>>>>> 2d4df3eca5cd9d2f924e2ba5ce65f3cc97f877e6
-		return "No Event Found";
-	}
-  // traverse through
-	else {
+    // check only head
+  else if (head->getNext() == nullptr){
+    if (head->getData()->startAfter(day, hour, minute) or head->getData()->startAt(day, hour, minute)){
+      return head->getData()->toString();
+    }
+    return "No Event Found";
+  }
+    // traverse through
+  else {
     Node* current = head;
-		while(current != nullptr){
-			if(current->getData()->startAfter(day, hour, minute) or current->getData()->startAt(day, hour, minute)){
-				return current->getData()->toString();
-			}
-			current = current->getNext();
-		}
-		return "No Event Found";
-	}
+    while(current != nullptr){
+      if(current->getData()->startAfter(day, hour, minute) or current->getData()->startAt(day, hour, minute)){
+        return current->getData()->toString();
+      }
+      current = current->getNext();
+    }
+    return "No Event Found";
+  }
 }
 
 void Scheduler::removeAllEventsOn(int day){
+  // check if empty
   if (head != nullptr){
-	  if (head->getData()->getDay() == day){
-	  	delete head;
-	  	head = nullptr;
-      num_events--;
-	  }
-	  else{
-	  	Node* previous = head;
- 		  Node* current = head->getNext();
-		  while(current != nullptr){
-		    if (current->getData()->getDay() == day){
-		    	previous->setNext(current->getNext());
-          delete current->getData();
-		    	delete current;
-          num_events--;
-		    	current = previous->getNext();
-		    }
-		    else {
-			    previous = current;
-			    current = current->getNext();
-			}
-		  }
-	  }
+    if (head->getData()->getDay() == day){
+      delete head;
+      head = nullptr;
+        num_events--;
+    }
+    else{
+        Node* previous = head;
+      Node* current = head->getNext();
+      while(current != nullptr){
+        if (current->getData()->getDay() == day){
+          previous->setNext(current->getNext());
+              delete current->getData();
+          delete current;
+              num_events--;
+          current = previous->getNext();
+        }
+        else {
+          previous = current;
+          current = current->getNext();
+      }
+      }
+    }
   }
 }
 
@@ -251,7 +238,6 @@ void Scheduler::removeAllEvents(){
   Node* current = head;
   while(current != nullptr){
     Node* next = current->getNext();
-    // std::cout << "\n deleting : " + current->getData()->toString() << std::endl;
     delete current->getData();
     delete current;
     current = next;
@@ -261,16 +247,16 @@ void Scheduler::removeAllEvents(){
 }
 
 int Scheduler::getNumberOfEventsOn(int day) const{
-	Node* temp = this->head;
-	int count = 0;
+  Node* temp = this->head;
+  int count = 0;
 
-	while(temp != nullptr){
+  while(temp != nullptr){
       if (temp->getData()->getDay() == day){
-      	count++;
+        count++;
       }
       temp = temp->getNext();
-  	}
-  return count;
+    }
+    return count;
 }
 
 int Scheduler::getNumberOfEvents() const{
@@ -285,11 +271,11 @@ bool Scheduler::isEmpty() const{
 }
 
 int Scheduler::getYear() const{
-	return year;
+  return year;
 }
 
 int Scheduler::getMonth() const{
-	return month;
+  return month;
 }
 
 std::string Scheduler::toString() const{
