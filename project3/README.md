@@ -17,7 +17,9 @@ Sorter class contains 3 sorting algorithms: insertion sort, merge sort, and quic
 `Sorter.cpp` `Sorter.hpp` `test.cpp`
 
 ## Instructions:
-Run `clang++ -std=c++11 -Wall -Wextra -g Sorter.cpp Sorter.hpp test.cpp`.
+Compile: `clang++ -std=c++11 -Wall -Wextra -g Sorter.cpp Sorter.hpp test.cpp`
+Run:  `.\test`
+Note: Running the program will create file `quick_sort.csv` `merge_sort.csv` and `insertion_sort.csv` that include runtimes for input arrays: Size (column 0), Unordered (1), Ordered (2), Almost ordered (3), and Reverse ordered (4). The frequency of collecting data points of runtimes can be edited in the x incrementor 3 for loops in `int main()` of `test.cpp` .  
 
 ## References:
 
