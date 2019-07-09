@@ -6,7 +6,7 @@
 class Course{
 public:
   Course();
-  Course(std::string id, int capacity);
+  Course(std::string courseID, int courseCapacity);
   Course(const Course& other);
   Course& operator=(const Course& other);
   ~Course();
@@ -24,6 +24,10 @@ public:
 
 private:
   //your design
+  std::string id;
+  int capacity;
+  int* data;
+  int enrolled;
 };
 
 #endif
