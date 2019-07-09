@@ -6,7 +6,7 @@
 class Student{
 public:
   Student();
-  Student(int id, std::string firstName, std::string lastName);
+  Student(int given_id, std::string firstName, std::string lastName);
   Student(const Student& other);
   Student& operator=(const Student& other);
   ~Student();
@@ -18,6 +18,9 @@ public:
 
 private:
   //your design
+	int id;
+	std::string first;
+	std::string last;
 };
 
 #endif
