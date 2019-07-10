@@ -9,22 +9,25 @@
 class StudentDatabase{
 public:
   StudentDatabase();
-  StudentDatabase(const StudentDatabase& other);
-  StudentDatabase& operator=(const StudentDatabase& other);
-  ~StudentDatabase();
+  // StudentDatabase(const StudentDatabase& other);
+  // StudentDatabase& operator=(const StudentDatabase& other);
+  // ~StudentDatabase();
 
-  const Student* searchBy(int studentID) const;
+  // const Student* searchBy(int studentID) const;
   bool insert(Student* student);
-  bool deleteBy(int studentID);
-  void balance();
+  // bool deleteBy(int studentID);
+  // void balance();
 
   bool isEmpty() const;
   int getNumberOfStudents() const;
   std::string toStringInOrder() const;
-  std::string toTreeString() const;
+  // std::string toTreeString() const;
 
 private:
-  //your design
+  BSTNode* root;
+  int num_students;
+  BSTNode* place(BSTNode* current, int key);
+  std::string inOrder(const BSTNode* current) const;
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Student.hpp"
-// #include "StudentDatabase.hpp"
+#include "StudentDatabase.hpp"
 #include "Course.hpp"
 // #include "CourseManager.hpp"
 // #include "EnrollmentManager.hpp"
