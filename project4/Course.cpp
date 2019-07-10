@@ -22,14 +22,17 @@ Course::Course(const Course& other){
 
 Course& Course::operator=(const Course& other){
 	if (&other != this){
+		delete data;
 		id = other.id;
 		capacity = other.capacity;
+		data = other.data;
+		enrolled = other.enrolled;
 	}
 	return (*this);
 }
 
 Course::~Course(){
-
+	delete data;
 }
 
 bool Course::isFull() const{
@@ -56,7 +59,7 @@ bool Course::drop(int studentID){
 	int *temp = new int[capacity];
 	bool passed = false;
 
-	// resize and drop studentID
+	// resize data and drop studentID
 	for (int i = 0; i < capacity; i++){
 		if (data[i] == studentID){
 			passed = true;
@@ -70,6 +73,7 @@ bool Course::drop(int studentID){
 		}
 	}
 
+	enrolled--;
 	return true;
 }
 
