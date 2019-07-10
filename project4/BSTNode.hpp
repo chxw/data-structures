@@ -6,7 +6,7 @@
 class BSTNode{
 public:
   BSTNode();
-  BSTNode(Student* data);
+  BSTNode(Student* sdata);
   BSTNode(const BSTNode& other);
   BSTNode& operator=(const BSTNode& other);
   ~BSTNode();
