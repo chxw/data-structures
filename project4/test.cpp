@@ -1,6 +1,8 @@
 #include <cassert>
 #include <string>
 
+#include <iostream>
+
 #include "Student.hpp"
 #include "StudentDatabase.hpp"
 #include "Course.hpp"
@@ -72,34 +74,40 @@ void course_test(){
 
   //assignment operator
   *course1 = *course;
-  assert(course1->toString() == "COMP-000 (0/1)");
+  std::cout << course1->toString() << std::endl;
+
+  // assert(course1->toString() == "COMP-000 (0/1)");
 
   delete course;
   delete course1;
   delete course2;
 }
 
-// void test2(){
-//   StudentDatabase* studentDatabase = new StudentDatabase();
+void test2(){
+  StudentDatabase* studentDatabase = new StudentDatabase();
 
-//   Student* s1 = new Student(1, "John", "Smith");
-//   Student* s2 = new Student(2, "David", "Smith");
-//   Student* s3 = new Student(3, "Mary", "Smith");
+  Student* s1 = new Student(1, "John", "Smith");
+  Student* s2 = new Student(2, "David", "Smith");
+  Student* s3 = new Student(3, "Mary", "Smith");
 
-//   studentDatabase->insert(s2);
-//   studentDatabase->insert(s1);
-//   studentDatabase->insert(s3);
+  studentDatabase->insert(s2);
+  studentDatabase->insert(s1);
+  studentDatabase->insert(s3);
 
-//   std::string result = studentDatabase->toTreeString();
-//   std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";
+  std::string inOrder = studentDatabase->toStringInOrder();
+  std::cout << inOrder << std::endl;
 
-//   assert(result == expected);
+  // std::string result = studentDatabase->toTreeString();
+  // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";
 
-//   delete studentDatabase;
-// }
+  // assert(result == expected);
+
+  delete studentDatabase;
+}
 
 int main(){
   student_test();
+  course_test();
 
   // test2();
   return 0;
