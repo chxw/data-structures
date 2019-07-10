@@ -1,7 +1,8 @@
 #include "StudentDatabase.hpp"
 
 StudentDatabase::StudentDatabase(){
-
+	root = nullptr;
+	num_students = 0;
 }
 
 StudentDatabase::StudentDatabase(const StudentDatabase& other){
@@ -16,12 +17,39 @@ StudentDatabase::~StudentDatabase(){
 
 }
 
-const Student* searchBy(int studentID) const;
-bool insert(Student* student);
-bool deleteBy(int studentID);
-void balance();
+const Student* StudentDatabase::searchBy(int studentID) const{
 
-bool isEmpty() const;
-int getNumberOfStudents() const;
-std::string toStringInOrder() const;
-std::string toTreeString() const;
+}
+
+bool StudentDatabase::insert(Student* student){
+	if (student == nullptr){
+		
+	}
+}
+
+bool StudentDatabase::deleteBy(int studentID){
+
+}
+
+void StudentDatabase::balance(){
+
+}
+
+bool StudentDatabase::isEmpty() const{
+	if (num_students > 0){
+		return true;
+	}
+	return false;
+}
+
+int StudentDatabase::getNumberOfStudents() const{
+	return num_students;
+}
+
+std::string StudentDatabase::toStringInOrder() const{
+
+}
+
+std::string StudentDatabase::toTreeString() const{
+
+}
