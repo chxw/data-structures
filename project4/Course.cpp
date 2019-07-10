@@ -1,10 +1,11 @@
 #include "Course.hpp"
+#include <iostream>
 
 Course::Course(){
 	id = "COMP-000";
+	enrolled = 0;
 	capacity = 1;
 	data = new int[capacity];
-	enrolled = 0;
 }
 
 Course::Course(std::string courseID, int courseCapacity){
@@ -46,8 +47,9 @@ bool Course::enroll(int studentID){
 	if (isFull()){
 		return false;
 	}
+	std::cout << "here";
 	data[enrolled] = studentID;
-	enrolled++;
+	enrolled += 1;
 	return true;
 }
 
@@ -107,9 +109,9 @@ std::string Course::toString() const{
 
 	s += id;
 	s += " (";
-	s += enrolled;
+	s += std::to_string(enrolled);
 	s += "/";
-	s += capacity;
+	s += std::to_string(capacity);
 	s += ")";
 
 	return s;
