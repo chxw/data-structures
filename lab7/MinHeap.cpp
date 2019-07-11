@@ -14,7 +14,7 @@ MinHeap::MinHeap(){
 //  MinHeap& operator=(const MinHeap& other);
 
 MinHeap::~MinHeap(){
-	delete array;
+	delete[] array;
 }
 
 void MinHeap::insert(int number){
