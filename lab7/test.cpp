@@ -15,7 +15,6 @@ void heapsort(int* const array, int size){
 
   for (int i = 0; i < size; i++){
     array[i] = heap.extractMin();
-    std::cout << array[i] << std::endl;
   }
 }
 

@@ -1,6 +1,8 @@
 #include "MinHeap.hpp"
 #include <string>
 #include <iostream>
+#include <stdexcept>
+
 
 MinHeap::MinHeap(){
 	size = 0;
