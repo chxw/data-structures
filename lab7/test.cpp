@@ -86,6 +86,6 @@ void test2(){
 int main(){
   insert_test();
   extract_test();
-  // test2();
+  test2();
   return 0;
 }

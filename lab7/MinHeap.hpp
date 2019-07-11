@@ -15,13 +15,13 @@ public:
 
 private:
   //your design
+  int get_parent(int node);
+  int get_left(int node);
+  int get_right(int node);
   void swap(int &a, int &b);
-  void expand();
   void bubble_up(int start);
   void bubble_down(int start);
-  void fit();
-  int find_min(int a, int b, int c);
-
+  
   int* array;
   int size;
   int capacity;

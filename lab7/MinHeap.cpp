@@ -4,7 +4,7 @@
 
 MinHeap::MinHeap(){
 	size = 0;
-	capacity = 1000;
+	capacity = 10000;
 	array = new int[capacity];
 }
 
@@ -12,53 +12,38 @@ MinHeap::MinHeap(){
 //  MinHeap& operator=(const MinHeap& other);
 
 MinHeap::~MinHeap(){
-	delete array;
+	delete[] array;
 }
 
-void MinHeap::insert(int number){
-	if(isEmpty()){
-		array[0] = number;
-		size++;
-		return;
-	}
-	if (size == capacity){
-		expand();
-	}
-
-	array[size] = number;
-	bubble_up(size);
-	size++;
-
-	return;
-
+int MinHeap::get_parent(int node){
+	return (node - 1)/2;
 }
 
-void MinHeap::expand(){
-	capacity += 15;
-	int* temp = new int[capacity];
-	for (int i = 0; i < capacity; i++){
-		temp[i] = array[i];
-	}
-	delete array;
-	array = temp;
-	temp = nullptr;
+int MinHeap::get_left(int node){
+	return 2*node+1;
 }
 
-void MinHeap::fit(){
-	capacity = size;
-	int* temp = new int[capacity];
-	for (int i = 0; i < capacity; i++){
-		temp[i] = array[i];
-	}
-	delete array;
-	array = temp;
-	temp = nullptr;
+int MinHeap::get_right(int node){
+	return 2*node+2;
 }
 
 void MinHeap::swap(int &a, int &b){
 	int hold = a;
 	a = b;
 	b = hold;
+}
+
+void MinHeap::insert(int number){
+	if (size == capacity){
+		throw std::runtime_error("Overflow, int not inserted");
+	}
+
+	array[size] = number;
+	size++;
+	bubble_up(size-1);
+
+	return;
+
 }
 
 int MinHeap::extractMin(){
@@ -78,62 +63,32 @@ int MinHeap::extractMin(){
 	return min;
 }
 
-void MinHeap::bubble_up(int start){
-	int child = start;
-	int parent = (child - 1)/2;
-
-	if (start == 1){
-		if (array[0] > array[1]){
-			swap(array[0], array[1]);
-		}
-	}
+void MinHeap::bubble_up(int child){
+	int parent = get_parent(child);
 
 	while (parent >= 0 and array[child] < array[parent]){
 		swap(array[child], array[parent]);
 		child = parent;
-		parent = (child - 1)/2;
+		parent = get_parent(child);
 	}
 }
 
-void MinHeap::bubble_down(int start){
-	int parent = start;
-	int left = (2*parent)+1;
-	int right = (2*parent)+2;
+void MinHeap::bubble_down(int parent){
+	int left = get_left(parent);
+	int right = get_right(parent);
 
-	if (left > size){
-		if(array[parent] < array[right]){
-				swap(array[parent], array[right]);
-			}
-			return;
-	}
-	if (right > size){
-		if(array[parent] < array[left]){
-				swap(array[parent], array[left]);
-			}
-			return;
-	}
+	int min = parent;
 
-	int min = find_min(array[parent], array[left], array[right]);
-
-	if (min == array[left]){
-		swap(array[left], array[parent]);
-		bubble_down(left);
+	if (left < size and array[left] < array[parent]){
+		min = left;
 	}
-	else if (min == array[right]){
-		swap(array[right], array[parent]);
-		bubble_down(right);
+	if (right < size and array[right] < array[min]){
+		min = right;
 	}
-	return;
-}
-
-int MinHeap::find_min(int a, int b, int c){
-	if (a < b and a < c){
-		return a;
+	if (min != parent){
+		swap(array[parent], array[min]);
+		bubble_down(min);
 	}
-	else if (b < a and b < c){
-		return b;
-	}
-	return c;
 }
 
 bool MinHeap::isEmpty() const{
