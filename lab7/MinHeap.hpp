@@ -11,7 +11,6 @@ public:
   void insert(int number);
   int extractMin();
   bool isEmpty() const;
-  void toString() const;
 
 private:
   //your design
@@ -19,7 +18,6 @@ private:
   void expand();
   void bubble_up(int start);
   void bubble_down(int start);
-  void fit();
   int find_min(int a, int b, int c);
 
   int* array;
