@@ -31,6 +31,8 @@ private:
   int year;
   int month;
   int num_events;
+  int leap(int year);
+
   Node* head;
 };
 

@@ -1,4 +1,3 @@
-
 #include "Scheduler.hpp"
 
 #include <iostream>
@@ -80,6 +79,18 @@ Scheduler::~Scheduler(){
   head = nullptr;
 }
 
+int Scheduler::leap(int year){
+  if (year % 4 == 0){
+    if (year % 100 != 0){
+      return 29;
+    }
+    else if (year % 100 == 0 and year % 400 == 0){
+      return 29;
+    }
+  }
+  return 28;
+}
+
 void Scheduler::add(Event* event){
   //// requirements check
   // map month to number of days in that month
@@ -87,18 +98,7 @@ void Scheduler::add(Event* event){
   BasePairMap m;
 
   m[1] = 31;
-  // for leap years
-  if (year % 4 == 0){
-    if (year % 100 != 0){
-      m[2] = 29;
-    }
-    else if (year % 100 == 0 and year % 400 == 0){
-      m[2] = 29;
-    }
-  }
-  else{
-    m[2] = 28;
-  }
+  m[2] = leap(year);
   m[3] = 31;
   m[4] = 30;
   m[5] = 31;
