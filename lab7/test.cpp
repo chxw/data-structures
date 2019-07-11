@@ -1,9 +1,22 @@
 #include <cassert>
 #include <cstdlib>
 
+#include <string>
+#include <iostream>
+
 #include "MinHeap.hpp"
 
 void heapsort(int* const array, int size){
+  MinHeap heap;
+
+  for (int i = 0; i < size; i++){
+    heap.insert(array[i]);
+  }
+
+  for (int i = 0; i < size; i++){
+    array[i] = heap.extractMin();
+    std::cout << array[i] << std::endl;
+  }
 }
 
 void test1(){

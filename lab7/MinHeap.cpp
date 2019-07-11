@@ -44,17 +44,6 @@ void MinHeap::expand(){
 	temp = nullptr;
 }
 
-void MinHeap::fit(){
-	capacity = size;
-	int* temp = new int[capacity];
-	for (int i = 0; i < capacity; i++){
-		temp[i] = array[i];
-	}
-	delete array;
-	array = temp;
-	temp = nullptr;
-}
-
 void MinHeap::swap(int &a, int &b){
 	int hold = a;
 	a = b;
