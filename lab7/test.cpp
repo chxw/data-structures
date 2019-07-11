@@ -5,8 +5,17 @@
 
 #include <iostream>
 
-// void heapsort(int* const array, int size){
-// }
+void heapsort(int* const array, int size){
+  MinHeap heap;
+  
+  for (int i = 0; i < size; i++){
+    heap.insert(array[i]);
+  }
+
+  for (int i = 0; i < size; i++){
+    array[i] = heap.extractMin();
+  }
+}
 
 void insert_test(){
   MinHeap heap;
@@ -21,7 +30,14 @@ void insert_test(){
   heap.insert(20);
   heap.insert(-2);
 
-  // heap.toString();
+  assert(heap.extractMin() == -2);
+  assert(heap.extractMin() == 0);
+  assert(heap.extractMin() == 1);
+  assert(heap.extractMin() == 4);
+  assert(heap.extractMin() == 15);
+  assert(heap.extractMin() == 16);
+  assert(heap.extractMin() == 20);
+  assert(heap.extractMin() == 50);
 
 }
 
@@ -33,44 +49,39 @@ void extract_test(){
     heap.insert(i);
   }
 
-
   for(int i = 0; i <= n; i++){
-    // assert(heap.extractMin() == i);
-    heap.extractMin();
-    // std::cout << ", ";
+    assert(heap.extractMin() == i);
   }
 
-  heap.toString();
-
-  // assert(heap.isEmpty());
+  assert(heap.isEmpty());
 }
 
-// void test2(){
-//   int size = 10000;
-//   int* array = new int[size];
-//   for(int i = 0; i < size; i++){
-//     array[i] = i;
-//   }
+void test2(){
+  int size = 10000;
+  int* array = new int[size];
+  for(int i = 0; i < size; i++){
+    array[i] = i;
+  }
 
-//   unsigned int seed = 2019;
-//   std::srand(seed);
-//   for(int i = 0; i < size; i++){
-//     int index1 = std::rand() % size;
-//     int index2 = std::rand() % size;
+  unsigned int seed = 2019;
+  std::srand(seed);
+  for(int i = 0; i < size; i++){
+    int index1 = std::rand() % size;
+    int index2 = std::rand() % size;
 
-//     int number1 = array[index1];
-//     array[index1] = array[index2];
-//     array[index2] = number1;
-//   }
+    int number1 = array[index1];
+    array[index1] = array[index2];
+    array[index2] = number1;
+  }
 
-//   heapsort(array, size);
+  heapsort(array, size);
 
-//   for(int i = 0; i < size; i++){
-//     assert(array[i] == i);
-//   }
+  for(int i = 0; i < size; i++){
+    assert(array[i] == i);
+  }
 
-//   delete [] array;
-// }
+  delete [] array;
+}
 
 int main(){
   insert_test();

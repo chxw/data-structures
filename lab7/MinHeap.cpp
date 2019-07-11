@@ -4,7 +4,7 @@
 
 MinHeap::MinHeap(){
 	size = 0;
-	capacity = 15;
+	capacity = 1000;
 	array = new int[capacity];
 }
 
@@ -65,15 +65,14 @@ int MinHeap::extractMin(){
 	if(isEmpty()){
 		throw std::runtime_error("Not Valid");
 	}
-	else if(size == 1){
+	else if (size == 1){
+		size--;
 		return array[0];
 	}
 
 	int min = array[0];
-
-	swap(array[0], array[size]);
+	array[0] = array[size-1];
 	size--;
-	// fit();
 	bubble_down(0);
 
 	return min;
@@ -83,13 +82,16 @@ void MinHeap::bubble_up(int start){
 	int child = start;
 	int parent = (child - 1)/2;
 
-	while (array[child] < array[parent]){
+	if (start == 1){
+		if (array[0] > array[1]){
+			swap(array[0], array[1]);
+		}
+	}
+
+	while (parent >= 0 and array[child] < array[parent]){
 		swap(array[child], array[parent]);
 		child = parent;
 		parent = (child - 1)/2;
-		if (parent < 0){
-			break;
-		}
 	}
 }
 
@@ -98,24 +100,30 @@ void MinHeap::bubble_down(int start){
 	int left = (2*parent)+1;
 	int right = (2*parent)+2;
 
-	while (true){
-		int min = find_min(array[parent], array[left], array[right]);
-		if (min == array[parent]){
-			break;
-		}
-		else if(min == array[left]){
-			swap(array[left], array[parent]);
-			parent = left;
-			left = (2*parent)+1;
-			right = (2*parent)+2;
-		}
-		else{
-			swap(array[right], array[parent]);
-			parent = right;
-			left = (2*parent)+1;
-			right = (2*parent)+2;
-		}
+	if (left > size){
+		if(array[parent] < array[right]){
+				swap(array[parent], array[right]);
+			}
+			return;
 	}
+	if (right > size){
+		if(array[parent] < array[left]){
+				swap(array[parent], array[left]);
+			}
+			return;
+	}
+
+	int min = find_min(array[parent], array[left], array[right]);
+
+	if (min == array[left]){
+		swap(array[left], array[parent]);
+		bubble_down(left);
+	}
+	else if (min == array[right]){
+		swap(array[right], array[parent]);
+		bubble_down(right);
+	}
+	return;
 }
 
 int MinHeap::find_min(int a, int b, int c){
@@ -145,4 +153,5 @@ void MinHeap::toString() const{
 			std::cout << ", ";
 		}
 	}
+	std::cout << std::endl;
 }
