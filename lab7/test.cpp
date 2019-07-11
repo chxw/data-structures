@@ -9,10 +9,11 @@
 void heapsort(int* const array, int size){
   MinHeap heap;
 
+  std::cout << "here";
+  
   for (int i = 0; i < size; i++){
     heap.insert(array[i]);
   }
-
   for (int i = 0; i < size; i++){
     array[i] = heap.extractMin();
   }
@@ -55,6 +56,7 @@ void test2(){
   heapsort(array, size);
 
   for(int i = 0; i < size; i++){
+    std::cout << i << " ";
     assert(array[i] == i);
   }
 

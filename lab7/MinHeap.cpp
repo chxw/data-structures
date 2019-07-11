@@ -3,10 +3,9 @@
 #include <iostream>
 #include <stdexcept>
 
-
 MinHeap::MinHeap(){
 	size = 0;
-	capacity = 100;
+	capacity = 10000;
 	array = new int[capacity];
 }
 
@@ -23,27 +22,13 @@ void MinHeap::insert(int number){
 		size++;
 		return;
 	}
-	if (size == capacity){
-		expand();
-	}
-
+	
 	array[size] = number;
 	bubble_up(size);
 	size++;
 
 	return;
 
-}
-
-void MinHeap::expand(){
-	capacity += 15;
-	int* temp = new int[capacity];
-	for (int i = 0; i < capacity; i++){
-		temp[i] = array[i];
-	}
-	delete[] array;
-	array = temp;
-	temp = nullptr;
 }
 
 void MinHeap::swap(int &a, int &b){

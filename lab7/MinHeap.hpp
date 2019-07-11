@@ -15,7 +15,6 @@ public:
 private:
   //your design
   void swap(int &a, int &b);
-  void expand();
   void bubble_up(int start);
   void bubble_down(int start);
   int find_min(int a, int b, int c);
