@@ -1,11 +1,10 @@
 #include "MinHeap.hpp"
 #include <string>
 #include <iostream>
-#include <stdexcept>
 
 MinHeap::MinHeap(){
 	size = 0;
-	capacity = 10000;
+	capacity = 1000;
 	array = new int[capacity];
 }
 
@@ -13,7 +12,7 @@ MinHeap::MinHeap(){
 //  MinHeap& operator=(const MinHeap& other);
 
 MinHeap::~MinHeap(){
-	delete[] array;
+	delete array;
 }
 
 void MinHeap::insert(int number){
@@ -22,13 +21,38 @@ void MinHeap::insert(int number){
 		size++;
 		return;
 	}
-	
+	if (size == capacity){
+		expand();
+	}
+
 	array[size] = number;
 	bubble_up(size);
 	size++;
 
 	return;
 
+}
+
+void MinHeap::expand(){
+	capacity += 15;
+	int* temp = new int[capacity];
+	for (int i = 0; i < capacity; i++){
+		temp[i] = array[i];
+	}
+	delete array;
+	array = temp;
+	temp = nullptr;
+}
+
+void MinHeap::fit(){
+	capacity = size;
+	int* temp = new int[capacity];
+	for (int i = 0; i < capacity; i++){
+		temp[i] = array[i];
+	}
+	delete array;
+	array = temp;
+	temp = nullptr;
 }
 
 void MinHeap::swap(int &a, int &b){
@@ -58,6 +82,12 @@ void MinHeap::bubble_up(int start){
 	int child = start;
 	int parent = (child - 1)/2;
 
+	if (start == 1){
+		if (array[0] > array[1]){
+			swap(array[0], array[1]);
+		}
+	}
+
 	while (parent >= 0 and array[child] < array[parent]){
 		swap(array[child], array[parent]);
 		child = parent;
@@ -73,14 +103,14 @@ void MinHeap::bubble_down(int start){
 	if (left > size){
 		if(array[parent] < array[right]){
 				swap(array[parent], array[right]);
-		}
-		return;
+			}
+			return;
 	}
 	if (right > size){
 		if(array[parent] < array[left]){
 				swap(array[parent], array[left]);
-		}
-		return;
+			}
+			return;
 	}
 
 	int min = find_min(array[parent], array[left], array[right]);
@@ -113,15 +143,15 @@ bool MinHeap::isEmpty() const{
 	return true;
 }
 
-// void MinHeap::toString() const{
-// 	if (isEmpty()){
-// 		return;
-// 	}
-// 	for (int i = 0; i < size; i++){
-// 		std::cout << array[i];
-// 		if (i != size - 1){
-// 			std::cout << ", ";
-// 		}
-// 	}
-// 	std::cout << std::endl;
-// }
+void MinHeap::toString() const{
+	if (isEmpty()){
+		return;
+	}
+	for (int i = 0; i < size; i++){
+		std::cout << array[i];
+		if (i != size - 1){
+			std::cout << ", ";
+		}
+	}
+	std::cout << std::endl;
+}
