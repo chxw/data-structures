@@ -3,46 +3,12 @@
 
 #include "MinHeap.hpp"
 
-#include <iostream>
-
 void heapsort(int* const array, int size){
-  MinHeap heap;
-  
-  for (int i = 0; i < size; i++){
-    heap.insert(array[i]);
-  }
-
-  for (int i = 0; i < size; i++){
-    array[i] = heap.extractMin();
-  }
 }
 
-void insert_test(){
+void test1(){
   MinHeap heap;
   assert(heap.isEmpty());
-
-  heap.insert(15);
-  heap.insert(0);
-  heap.insert(4);
-  heap.insert(16);
-  heap.insert(1);
-  heap.insert(50);
-  heap.insert(20);
-  heap.insert(-2);
-
-  assert(heap.extractMin() == -2);
-  assert(heap.extractMin() == 0);
-  assert(heap.extractMin() == 1);
-  assert(heap.extractMin() == 4);
-  assert(heap.extractMin() == 15);
-  assert(heap.extractMin() == 16);
-  assert(heap.extractMin() == 20);
-  assert(heap.extractMin() == 50);
-
-}
-
-void extract_test(){
-  MinHeap heap;
 
   int n = 1000;
   for(int i = n; i >= 0; i--){
@@ -84,8 +50,7 @@ void test2(){
 }
 
 int main(){
-  insert_test();
-  extract_test();
-  // test2();
+  test1();
+  test2();
   return 0;
 }
