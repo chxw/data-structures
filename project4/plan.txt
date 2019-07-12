@@ -1,9 +1,11 @@
 Chelsea Wang
 
 7/9: setup work (cp code skeleton to remote directory), draw out the different data structures to be implemented, implement student class + test, implement course class + test
-7/10: BSTNode class + test, start student database class (low hanging fruit functions)
-7/11-7/12: student database class, testing rigorously until satisfied with tests
+7/10: BSTNode class + test 
+7/11: finish L7
+7/12: start student database class, testing all the way
 7/13: out of town
-7/14-7/16: course manager, testing rigorously until satisfied
+7/14: finish student database class, testing rigorously until satisfied with tests
+7/15-7/16: course manager, testing rigorously until satisfied
 7/17-7/19: enrollment manager
 7/20: full day of testing, writing README.md, checking to make sure specs are satisfied

@@ -1,4 +1,5 @@
 #include "StudentDatabase.hpp"
+#include <stdexcept>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -9,9 +10,9 @@ StudentDatabase::StudentDatabase(){
 
 // }
 
-// StudentDatabase& StudentDatabase::operator=(const StudentDatabase& other){
-// 	throw std::runtime_error("Not Implemented");
-// }
+StudentDatabase& StudentDatabase::operator=(const StudentDatabase& other){
+	throw std::runtime_error("Not Implemented");
+}
 
 // StudentDatabase::~StudentDatabase(){
 
@@ -22,25 +23,31 @@ StudentDatabase::StudentDatabase(){
 // }
 
 bool StudentDatabase::insert(Student* student){
-	BSTNode* current = new BSTNode(student);
-	place(current, student->getID());
+	BSTNode* newbie = new BSTNode(student);
+
+	if (isEmpty()){
+		root = newbie;
+		return true;
+	}
+
+	place(root, newbie);
+	num_students++;
+
 	return true;
 }
 
-BSTNode* StudentDatabase::place(BSTNode* current, int key){
-	// pre-order recursive traversal
-
-	// base case
-	if (current == nullptr or current->getData()->getID() == key)
-		return current;
-
-	// if studentID to be inserted is greater, go right
-	if (current->getData()->getID() < key){
-		return place(current->getRight(), key);
+void StudentDatabase::place(BSTNode* current, BSTNode* newbie){
+	if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() != nullptr){
+		place(current->getLeft(), newbie);
 	}
-	// if studentID to be inserted is lesser, go left
-	else{
-		return place(current->getLeft(), key);
+	else if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() == nullptr){
+		current->setLeft(newbie);
+	}
+	else if (newbie->getData()->getID() >= current->getData()->getID() and current->getRight() != nullptr){
+		place(current->getRight(), newbie);
+	}
+	else if (newbie->getData() >= current->getData() and current->getRight() == nullptr){
+		current->setRight(newbie);
 	}
 }
 
@@ -53,7 +60,7 @@ BSTNode* StudentDatabase::place(BSTNode* current, int key){
 // }
 
 bool StudentDatabase::isEmpty() const{
-	if (num_students > 0){
+	if (root == nullptr){
 		return true;
 	}
 	return false;

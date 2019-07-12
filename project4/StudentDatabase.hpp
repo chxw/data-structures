@@ -10,7 +10,7 @@ class StudentDatabase{
 public:
   StudentDatabase();
   // StudentDatabase(const StudentDatabase& other);
-  // StudentDatabase& operator=(const StudentDatabase& other);
+  StudentDatabase& operator=(const StudentDatabase& other);
   // ~StudentDatabase();
 
   // const Student* searchBy(int studentID) const;
@@ -26,7 +26,7 @@ public:
 private:
   BSTNode* root;
   int num_students;
-  BSTNode* place(BSTNode* current, int key);
+  void place(BSTNode* current, BSTNode* newbie);
   std::string inOrder(const BSTNode* current) const;
 };
 

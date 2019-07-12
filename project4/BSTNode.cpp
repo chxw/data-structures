@@ -7,6 +7,8 @@ BSTNode::BSTNode(){
 
 BSTNode::BSTNode(Student* sdata){
 	data = sdata;
+	left = nullptr;
+	right = nullptr;
 }
 
 BSTNode::BSTNode(const BSTNode& other){

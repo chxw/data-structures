@@ -104,7 +104,7 @@ void course_test(){
   delete course2;
 }
 
-void test2(){
+void sdatabase_test(){
   StudentDatabase* studentDatabase = new StudentDatabase();
 
   Student* s1 = new Student(1, "John", "Smith");
@@ -129,7 +129,6 @@ void test2(){
 int main(){
   student_test();
   course_test();
-
-  // test2();
+  sdatabase_test();
   return 0;
 }
