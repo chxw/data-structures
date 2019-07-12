@@ -48,42 +48,40 @@ void course_test(){
   assert(course1->isFull() == false);
   assert(course1->getCapacity() == 50);
 
-  course1->enroll(1);
+  for (int i = 0; i < 50; i++){
+    course1->enroll(i);
+  }
 
-  // for (int i = 0; i < 50; i++){
-  //   course1->enroll(i);
-  // }
+  assert(course1->isFull() == true);
+  assert(course1->isHaving(0) == true);
+  assert(course1->isHaving(50) == false);
+  assert(course1->getNumberOfEnrolledStudents() == 50);
+  assert(course1->getStudentIDAt(49) == 49);
 
-  // assert(course1->isFull() == true);
-  // assert(course1->isHaving(0) == true);
-  // assert(course1->isHaving(50) == false);
-  // assert(course1->getNumberOfEnrolledStudents() == 50);
-  // assert(course1->getStudentIDAt(49) == 49);
+  course1->drop(30);
+  assert(course1->isFull() == false);
+  assert(course1->getNumberOfEnrolledStudents() == 49);
 
-  // course1->drop(30);
-  // assert(course1->isFull() == false);
-  // assert(course1->getStudentIDAt(30) == 31);
+  assert(course1->getStudentIDAt(30) == 31);
 
-  // course1->drop(0);
-  // assert(course1->getStudentIDAt(0) == 1);
+  course1->drop(0);
+  assert(course1->getStudentIDAt(0) == 1);
 
-  // course1->drop(49);
-  // assert(course1->getStudentIDAt(49) == 0);
-  // assert(course1->getNumberOfEnrolledStudents() == 47);
+  course1->drop(49);
+  assert(course1->getStudentIDAt(49) == 0);
+  assert(course1->getNumberOfEnrolledStudents() == 47);
 
-  // //copy constructor
-  // Course* course2 = new Course(*course1);
-  // assert(course2->toString() == "COMP-000 (0/50)");
+  //copy constructor
+  Course* course2 = new Course(*course1);
+  assert(course2->toString() == "COMP-15 (47/50)");
 
-  // //assignment operator
-  // *course1 = *course;
-  // std::cout << course1->toString() << std::endl;
+  //assignment operator
+  *course1 = *course;
+  assert(course1->toString() == "COMP-000 (0/1)");
 
-  // assert(course1->toString() == "COMP-000 (0/1)");
-
-  // delete course;
-  // delete course1;
-  // delete course2;
+  delete course;
+  delete course1;
+  delete course2;
 }
 
 void test2(){

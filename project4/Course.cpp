@@ -13,27 +13,40 @@ Course::Course(std::string courseID, int courseCapacity){
 		throw std::runtime_error("Not Valid");
 	}
 	id = courseID;
+	enrolled = 0;
 	capacity = courseCapacity;
+	data = new int[capacity];
 }
 
 Course::Course(const Course& other){
 	id = other.id;
+	enrolled = other.enrolled;
 	capacity = other.capacity;
+	data = new int[capacity];
+
+	for (int i = 0; i < other.enrolled; i++){
+		data[i] = other.data[i];
+	}
 }
 
 Course& Course::operator=(const Course& other){
 	if (&other != this){
-		delete data;
+		delete [] data;
 		id = other.id;
 		capacity = other.capacity;
-		data = other.data;
 		enrolled = other.enrolled;
+
+		data = new int[capacity];
+
+		for (int i = 0; i < other.enrolled; i++){
+			data[i] = other.data[i];
+		}
 	}
 	return (*this);
 }
 
 Course::~Course(){
-	delete data;
+	delete [] data;
 }
 
 bool Course::isFull() const{
@@ -47,7 +60,6 @@ bool Course::enroll(int studentID){
 	if (isFull()){
 		return false;
 	}
-	std::cout << "here";
 	data[enrolled] = studentID;
 	enrolled += 1;
 	return true;
@@ -59,28 +71,35 @@ bool Course::drop(int studentID){
 	}
 
 	int *temp = new int[capacity];
-	bool passed = false;
+	int index;
 
 	// resize data and drop studentID
-	for (int i = 0; i < capacity; i++){
+	for (int i = 0; i < enrolled; i++){
 		if (data[i] == studentID){
-			passed = true;
-			continue;
-		}
-		if (!passed){
-			temp[i] = data[i];
-		}
-		else if (passed){
-			temp[i] = data[i+1];
+			index = i;
+			break;
 		}
 	}
+
+	for (int i = 0; i < enrolled - 1; i++){
+		if (i >= index){
+			temp[i] = data[i+1];
+		}
+		else{
+			temp[i] = data[i];
+		}
+	}
+
+	delete [] data;
+	data = temp;
+	temp = nullptr;
 
 	enrolled--;
 	return true;
 }
 
 bool Course::isHaving(int studentID){
-	for (int i = 0; i < capacity; i++){
+	for (int i = 0; i < enrolled; i++){
 		if (data[i] == studentID){
 			return true;
 		}
