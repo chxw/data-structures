@@ -92,6 +92,13 @@ bool StudentDatabase::deleteBy(int studentID){
 
 }
 
+BSTNode* min_node(BSTNode* current){
+	while (current and current->getLeft() != nullptr)
+		current = current->getLeft();
+
+	return current;
+}
+
 void StudentDatabase::delete_current(BSTNode* previous, BSTNode* current){
 	// leaf
 	if(current->getLeft() == nullptr and current->getRight() == nullptr){
@@ -131,6 +138,7 @@ void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_sw
 	if (to_swap->getRight() == nullptr and to_swap->getRight() == nullptr){
 		temp = new BSTNode(to_swap->getData());
 	}
+	
 	//to_swap has children
 	else{
 		// to_swap is right child
