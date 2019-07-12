@@ -1,5 +1,7 @@
 #include <cassert>
 #include <string>
+#include <climits>
+#include <stdexcept>
 
 #include <iostream>
 
@@ -41,6 +43,25 @@ void course_test(){
   assert(course->toString() == "COMP-000 (0/1)");
 
   //parametrized constructor
+  //catch exceptions
+  std::string message;
+  try{
+    Course* course_fail = new Course("COMP-20", 0);
+  }
+  catch(std::runtime_error& e){
+    message = e.what();
+  }
+  assert(message == "Not Valid");
+
+  std::string message1;
+  try{
+    Course* course_fail1 = new Course("", 1);
+  }
+  catch(std::runtime_error& e){
+    message1 = e.what();
+  }
+  assert(message1 == "Not Valid");
+
   Course* course1 = new Course("COMP-15", 50);
   assert(course1->toString() == "COMP-15 (0/50)");
   assert(course1->getID() == "COMP-15");
