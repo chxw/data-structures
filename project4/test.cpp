@@ -105,8 +105,10 @@ void course_test(){
 }
 
 void sdatabase_test(){
+  //default constructor
   StudentDatabase* studentDatabase = new StudentDatabase();
 
+  //parametrized constructor
   Student* s1 = new Student(1, "John", "Smith");
   Student* s2 = new Student(2, "David", "Smith");
   Student* s3 = new Student(3, "Mary", "Smith");
@@ -114,6 +116,7 @@ void sdatabase_test(){
   Student* s5 = new Student(5, "Mary", "Magdalene");
   Student* s6 = new Student(6, "Mary", "Joseph");
 
+  //insert
   studentDatabase->insert(s2);
   studentDatabase->insert(s1);
   studentDatabase->insert(s3);
@@ -121,15 +124,37 @@ void sdatabase_test(){
   studentDatabase->insert(s5);
   studentDatabase->insert(s6);
 
-
+  //inOrder traversal
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
 
-  const Student* ptr = studentDatabase->searchBy(s2->getID());
+  //searchBy
+  const Student* ptr = studentDatabase->searchBy(s1->getID());
+  assert(ptr->getID() == s1->getID());
+  ptr = studentDatabase->searchBy(s2->getID());
   assert(ptr->getID() == s2->getID());
+  ptr = studentDatabase->searchBy(s3->getID());
+  assert(ptr->getID() == s3->getID());
+  ptr = studentDatabase->searchBy(s4->getID());
+  assert(ptr->getID() == s4->getID());
+  ptr = studentDatabase->searchBy(s5->getID());
+  assert(ptr->getID() == s5->getID());
+  ptr = studentDatabase->searchBy(s6->getID());
+  assert(ptr->getID() == s6->getID());
+  assert(studentDatabase->searchBy(0) == nullptr);
 
-  ptr = studentDatabase->searchBy(-100);
-  assert(ptr == nullptr);
+  studentDatabase->deleteBy(s1->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->deleteBy(s2->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->deleteBy(s3->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->deleteBy(s4->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->deleteBy(s5->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->deleteBy(s6->getID());
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
 
   // std::string result = studentDatabase->toTreeString();
   // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";

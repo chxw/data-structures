@@ -3,6 +3,8 @@
 
 BSTNode::BSTNode(){
 	data = nullptr;
+	left = nullptr;
+	right = nullptr;
 }
 
 BSTNode::BSTNode(Student* sdata){
@@ -23,6 +25,8 @@ BSTNode& BSTNode::operator=(const BSTNode& other){
 
 BSTNode::~BSTNode(){
 	delete data;
+	left = nullptr;
+	right = nullptr;
 }
 
 Student* BSTNode::getData() const{

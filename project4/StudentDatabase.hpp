@@ -15,7 +15,7 @@ public:
 
   const Student* searchBy(int studentID) const;
   bool insert(Student* student);
-  // bool deleteBy(int studentID);
+  bool deleteBy(int studentID);
   // void balance();
 
   bool isEmpty() const;
@@ -26,9 +26,9 @@ public:
 private:
   BSTNode* root;
   int num_students;
-
-  const Student* search(BSTNode* current, int key) const;
   void place(BSTNode* current, BSTNode* newbie);
+  void delete_current(BSTNode* previous, BSTNode* current);
+  void relink(BSTNode* previous, BSTNode* current, BSTNode* to_delete);
   std::string inOrder(const BSTNode* current) const;
 };
 
