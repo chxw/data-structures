@@ -12,7 +12,7 @@ Course::Course(){
 Course::Course(std::string courseID, int courseCapacity){
 	if (courseID.size() == 0 or courseCapacity <= 0){
 		throw std::runtime_error("Not Valid");
-	}
+	}	
 	id = courseID;
 	enrolled = 0;
 	capacity = courseCapacity;

@@ -89,7 +89,6 @@ void course_test(){
   assert(course1->getStudentIDAt(0) == 1);
 
   course1->drop(49);
-  assert(course1->getStudentIDAt(49) == 0);
   assert(course1->getNumberOfEnrolledStudents() == 47);
 
   //copy constructor
