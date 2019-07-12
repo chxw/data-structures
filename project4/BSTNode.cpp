@@ -1,4 +1,5 @@
 #include "BSTNode.hpp"
+#include <stdexcept>
 
 BSTNode::BSTNode(){
 
