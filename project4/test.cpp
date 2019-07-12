@@ -110,13 +110,26 @@ void sdatabase_test(){
   Student* s1 = new Student(1, "John", "Smith");
   Student* s2 = new Student(2, "David", "Smith");
   Student* s3 = new Student(3, "Mary", "Smith");
+  Student* s4 = new Student(4, "Mary", "J Blige");
+  Student* s5 = new Student(5, "Mary", "Magdalene");
+  Student* s6 = new Student(6, "Mary", "Joseph");
 
   studentDatabase->insert(s2);
   studentDatabase->insert(s1);
   studentDatabase->insert(s3);
+  studentDatabase->insert(s4);
+  studentDatabase->insert(s5);
+  studentDatabase->insert(s6);
+
 
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
+
+  const Student* ptr = studentDatabase->searchBy(s2->getID());
+  assert(ptr->getID() == s2->getID());
+
+  ptr = studentDatabase->searchBy(-100);
+  assert(ptr == nullptr);
 
   // std::string result = studentDatabase->toTreeString();
   // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";

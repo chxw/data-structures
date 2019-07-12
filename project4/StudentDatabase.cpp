@@ -1,4 +1,5 @@
 #include "StudentDatabase.hpp"
+#include <iostream>
 #include <stdexcept>
 
 StudentDatabase::StudentDatabase(){
@@ -18,9 +19,22 @@ StudentDatabase& StudentDatabase::operator=(const StudentDatabase& other){
 
 // }
 
-// const Student* StudentDatabase::searchBy(int studentID) const{
+const Student* StudentDatabase::searchBy(int studentID) const{
+	return search(root, studentID);
+}
 
-// }
+const Student* StudentDatabase::search(BSTNode* current, int key) const{
+	if (current == nullptr){
+		return nullptr;
+	}
+	else if (current->getData()->getID() == key){
+		return current->getData();
+	}
+	if (current->getRight()->getData()->getID() < key){
+		return search(current->getRight(), key);
+	}
+	return search(current->getLeft(), key);
+}
 
 bool StudentDatabase::insert(Student* student){
 	BSTNode* newbie = new BSTNode(student);
@@ -75,11 +89,12 @@ std::string StudentDatabase::toStringInOrder() const{
 }
 
 std::string StudentDatabase::inOrder(const BSTNode* current) const{
+	std::string order;
+
 	if (current == nullptr){
+		order.pop_back();
 		return "";
 	}
-
-	std::string order;
 
 	order += inOrder(current->getLeft());
 	order += std::to_string(current->getData()->getID());

@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 BSTNode::BSTNode(){
-
+	data = nullptr;
 }
 
 BSTNode::BSTNode(Student* sdata){

@@ -13,7 +13,7 @@ public:
   StudentDatabase& operator=(const StudentDatabase& other);
   // ~StudentDatabase();
 
-  // const Student* searchBy(int studentID) const;
+  const Student* searchBy(int studentID) const;
   bool insert(Student* student);
   // bool deleteBy(int studentID);
   // void balance();
@@ -26,6 +26,8 @@ public:
 private:
   BSTNode* root;
   int num_students;
+
+  const Student* search(BSTNode* current, int key) const;
   void place(BSTNode* current, BSTNode* newbie);
   std::string inOrder(const BSTNode* current) const;
 };
