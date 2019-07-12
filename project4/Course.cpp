@@ -1,5 +1,6 @@
 #include "Course.hpp"
 #include <iostream>
+#include <stdexcept>
 
 Course::Course(){
 	id = "COMP-000";
