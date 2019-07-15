@@ -29,8 +29,9 @@ const Student* StudentDatabase::searchBy(int studentID) const{
 			current = current->getLeft();
 		}
 		//found
-		else
+		else{
 			return current->getData();
+		}
 	}
 
 	//not found
@@ -126,7 +127,12 @@ void StudentDatabase::delete_current(BSTNode* previous, BSTNode* current){
 		}
 		else{
 			BSTNode* to_swap = min_node(current->getRight());
-			root = to_swap;
+			Student* s_temp = new Student(*(to_swap->getData()));
+			BSTNode* temp = new BSTNode(s_temp);
+			temp->setRight(current->getRight());
+			temp->setLeft(current->getLeft());
+			root = temp;
+			std::cout << "here";
 			delete to_swap;
 		}
 		delete current;
@@ -182,9 +188,6 @@ void StudentDatabase::delete_current(BSTNode* previous, BSTNode* current){
 			}
 			// current is left child
 			else {
-				std::cout << "previous is " << previous->getData()->getID() << std::endl;
-				std::cout << "current is " << current->getData()->getID() << std::endl;
-				std::cout << "min node is " << min_node(current->getRight())->getData()->getID() << std::endl;
 				relink(previous, current, min_node(current->getRight()));
 				return;
 			}
@@ -261,9 +264,7 @@ BSTNode* StudentDatabase::createBalancedTree(BSTNode** arr, int start, int end){
 
 	int mid = (start + end)/2;
 	BSTNode* mini_root = arr[mid];
-
 	mini_root->setLeft(createBalancedTree(arr, start, mid - 1));
-
 	mini_root->setRight(createBalancedTree(arr, mid + 1, end));
 
 	return root;
