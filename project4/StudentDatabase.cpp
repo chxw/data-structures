@@ -75,6 +75,9 @@ bool StudentDatabase::deleteBy(int studentID){
 	BSTNode* previous = nullptr;
 	BSTNode* current = root;
 
+	std::cout << "root is " << root->getData()->getID() << std::endl;
+	std::cout << "to delete " << studentID << std::endl;
+
 	while (current != nullptr){
 		if (studentID > current->getData()->getID()){
 			previous = current;
@@ -171,13 +174,14 @@ void StudentDatabase::delete_current(BSTNode* previous, BSTNode* current){
 		else {
 			// current is right child
 			if (previous->getRight() == current){
-				std::cout << "current is right child" << std::endl;
 				relink(previous, current, min_node(current->getRight()));
 				return;
 			}
 			// current is left child
 			else {
-				std::cout << "current is left child" << std::endl;
+				std::cout << "previous is " << previous->getData()->getID() << std::endl;
+				std::cout << "current is " << current->getData()->getID() << std::endl;
+				std::cout << "min node is " << min_node(current->getRight())->getData()->getID() << std::endl;
 				relink(previous, current, min_node(current->getRight()));
 				return;
 			}
@@ -199,19 +203,14 @@ void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_sw
 	} 
 
 	//find where to_swap can replace current
-	if (previous != nullptr){
-		if(previous->getRight() == current){
-			previous->setRight(to_swap);
-		}
-		else{
-			previous->setLeft(to_swap);
-		}
+	if(previous->getRight() == current){
+		previous->setRight(to_swap);
 	}
 	else{
-		root = to_swap;
+		previous->setLeft(to_swap);
 	}
 
-	std::cout << "root is " << root->getData()->getID() << std::endl;
+	std::cout << toStringInOrder() << std::endl;
 
 	delete current;
 }

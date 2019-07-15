@@ -104,7 +104,7 @@ void course_test(){
   delete course2;
 }
 
-void sdatabase_test(){
+void small_sdatabase_test(){
   //default constructor
   StudentDatabase* studentDatabase = new StudentDatabase();
 
@@ -143,17 +143,80 @@ void sdatabase_test(){
   assert(ptr->getID() == s6->getID());
   assert(studentDatabase->searchBy(0) == nullptr);
 
-  studentDatabase->deleteBy(s1->getID());
+  //deleteBy test1
+  assert(studentDatabase->deleteBy(s1->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  studentDatabase->deleteBy(s2->getID());
+  assert(studentDatabase->deleteBy(s2->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  studentDatabase->deleteBy(s3->getID());
+  assert(studentDatabase->deleteBy(s3->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  studentDatabase->deleteBy(s4->getID());
+  assert(studentDatabase->deleteBy(s4->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  studentDatabase->deleteBy(s5->getID());
+  assert(studentDatabase->deleteBy(s5->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  studentDatabase->deleteBy(s6->getID());
+  assert(studentDatabase->deleteBy(s6->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+
+  // std::string result = studentDatabase->toTreeString();
+  // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";
+
+  // assert(result == expected);
+
+  delete studentDatabase;
+}
+
+void large_sdatabase_test(){
+  //default constructor
+  StudentDatabase* studentDatabase = new StudentDatabase();
+
+  //parametrized constructor
+  Student* s1 = new Student(1, "John", "Smith");
+  Student* s2 = new Student(2, "David", "Smith");
+  Student* s3 = new Student(3, "Mary", "Smith");
+  Student* s4 = new Student(4, "Mary", "J Blige");
+  Student* s5 = new Student(5, "Mary", "Magdalene");
+  Student* s6 = new Student(6, "Mary", "Joseph");
+  Student* s7 = new Student(7, "Johnny", "Depp");
+  Student* s8 = new Student(8, "Johnny", "Cash");
+  Student* s9 = new Student(9, "June", "Carter");
+  Student* s10 = new Student(10, "Lil", "Nas X");  
+
+  //insert
+  studentDatabase->insert(s5);
+  studentDatabase->insert(s2);
+  studentDatabase->insert(s1);
+  studentDatabase->insert(s3);
+  studentDatabase->insert(s10);
+  studentDatabase->insert(s4);
+  studentDatabase->insert(s6);
+  studentDatabase->insert(s8);
+  studentDatabase->insert(s7);
+  studentDatabase->insert(s9);
+
+  //inOrder traversal
+  std::string inOrder = studentDatabase->toStringInOrder();
+  std::cout << inOrder << std::endl;
+
+  //deleteBy test1
+  assert(studentDatabase->deleteBy(s10->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s2->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s3->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s9->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s5->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s6->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s4->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s1->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s8->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s7->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
 
   // std::string result = studentDatabase->toTreeString();
@@ -167,6 +230,7 @@ void sdatabase_test(){
 int main(){
   student_test();
   course_test();
-  sdatabase_test();
+  small_sdatabase_test();
+  large_sdatabase_test();
   return 0;
 }
