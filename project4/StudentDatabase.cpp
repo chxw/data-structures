@@ -1,4 +1,5 @@
 #include "StudentDatabase.hpp"
+#include <math.h>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -46,7 +47,10 @@ bool StudentDatabase::insert(Student* student){
 
 	place(root, newbie);
 	num_students++;
-	// balance();
+
+	if (num_students >= 3){
+		balance();
+	}
 
 	return true;
 }
@@ -215,34 +219,68 @@ void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_sw
 }
 
 void StudentDatabase::balance(){
-	std::vector<BSTNode *> order;
-	inOrderArray(root, order);
-	int size = order.size();
-	createBalancedTree(0, size-1, order);
-
+	BSTNode* pseudoroot;
+	pseudoroot->setRight(root);
+	tree_to_vine(pseudoroot);
+	vine_to_tree(pseudoroot, double(num_students));
+	root = pseudoroot->getRight();
+	pseudoroot = nullptr;
 }
 
-BSTNode* StudentDatabase::createBalancedTree(int start, int end, std::vector<BSTNode*> &order){
-	if (start > end)
-		return nullptr;
-
-	int mid = (start + end)/2;
-	root = order[mid];
-
-	root->setLeft(createBalancedTree(start, mid-1, order));
-	root->setRight(createBalancedTree(mid+1, end, order));
-
-	return root;
+BSTNode* StudentDatabase::rightRotate(BSTNode* current){
+	BSTNode* to_move = current->getLeft();
+	current->setLeft(to_move->getRight());
+	to_move->setRight(current);
+	return to_move;
 }
 
-void StudentDatabase::inOrderArray(BSTNode* current, std::vector<BSTNode*> &order){
-	if (current == nullptr){
-		return;
+BSTNode* StudentDatabase::leftRotate(BSTNode* current){
+	BSTNode* to_move = current->getRight();
+	current->setRight(to_move->getLeft());
+	to_move->setLeft(current);
+	return to_move;
+}
+
+void StudentDatabase::tree_to_vine(BSTNode* root){
+	BSTNode* tail = root;
+	BSTNode* rest = tail->getRight();
+
+	while (rest != nullptr){
+		// continue
+		if (rest->getLeft() == nullptr){
+			tail = rest;
+			rest = rest->getRight();
+		}
+		// if there is left child, rotate right
+		else{
+			BSTNode* temp = rest->getLeft();
+			rest->setLeft(temp->getRight());
+			temp->setRight(rest);
+			rest = temp;
+			tail->setRight(temp);
+		}
 	}
+}
 
-	inOrderArray(current->getLeft(), order);
-	order.push_back(current);
-	inOrderArray(current->getRight(), order);
+void StudentDatabase::vine_to_tree(BSTNode* root, double size){
+	double leaves = size + 1 - pow(2,(log2(size + 1)));
+	compress(root, leaves);
+	size = size - leaves;
+	while (size > 1){
+		compress(root, (size/2));
+		size = size/2;
+	}
+}
+
+void StudentDatabase::compress(BSTNode* root, double count){
+	BSTNode* scanner = root;
+	for (double i = double(1); i < count; i++){
+		BSTNode* child = scanner->getRight();
+		scanner->setRight(child->getRight());
+		scanner = scanner->getRight();
+		child->setRight(scanner->getLeft());
+		scanner->setLeft(child);
+	}
 }
 
 bool StudentDatabase::isEmpty() const{

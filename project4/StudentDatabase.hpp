@@ -30,8 +30,9 @@ private:
   BSTNode* root;
   int num_students;
 
-  void inOrderArray(BSTNode* current, std::vector<BSTNode*> &order);
-  BSTNode* createBalancedTree(int start, int end, std::vector<BSTNode*> &order);
+  void tree_to_vine(BSTNode* root);
+  void vine_to_tree(BSTNode* root, double size);
+  void compress(BSTNode* root, double count);  
   BSTNode* min_node(BSTNode* current);
   void place(BSTNode* current, BSTNode* newbie);
   void delete_current(BSTNode* previous, BSTNode* current);
