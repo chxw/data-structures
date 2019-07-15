@@ -26,6 +26,7 @@ public:
 private:
   BSTNode* root;
   int num_students;
+  BSTNode* min_node(BSTNode* current);
   void place(BSTNode* current, BSTNode* newbie);
   void delete_current(BSTNode* previous, BSTNode* current);
   void relink(BSTNode* previous, BSTNode* current, BSTNode* to_delete);
