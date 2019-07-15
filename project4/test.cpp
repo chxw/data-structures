@@ -231,6 +231,6 @@ int main(){
   student_test();
   course_test();
   small_sdatabase_test();
-  //large_sdatabase_test();
+  large_sdatabase_test();
   return 0;
 }

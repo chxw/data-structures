@@ -47,10 +47,10 @@ bool StudentDatabase::insert(Student* student){
 
 	place(root, newbie);
 	num_students++;
-
-	if (num_students >= 3){
-		balance();
-	}
+	
+	// if (num_students >= 3){
+	// 	balance();
+	// }
 
 	return true;
 }
@@ -219,69 +219,56 @@ void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_sw
 }
 
 void StudentDatabase::balance(){
-	BSTNode* pseudoroot;
-	pseudoroot->setRight(root);
-	tree_to_vine(pseudoroot);
-	vine_to_tree(pseudoroot, double(num_students));
-	root = pseudoroot->getRight();
-	pseudoroot = nullptr;
+	BSTNode** arr = new BSTNode*[num_students];
+	inOrderArray(root, arr);
+	int size = sizeof(arr) / sizeof(arr[0]);
+	createBalancedTree(arr, 0, size-1);
 }
 
-BSTNode* StudentDatabase::rightRotate(BSTNode* current){
-	BSTNode* to_move = current->getLeft();
-	current->setLeft(to_move->getRight());
-	to_move->setRight(current);
-	return to_move;
-}
-
-BSTNode* StudentDatabase::leftRotate(BSTNode* current){
-	BSTNode* to_move = current->getRight();
-	current->setRight(to_move->getLeft());
-	to_move->setLeft(current);
-	return to_move;
-}
-
-void StudentDatabase::tree_to_vine(BSTNode* root){
-	BSTNode* tail = root;
-	BSTNode* rest = tail->getRight();
-
-	while (rest != nullptr){
-		// continue
-		if (rest->getLeft() == nullptr){
-			tail = rest;
-			rest = rest->getRight();
+void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** arr){
+	int index = 0;
+	while (current != nullptr){
+		if (current->getLeft() == nullptr){
+			arr[index] = current;
+			index++;
+			current = current->getRight();
 		}
-		// if there is left child, rotate right
 		else{
-			BSTNode* temp = rest->getLeft();
-			rest->setLeft(temp->getRight());
-			temp->setRight(rest);
-			rest = temp;
-			tail->setRight(temp);
+			BSTNode* pre = current->getLeft();
+			while (pre->getRight() != nullptr and pre->getRight() != current){
+				pre = pre->getRight();
+			}
+
+			if (pre->getRight() == nullptr){
+				pre->setRight(current);
+				current = current->getLeft();
+			}
+
+			else {
+				pre->setRight(nullptr);
+				arr[index] = current;
+				index++;
+				current = current->getRight();
+			}
 		}
 	}
 }
 
-void StudentDatabase::vine_to_tree(BSTNode* root, double size){
-	double leaves = size + 1 - pow(2,(log2(size + 1)));
-	compress(root, leaves);
-	size = size - leaves;
-	while (size > 1){
-		compress(root, (size/2));
-		size = size/2;
+BSTNode* StudentDatabase::createBalancedTree(BSTNode** arr, int start, int end){
+	if (start > end){
+		return nullptr;
 	}
+
+	int mid = (start + end)/2;
+	BSTNode* mini_root = arr[mid];
+
+	mini_root->setLeft(createBalancedTree(arr, start, mid - 1));
+
+	mini_root->setRight(createBalancedTree(arr, mid + 1, end));
+
+	return root;
 }
 
-void StudentDatabase::compress(BSTNode* root, double count){
-	BSTNode* scanner = root;
-	for (double i = double(1); i < count; i++){
-		BSTNode* child = scanner->getRight();
-		scanner->setRight(child->getRight());
-		scanner = scanner->getRight();
-		child->setRight(scanner->getLeft());
-		scanner->setLeft(child);
-	}
-}
 
 bool StudentDatabase::isEmpty() const{
 	if (root == nullptr){

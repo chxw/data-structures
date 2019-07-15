@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include <vector>
 #include <stdexcept>
 
 #include "BSTNode.hpp"
@@ -29,10 +28,10 @@ public:
 private:
   BSTNode* root;
   int num_students;
+  BSTNode** arr;
 
-  void tree_to_vine(BSTNode* root);
-  void vine_to_tree(BSTNode* root, double size);
-  void compress(BSTNode* root, double count);  
+  void inOrderArray(BSTNode* current, BSTNode** arr);
+  BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
   BSTNode* min_node(BSTNode* current);
   void place(BSTNode* current, BSTNode* newbie);
   void delete_current(BSTNode* previous, BSTNode* current);
