@@ -2,6 +2,9 @@
 #define STUDENTDATABASE_HPP
 
 #include <string>
+#include <iostream>
+#include <vector>
+#include <stdexcept>
 
 #include "BSTNode.hpp"
 #include "Student.hpp"
@@ -16,7 +19,7 @@ public:
   const Student* searchBy(int studentID) const;
   bool insert(Student* student);
   bool deleteBy(int studentID);
-  // void balance();
+  void balance();
 
   bool isEmpty() const;
   int getNumberOfStudents() const;
@@ -26,6 +29,9 @@ public:
 private:
   BSTNode* root;
   int num_students;
+
+  void inOrderArray(BSTNode* current, std::vector<BSTNode*> &order);
+  BSTNode* createBalancedTree(int start, int end, std::vector<BSTNode*> &order);
   BSTNode* min_node(BSTNode* current);
   void place(BSTNode* current, BSTNode* newbie);
   void delete_current(BSTNode* previous, BSTNode* current);

@@ -1,6 +1,4 @@
 #include "StudentDatabase.hpp"
-#include <iostream>
-#include <stdexcept>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -48,6 +46,7 @@ bool StudentDatabase::insert(Student* student){
 
 	place(root, newbie);
 	num_students++;
+	// balance();
 
 	return true;
 }
@@ -215,9 +214,36 @@ void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_sw
 	delete current;
 }
 
-// void StudentDatabase::balance(){
+void StudentDatabase::balance(){
+	std::vector<BSTNode *> order;
+	inOrderArray(root, order);
+	int size = order.size();
+	createBalancedTree(0, size-1, order);
 
-// }
+}
+
+BSTNode* StudentDatabase::createBalancedTree(int start, int end, std::vector<BSTNode*> &order){
+	if (start > end)
+		return nullptr;
+
+	int mid = (start + end)/2;
+	root = order[mid];
+
+	root->setLeft(createBalancedTree(start, mid-1, order));
+	root->setRight(createBalancedTree(mid+1, end, order));
+
+	return root;
+}
+
+void StudentDatabase::inOrderArray(BSTNode* current, std::vector<BSTNode*> &order){
+	if (current == nullptr){
+		return;
+	}
+
+	inOrderArray(current->getLeft(), order);
+	order.push_back(current);
+	inOrderArray(current->getRight(), order);
+}
 
 bool StudentDatabase::isEmpty() const{
 	if (root == nullptr){
