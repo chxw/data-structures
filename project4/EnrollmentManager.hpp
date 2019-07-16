@@ -15,29 +15,31 @@ enum class Semester{
 class EnrollmentManager{
 public:
   EnrollmentManager();
-  EnrollmentManager(int year, Semester semester);
+  EnrollmentManager(int yr, Semester sem);
   EnrollmentManager(const EnrollmentManager& other);
   EnrollmentManager& operator=(const EnrollmentManager& other);
-  ~EnrollmentManager();
+  // ~EnrollmentManager();
 
-  bool registerStudent(int studentID, std::string firstName, std::string lastName);
-  bool unregisterStudent(int studentID);
+  // bool registerStudent(int studentID, std::string firstName, std::string lastName);
+  // bool unregisterStudent(int studentID);
 
-  bool addCourse(std::string courseID, int capacity);
-  bool cancelCourse(std::string courseID);
+  // bool addCourse(std::string courseID, int capacity);
+  // bool cancelCourse(std::string courseID);
 
-  bool enroll(int studentID, std::string courseID);
-  bool drop(int studentID, std::string courseID);
+  // bool enroll(int studentID, std::string courseID);
+  // bool drop(int studentID, std::string courseID);
 
-  std::string reportSummary() const;
-  std::string report(int studentID) const;
-  std::string report(std::string courseID) const;
+  // std::string reportSummary() const;
+  // std::string report(int studentID) const;
+  // std::string report(std::string courseID) const;
 
-  int getYear() const;
-  Semester getSemester() const;
+  // int getYear() const;
+  // Semester getSemester() const;
 
 private:
   //your design
+  int year;
+  Semester semester;
 };
 
 #endif

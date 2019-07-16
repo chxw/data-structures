@@ -5,6 +5,7 @@ Chelsea Wang
 7/11: finish L7
 7/12: start student database class: default, assignment, destructor, searchBy, insert, isEmpty(), gets, and inOrder, testing all the way
 7/13-7/14: out of town
-7/15-7/16: finish student database class: deleteBy(), toTreeString(), testing rigorously until satisfied with tests. Start course manager, testing rigorously until satisfied
-7/17-7/19: finish course manager and enrollment manager
+7/15-7/16: finish student database class: deleteBy(), balance(),  toTreeString(), testing rigorously until satisfied with tests. finish course manager.
+7/17-7/18: finish  enrollment manager
+7/19: write clean tests
 7/20: full day of testing, writing README.md, checking to make sure specs are satisfied
