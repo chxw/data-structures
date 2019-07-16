@@ -358,13 +358,9 @@ std::string StudentDatabase::preOrder(const BSTNode* current) const{
 	}
 
 	// left
-	order += "[";
 	order += preOrder(current->getLeft());
-	order += "]";
 	// right
-	order += "[";
 	order += preOrder(current->getRight());
-	order += "]";
 
 	return order;
 }
