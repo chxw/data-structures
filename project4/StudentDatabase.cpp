@@ -288,6 +288,8 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 	order += ",";
 	order += inOrder(current->getRight());
 
+	order.pop_back();
+
 	return order;
 }
 

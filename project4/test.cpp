@@ -148,10 +148,30 @@ void cmanager_test(){
   cm.cancel(course9->getID());
   std::cout << "delete comp-23 \n" + cm.getCourseListString() << std::endl;
 
+  // get number of courses
+  assert(cm.getNumberOfCourses() == 5);
+
+  // enroll
   for (int i = 0; i < 50; i++){
     cm.enroll(i, course3->getID());
   }
 
+  assert(course3->isFull() == true);
+
+  // getAllEnrolledCoursesStringOf
+  cm.enroll(0, course4->getID());
+  cm.enroll(0, course6->getID());
+  cm.enroll(0, course7->getID());
+  cm.enroll(0, course8->getID());
+  assert(cm.getAllEnrolledCoursesStringOf(0) == cm.getCourseListString());
+
+  // drop student from one course
+  cm.drop(0, course4->getID());
+  assert(course4->isHaving(0) == false);
+
+  // drop student from all courses
+  cm.dropFromAllCourses(0);
+  assert(cm.getAllEnrolledCoursesStringOf(0) == "");
 }
 
 void small_sdatabase_test(){

@@ -15,7 +15,9 @@ CourseManager& CourseManager::operator=(const CourseManager& other){
 	throw std::runtime_error("Not Implemented");
 }
 
-// ~CourseManager();
+CourseManager::~CourseManager(){
+	delete [] array;
+}
 
 const Course* CourseManager::searchBy(std::string courseID) const{
 	for (int i = 0; i < size; i++){
@@ -85,11 +87,43 @@ bool CourseManager::enroll(int studentID, std::string courseID){
 	return false;
 }
 
-// bool drop(int studentID, std::string courseID);
-// void dropFromAllCourses(int studentID);
-// std::string getAllEnrolledCoursesStringOf(int studentID);
+bool CourseManager::drop(int studentID, std::string courseID){
+	for (int i = 0; i < size; i++){
+		if (array[i]->getID() == courseID){
+			array[i]->drop(studentID);
+			return true;
+		}
+	}
 
-// int getNumberOfCourses() const;
+	return false;
+}
+
+void CourseManager::dropFromAllCourses(int studentID){
+	for (int i = 0; i < size; i++){
+		if (array[i]->isHaving(studentID)){
+			array[i]->drop(studentID);
+		}
+	}
+}
+
+std::string CourseManager::getAllEnrolledCoursesStringOf(int studentID){
+	std::string s = "";
+
+	for (int i = 0; i < size; i++){
+		if (array[i]->isHaving(studentID)){
+			s += array[i]->getID();
+			s += ",";
+		}
+	}
+
+	s.pop_back();
+	return s;
+}
+
+int CourseManager::getNumberOfCourses() const{
+	return size;
+}
+
 std::string CourseManager::getCourseListString() const{
 	std::string s;
 
@@ -98,5 +132,6 @@ std::string CourseManager::getCourseListString() const{
 		s += ",";
 	}
 
+	s.pop_back();
 	return s;
 }
