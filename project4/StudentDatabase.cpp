@@ -46,14 +46,11 @@ bool StudentDatabase::insert(Student* student){
 		return true;
 	}
 
-	bool result = place(root, newbie);
-	num_students++;
+	return place(root, newbie);
 	
 	// if (num_students >= 3){
 	// 	balance();
 	// }
-
-	return result;
 }
 
 bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
@@ -64,6 +61,7 @@ bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 	// found setLeft place
 	else if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() == nullptr){
 		current->setLeft(newbie);
+		num_students++;
 		return true;
 	}
 	// needs to go right
@@ -73,6 +71,7 @@ bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 	// found setRight place
 	else if (newbie->getData() >= current->getData() and current->getRight() == nullptr){
 		current->setRight(newbie);
+		num_students++;
 		return true;
 	}
 	return false;
@@ -103,6 +102,7 @@ bool StudentDatabase::deleteBy(int studentID){
 			if (current->getLeft() == nullptr and current->getRight() == nullptr){
 				// root
 				if (previous == nullptr){
+					std::cout << "root to be deleted is " << root->getData()->getID() << std::endl;
 					delete root;
 					root = nullptr;
 					break;
@@ -115,6 +115,7 @@ bool StudentDatabase::deleteBy(int studentID){
 				}
 				// current is prev right child
 				else{
+					std::cout << "leaf current about to be deleted is " << current->getData()->getID() << std::endl;
 					delete current;
 					previous->setRight(nullptr);
 					break;
@@ -171,13 +172,9 @@ bool StudentDatabase::deleteBy(int studentID){
 				BSTNode* to_swap_parent = find_parent(to_swap->getData()->getID());
 				BSTNode* to_swap_child = nullptr;
 
-				// if to_swap has 1 child, save it
-				if (to_swap->getRight() == nullptr and to_swap->getLeft() != nullptr){
-					to_swap_child = to_swap->getLeft(); 
-				}
-				else if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
+				// if to_swap has 1 child (it must be right child) save it
+				if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
 					to_swap_child = to_swap->getRight();
-					std::cout << "to_swap_child is " << to_swap_child->getData()->getID() << std::endl;
 				}
 
 				if (to_swap == to_swap_parent->getRight()){
@@ -187,37 +184,33 @@ bool StudentDatabase::deleteBy(int studentID){
 					to_swap_parent->setLeft(nullptr);
 				}
 
+				newbie->setLeft(current->getLeft());
+				// save to_swap_child
+				if (to_swap_child != nullptr){
+					newbie->setRight(to_swap_child);
+				}
+				else {
+					newbie->setRight(current->getRight());
+				}
+
 				delete to_swap;
 
-				newbie->setLeft(current->getLeft());
-				newbie->setRight(current->getRight());
-
+				// root
 				if (previous == nullptr){
 					root = newbie;
-					// insert saved to_swap_child
-					if (to_swap_child != nullptr){
-						std::cout << "to_swap_child being inserted" << std::endl;
-						assert(insert(to_swap_child->getData()) == true);
-					}
-					// delete current
+					delete current;
 					break;
 				}
+				// current is prev left child
 				else if (previous->getLeft() == current){
 					previous->setLeft(newbie);
-					if (to_swap_child != nullptr){
-						std::cout << "to_swap_child being inserted" << std::endl;
-						assert(insert(to_swap_child->getData()) == true);
-					}
-					// delete current;
+					delete current;
 					break;
 				}
+				// current is prev right child
 				else{
 					previous->setRight(newbie);
-					if (to_swap_child != nullptr){
-						std::cout << "to_swap_child being inserted" << std::endl;
-						assert(insert(to_swap_child->getData()) == true);
-					}
-					// delete current;
+					delete current;
 					break;
 				}
 			}

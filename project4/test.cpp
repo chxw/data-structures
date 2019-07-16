@@ -281,25 +281,25 @@ void large_sdatabase_test(){
 
   //deleteBy test1
   assert(studentDatabase->deleteBy(10) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(2) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "2 deleted: " + studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(3) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "3 deleted: " +studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(9) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "9 deleted: " +studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(5) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "5 deleted: " +studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(6) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "6 deleted: " +studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(7) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "7 deleted: " +studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(8) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(9) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(10) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "8 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(1) == true);
+  std::cout << "1 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(4) == true);
+  std::cout << "4 deleted: " +studentDatabase->toStringInOrder() << std::endl;
 
   // std::string result = studentDatabase->toTreeString();
   // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";
