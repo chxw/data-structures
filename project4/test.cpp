@@ -249,7 +249,19 @@ void large_sdatabase_test(){
   Student* s7 = new Student(7, "Johnny", "Depp");
   Student* s8 = new Student(8, "Johnny", "Cash");
   Student* s9 = new Student(9, "June", "Carter");
-  Student* s10 = new Student(10, "Lil", "Nas X");  
+  Student* s10 = new Student(10, "Lil", "Nas X");
+
+  assert(s1->getID() == 1);
+  assert(s2->getID() == 2);
+  assert(s3->getID() == 3);
+  assert(s4->getID() == 4);
+  assert(s5->getID() == 5);
+  assert(s6->getID() == 6);
+  assert(s7->getID() == 7);
+  assert(s8->getID() == 8);
+  assert(s9->getID() == 9);
+  assert(s10->getID() == 10);
+
 
   //insert
   studentDatabase->insert(s5);
@@ -268,25 +280,25 @@ void large_sdatabase_test(){
   std::cout << inOrder << std::endl;
 
   //deleteBy test1
-  assert(studentDatabase->deleteBy(s10->getID()) == true);
+  assert(studentDatabase->deleteBy(10) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s2->getID()) == true);
+  assert(studentDatabase->deleteBy(2) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s3->getID()) == true);
+  assert(studentDatabase->deleteBy(3) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s9->getID()) == true);
+  assert(studentDatabase->deleteBy(9) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s5->getID()) == true);
+  assert(studentDatabase->deleteBy(5) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s6->getID()) == true);
+  assert(studentDatabase->deleteBy(6) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s4->getID()) == true);
+  assert(studentDatabase->deleteBy(7) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s1->getID()) == true);
+  assert(studentDatabase->deleteBy(8) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s8->getID()) == true);
+  assert(studentDatabase->deleteBy(9) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s7->getID()) == true);
+  assert(studentDatabase->deleteBy(10) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
 
   // std::string result = studentDatabase->toTreeString();
@@ -301,7 +313,7 @@ int main(){
   // student_test();
   // course_test();
   // small_sdatabase_test();
-  // large_sdatabase_test();
-  cmanager_test();
+  large_sdatabase_test();
+  // cmanager_test();
   return 0;
 }

@@ -30,10 +30,11 @@ private:
   int num_students;
   BSTNode** arr;
 
+  BSTNode* find_parent(int studentID);
   void inOrderArray(BSTNode* current, BSTNode** arr);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
   BSTNode* min_node(BSTNode* current);
-  void place(BSTNode* current, BSTNode* newbie);
+  bool place(BSTNode* current, BSTNode* newbie);
   BSTNode* delete_current(int key, BSTNode* current, BSTNode* previous);
   std::string inOrder(const BSTNode* current) const;
 };

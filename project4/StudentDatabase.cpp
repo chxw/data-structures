@@ -46,17 +46,17 @@ bool StudentDatabase::insert(Student* student){
 		return true;
 	}
 
-	place(root, newbie);
+	bool result = place(root, newbie);
 	num_students++;
 	
 	// if (num_students >= 3){
 	// 	balance();
 	// }
 
-	return true;
+	return result;
 }
 
-void StudentDatabase::place(BSTNode* current, BSTNode* newbie){
+bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 	// needs to go left
 	if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() != nullptr){
 		place(current->getLeft(), newbie);
@@ -64,6 +64,7 @@ void StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 	// found setLeft place
 	else if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() == nullptr){
 		current->setLeft(newbie);
+		return true;
 	}
 	// needs to go right
 	else if (newbie->getData()->getID() >= current->getData()->getID() and current->getRight() != nullptr){
@@ -72,7 +73,9 @@ void StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 	// found setRight place
 	else if (newbie->getData() >= current->getData() and current->getRight() == nullptr){
 		current->setRight(newbie);
+		return true;
 	}
+	return false;
 }
 
 bool StudentDatabase::deleteBy(int studentID){
@@ -163,38 +166,58 @@ bool StudentDatabase::deleteBy(int studentID){
 			else{
 				BSTNode* to_swap = min_node(current->getRight());
 				Student* data = new Student(*(to_swap->getData()));
-				std::cout << "to_swap data is " << data->toString() << std::endl;
-
 				BSTNode* newbie = new BSTNode(data);
 
-				std::cout << "newbie data is " << newbie->getData()->toString() << std::endl;
+				BSTNode* to_swap_parent = find_parent(to_swap->getData()->getID());
+				BSTNode* to_swap_child = nullptr;
+
+				// if to_swap has 1 child, save it
+				if (to_swap->getRight() == nullptr and to_swap->getLeft() != nullptr){
+					to_swap_child = to_swap->getLeft(); 
+				}
+				else if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
+					to_swap_child = to_swap->getRight();
+					std::cout << "to_swap_child is " << to_swap_child->getData()->getID() << std::endl;
+				}
+
+				if (to_swap == to_swap_parent->getRight()){
+					to_swap_parent->setRight(nullptr);
+				}
+				else if (to_swap == to_swap_parent->getLeft()){
+					to_swap_parent->setLeft(nullptr);
+				}
 
 				delete to_swap;
-				// current->setRight(nullptr);
-				std::cout << "to_swap deleted" << std::endl;
 
-				std::cout << "current data is " << current->getData()->toString() << std::endl;
-				std::cout << "current->getLeft " << current->getLeft()->getData()->toString() << std::endl;
 				newbie->setLeft(current->getLeft());
-				// std::cout << "current->getRight " << current->getRight()->getData()->toString() << std::endl;
 				newbie->setRight(current->getRight());
-
-				// assert(current->getRight() == nullptr);
-				// assert(newbie->getRight() == nullptr);
 
 				if (previous == nullptr){
 					root = newbie;
-					delete current;
+					// insert saved to_swap_child
+					if (to_swap_child != nullptr){
+						std::cout << "to_swap_child being inserted" << std::endl;
+						assert(insert(to_swap_child->getData()) == true);
+					}
+					// delete current
 					break;
 				}
 				else if (previous->getLeft() == current){
 					previous->setLeft(newbie);
-					delete current;
+					if (to_swap_child != nullptr){
+						std::cout << "to_swap_child being inserted" << std::endl;
+						assert(insert(to_swap_child->getData()) == true);
+					}
+					// delete current;
 					break;
 				}
 				else{
 					previous->setRight(newbie);
-					delete current;
+					if (to_swap_child != nullptr){
+						std::cout << "to_swap_child being inserted" << std::endl;
+						assert(insert(to_swap_child->getData()) == true);
+					}
+					// delete current;
 					break;
 				}
 			}
@@ -203,6 +226,29 @@ bool StudentDatabase::deleteBy(int studentID){
 	}
 
 	return true;
+}
+
+BSTNode* StudentDatabase::find_parent(int studentID){
+	BSTNode* parent = nullptr;
+	BSTNode* current = root;
+
+	while (current != nullptr){
+		if (studentID > current->getData()->getID()){
+			parent = current;
+			current = current->getRight();
+		}
+		else if (studentID < current->getData()->getID()){
+			parent = current;
+			current = current->getLeft();
+		}
+		//found
+		else{
+			return parent;
+		}
+	}
+
+	//not found
+	return nullptr;
 }
 
 BSTNode* StudentDatabase::min_node(BSTNode* current){
@@ -287,8 +333,6 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 	order += std::to_string(current->getData()->getID());
 	order += ",";
 	order += inOrder(current->getRight());
-
-	order.pop_back();
 
 	return order;
 }

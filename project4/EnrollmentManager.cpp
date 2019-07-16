@@ -8,7 +8,7 @@ EnrollmentManager::EnrollmentManager(){
 
 EnrollmentManager::EnrollmentManager(int yr, Semester sem){
 	year = yr;
-	semester = sem
+	semester = sem;
 }
 
 EnrollmentManager::EnrollmentManager(const EnrollmentManager& other){
