@@ -170,7 +170,7 @@ bool StudentDatabase::deleteBy(int studentID){
 				std::cout << "newbie data is " << newbie->getData()->toString() << std::endl;
 
 				delete to_swap;
-				current->setRight(nullptr);
+				// current->setRight(nullptr);
 				std::cout << "to_swap deleted" << std::endl;
 
 				std::cout << "current data is " << current->getData()->toString() << std::endl;
@@ -179,8 +179,8 @@ bool StudentDatabase::deleteBy(int studentID){
 				// std::cout << "current->getRight " << current->getRight()->getData()->toString() << std::endl;
 				newbie->setRight(current->getRight());
 
-				assert(current->getRight() == nullptr);
-				assert(newbie->getRight() == nullptr);
+				// assert(current->getRight() == nullptr);
+				// assert(newbie->getRight() == nullptr);
 
 				if (previous == nullptr){
 					root = newbie;
@@ -222,6 +222,7 @@ void StudentDatabase::balance(){
 void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** arr){
 	int index = 0;
 	while (current != nullptr){
+		// no left
 		if (current->getLeft() == nullptr){
 			arr[index] = current;
 			index++;
@@ -232,12 +233,10 @@ void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** arr){
 			while (pre->getRight() != nullptr and pre->getRight() != current){
 				pre = pre->getRight();
 			}
-
 			if (pre->getRight() == nullptr){
 				pre->setRight(current);
 				current = current->getLeft();
 			}
-
 			else {
 				pre->setRight(nullptr);
 				arr[index] = current;

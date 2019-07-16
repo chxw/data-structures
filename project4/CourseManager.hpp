@@ -2,6 +2,7 @@
 #define COURSEMANAGER_HPP
 
 #include <string>
+#include <stdexcept>
 
 #include "Course.hpp"
 
@@ -10,22 +11,25 @@ public:
   CourseManager();
   CourseManager(const CourseManager& other);
   CourseManager& operator=(const CourseManager& other);
-  ~CourseManager();
+  // ~CourseManager();
 
   const Course* searchBy(std::string courseID) const;
   bool add(Course* course);
   bool cancel(std::string courseID);
 
-  bool enroll(int studentID, std::string courseID);
-  bool drop(int studentID, std::string courseID);
-  void dropFromAllCourses(int studentID);
-  std::string getAllEnrolledCoursesStringOf(int studentID);
+  // bool enroll(int studentID, std::string courseID);
+  // bool drop(int studentID, std::string courseID);
+  // void dropFromAllCourses(int studentID);
+  // std::string getAllEnrolledCoursesStringOf(int studentID);
 
-  int getNumberOfCourses() const;
+  // int getNumberOfCourses() const;
   std::string getCourseListString() const;
 
 private:
   //your design
+  Course **array;
+  int size;
+  int capacity;
 };
 
 #endif

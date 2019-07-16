@@ -8,7 +8,7 @@
 #include "Student.hpp"
 #include "StudentDatabase.hpp"
 #include "Course.hpp"
-// #include "CourseManager.hpp"
+#include "CourseManager.hpp"
 // #include "EnrollmentManager.hpp"
 
 void student_test(){
@@ -36,7 +36,7 @@ void student_test(){
 
   assert(student3->toString() == "6 Chelsea Wang");
   assert(student2->toString() == "0 FIRST LAST");
-  
+
   delete student2;
   delete student3;
 }
@@ -106,6 +106,52 @@ void course_test(){
   delete course;
   delete course1;
   delete course2;
+}
+
+void cmanager_test(){
+  CourseManager cm = CourseManager();
+
+  Course* course1 = new Course("COMP-15", 50);
+  Course* course2 = new Course("COMP-16", 50);
+  Course* course3 = new Course("COMP-17", 50);
+  Course* course4 = new Course("COMP-18", 50);
+  Course* course5 = new Course("COMP-19", 50);
+  Course* course6 = new Course("COMP-20", 50);
+  Course* course7 = new Course("COMP-21", 50);
+  Course* course8 = new Course("COMP-22", 50);
+  Course* course9 = new Course("COMP-23", 50);
+
+  // add
+  cm.add(course1);
+  cm.add(course2);
+  cm.add(course3);
+  cm.add(course4);
+  cm.add(course5);
+  cm.add(course6);
+  cm.add(course7);
+  cm.add(course8);
+  cm.add(course9);
+
+  // searchBy
+  assert((cm.searchBy(course9->getID()))->getID() == course9->getID());
+
+  // getCourseListString
+  std::cout << cm.getCourseListString() << std::endl;
+
+  // cancel
+  cm.cancel(course5->getID());
+  std::cout << "delete comp-19 \n" + cm.getCourseListString() << std::endl;
+  cm.cancel(course2->getID());
+  std::cout << "delete comp-16 \n" + cm.getCourseListString() << std::endl;
+  cm.cancel(course1->getID());
+  std::cout << "delete comp-15 \n" + cm.getCourseListString() << std::endl;
+  cm.cancel(course9->getID());
+  std::cout << "delete comp-23 \n" + cm.getCourseListString() << std::endl;
+
+  for (int i = 0; i < 50; i++){
+    cm.enroll(i, course3->getID());
+  }
+
 }
 
 void small_sdatabase_test(){
@@ -234,7 +280,8 @@ void large_sdatabase_test(){
 int main(){
   // student_test();
   // course_test();
-  small_sdatabase_test();
-  large_sdatabase_test();
+  // small_sdatabase_test();
+  // large_sdatabase_test();
+  cmanager_test();
   return 0;
 }
