@@ -330,6 +330,41 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 	return order;
 }
 
-// std::string StudentDatabase::toTreeString() const{
+std::string StudentDatabase::toTreeString() const{
+	return preOrder(root);
+}
 
-// }
+
+std::string StudentDatabase::preOrder(const BSTNode* current) const{
+	std::string order;
+
+	if (current == nullptr){
+		return "";
+	}
+
+	// node
+	if (current->getLeft() == nullptr){
+		order += "[]";
+	}
+	else {
+		order += "[";
+	}
+	order += "("+current->getData()->toString()+")";
+	if (current->getRight() == nullptr){
+		order += "[]";
+	}
+	else {
+		order += "]";
+	}
+
+	// left
+	order += "[";
+	order += preOrder(current->getLeft());
+	order += "]";
+	// right
+	order += "[";
+	order += preOrder(current->getRight());
+	order += "]";
+
+	return order;
+}

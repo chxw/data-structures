@@ -23,13 +23,14 @@ public:
   bool isEmpty() const;
   int getNumberOfStudents() const;
   std::string toStringInOrder() const;
-  // std::string toTreeString() const;
+  std::string toTreeString() const;
 
 private:
   BSTNode* root;
   int num_students;
   BSTNode** arr;
 
+  std::string preOrder(const BSTNode* current) const;
   BSTNode* find_parent(int studentID);
   void inOrderArray(BSTNode* current, BSTNode** arr);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);

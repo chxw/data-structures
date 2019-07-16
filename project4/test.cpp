@@ -279,6 +279,10 @@ void large_sdatabase_test(){
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
 
+  //toTreeString
+
+  std::cout << studentDatabase->toTreeString();
+
   //deleteBy test1
   assert(studentDatabase->deleteBy(10) == true);
   std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
