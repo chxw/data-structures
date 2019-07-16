@@ -25,6 +25,7 @@ BSTNode& BSTNode::operator=(const BSTNode& other){
 
 BSTNode::~BSTNode(){
 	delete data;
+	data = nullptr;
 	left = nullptr;
 	right = nullptr;
 }

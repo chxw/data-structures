@@ -49,9 +49,9 @@ bool StudentDatabase::insert(Student* student){
 	place(root, newbie);
 	num_students++;
 	
-	if (num_students >= 3){
-		balance();
-	}
+	// if (num_students >= 3){
+	// 	balance();
+	// }
 
 	return true;
 }
@@ -80,47 +80,129 @@ bool StudentDatabase::deleteBy(int studentID){
 		return false;
 	}
 
-	root = delete_current(studentID, root, nullptr);
-	return true;
-}
+	BSTNode* previous = nullptr;
+	BSTNode* current = root;
 
-BSTNode* StudentDatabase::delete_current(int key, BSTNode* current, BSTNode* previous){
-	if (key < current->getData()->getID()){
-		current = delete_current(key, current->getRight(), current);
-	}
-	else if (key < current->getData()->getID()){
-		current = delete_current(key, current->getLeft(), current);
-	}
-	else{
-		// current is leaf
-		if (current->getLeft() == nullptr and current->getRight() == nullptr){
-			return nullptr;
+	while (true){
+		// go right
+		if (studentID > current->getData()->getID()){
+			previous = current;
+			current = current->getRight();
 		}
-		// current only has right node
-		else if (current->getLeft() == nullptr){
-			return current->getRight();
+		// go left
+		else if (studentID < current->getData()->getID()){
+			previous = current;
+			current = current->getLeft();
 		}
-		// current only has left node
-		else if (current->getRight() == nullptr){
-			return current->getLeft();
-		}
+		// found
 		else{
-			BSTNode* min;
-			min = min_node(current->getRight());
-			Student* s_temp = new Student(*(min->getData()));
-			BSTNode* temp = new BSTNode(s_temp);
-			if (previous != nullptr){
-				if (previous->getRight() == current){
-					previous->setRight(temp);
+			// current is leaf
+			if (current->getLeft() == nullptr and current->getRight() == nullptr){
+				// root
+				if (previous == nullptr){
+					delete root;
+					root = nullptr;
+					break;
 				}
+				// current is prev left child
+				else if (previous->getLeft() == current){
+					delete current;
+					previous->setLeft(nullptr);
+					break;
+				}
+				// current is prev right child
 				else{
-					previous->setLeft(temp);
+					delete current;
+					previous->setRight(nullptr);
+					break;
 				}
 			}
-			delete_current(current->getData()->getID(), current->getRight(), current);
+			// current only has right child
+			else if (current->getLeft() == nullptr){
+				// root
+				if (previous == nullptr){
+					root = current->getRight();
+					delete current;
+					break;
+				}
+				// current is prev left child
+				else if (previous->getLeft() == current){
+					previous->setLeft(current->getRight());
+					delete current;
+					break;
+				}
+				// current is prev right child
+				else{
+					previous->setRight(current->getRight());
+					delete current;
+					break;
+				}
+			}
+			// current only has left child
+			else if (current->getRight() == nullptr){
+				// root
+				if (previous == nullptr){
+					root = current->getRight();
+					delete current;
+					break;
+				}
+				// current is prev left child
+				else if (previous->getLeft() == current){
+					previous->setLeft(current->getLeft());
+					delete current;
+					break;
+				}
+				// current is prev right child
+				else{
+					previous->setRight(current->getLeft());
+					delete current;
+					break;
+				}
+			}
+			// current has both children
+			else{
+				BSTNode* to_swap = min_node(current->getRight());
+				Student* data = new Student(*(to_swap->getData()));
+				std::cout << "to_swap data is " << data->toString() << std::endl;
+
+				BSTNode* newbie = new BSTNode(data);
+
+				std::cout << "newbie data is " << newbie->getData()->toString() << std::endl;
+
+				delete to_swap;
+				current->setRight(nullptr);
+				std::cout << "to_swap deleted" << std::endl;
+
+				std::cout << "current data is " << current->getData()->toString() << std::endl;
+				std::cout << "current->getLeft " << current->getLeft()->getData()->toString() << std::endl;
+				newbie->setLeft(current->getLeft());
+				// std::cout << "current->getRight " << current->getRight()->getData()->toString() << std::endl;
+				newbie->setRight(current->getRight());
+
+				assert(current->getRight() == nullptr);
+				assert(newbie->getRight() == nullptr);
+
+				if (previous == nullptr){
+					root = newbie;
+					delete current;
+					break;
+				}
+				else if (previous->getLeft() == current){
+					previous->setLeft(newbie);
+					delete current;
+					break;
+				}
+				else{
+					previous->setRight(newbie);
+					delete current;
+					break;
+				}
+			}
+
 		}
 	}
-	return current;
+
+	return true;
 }
 
 BSTNode* StudentDatabase::min_node(BSTNode* current){

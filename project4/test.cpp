@@ -33,6 +33,10 @@ void student_test(){
 
   delete student;
   delete student1;
+
+  assert(student3->toString() == "6 Chelsea Wang");
+  assert(student2->toString() == "0 FIRST LAST");
+  
   delete student2;
   delete student3;
 }
@@ -144,7 +148,7 @@ void small_sdatabase_test(){
   assert(studentDatabase->searchBy(0) == nullptr);
 
   //deleteBy test1
-  assert(studentDatabase->deleteBy(s1->getID()) == true);
+  studentDatabase->deleteBy(s1->getID());
   std::cout << studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(s2->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
@@ -198,14 +202,14 @@ void large_sdatabase_test(){
   std::cout << inOrder << std::endl;
 
   //deleteBy test1
-  // assert(studentDatabase->deleteBy(s10->getID()) == true);
-  //std::cout << studentDatabase->toStringInOrder() << std::endl;
-  //assert(studentDatabase->deleteBy(s2->getID()) == true);
-  //std::cout << studentDatabase->toStringInOrder() << std::endl;
-  //assert(studentDatabase->deleteBy(s3->getID()) == true);
-  //std::cout << studentDatabase->toStringInOrder() << std::endl;
-  //assert(studentDatabase->deleteBy(s9->getID()) == true);
-  //std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s10->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s2->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s3->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  assert(studentDatabase->deleteBy(s9->getID()) == true);
+  std::cout << studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(s5->getID()) == true);
   std::cout << studentDatabase->toStringInOrder() << std::endl;
   assert(studentDatabase->deleteBy(s6->getID()) == true);
@@ -228,8 +232,8 @@ void large_sdatabase_test(){
 }
 
 int main(){
-  student_test();
-  course_test();
+  // student_test();
+  // course_test();
   small_sdatabase_test();
   large_sdatabase_test();
   return 0;
