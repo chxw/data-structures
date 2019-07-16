@@ -49,9 +49,9 @@ bool StudentDatabase::insert(Student* student){
 	place(root, newbie);
 	num_students++;
 	
-	// if (num_students >= 3){
-	// 	balance();
-	// }
+	if (num_students >= 3){
+		balance();
+	}
 
 	return true;
 }
@@ -76,31 +76,51 @@ void StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 }
 
 bool StudentDatabase::deleteBy(int studentID){
-	BSTNode* previous = nullptr;
-	BSTNode* current = root;
+	if (searchBy(studentID) == nullptr){
+		return false;
+	}
 
-	std::cout << "root is " << root->getData()->getID() << std::endl;
-	std::cout << "to delete " << studentID << std::endl;
+	root = delete_current(studentID, root, nullptr);
+	return true;
+}
 
-	while (current != nullptr){
-		if (studentID > current->getData()->getID()){
-			previous = current;
-			current = current->getRight();
+BSTNode* StudentDatabase::delete_current(int key, BSTNode* current, BSTNode* previous){
+	if (key < current->getData()->getID()){
+		current = delete_current(key, current->getRight(), current);
+	}
+	else if (key < current->getData()->getID()){
+		current = delete_current(key, current->getLeft(), current);
+	}
+	else{
+		// current is leaf
+		if (current->getLeft() == nullptr and current->getRight() == nullptr){
+			return nullptr;
 		}
-		else if (studentID < current->getData()->getID()){
-			previous = current;
-			current = current->getLeft();
+		// current only has right node
+		else if (current->getLeft() == nullptr){
+			return current->getRight();
 		}
-		//found
+		// current only has left node
+		else if (current->getRight() == nullptr){
+			return current->getLeft();
+		}
 		else{
-			delete_current(previous, current);
-			num_students--;
-			return true;
+			BSTNode* min;
+			min = min_node(current->getRight());
+			Student* s_temp = new Student(*(min->getData()));
+			BSTNode* temp = new BSTNode(s_temp);
+			if (previous != nullptr){
+				if (previous->getRight() == current){
+					previous->setRight(temp);
+				}
+				else{
+					previous->setLeft(temp);
+				}
+			}
+			delete_current(current->getData()->getID(), current->getRight(), current);
 		}
 	}
-	//not found
-	return false;
-
+	return current;
 }
 
 BSTNode* StudentDatabase::min_node(BSTNode* current){
@@ -108,117 +128,6 @@ BSTNode* StudentDatabase::min_node(BSTNode* current){
 		current = current->getLeft();
 
 	return current;
-}
-
-void StudentDatabase::delete_current(BSTNode* previous, BSTNode* current){
-	// delete root
-	if (previous == nullptr){
-		// leaf current
-		if(current->getLeft() == nullptr and current->getRight() == nullptr){
-			root = nullptr;
-		}
-		// current only has left child
-		else if(current->getRight() == nullptr){
-			root = current->getLeft();
-		}
-		// current only has right child
-		else if (current->getLeft() == nullptr){
-			root = current->getRight();
-		}
-		else{
-			BSTNode* to_swap = min_node(current->getRight());
-			Student* s_temp = new Student(*(to_swap->getData()));
-			BSTNode* temp = new BSTNode(s_temp);
-			temp->setRight(current->getRight());
-			temp->setLeft(current->getLeft());
-			root = temp;
-			std::cout << "here";
-			delete to_swap;
-		}
-		delete current;
-	}
-	// current is previous right child
-	else if (previous->getRight() == current){
-		//leaf current
-		if (current->getLeft() == nullptr and current->getRight() == nullptr){
-			previous->setRight(nullptr);
-		}
-		//current only has left child
-		else if (current->getRight() == nullptr){
-			previous->setRight(current->getLeft());
-		}
-		// current only has right child
-		else if (current->getLeft() == nullptr){
-			previous->setRight(current->getLeft());
-		}
-		// current has both children
-		else {
-			// current is right child
-			if (previous->getRight() == current){
-				relink(previous, current, min_node(current->getRight()));
-				return;
-			}
-			// current is left child
-			else {
-				relink(previous, current, min_node(current->getRight()));
-				return;
-			}
-		}
-		delete current;
-	}
-	//current is previous left child
-	else{
-		//leaf current
-		if (current->getLeft() == nullptr and current->getRight() == nullptr){
-			previous->setLeft(nullptr);
-		}
-		//current only has left child
-		else if (current->getRight() == nullptr){
-			previous->setLeft(current->getLeft());
-		}
-		// current only has right child
-		else if (current->getLeft() == nullptr){
-			previous->setLeft(current->getLeft());
-		}
-		else {
-			// current is right child
-			if (previous->getRight() == current){
-				relink(previous, current, min_node(current->getRight()));
-				return;
-			}
-			// current is left child
-			else {
-				relink(previous, current, min_node(current->getRight()));
-				return;
-			}
-		}
-		delete current;
-	}
-}
-
-void StudentDatabase::relink(BSTNode* previous, BSTNode* current, BSTNode* to_swap){
-	//to_swap always a leaf
-	if (to_swap != nullptr){
-		Student* s_temp = new Student(*(to_swap->getData()));
-		BSTNode* temp = new BSTNode(s_temp);
-		temp->setRight(current->getRight());
-		temp->setLeft(current->getLeft());
-		delete to_swap;
-		to_swap = temp;
-		temp = nullptr;
-	} 
-
-	//find where to_swap can replace current
-	if(previous->getRight() == current){
-		previous->setRight(to_swap);
-	}
-	else{
-		previous->setLeft(to_swap);
-	}
-
-	std::cout << toStringInOrder() << std::endl;
-
-	delete current;
 }
 
 void StudentDatabase::balance(){
