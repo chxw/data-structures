@@ -262,7 +262,6 @@ void large_sdatabase_test(){
   assert(s9->getID() == 9);
   assert(s10->getID() == 10);
 
-
   //insert
   studentDatabase->insert(s5);
   studentDatabase->insert(s2);
@@ -280,8 +279,7 @@ void large_sdatabase_test(){
   std::cout << inOrder << std::endl;
 
   //toTreeString
-
-  std::cout << studentDatabase->toTreeString();
+  std::cout << studentDatabase->toTreeString() << std::endl;
 
   //deleteBy test1
   assert(studentDatabase->deleteBy(10) == true);
@@ -316,7 +314,7 @@ void large_sdatabase_test(){
 int main(){
   // student_test();
   // course_test();
-  // small_sdatabase_test();
+  small_sdatabase_test();
   large_sdatabase_test();
   // cmanager_test();
   return 0;

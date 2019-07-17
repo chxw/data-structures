@@ -30,8 +30,9 @@ private:
   int num_students;
   BSTNode** arr;
 
-  std::string preOrder(const BSTNode* current) const;
-  BSTNode* find_parent(int studentID);
+  std::string preOrder(const BSTNode* current, int depth) const;
+  BSTNode* find_parent(BSTNode* child) const;
+  int find_depth(const BSTNode* node) const;
   void inOrderArray(BSTNode* current, BSTNode** arr);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
   BSTNode* min_node(BSTNode* current);

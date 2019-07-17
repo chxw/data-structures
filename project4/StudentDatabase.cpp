@@ -1,5 +1,5 @@
 #include "StudentDatabase.hpp"
-#include <math.h>
+#include <stack>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -102,7 +102,6 @@ bool StudentDatabase::deleteBy(int studentID){
 			if (current->getLeft() == nullptr and current->getRight() == nullptr){
 				// root
 				if (previous == nullptr){
-					std::cout << "root to be deleted is " << root->getData()->getID() << std::endl;
 					delete root;
 					root = nullptr;
 					break;
@@ -115,7 +114,6 @@ bool StudentDatabase::deleteBy(int studentID){
 				}
 				// current is prev right child
 				else{
-					std::cout << "leaf current about to be deleted is " << current->getData()->getID() << std::endl;
 					delete current;
 					previous->setRight(nullptr);
 					break;
@@ -146,7 +144,7 @@ bool StudentDatabase::deleteBy(int studentID){
 			else if (current->getRight() == nullptr){
 				// root
 				if (previous == nullptr){
-					root = current->getRight();
+					root = current->getLeft();
 					delete current;
 					break;
 				}
@@ -169,10 +167,10 @@ bool StudentDatabase::deleteBy(int studentID){
 				Student* data = new Student(*(to_swap->getData()));
 				BSTNode* newbie = new BSTNode(data);
 
-				BSTNode* to_swap_parent = find_parent(to_swap->getData()->getID());
+				BSTNode* to_swap_parent = find_parent(to_swap);
 				BSTNode* to_swap_child = nullptr;
 
-				// if to_swap has 1 child (it must be right child) save it
+				// if to_swap has 1 child (it must be right child), save it
 				if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
 					to_swap_child = to_swap->getRight();
 				}
@@ -221,7 +219,8 @@ bool StudentDatabase::deleteBy(int studentID){
 	return true;
 }
 
-BSTNode* StudentDatabase::find_parent(int studentID){
+BSTNode* StudentDatabase::find_parent(BSTNode* child) const{
+	int studentID = child->getData()->getID();
 	BSTNode* parent = nullptr;
 	BSTNode* current = root;
 
@@ -256,6 +255,7 @@ void StudentDatabase::balance(){
 	inOrderArray(root, arr);
 	int size = sizeof(arr) / sizeof(arr[0]);
 	createBalancedTree(arr, 0, size-1);
+	delete [] arr;
 }
 
 void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** arr){
@@ -331,36 +331,64 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 }
 
 std::string StudentDatabase::toTreeString() const{
-	return preOrder(root);
+	if (root == nullptr){
+		return "[]";
+	}
+	return preOrder(root, 0);
 }
 
+int StudentDatabase::find_depth(const BSTNode* node) const{
+	int studentID = node->getData()->getID();
+	BSTNode* current = root;
+	int depth = 0;
 
-std::string StudentDatabase::preOrder(const BSTNode* current) const{
+	while (current != nullptr){
+		if (studentID > current->getData()->getID()){
+			current = current->getRight();
+			depth++;
+		}
+		else if (studentID < current->getData()->getID()){
+			current = current->getLeft();
+			depth++;
+		}
+		//found
+		else{
+			return depth;
+		}
+	}
+
+	//not found
+	return -1;
+}
+
+std::string StudentDatabase::preOrder(const BSTNode* current, int depth) const{
 	std::string order;
 
 	if (current == nullptr){
-		return "";
-	}
-
-	// node
-	if (current->getLeft() == nullptr){
 		order += "[]";
-	}
-	else {
-		order += "[";
-	}
-	order += "("+current->getData()->toString()+")";
-	if (current->getRight() == nullptr){
-		order += "[]";
-	}
-	else {
-		order += "]";
+		return order;
 	}
 
 	// left
-	order += preOrder(current->getLeft());
+	order += preOrder(current->getLeft(), depth);
+
+	// node
+	if (current->getLeft() == nullptr){
+		depth = find_depth(current);
+	}
+	else{
+		order += "]";
+	}
+	order += "("+current->getData()->toString()+")";
+	if (current->getRight() == nullptr){
+		depth = find_depth(current);
+	}
+	else{
+		order += "[";
+	}
+
 	// right
-	order += preOrder(current->getRight());
+	order += preOrder(current->getRight(), depth);
 
 	return order;
 }
