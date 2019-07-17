@@ -25,11 +25,13 @@ public:
   std::string toStringInOrder() const;
   std::string toTreeString() const;
 
+  void printTree() const;
+
 private:
   BSTNode* root;
   int num_students;
   BSTNode** arr;
-
+  void postOrder(const BSTNode* current, int indent) const;
   std::string preOrder(const BSTNode* current, int depth) const;
   BSTNode* find_parent(BSTNode* child) const;
   int find_depth(const BSTNode* node) const;

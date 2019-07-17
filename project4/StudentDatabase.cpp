@@ -1,5 +1,5 @@
 #include "StudentDatabase.hpp"
-#include <stack>
+#include <iomanip>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -399,4 +399,26 @@ std::string StudentDatabase::preOrder(const BSTNode* current, int depth) const{
 	order += preOrder(current->getRight(), depth);
 
 	return order;
+}
+
+void StudentDatabase::printTree() const{
+	postOrder(root, 0);
+}
+
+void StudentDatabase::postOrder(const BSTNode* current, int indent) const{
+	if (current == nullptr){
+		return;
+	}
+
+	indent += 10;
+
+	postOrder(current->getRight(), indent);
+
+	std::cout << std::endl;
+	for (int i = 10; i < indent; i++){
+		std::cout << " ";
+	}
+	std::cout << current->getData()->getID() << "\n";
+
+	postOrder(current->getLeft(), indent);
 }

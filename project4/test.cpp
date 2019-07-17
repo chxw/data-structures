@@ -204,8 +204,12 @@ void small_sdatabase_test(){
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
 
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
   //balance
   studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
   //searchBy
   const Student* ptr = studentDatabase->searchBy(s1->getID());
@@ -296,6 +300,13 @@ void large_sdatabase_test(){
   //inOrder traversal
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
+
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  //balance
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
   //toTreeString
   std::cout << studentDatabase->toTreeString() << std::endl;
