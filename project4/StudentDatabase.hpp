@@ -31,6 +31,9 @@ private:
   BSTNode* root;
   int num_students;
   BSTNode** arr;
+
+  bool isBalanced();
+  bool checkBalance(BSTNode* current);
   void postOrder(const BSTNode* current, int indent) const;
   std::string preOrder(const BSTNode* current, int depth) const;
   BSTNode* find_parent(BSTNode* child) const;
