@@ -384,7 +384,14 @@ std::string StudentDatabase::toTreeString() const{
 	if (root == nullptr){
 		return "[]";
 	}
-	return preOrder(root, 0);
+
+	std::string s = "";
+
+	printString(root->getLeft(), s);
+	s += "("+root->getData()->toString()+")";
+	printString(root->getRight(), s);
+
+	return s;
 }
 
 int StudentDatabase::find_depth(const BSTNode* node) const{
@@ -411,36 +418,25 @@ int StudentDatabase::find_depth(const BSTNode* node) const{
 	return -1;
 }
 
-std::string StudentDatabase::preOrder(const BSTNode* current, int depth) const{
-	std::string order;
-
+std::string StudentDatabase::printString(const BSTNode* current, std::string& s) const{
 	if (current == nullptr){
-		order += "[]";
-		return order;
+		return "";
 	}
 
 	// left
-	order += preOrder(current->getLeft(), depth);
+	s += "[";
+	s += printString(current->getLeft(), s);
+	s += "]";
 
 	// node
-	if (current->getLeft() == nullptr){
-		depth = find_depth(current);
-	}
-	else{
-		order += "]";
-	}
-	order += "("+current->getData()->toString()+")";
-	if (current->getRight() == nullptr){
-		depth = find_depth(current);
-	}
-	else{
-		order += "[";
-	}
+	s += "("+current->getData()->toString()+")";
 
 	// right
-	order += preOrder(current->getRight(), depth);
+	s += "[";
+	s += printString(current->getRight(), s);
+	s += "]";
 
-	return order;
+	return s;
 }
 
 void StudentDatabase::printTree() const{

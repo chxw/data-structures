@@ -35,7 +35,7 @@ private:
   bool isBalanced();
   bool checkBalance(BSTNode* current);
   void postOrder(const BSTNode* current, int indent) const;
-  std::string preOrder(const BSTNode* current, int depth) const;
+  std::string printString(const BSTNode* current, std::string& s) const;
   BSTNode* find_parent(BSTNode* child) const;
   int find_depth(const BSTNode* node) const;
   void inOrderArray(BSTNode* current, BSTNode** arr);
