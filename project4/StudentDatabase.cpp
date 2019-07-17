@@ -1,5 +1,6 @@
 #include "StudentDatabase.hpp"
 #include <iomanip>
+#include <cstdlib>
 
 StudentDatabase::StudentDatabase(){
 	root = nullptr;
@@ -249,6 +250,30 @@ BSTNode* StudentDatabase::min_node(BSTNode* current){
 		current = current->getLeft();
 
 	return current;
+}
+
+bool isBalanced(){
+	return checkBalance(root);
+}
+
+bool checkBalance(BSTNode* current){
+	// empty tree is balanced
+	if (current == nullptr){
+		return true;
+	}
+
+	int leftDepth = find_depth(root->getLeft());
+	int rightDepth = find_depth(root->getRight());
+
+	// balanced tree def'n:
+	// 1. difference between depth of left and right subtrees is <= 1
+	// 2. left subtree balanced
+	// 3. right subtree balanced
+	if (abs(leftDepth - rightDepth) <= 1 and checkBalance(current->getLeft()) and checkBalance(current->getRight())){
+		return true;
+	}
+
+	return false;
 }
 
 void StudentDatabase::balance(){
