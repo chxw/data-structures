@@ -188,15 +188,24 @@ void small_sdatabase_test(){
 
   //insert
   studentDatabase->insert(s2);
+  assert(studentDatabase->getNumberOfStudents() == 1);
   studentDatabase->insert(s1);
+  assert(studentDatabase->getNumberOfStudents() == 2);
   studentDatabase->insert(s3);
+  assert(studentDatabase->getNumberOfStudents() == 3);
   studentDatabase->insert(s4);
+  assert(studentDatabase->getNumberOfStudents() == 4);
   studentDatabase->insert(s5);
+  assert(studentDatabase->getNumberOfStudents() == 5);
   studentDatabase->insert(s6);
+  assert(studentDatabase->getNumberOfStudents() == 6);
 
   //inOrder traversal
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
+
+  //balance
+  studentDatabase->balance();
 
   //searchBy
   const Student* ptr = studentDatabase->searchBy(s1->getID());
@@ -264,15 +273,25 @@ void large_sdatabase_test(){
 
   //insert
   studentDatabase->insert(s5);
+  assert(studentDatabase->getNumberOfStudents() == 1);
   studentDatabase->insert(s2);
+  assert(studentDatabase->getNumberOfStudents() == 2);
   studentDatabase->insert(s1);
+  assert(studentDatabase->getNumberOfStudents() == 3);
   studentDatabase->insert(s3);
+  assert(studentDatabase->getNumberOfStudents() == 4);
   studentDatabase->insert(s10);
+  assert(studentDatabase->getNumberOfStudents() == 5);
   studentDatabase->insert(s4);
+  assert(studentDatabase->getNumberOfStudents() == 6);
   studentDatabase->insert(s6);
+  assert(studentDatabase->getNumberOfStudents() == 7);
   studentDatabase->insert(s8);
+  assert(studentDatabase->getNumberOfStudents() == 8);
   studentDatabase->insert(s7);
+  assert(studentDatabase->getNumberOfStudents() == 9);
   studentDatabase->insert(s9);
+  assert(studentDatabase->getNumberOfStudents() == 10);
 
   //inOrder traversal
   std::string inOrder = studentDatabase->toStringInOrder();

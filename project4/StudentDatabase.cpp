@@ -43,6 +43,7 @@ bool StudentDatabase::insert(Student* student){
 
 	if (isEmpty()){
 		root = newbie;
+		num_students++;
 		return true;
 	}
 
@@ -254,6 +255,13 @@ void StudentDatabase::balance(){
 	BSTNode** arr = new BSTNode*[num_students];
 	inOrderArray(root, arr);
 	int size = sizeof(arr) / sizeof(arr[0]);
+
+	std::cout << "balance fcn " << std::endl;
+	for (int i = 0; i < num_students; i++){
+		std::cout << arr[i]->getData()->getID() << " ";
+	}
+	std::cout << std::endl;
+
 	createBalancedTree(arr, 0, size-1);
 	delete [] arr;
 }
