@@ -48,10 +48,6 @@ bool StudentDatabase::insert(Student* student){
 	}
 
 	return place(root, newbie);
-	
-	// if (num_students >= 3){
-	// 	balance();
-	// }
 }
 
 bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
@@ -82,6 +78,10 @@ bool StudentDatabase::deleteBy(int studentID){
 	if (searchBy(studentID) == nullptr){
 		return false;
 	}
+
+	// if (num_students >= 3){
+	// 	balance();
+	// }
 
 	BSTNode* previous = nullptr;
 	BSTNode* current = root;
@@ -171,7 +171,7 @@ bool StudentDatabase::deleteBy(int studentID){
 				BSTNode* to_swap_parent = find_parent(to_swap);
 				BSTNode* to_swap_child = nullptr;
 
-				// if to_swap has 1 child (it must be right child), save it
+				// if to_swap has 1 child (it must be right child since to_swap is right subtree min_node), save it
 				if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
 					to_swap_child = to_swap->getRight();
 				}
@@ -255,12 +255,6 @@ void StudentDatabase::balance(){
 	BSTNode** arr = new BSTNode*[num_students];
 	inOrderArray(root, arr);
 	// int size = sizeof(arr) / sizeof(arr[0]);
-
-	std::cout << "balance fcn " << std::endl;
-	for (int i = 0; i < num_students; i++){
-		std::cout << arr[i]->getData()->getID() << " ";
-	}
-	std::cout << std::endl;
 
 	// for (int i = 0; i < num_students; i++){
 	// 	arr[i]->setLeft(nullptr);
