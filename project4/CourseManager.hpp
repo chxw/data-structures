@@ -30,6 +30,8 @@ private:
   Course **array;
   int size;
   int capacity;
+
+  void expand();
 };
 
 #endif

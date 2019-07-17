@@ -37,13 +37,24 @@ bool CourseManager::add(Course* course){
 		return false;
 	}
 	if (size == capacity){
-		throw std::runtime_error("Not Valid");
+		expand();
 	}
 
 	array[size] = course;
 	size++;
 
 	return true;
+}
+
+void CourseManager::expand(){
+	capacity = capacity*2;
+	Course **temp = new Course*[capacity];
+	for (int i = 0; i < capacity/2; i++){
+		temp[i] = array[i];
+	}
+	delete [] array;
+	array = temp;
+	temp = nullptr;
 }
 
 bool CourseManager::cancel(std::string courseID){
