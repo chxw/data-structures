@@ -1,12 +1,13 @@
 #include <cassert>
 #include <string>
+#include <iostream>
 
 #include "hasher.hpp"
 
 void test1(){
   std::string key;
 
-  cin >> key;
+  std::cin >> key;
 
   if (key == ""){
   	return;
