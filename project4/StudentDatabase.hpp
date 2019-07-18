@@ -11,9 +11,9 @@
 class StudentDatabase{
 public:
   StudentDatabase();
-  // StudentDatabase(const StudentDatabase& other);
+  StudentDatabase(const StudentDatabase& other);
   StudentDatabase& operator=(const StudentDatabase& other);
-  // ~StudentDatabase();
+  ~StudentDatabase();
 
   const Student* searchBy(int studentID) const;
   bool insert(Student* student);
@@ -31,6 +31,8 @@ private:
   BSTNode* root;
   BSTNode** arr;
   int num_students;
+
+  void destruct(BSTNode* current);
 
   bool isBalanced();
   bool checkBalance(BSTNode* current);

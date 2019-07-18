@@ -7,17 +7,28 @@ StudentDatabase::StudentDatabase(){
 	num_students = 0;
 }
 
-// StudentDatabase::StudentDatabase(const StudentDatabase& other){
-
-// }
+StudentDatabase::StudentDatabase(const StudentDatabase& other){
+	throw std::runtime_error("Not Implemented");
+}
 
 StudentDatabase& StudentDatabase::operator=(const StudentDatabase& other){
 	throw std::runtime_error("Not Implemented");
 }
 
-// StudentDatabase::~StudentDatabase(){
+StudentDatabase::~StudentDatabase(){
+	destruct(root);
+}
 
-// }
+void StudentDatabase::destruct(BSTNode* current){
+	if (current == nullptr){
+		return;
+	}
+
+	destruct(current->getLeft());
+	destruct(current->getRight());
+	delete current;
+
+}
 
 const Student* StudentDatabase::searchBy(int studentID) const{
 	BSTNode* current = root;

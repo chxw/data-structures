@@ -6,7 +6,7 @@ Chelsea Wang
 7/12: start student database class: default, assignment, destructor, searchBy, insert, isEmpty(), gets, and inOrder, testing all the way
 7/13-7/14: out of town
 7/15-7/17: finish SD fcns: deleteBy(), testing rigorously until satisfied with tests. finish course manager.
-7/18: finish SD class: balance().
+7/18: finish SD class: balance(), destructor. clean up classes.
 7/19: finish  enrollment manager.
 7/20: full day of clean testing, writing README.md, checking to make sure specs are satisfied
 7/21: P4 due
