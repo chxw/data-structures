@@ -20,16 +20,16 @@ public:
   EnrollmentManager& operator=(const EnrollmentManager& other);
   // ~EnrollmentManager();
 
-  // bool registerStudent(int studentID, std::string firstName, std::string lastName);
+  bool registerStudent(int studentID, std::string firstName, std::string lastName);
   // bool unregisterStudent(int studentID);
 
-  // bool addCourse(std::string courseID, int capacity);
+  bool addCourse(std::string courseID, int capacity);
   // bool cancelCourse(std::string courseID);
 
   // bool enroll(int studentID, std::string courseID);
   // bool drop(int studentID, std::string courseID);
 
-  // std::string reportSummary() const;
+  std::string reportSummary() const;
   // std::string report(int studentID) const;
   // std::string report(std::string courseID) const;
 
@@ -40,6 +40,9 @@ private:
   //your design
   int year;
   Semester semester;
+
+  StudentDatabase* sd;
+  CourseManager* cm;
 };
 
 #endif

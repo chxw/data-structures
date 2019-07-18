@@ -7,6 +7,9 @@ Student::Student(){
 }
 
 Student::Student(int given_id, std::string firstName, std::string lastName){
+	if (id < 0 or firstName.length() == 0 or lastName.length() == 0){
+		throw std::runtime_error("Not Valid");
+	}
 	id = given_id;
 	first = firstName;
 	last = lastName;
