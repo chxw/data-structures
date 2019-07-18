@@ -5,9 +5,7 @@
 #include "hasher.hpp"
 
 void test1(){
-  std::string key;
-
-  std::cin >> key;
+  std::string key = "Comp15";
 
   if (key == ""){
   	return;
@@ -15,11 +13,9 @@ void test1(){
 
   unsigned int hashCode = generateHashCodeOf(key);
 
-  std::cout << "h = " << hashCode << std::endl;
+  unsigned int expected = 13226;
 
-  // unsigned int expected = 0;  You will need to change this. 
-
-  // assert(hashCode == expected);
+  assert(hashCode == expected);
 }
 
 int main(){
