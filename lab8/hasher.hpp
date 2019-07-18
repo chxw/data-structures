@@ -3,6 +3,8 @@
 
 #include <string>
 
-unsigned int generateHashCodeOf(const std::string& key);
+unsigned int generateHashCodeOf(const std::string& key){
+	
+}
 
 #endif
