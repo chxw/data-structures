@@ -34,15 +34,20 @@ private:
 
   bool isBalanced();
   bool checkBalance(BSTNode* current);
+
   void postOrder(const BSTNode* current, int indent) const;
-  std::string printString(const BSTNode* current, std::string& s) const;
+  void printString(const BSTNode* current, std::string& s) const;
+
   BSTNode* find_parent(BSTNode* child) const;
   int find_depth(const BSTNode* node) const;
+
   void inOrderArray(BSTNode* current, BSTNode** arr);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
+
   BSTNode* min_node(BSTNode* current);
   bool place(BSTNode* current, BSTNode* newbie);
   BSTNode* delete_current(int key, BSTNode* current, BSTNode* previous);
+
   std::string inOrder(const BSTNode* current) const;
 };
 

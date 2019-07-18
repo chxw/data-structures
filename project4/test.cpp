@@ -206,7 +206,7 @@ void small_sdatabase_test(){
 
   // std::cout << "before " << std::endl;
   // studentDatabase->printTree();
-  // //balance
+  
   // studentDatabase->balance();
   // std::cout << "after " << std::endl;
   // studentDatabase->printTree();
@@ -301,106 +301,95 @@ void large_sdatabase_test(){
   std::string inOrder = studentDatabase->toStringInOrder();
   std::cout << inOrder << std::endl;
 
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
   //toTreeString
-  std::cout << studentDatabase->toTreeString() << std::endl;
+  // std::cout << studentDatabase->toTreeString() << std::endl;
 
   //deleteBy test1
-  // assert(studentDatabase->deleteBy(10) == true);
-  // std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(10) == true);
+  std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(2) == true);
-  // std::cout << "2 deleted: " + studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(2) == true);
+  std::cout << "2 deleted: " + studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(3) == true);
-  // std::cout << "3 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(3) == true);
+  std::cout << "3 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(9) == true);
-  // std::cout << "9 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(9) == true);
+  std::cout << "9 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(5) == true);
-  // std::cout << "5 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(5) == true);
+  std::cout << "5 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(6) == true);
-  // std::cout << "6 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(6) == true);
+  std::cout << "6 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(7) == true);
-  // std::cout << "7 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(7) == true);
+  std::cout << "7 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(8) == true);
-  // std::cout << "8 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(8) == true);
+  std::cout << "8 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
-  // assert(studentDatabase->deleteBy(1) == true);
-  // std::cout << "1 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(1) == true);
+  std::cout << "1 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
   
-  // assert(studentDatabase->deleteBy(4) == true);
-  // std::cout << "4 deleted: " +studentDatabase->toStringInOrder() << std::endl;
-  // std::cout << "before " << std::endl;
-  // studentDatabase->printTree();
-  // //balance
-  // studentDatabase->balance();
-  // std::cout << "after " << std::endl;
-  // studentDatabase->printTree();
+  assert(studentDatabase->deleteBy(4) == true);
+  std::cout << "4 deleted: " +studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
   // std::string result = studentDatabase->toTreeString();
   // std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";

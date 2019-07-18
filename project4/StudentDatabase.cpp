@@ -292,12 +292,10 @@ void StudentDatabase::balance(){
 	inOrderArray(root, arr);
 	// int size = sizeof(arr) / sizeof(arr[0]);
 
-	// for (int i = 0; i < num_students; i++){
-	// 	arr[i]->setLeft(nullptr);
-	// 	arr[i]->setRight(nullptr);
-	// }
-
-	std::cout << "num_students " << num_students << std::endl;
+	std::cout << "balance fcn" << std::endl;
+	for (int i = 0; i < num_students; i++){
+		std::cout << arr[i]->getData()->getID() << " ";
+	}
 
 	root = createBalancedTree(arr, 0, num_students-1);
 	delete [] arr;
@@ -342,7 +340,6 @@ BSTNode* StudentDatabase::createBalancedTree(BSTNode** arr, int start, int end){
 
 	int mid = (start + end)/2;
 	BSTNode* mini_root = arr[mid];
-	std::cout << "mini_root->getLeft()" << mini_root->getLeft()->getData()->getID() << std::endl;
 	mini_root->setLeft(createBalancedTree(arr, start, mid - 1));
 	mini_root->setRight(createBalancedTree(arr, mid + 1, end));
 
@@ -380,20 +377,6 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 	return order;
 }
 
-std::string StudentDatabase::toTreeString() const{
-	if (root == nullptr){
-		return "[]";
-	}
-
-	std::string s = "";
-
-	printString(root->getLeft(), s);
-	s += "("+root->getData()->toString()+")";
-	printString(root->getRight(), s);
-
-	return s;
-}
-
 int StudentDatabase::find_depth(const BSTNode* node) const{
 	int studentID = node->getData()->getID();
 	BSTNode* current = root;
@@ -418,14 +401,26 @@ int StudentDatabase::find_depth(const BSTNode* node) const{
 	return -1;
 }
 
-std::string StudentDatabase::printString(const BSTNode* current, std::string& s) const{
+std::string StudentDatabase::toTreeString() const{
+	if (root == nullptr){
+		return "[]";
+	}
+
+	std::string s = "";
+
+	printString(root, s);
+
+	return s;
+}
+
+void StudentDatabase::printString(const BSTNode* current, std::string& s) const{
 	if (current == nullptr){
-		return "";
+		return;
 	}
 
 	// left
 	s += "[";
-	s += printString(current->getLeft(), s);
+	printString(current->getLeft(), s);
 	s += "]";
 
 	// node
@@ -433,10 +428,8 @@ std::string StudentDatabase::printString(const BSTNode* current, std::string& s)
 
 	// right
 	s += "[";
-	s += printString(current->getRight(), s);
+	printString(current->getRight(), s);
 	s += "]";
-
-	return s;
 }
 
 void StudentDatabase::printTree() const{
