@@ -5,6 +5,4 @@
 
 unsigned int generateHashCodeOf(const std::string& key);
 
-int pusher(char c);
-
 #endif

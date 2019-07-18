@@ -30,7 +30,6 @@ public:
 private:
   BSTNode* root;
   int num_students;
-  BSTNode** arr;
 
   bool isBalanced();
   bool checkBalance(BSTNode* current);
