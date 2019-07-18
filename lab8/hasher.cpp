@@ -9,7 +9,7 @@ unsigned int generateHashCodeOf(const std::string& key){
 	int h = pusher(c);
 
 	for (std::string::size_type i = 1; i < key.size(); i++){
-		h = h*pusher(key.at(i));
+		h += pusher(key.at(i));
 	}
 
 	return h % 16384;
@@ -20,82 +20,82 @@ int pusher(char c){
 	int push = 0;
 
 	if (c == 'a' or c == 'A'){
-		push = 1;
+		push = partition*1;
 	}
 	else if (c == 'b' or c == 'B'){
-		push = 2;
+		push = partition*2;
 	}
 	else if (c == 'c' or c == 'C'){
-		push = 3;
+		push = partition*3;
 	}
 	else if (c == 'd' or c == 'D'){
-		push = 4;
+		push = partition*4;
 	}
 	else if (c == 'e' or c == 'E'){
-		push = 5;
+		push = partition*5;
 	}
 	else if (c == 'f' or c == 'F'){
-		push = 6;
+		push = partition*6;
 	}
 	else if (c == 'g' or c == 'G'){
-		push = 7;
+		push = partition*7;
 	}
 	else if (c == 'h' or c == 'H'){
-		push = 8;
+		push = partition*8;
 	}
 	else if (c == 'i' or c == 'I'){
-		push = 9;
+		push = partition*9;
 	}
 	else if (c == 'j' or c == 'J'){
-		push = 10;
+		push = partition*10;
 	}
 	else if (c == 'k' or c == 'K'){
-		push = 11;
+		push = partition*11;
 	}
 	else if (c == 'l' or c == 'L'){
-		push = 12;
+		push = partition*12;
 	}
 	else if (c == 'm' or c == 'M'){
-		push = 13;
+		push = partition*13;
 	}
 	else if (c == 'n' or c == 'N'){
-		push = 14;
+		push = partition*14;
 	}
 	else if (c == 'o' or c == 'O'){
-		push = 15;
+		push = partition*15;
 	}
 	else if (c == 'p' or c == 'P'){
-		push = 16;
+		push = partition*16;
 	}
 	else if (c == 'q' or c == 'Q'){
-		push = 17;
+		push = partition*17;
 	}
 	else if (c == 'r' or c == 'R'){
-		push = 18;
+		push = partition*18;
 	}
 	else if (c == 's' or c == 'S'){
-		push = 19;
+		push = partition*19;
 	}
 	else if (c == 't' or c == 'T'){
-		push = 20;
+		push = partition*20;
 	}
 	else if (c == 'u' or c == 'U'){
-		push = 21;
+		push = partition*21;
 	}
 	else if (c == 'v' or c == 'V'){
-		push = 22;
+		push = partition*22;
 	}
 	else if (c == 'w' or c == 'W'){
-		push = 23;
+		push = partition*23;
 	}
 	else if (c == 'x' or c == 'X'){
-		push = 24;
+		push = partition*24;
 	}
 	else if (c == 'y' or c == 'Y'){
-		push = 25;
+		push = partition*25;
 	}
 	else if (c == 'z' or c == 'Z'){
-		push = 26;
+		push = partition*26;
 	}
 
 	return push;
