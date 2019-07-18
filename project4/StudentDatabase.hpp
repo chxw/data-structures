@@ -40,7 +40,7 @@ private:
   BSTNode* find_parent(BSTNode* child) const;
   int find_depth(const BSTNode* node) const;
 
-  void inOrderArray(BSTNode* current, BSTNode** arr);
+  void inOrderArray(BSTNode* current, BSTNode** &arr, int index);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
 
   BSTNode* min_node(BSTNode* current);

@@ -289,31 +289,27 @@ BSTNode* StudentDatabase::min_node(BSTNode* current){
 
 void StudentDatabase::balance(){
 	BSTNode** arr = new BSTNode*[num_students];
-	inOrderArray(root, arr);
+
+	inOrderArray(root, arr, 0);
 	// int size = sizeof(arr) / sizeof(arr[0]);
 
-	std::cout << "balance fcn" << std::endl;
 	for (int i = 0; i < num_students; i++){
 		std::cout << arr[i]->getData()->getID() << " ";
 	}
 
-	root = createBalancedTree(arr, 0, num_students-1);
+	// root = createBalancedTree(arr, 0, num_students-1);
 	delete [] arr;
 }
 
-void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** arr){
-	std::string order;
-
+void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** &arr, int index){
 	if (current == nullptr){
-		return "";
+		return;
 	}
 
-	order += inOrder(current->getLeft());
-	order += std::to_string(current->getData()->getID());
-	order += ",";
-	order += inOrder(current->getRight());
-
-	return order;
+	inOrderArray(current->getLeft(), arr, index);
+	arr[index] = current;
+	index++;
+	inOrderArray(current->getRight(), arr, index);
 }
 
 BSTNode* StudentDatabase::createBalancedTree(BSTNode** arr, int start, int end){
