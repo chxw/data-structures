@@ -5,7 +5,6 @@
 unsigned int generateHashCodeOf(const std::string& key){
 	int index = 0;
 	char c = key.at(index);
-	int push = 1;
 	int h = pusher(c);
 
 	for (std::string::size_type i = 1; i < key.size(); i++){
