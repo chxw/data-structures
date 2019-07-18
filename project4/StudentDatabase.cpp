@@ -229,6 +229,7 @@ bool StudentDatabase::deleteBy(int studentID){
 		}
 	}
 
+	num_students--;
 	return true;
 }
 
@@ -263,53 +264,69 @@ BSTNode* StudentDatabase::min_node(BSTNode* current){
 	return current;
 }
 
-// bool StudentDatabase::isBalanced(){
-// 	return checkBalance(root);
-// }
-
-// bool StudentDatabase::checkBalance(BSTNode* current){
-// 	// empty tree is balanced
-// 	if (current == nullptr){
-// 		return true;
-// 	}
-
-// 	int leftDepth = find_depth(current->getLeft());
-// 	int rightDepth = find_depth(current->getRight());
-
-// 	// balanced tree def'n:
-// 	// 1. difference between depth of left and right subtrees is <= 1
-// 	// 2. left subtree balanced
-// 	// 3. right subtree balanced
-// 	if (abs(leftDepth - rightDepth) <= 1 and checkBalance(current->getLeft()) and checkBalance(current->getRight())){
-// 		return true;
-// 	}
-
-// 	return false;
-// }
-
-void StudentDatabase::balance(){
-	BSTNode** arr = new BSTNode*[num_students];
-
-	inOrderArray(root, arr, 0);
-	// int size = sizeof(arr) / sizeof(arr[0]);
-
-	for (int i = 0; i < num_students; i++){
-		std::cout << arr[i]->getData()->getID() << " ";
-	}
-
-	// root = createBalancedTree(arr, 0, num_students-1);
-	delete [] arr;
+bool StudentDatabase::isBalanced(){
+	return checkBalance(root);
 }
 
-void StudentDatabase::inOrderArray(BSTNode* current, BSTNode** &arr, int index){
+bool StudentDatabase::checkBalance(BSTNode* current){
+	// empty tree is balanced
 	if (current == nullptr){
+		return true;
+	}
+
+	int leftHeight = find_height(current->getLeft());
+	int rightHeight = find_height(current->getRight());
+
+	// balanced tree def'n:
+	// 1. difference between height of left and right subtrees is <= 1
+	// 2. left subtree balanced
+	// 3. right subtree balanced
+	if (abs(leftHeight - rightHeight) <= 1 and checkBalance(current->getLeft()) and checkBalance(current->getRight())){
+		return true;
+	}
+
+	return false;
+}
+
+void StudentDatabase::balance(){
+	if (isBalanced()){
 		return;
 	}
 
-	inOrderArray(current->getLeft(), arr, index);
-	arr[index] = current;
-	index++;
-	inOrderArray(current->getRight(), arr, index);
+	arr = new BSTNode*[num_students];
+
+	inOrderArray(root);
+	root = createBalancedTree(arr, 0, num_students-1);
+
+	delete [] arr;
+}
+
+void StudentDatabase::inOrderArray(BSTNode* current){
+	int index = 0;
+	while (current != nullptr){
+		// no left
+		if (current->getLeft() == nullptr){
+			arr[index] = current;
+			index++;
+			current = current->getRight();
+		}
+		else{
+			BSTNode* pre = current->getLeft();
+			while (pre->getRight() != nullptr and pre->getRight() != current){
+				pre = pre->getRight();
+			}
+			if (pre->getRight() == nullptr){
+				pre->setRight(current);
+				current = current->getLeft();
+			}
+			else {
+				pre->setRight(nullptr);
+				arr[index] = current;
+				index++;
+				current = current->getRight();
+			}
+		}
+	}
 }
 
 BSTNode* StudentDatabase::createBalancedTree(BSTNode** arr, int start, int end){
@@ -356,28 +373,12 @@ std::string StudentDatabase::inOrder(const BSTNode* current) const{
 	return order;
 }
 
-int StudentDatabase::find_depth(const BSTNode* node) const{
-	int studentID = node->getData()->getID();
-	BSTNode* current = root;
-	int depth = 0;
-
-	while (current != nullptr){
-		if (studentID > current->getData()->getID()){
-			current = current->getRight();
-			depth++;
-		}
-		else if (studentID < current->getData()->getID()){
-			current = current->getLeft();
-			depth++;
-		}
-		//found
-		else{
-			return depth;
-		}
+int StudentDatabase::find_height(const BSTNode* current) const{
+	if (current == nullptr){
+		return 0;
 	}
 
-	//not found
-	return -1;
+	return 1 + std::max(find_height(current->getLeft()), find_height(current->getRight()));
 }
 
 std::string StudentDatabase::toTreeString() const{

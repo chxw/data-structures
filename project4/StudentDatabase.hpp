@@ -29,6 +29,7 @@ public:
 
 private:
   BSTNode* root;
+  BSTNode** arr;
   int num_students;
 
   bool isBalanced();
@@ -38,9 +39,9 @@ private:
   void printString(const BSTNode* current, std::string& s) const;
 
   BSTNode* find_parent(BSTNode* child) const;
-  int find_depth(const BSTNode* node) const;
+  int find_height(const BSTNode* current) const;
 
-  void inOrderArray(BSTNode* current, BSTNode** &arr, int index);
+  void inOrderArray(BSTNode* current);
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
 
   BSTNode* min_node(BSTNode* current);

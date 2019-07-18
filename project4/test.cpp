@@ -311,13 +311,13 @@ void large_sdatabase_test(){
   // std::cout << studentDatabase->toTreeString() << std::endl;
 
   //deleteBy test1
-  assert(studentDatabase->deleteBy(10) == true);
-  std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
-  std::cout << "before " << std::endl;
-  studentDatabase->printTree();
-  studentDatabase->balance();
-  std::cout << "after " << std::endl;
-  studentDatabase->printTree();
+  // assert(studentDatabase->deleteBy(10) == true);
+  // std::cout << "10 deleted: " + studentDatabase->toStringInOrder() << std::endl;
+  // std::cout << "before " << std::endl;
+  // studentDatabase->printTree();
+  // studentDatabase->balance();
+  // std::cout << "after " << std::endl;
+  // studentDatabase->printTree();
 
   assert(studentDatabase->deleteBy(2) == true);
   std::cout << "2 deleted: " + studentDatabase->toStringInOrder() << std::endl;
