@@ -8,7 +8,7 @@ unsigned int generateHashCodeOf(const std::string& key){
 	int partition = 64;
 
 	for (std::string::size_type i = 0; i < key.size(); i++){
-		h += (key.at(0) - '0')* partition;
+		h += (key.at(i) - '0')*partition;
 	}
 
 	return h % 16384;
