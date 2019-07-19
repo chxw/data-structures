@@ -50,7 +50,7 @@ private:
   bool place(BSTNode* current, BSTNode* newbie);
   BSTNode* delete_current(int key, BSTNode* current, BSTNode* previous);
 
-  std::string inOrder(const BSTNode* current) const;
+  std::string inOrder(const BSTNode* current, std::string& order) const;
 };
 
 #endif

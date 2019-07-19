@@ -27,7 +27,10 @@ EnrollmentManager& EnrollmentManager::operator=(const EnrollmentManager& other){
 	throw std::runtime_error("Not Implemented");
 }
 
-// EnrollmentManager::~EnrollmentManager();
+EnrollmentManager::~EnrollmentManager(){
+	delete cm;
+	delete sd;
+}
 
 bool EnrollmentManager::registerStudent(int studentID, std::string firstName, std::string lastName){
 	if (sd->searchBy(studentID) != nullptr){
@@ -45,7 +48,11 @@ bool EnrollmentManager::registerStudent(int studentID, std::string firstName, st
 	return true;
 }
 
-// bool unregisterStudent(int studentID);
+bool EnrollmentManager::unregisterStudent(int studentID){
+	cm->dropFromAllCourses(studentID);
+	return sd->deleteBy(studentID);
+
+}
 
 bool EnrollmentManager::addCourse(std::string courseID, int capacity){
 	if (cm->searchBy(courseID) != nullptr){
@@ -57,10 +64,22 @@ bool EnrollmentManager::addCourse(std::string courseID, int capacity){
 	return true;
 }
 
-// bool cancelCourse(std::string courseID);
+bool EnrollmentManager::cancelCourse(std::string courseID){
+	return cm->cancel(courseID);
+}
 
-// bool enroll(int studentID, std::string courseID);
-// bool drop(int studentID, std::string courseID);
+bool EnrollmentManager::enroll(int studentID, std::string courseID){
+	if ((cm->getAllEnrolledCoursesStringOf(studentID)).find(courseID) != std::string::npos){
+		return false;
+	}
+
+	cm->enroll(studentID, courseID);
+	return true;
+}
+
+bool EnrollmentManager::drop(int studentID, std::string courseID){
+	return cm->drop(studentID, courseID);
+}
 
 std::string EnrollmentManager::reportSummary() const{
 	std::string s;
@@ -87,10 +106,38 @@ std::string EnrollmentManager::reportSummary() const{
 	s += "\n";
 	s += cm->getCourseListString();
 
+	return s;
 }
 
-// std::string report(int studentID) const;
-// std::string report(std::string courseID) const;
+std::string EnrollmentManager::report(int studentID) const{
+	std::string s;
 
-// int getYear() const;
-// Semester getSemester() const;
+	s += (sd->searchBy(studentID))->toString();
+	s += "\n";
+	s += cm->getAllEnrolledCoursesStringOf(studentID);
+
+	return s;
+}
+
+std::string EnrollmentManager::report(std::string courseID) const{
+	std::string s;
+
+	const Course* course = cm->searchBy(courseID);
+	s += course->toString();
+	s += "\n";
+	for (int i = 0; i < course->getNumberOfEnrolledStudents(); i++){
+		s += std::to_string(course->getStudentIDAt(i));
+		s += "\n";
+	}
+
+	s.pop_back();
+	return s;
+}
+
+int EnrollmentManager::getYear() const{
+	return year;
+}
+
+Semester EnrollmentManager::getSemester() const{
+	return semester;
+}

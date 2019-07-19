@@ -410,17 +410,62 @@ void large_sdatabase_test(){
 void emanager_test(){
   EnrollmentManager* em = new EnrollmentManager();
 
-  assert(em->registerStudent(6, "Chelsea", "Wang") == true);
-  assert(em->addCourse("COMP-15", 50) == true);
+  assert(em->getYear() == 2019);
+  assert(em->getSemester() == Semester::SUMMER);
+
+  assert(em->registerStudent(6, "Chelsea", "Wang"));
+  em->registerStudent(7, "Bernie", "Sanders");
+  em->registerStudent(8, "Kamala", "Harris");
+  em->registerStudent(9, "Beto", "O'Rourke");
+  em->registerStudent(10, "Cory", "Booker");
+
+  assert(em->addCourse("COMP-15", 50));
+  em->addCourse("COMP-20", 15);
+  em->addCourse("COMP-30", 30);
+  em->addCourse("COMP-40", 45);
+
+  assert(em->enroll(6, "COMP-15"));
+  em->enroll(7, "COMP-15");
+  em->enroll(8, "COMP-15");
+  em->enroll(9, "COMP-15");
+  em->enroll(10, "COMP-15");
+  em->enroll(6, "COMP-20");
+  em->enroll(7, "COMP-20");
+
+  std::cout << "*** Report Summary: " << std::endl;
   std::cout << em->reportSummary() << std::endl;
+  std::cout << "*** Report(studentID): " << std::endl;
+  std::cout << em->report(6) << std::endl;
+  std::cout << "*** Report(courseID): " << std::endl;
+  std::cout << em->report("COMP-15") << std::endl;
+
+  std::cout << "\n DROP 7 FROM COMP-20 \n" << std::endl;
+  em->drop(7, "COMP-20");
+
+  std::cout << "\n UNENROLL 6, 9, 10 \n" << std::endl;
+  em->unregisterStudent(6);
+  em->unregisterStudent(9);
+  em->unregisterStudent(10);
+
+  std::cout << "*** Report Summary: " << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+  std::cout << "*** Report(courseID): " << std::endl;
+  std::cout << em->report("COMP-15") << std::endl;
+
+  std::cout << "\n CANCEL COMP-15 \n" << std::endl;
+  em->cancelCourse("COMP-15");
+
+  std::cout << "*** Report Summary: " << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+
 }
 
 int main(){
-  student_test();
-  course_test();
-  small_sdatabase_test();
-  large_sdatabase_test();
-  cmanager_test();
+  // student_test();
+  // course_test();
+  // small_sdatabase_test();
+  // large_sdatabase_test();
+  // cmanager_test();
   emanager_test();
   return 0;
 }

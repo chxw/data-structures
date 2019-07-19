@@ -366,20 +366,23 @@ int StudentDatabase::getNumberOfStudents() const{
 }
 
 std::string StudentDatabase::toStringInOrder() const{
-	return inOrder(root);
+	std::string s = "";
+	inOrder(root, s);
+
+	s.pop_back();
+
+	return s;
 }
 
-std::string StudentDatabase::inOrder(const BSTNode* current) const{
-	std::string order;
-
+std::string StudentDatabase::inOrder(const BSTNode* current, std::string& order) const{
 	if (current == nullptr){
 		return "";
 	}
 
-	order += inOrder(current->getLeft());
+	inOrder(current->getLeft(), order);
 	order += std::to_string(current->getData()->getID());
 	order += ",";
-	order += inOrder(current->getRight());
+	inOrder(current->getRight(), order);
 
 	return order;
 }
