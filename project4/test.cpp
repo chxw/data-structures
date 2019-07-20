@@ -208,6 +208,8 @@ void cmanager_test(){
 
   // drop student from all courses
   cm.dropFromAllCourses(0);
+
+  delete cm;
 }
 
 void toTreeString_test(){
