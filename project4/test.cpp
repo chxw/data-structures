@@ -512,8 +512,8 @@ void emanager_test(){
 int main(){
 //  student_test();
 //  course_test();
-cmanager_test();
-//  small_sdatabase_test();
+//  cmanager_test();
+  small_sdatabase_test();
 //  large_sdatabase_test();
 //  emanager_test();
   return 0;
