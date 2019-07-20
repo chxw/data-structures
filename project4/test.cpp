@@ -146,7 +146,7 @@ void course_test(){
 }
 
 void cmanager_test(){
-  CourseManager cm = CourseManager();
+  CourseManager* cm = new CourseManager();
 
   Course* course1 = new Course("COMP-15", 50);
   Course* course2 = new Course("COMP-16", 50);
