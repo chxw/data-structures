@@ -90,6 +90,10 @@ bool StudentDatabase::deleteBy(int studentID){
 	if (searchBy(studentID) == nullptr){
 		return false;
 	}
+	if (studentID == root->getData()->getID()){
+		delete root;
+		root = nullptr;
+	}
 	
 	BSTNode* previous = nullptr;
 	BSTNode* current = root;
