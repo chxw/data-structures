@@ -5,11 +5,11 @@
 
 #include <iostream>
 
-#include "Student.hpp"
-#include "StudentDatabase.hpp"
-#include "Course.hpp"
-#include "CourseManager.hpp"
-#include "EnrollmentManager.hpp"
+#include "Student->hpp"
+#include "StudentDatabase->hpp"
+#include "Course->hpp"
+#include "CourseManager->hpp"
+#include "EnrollmentManager->hpp"
 
 void student_test(){
   //default constructor
@@ -26,7 +26,7 @@ void student_test(){
     Student* student_fail = new Student(-1, "Chelsea", "Wang");
   }
   catch(std::runtime_error& e){
-    message = e.what();
+    message = e->what();
   }
   assert(message == "Not Valid");
 
@@ -35,7 +35,7 @@ void student_test(){
     Student* student_fail1 = new Student(0, "", "");
   }
   catch(std::runtime_error& e){
-    message1 = e.what();
+    message1 = e->what();
   }
   assert(message1 == "Not Valid");
 
@@ -72,7 +72,7 @@ void course_test(){
     Course* course_fail = new Course("COMP-20", 0);
   }
   catch(std::runtime_error& e){
-    message = e.what();
+    message = e->what();
   }
   assert(message == "Not Valid");
 
@@ -81,7 +81,7 @@ void course_test(){
     Course* course_fail1 = new Course("", 1);
   }
   catch(std::runtime_error& e){
-    message1 = e.what();
+    message1 = e->what();
   }
   assert(message1 == "Not Valid");
 
@@ -107,7 +107,7 @@ void course_test(){
     course1->getStudentIDAt(-1);
   }
   catch(std::range_error& e){
-    message2 = e.what();
+    message2 = e->what();
   }
   assert(message2 == "Out of Range");
 
@@ -116,7 +116,7 @@ void course_test(){
     course1->getStudentIDAt(51);
   }
   catch(std::range_error& e){
-    message3 = e.what();
+    message3 = e->what();
   }
   assert(message3 == "Out of Range");
 
@@ -159,55 +159,55 @@ void cmanager_test(){
   Course* course9 = new Course("COMP-23", 50);
 
   // add
-  cm.add(course1);
-  cm.add(course2);
-  cm.add(course3);
-  cm.add(course4);
-  cm.add(course5);
-  cm.add(course6);
-  cm.add(course7);
-  cm.add(course8);
-  cm.add(course9);
+  cm->add(course1);
+  cm->add(course2);
+  cm->add(course3);
+  cm->add(course4);
+  cm->add(course5);
+  cm->add(course6);
+  cm->add(course7);
+  cm->add(course8);
+  cm->add(course9);
 
   // searchBy
-  assert((cm.searchBy(course9->getID()))->getID() == course9->getID());
+  assert((cm->searchBy(course9->getID()))->getID() == course9->getID());
 
   // getCourseListString
-  std::cout << cm.getCourseListString() << std::endl;
+  std::cout << cm->getCourseListString() << std::endl;
 
   // cancel
-  cm.cancel(course5->getID());
-  std::cout << "delete comp-19 \n" + cm.getCourseListString() << std::endl;
-  cm.cancel(course2->getID());
-  std::cout << "delete comp-16 \n" + cm.getCourseListString() << std::endl;
-  cm.cancel(course1->getID());
-  std::cout << "delete comp-15 \n" + cm.getCourseListString() << std::endl;
-  cm.cancel(course9->getID());
-  std::cout << "delete comp-23 \n" + cm.getCourseListString() << std::endl;
+  cm->cancel(course5->getID());
+  std::cout << "delete comp-19 \n" + cm->getCourseListString() << std::endl;
+  cm->cancel(course2->getID());
+  std::cout << "delete comp-16 \n" + cm->getCourseListString() << std::endl;
+  cm->cancel(course1->getID());
+  std::cout << "delete comp-15 \n" + cm->getCourseListString() << std::endl;
+  cm->cancel(course9->getID());
+  std::cout << "delete comp-23 \n" + cm->getCourseListString() << std::endl;
 
   // get number of courses
-  assert(cm.getNumberOfCourses() == 5);
+  assert(cm->getNumberOfCourses() == 5);
 
   // enroll
   for (int i = 0; i < 50; i++){
-    cm.enroll(i, course3->getID());
+    cm->enroll(i, course3->getID());
   }
 
   assert(course3->isFull() == true);
 
   // getAllEnrolledCoursesStringOf
-  cm.enroll(0, course4->getID());
-  cm.enroll(0, course6->getID());
-  cm.enroll(0, course7->getID());
-  cm.enroll(0, course8->getID());
-  assert(cm.getAllEnrolledCoursesStringOf(0) == cm.getCourseListString());
+  cm->enroll(0, course4->getID());
+  cm->enroll(0, course6->getID());
+  cm->enroll(0, course7->getID());
+  cm->enroll(0, course8->getID());
+  assert(cm->getAllEnrolledCoursesStringOf(0) == cm->getCourseListString());
 
   // drop student from one course
-  cm.drop(0, course4->getID());
+  cm->drop(0, course4->getID());
   assert(course4->isHaving(0) == false);
 
   // drop student from all courses
-  cm.dropFromAllCourses(0);
+  cm->dropFromAllCourses(0);
 
   delete cm;
 }
