@@ -59,15 +59,14 @@ void CourseManager::expand(){
 }
 
 bool CourseManager::cancel(std::string courseID){
-	int index;
-
 	if (searchBy(courseID) == nullptr){
 		return false;
 	}
 
+	int index;
+
 	for (int i = 0; i < size; i++){
 		if (array[i]->getID() == courseID){
-			delete array[i];
 			index = i;
 		}
 	}

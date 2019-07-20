@@ -71,7 +71,6 @@ bool Course::drop(int studentID){
 		return false;
 	}
 
-	int *temp = new int[capacity];
 	int index;
 
 	// resize data and drop studentID
@@ -81,6 +80,8 @@ bool Course::drop(int studentID){
 			break;
 		}
 	}
+
+	int *temp = new int[capacity];
 
 	for (int i = 0; i < enrolled - 1; i++){
 		if (i >= index){
