@@ -67,6 +67,8 @@ bool CourseManager::cancel(std::string courseID){
 
 	for (int i = 0; i < size; i++){
 		if (array[i]->getID() == courseID){
+			delete array[i];
+			array[i] = nullptr;
 			index = i;
 		}
 	}
