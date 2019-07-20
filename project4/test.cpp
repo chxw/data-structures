@@ -5,11 +5,11 @@
 
 #include <iostream>
 
-#include "Student->hpp"
-#include "StudentDatabase->hpp"
-#include "Course->hpp"
-#include "CourseManager->hpp"
-#include "EnrollmentManager->hpp"
+#include "Student.hpp"
+#include "StudentDatabase.hpp"
+#include "Course.hpp"
+#include "CourseManager.hpp"
+#include "EnrollmentManager.hpp"
 
 void student_test(){
   //default constructor
@@ -26,7 +26,7 @@ void student_test(){
     Student* student_fail = new Student(-1, "Chelsea", "Wang");
   }
   catch(std::runtime_error& e){
-    message = e->what();
+    message = e.what();
   }
   assert(message == "Not Valid");
 
@@ -35,7 +35,7 @@ void student_test(){
     Student* student_fail1 = new Student(0, "", "");
   }
   catch(std::runtime_error& e){
-    message1 = e->what();
+    message1 = e.what();
   }
   assert(message1 == "Not Valid");
 
@@ -72,7 +72,7 @@ void course_test(){
     Course* course_fail = new Course("COMP-20", 0);
   }
   catch(std::runtime_error& e){
-    message = e->what();
+    message = e.what();
   }
   assert(message == "Not Valid");
 
@@ -81,7 +81,7 @@ void course_test(){
     Course* course_fail1 = new Course("", 1);
   }
   catch(std::runtime_error& e){
-    message1 = e->what();
+    message1 = e.what();
   }
   assert(message1 == "Not Valid");
 
@@ -107,7 +107,7 @@ void course_test(){
     course1->getStudentIDAt(-1);
   }
   catch(std::range_error& e){
-    message2 = e->what();
+    message2 = e.what();
   }
   assert(message2 == "Out of Range");
 
@@ -116,7 +116,7 @@ void course_test(){
     course1->getStudentIDAt(51);
   }
   catch(std::range_error& e){
-    message3 = e->what();
+    message3 = e.what();
   }
   assert(message3 == "Out of Range");
 
