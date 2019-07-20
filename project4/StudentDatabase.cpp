@@ -87,7 +87,7 @@ bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
 }
 
 bool StudentDatabase::deleteBy(int studentID){
-	if (isEmpty() == nullptr){
+	if (isEmpty()){
 		return false;
 	}
 	if (searchBy(studentID) == nullptr){
