@@ -208,16 +208,6 @@ void cmanager_test(){
 
   // drop student from all courses
   cm.dropFromAllCourses(0);
-
-  delete course1;
-  delete course2;
-  delete course3;
-  delete course4;
-  delete course5;
-  delete course6;
-  delete course7;
-  delete course8;
-  delete course9;
 }
 
 void toTreeString_test(){
