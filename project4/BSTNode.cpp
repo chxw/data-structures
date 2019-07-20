@@ -14,9 +14,7 @@ BSTNode::BSTNode(Student* sdata){
 }
 
 BSTNode::BSTNode(const BSTNode& other){
-	data = other.data;
-	left = other.left;
-	right = other.right;
+	throw std::runtime_error("Not Implemented");
 }
 
 BSTNode& BSTNode::operator=(const BSTNode& other){

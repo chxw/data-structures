@@ -16,7 +16,11 @@ CourseManager& CourseManager::operator=(const CourseManager& other){
 }
 
 CourseManager::~CourseManager(){
-	delete [] array;
+	for (int i = 0; i < size; i++){
+		delete array[i];
+	}
+	
+	delete[] array;
 }
 
 const Course* CourseManager::searchBy(std::string courseID) const{
@@ -31,9 +35,6 @@ const Course* CourseManager::searchBy(std::string courseID) const{
 
 bool CourseManager::add(Course* course){
 	if (course == nullptr){
-		return false;
-	}
-	if (searchBy(course->getID()) != nullptr){
 		return false;
 	}
 	if (size == capacity){

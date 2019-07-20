@@ -90,11 +90,7 @@ bool StudentDatabase::deleteBy(int studentID){
 	if (searchBy(studentID) == nullptr){
 		return false;
 	}
-
-	// if (num_students >= 3){
-	// 	balance();
-	// }
-
+	
 	BSTNode* previous = nullptr;
 	BSTNode* current = root;
 

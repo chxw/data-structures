@@ -121,6 +121,9 @@ int Course::getNumberOfEnrolledStudents() const{
 }
 
 int Course::getStudentIDAt(int index) const{
+	if (index > enrolled or index < 0){
+		throw std::range_error("Out of Range");
+	}
 	return data[index];
 }
 

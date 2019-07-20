@@ -1,4 +1,5 @@
 #include "Student.hpp"
+#include <iostream>
 
 Student::Student(){
 	id = 0;
@@ -7,7 +8,7 @@ Student::Student(){
 }
 
 Student::Student(int given_id, std::string firstName, std::string lastName){
-	if (id < 0 or firstName.length() == 0 or lastName.length() == 0){
+	if (given_id < 0 or firstName.length() == 0 or lastName.length() == 0){
 		throw std::runtime_error("Not Valid");
 	}
 	id = given_id;

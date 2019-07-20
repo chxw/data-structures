@@ -20,6 +20,25 @@ void student_test(){
   Student* student1 = new Student(6, "Chelsea", "Wang");
   assert(student1->toString() == "6 Chelsea Wang");
 
+  //catch exception
+  std::string message;
+  try{
+    Student* student_fail = new Student(-1, "Chelsea", "Wang");
+  }
+  catch(std::runtime_error& e){
+    message = e.what();
+  }
+  assert(message == "Not Valid");
+
+  std::string message1;
+  try{
+    Student* student_fail1 = new Student(0, "", "");
+  }
+  catch(std::runtime_error& e){
+    message1 = e.what();
+  }
+  assert(message1 == "Not Valid");
+
   // copy constructor
   Student* student2 = new Student(*student1);
   assert(student2->toString() == "6 Chelsea Wang");
@@ -82,6 +101,24 @@ void course_test(){
   assert(course1->isHaving(50) == false);
   assert(course1->getNumberOfEnrolledStudents() == 50);
   assert(course1->getStudentIDAt(49) == 49);
+
+  std::string message2;
+  try{
+    course1->getStudentIDAt(-1);
+  }
+  catch(std::range_error& e){
+    message2 = e.what();
+  }
+  assert(message2 == "Out of Range");
+
+  std::string message3;
+  try{
+    course1->getStudentIDAt(51);
+  }
+  catch(std::range_error& e){
+    message3 = e.what();
+  }
+  assert(message3 == "Out of Range");
 
   course1->drop(30);
   assert(course1->isFull() == false);
@@ -413,39 +450,50 @@ void emanager_test(){
   assert(em->getYear() == 2019);
   assert(em->getSemester() == Semester::SUMMER);
 
-  assert(em->registerStudent(6, "Chelsea", "Wang"));
-  em->registerStudent(7, "Bernie", "Sanders");
-  em->registerStudent(8, "Kamala", "Harris");
-  em->registerStudent(9, "Beto", "O'Rourke");
-  em->registerStudent(10, "Cory", "Booker");
+  std::string fname = "FIRST";
+  std::string lname = "LAST";
 
-  assert(em->addCourse("COMP-15", 50));
-  em->addCourse("COMP-20", 15);
-  em->addCourse("COMP-30", 30);
-  em->addCourse("COMP-40", 45);
-
-  assert(em->enroll(6, "COMP-15"));
-  em->enroll(7, "COMP-15");
-  em->enroll(8, "COMP-15");
-  em->enroll(9, "COMP-15");
-  em->enroll(10, "COMP-15");
-  em->enroll(6, "COMP-20");
-  em->enroll(7, "COMP-20");
+  for (int i = 0; i < 100; i++){
+    em->registerStudent(i, fname, lname);
+  }
 
   std::cout << "*** Report Summary: " << std::endl;
-  std::cout << em->reportSummary() << std::endl;
+  std::cout << em->reportSummary() << "\n" <<std::endl;
+
+  std::string comp15 = "COMP-15";
+  std::string comp20 = "COMP-20";
+  std::string comp30 = "COMP-30";
+  std::string comp40 = "COMP-40";
+
+  assert(em->addCourse(comp15, 100));
+  em->addCourse(comp20, 15);
+  em->addCourse(comp30, 30);
+  em->addCourse(comp40, 45);
+
+  for (int i = 0; i < 100; i++){
+    em->enroll(i, comp15);
+    em->enroll(i, comp20);
+    em->enroll(i, comp30);
+    em->enroll(i, comp40);
+  }
+
   std::cout << "*** Report(studentID): " << std::endl;
   std::cout << em->report(6) << std::endl;
   std::cout << "*** Report(courseID): " << std::endl;
   std::cout << em->report("COMP-15") << std::endl;
 
-  std::cout << "\n DROP 7 FROM COMP-20 \n" << std::endl;
-  em->drop(7, "COMP-20");
+  std::cout << "\n DROP everything from comp20 \n" << std::endl;
+  for (int i = 0; i < 15; i++){
+    em->drop(i, comp20);
+  }
 
-  std::cout << "\n UNENROLL 6, 9, 10 \n" << std::endl;
-  em->unregisterStudent(6);
-  em->unregisterStudent(9);
-  em->unregisterStudent(10);
+  std::cout << "*** Report(courseID): " << std::endl;
+  std::cout << em->report(comp20) << std::endl;
+
+  std::cout << "\n UNENROLL \n" << std::endl;
+  for (int i = 0; i < 100; i++){
+    em->unregisterStudent(i);
+  }
 
   std::cout << "*** Report Summary: " << std::endl;
   std::cout << em->reportSummary() << std::endl;
@@ -461,11 +509,11 @@ void emanager_test(){
 }
 
 int main(){
-  // student_test();
-  // course_test();
-  // small_sdatabase_test();
-  // large_sdatabase_test();
-  // cmanager_test();
+  student_test();
+  course_test();
+  cmanager_test();
+  small_sdatabase_test();
+  large_sdatabase_test();
   emanager_test();
   return 0;
 }
