@@ -2,9 +2,7 @@
 #include <stdexcept>
 
 BSTNode::BSTNode(){
-	data = nullptr;
-	left = nullptr;
-	right = nullptr;
+	throw std::runtime_error("Not Implemented");
 }
 
 BSTNode::BSTNode(Student* sdata){

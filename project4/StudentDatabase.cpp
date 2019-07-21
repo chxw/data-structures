@@ -51,39 +51,42 @@ const Student* StudentDatabase::searchBy(int studentID) const{
 }
 
 bool StudentDatabase::insert(Student* student){
-	BSTNode* newbie = new BSTNode(student);
+	if (searchBy(student->getID()) != nullptr){
+		return false;
+	}
 
 	if (isEmpty()){
-		root = newbie;
+		root = new BSTNode(student);
 		num_students++;
 		return true;
 	}
+	
+	place(root, student);
 
-	return place(root, newbie);
+	return true;
 }
 
-bool StudentDatabase::place(BSTNode* current, BSTNode* newbie){
+void StudentDatabase::place(BSTNode* current, Student* student){
 	// needs to go left
-	if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() != nullptr){
-		place(current->getLeft(), newbie);
+	if (student->getID() < current->getData()->getID() and current->getLeft() != nullptr){
+		place(current->getLeft(), student);
 	}
 	// found setLeft place
-	else if (newbie->getData()->getID() < current->getData()->getID() and current->getLeft() == nullptr){
+	else if (student->getID() < current->getData()->getID() and current->getLeft() == nullptr){
+		BSTNode* newbie = new BSTNode(student);
 		current->setLeft(newbie);
 		num_students++;
-		return true;
 	}
 	// needs to go right
-	else if (newbie->getData()->getID() >= current->getData()->getID() and current->getRight() != nullptr){
-		place(current->getRight(), newbie);
+	else if (student->getID() > current->getData()->getID() and current->getRight() != nullptr){
+		place(current->getRight(), student);
 	}
 	// found setRight place
-	else if (newbie->getData() >= current->getData() and current->getRight() == nullptr){
+	else if (student->getID() > current->getData()->getID() and current->getRight() == nullptr){
+		BSTNode* newbie = new BSTNode(student);
 		current->setRight(newbie);
 		num_students++;
-		return true;
 	}
-	return false;
 }
 
 bool StudentDatabase::deleteBy(int studentID){

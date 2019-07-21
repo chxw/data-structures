@@ -48,7 +48,7 @@ private:
   BSTNode* createBalancedTree(BSTNode** arr, int start, int end);
 
   BSTNode* min_node(BSTNode* current);
-  bool place(BSTNode* current, BSTNode* newbie);
+  void place(BSTNode* current, Student* student);
   BSTNode* delete_current(int key, BSTNode* current, BSTNode* previous);
 
   std::string inOrder(const BSTNode* current, std::string& order) const;

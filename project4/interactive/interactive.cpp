@@ -63,8 +63,7 @@ void menu(){
 }
 
 int main(){
-	CourseManager* cm = new CourseManager();
-	StudentDatabase* sd = new StudentDatabase();
+	EnrollmentManager* em = new EnrollmentManager();
 
 	menu();
 

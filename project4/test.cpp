@@ -398,67 +398,42 @@ void emanager_test(){
   std::string fname = "FIRST";
   std::string lname = "LAST";
 
-  for (int i = 0; i < 100; i++){
-    em->registerStudent(i, fname, lname);
+  for (int i = 0; i < 10000; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
   }
+
+  assert(em->report(10000) == "Not Found");
 
   std::cout << "*** Report Summary: " << std::endl;
   std::cout << em->reportSummary() << "\n" <<std::endl;
 
-  std::string comp15 = "COMP-15";
-  std::string comp20 = "COMP-20";
-  std::string comp30 = "COMP-30";
-  std::string comp40 = "COMP-40";
-
-  assert(em->addCourse(comp15, 100));
-  em->addCourse(comp20, 15);
-  em->addCourse(comp30, 30);
-  em->addCourse(comp40, 45);
-
-  for (int i = 0; i < 100; i++){
-    em->enroll(i, comp15);
-    em->enroll(i, comp20);
-    em->enroll(i, comp30);
-    em->enroll(i, comp40);
+  for (int i = 0; i < 10000; i++){
+    assert(em->report(i) == std::to_string(i)+" "+fname+" "+lname+"\n");
   }
 
-  std::cout << "*** Report(studentID): " << std::endl;
-  std::cout << em->report(6) << std::endl;
-  std::cout << "*** Report(courseID): " << std::endl;
-  std::cout << em->report("COMP-15") << std::endl;
-
-  std::cout << "\n DROP everything from comp20 \n" << std::endl;
-  for (int i = 0; i < 15; i++){
-    em->drop(i, comp20);
+  for (int i = 0; i < 10000; i++){
+    assert(em->addCourse(std::to_string(i), 10000) == true);;
   }
 
-  std::cout << "*** Report(courseID): " << std::endl;
-  std::cout << em->report(comp20) << std::endl;
-
-  std::cout << "\n UNENROLL \n" << std::endl;
-  for (int i = 0; i < 100; i++){
-    em->unregisterStudent(i);
-  }
+  assert(em->report(std::to_string(10000)) == "Not Found");
 
   std::cout << "*** Report Summary: " << std::endl;
-  std::cout << em->reportSummary() << std::endl;
-  std::cout << "*** Report(courseID): " << std::endl;
-  std::cout << em->report("COMP-15") << std::endl;
+  std::cout << em->reportSummary() << "\n" <<std::endl;
 
-  std::cout << "\n CANCEL COMP-15 \n" << std::endl;
-  em->cancelCourse("COMP-15");
+  for (int i = 0; i < 10000; i++){
+    assert(em->report(std::to_string(i)) == std::to_string(i)+" (0/10000)"+"\n");
+  }
 
-  std::cout << "*** Report Summary: " << std::endl;
-  std::cout << em->reportSummary() << std::endl;
 
+  delete em;
 }
 
 int main(){
-student_test();
-course_test();
-cmanager_test();
-small_sdatabase_test();
-large_sdatabase_test();
-emanager_test();
+  student_test();
+  course_test();
+  cmanager_test();
+  small_sdatabase_test();
+  large_sdatabase_test();
+  emanager_test();
   return 0;
 }

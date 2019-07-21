@@ -37,15 +37,17 @@ bool EnrollmentManager::registerStudent(int studentID, std::string firstName, st
 		return false;
 	}
 
+	bool result;
+
 	Student* newbie = new Student(studentID, firstName, lastName);
 
-	sd->insert(newbie);
+	result = sd->insert(newbie);
 
 	if (sd->getNumberOfStudents() % 100 == 0){
 		sd->balance();
 	}
 
-	return true;
+	return result;
 }
 
 bool EnrollmentManager::unregisterStudent(int studentID){
@@ -59,7 +61,7 @@ bool EnrollmentManager::addCourse(std::string courseID, int capacity){
 		return false;
 	}
 
-	Course* newbie = new Course (courseID, capacity);
+	Course* newbie = new Course(courseID, capacity);
 	cm->add(newbie);
 	return true;
 }
@@ -110,6 +112,10 @@ std::string EnrollmentManager::reportSummary() const{
 }
 
 std::string EnrollmentManager::report(int studentID) const{
+	if (sd->searchBy(studentID) == nullptr){
+		return "Not Found";
+	}
+
 	std::string s;
 
 	s += (sd->searchBy(studentID))->toString();
@@ -120,6 +126,10 @@ std::string EnrollmentManager::report(int studentID) const{
 }
 
 std::string EnrollmentManager::report(std::string courseID) const{
+	if (cm->searchBy(courseID) == nullptr){
+		return "Not Found";
+	}
+
 	std::string s;
 
 	const Course* course = cm->searchBy(courseID);
@@ -127,10 +137,11 @@ std::string EnrollmentManager::report(std::string courseID) const{
 	s += "\n";
 	for (int i = 0; i < course->getNumberOfEnrolledStudents(); i++){
 		s += std::to_string(course->getStudentIDAt(i));
-		s += "\n";
+		if (i != course->getNumberOfEnrolledStudents() - 1){
+			s += "\n";
+		}
 	}
 
-	s.pop_back();
 	return s;
 }
 
