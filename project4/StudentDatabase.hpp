@@ -25,6 +25,8 @@ public:
   std::string toStringInOrder() const;
   std::string toTreeString() const;
 
+  void printTree() const;
+
 
 private:
   BSTNode* root;
@@ -36,7 +38,6 @@ private:
   bool isBalanced();
   bool checkBalance(BSTNode* current);
 
-  void printTree() const;
   void postOrder(const BSTNode* current, int indent) const;
   
   void printString(const BSTNode* current, std::string& s) const;

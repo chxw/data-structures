@@ -179,6 +179,10 @@ bool StudentDatabase::deleteBy(int studentID){
 			// current has both children
 			else{
 				BSTNode* to_swap = min_node(current->getRight());
+
+				std::cout << "current is " << current->getData()->getID() << std::endl;
+				std::cout << "to swap is " << to_swap->getData()->getID() << std::endl;
+
 				Student* data = new Student(*(to_swap->getData()));
 				BSTNode* newbie = new BSTNode(data);
 
@@ -202,18 +206,22 @@ bool StudentDatabase::deleteBy(int studentID){
 				// save to_swap_child
 				if (to_swap_child != nullptr and current->getRight() != nullptr){
 					if (to_swap_child->getData()->getID() < current->getRight()->getData()->getID()){
+						std::cout << "newbie right is swap child" << std::endl;
 						newbie->setRight(to_swap_child);
 						to_swap_child->setRight(current->getRight());
 					}
 					else{
+						std::cout << "newbie right is current right" << std::endl;
 						newbie->setRight(current->getRight());
 						current->getRight()->setRight(to_swap_child);
 					}
 				}
 				else if (to_swap_child != nullptr and current->getRight() == nullptr){
+					std::cout << "newbie right is swap child" << std::endl;
 					newbie->setRight(to_swap_child);
 				}
 				else {
+					std::cout << "newbie right is current right" << std::endl;
 					newbie->setRight(current->getRight());
 				}
 
@@ -227,6 +235,7 @@ bool StudentDatabase::deleteBy(int studentID){
 				}
 				// current is prev left child
 				else if (previous->getLeft() == current){
+					std::cout << "newbie is " << newbie->getData()->getID() << std::endl;
 					previous->setLeft(newbie);
 					delete current;
 					break;

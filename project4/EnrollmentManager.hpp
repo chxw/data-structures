@@ -33,6 +33,8 @@ public:
   std::string report(int studentID) const;
   std::string report(std::string courseID) const;
 
+  void printTree() const;
+
   int getYear() const;
   Semester getSemester() const;
 

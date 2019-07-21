@@ -398,17 +398,23 @@ void emanager_test(){
   std::string fname = "FIRST";
   std::string lname = "LAST";
 
-  for (int i = 0; i < 10000; i++){
+  for (int i = 0; i < 101; i++){
     assert(em->registerStudent(i, fname, lname) == true);
   }
 
   assert(em->report(10000) == "Not Found");
 
-  std::cout << "*** Report Summary: " << std::endl;
-  std::cout << em->reportSummary() << "\n" <<std::endl;
+  // std::cout << "*** Report Summary: " << std::endl;
+  // std::cout << em->reportSummary() << "\n" <<std::endl;
 
-  for (int i = 0; i < 10000; i++){
+  for (int i = 0; i < 101; i++){
     assert(em->report(i) == std::to_string(i)+" "+fname+" "+lname+"\n");
+  }
+
+  for (int i = 1; i < 101; i++){
+    std::cout << "int " << i << std::endl;
+    em->printTree();
+    assert(em->unregisterStudent(i) == true);
   }
 
   for (int i = 0; i < 10000; i++){
@@ -417,13 +423,12 @@ void emanager_test(){
 
   assert(em->report(std::to_string(10000)) == "Not Found");
 
-  std::cout << "*** Report Summary: " << std::endl;
-  std::cout << em->reportSummary() << "\n" <<std::endl;
+  // std::cout << "*** Report Summary: " << std::endl;
+  // std::cout << em->reportSummary() << "\n" <<std::endl;
 
   for (int i = 0; i < 10000; i++){
     assert(em->report(std::to_string(i)) == std::to_string(i)+" (0/10000)"+"\n");
   }
-
 
   delete em;
 }

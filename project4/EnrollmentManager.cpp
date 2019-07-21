@@ -152,3 +152,7 @@ int EnrollmentManager::getYear() const{
 Semester EnrollmentManager::getSemester() const{
 	return semester;
 }
+
+void EnrollmentManager::printTree() const{
+	sd->printTree();
+}
