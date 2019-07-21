@@ -365,6 +365,10 @@ int StudentDatabase::getNumberOfStudents() const{
 }
 
 std::string StudentDatabase::toStringInOrder() const{
+	if (isEmpty()){
+		return "";
+	}
+
 	std::string s = "";
 	inOrder(root, s);
 
