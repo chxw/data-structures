@@ -395,40 +395,91 @@ void emanager_test(){
   assert(em->getYear() == 2019);
   assert(em->getSemester() == Semester::SUMMER);
 
+  // SD test
   std::string fname = "FIRST";
   std::string lname = "LAST";
 
-  for (int i = 0; i < 101; i++){
+  for (int i = 0; i < 10000; i++){
     assert(em->registerStudent(i, fname, lname) == true);
   }
 
   assert(em->report(10000) == "Not Found");
 
-  // std::cout << "*** Report Summary: " << std::endl;
-  // std::cout << em->reportSummary() << "\n" <<std::endl;
-
-  for (int i = 0; i < 101; i++){
+  for (int i = 0; i < 10000; i++){
     assert(em->report(i) == std::to_string(i)+" "+fname+" "+lname+"\n");
   }
-
-  for (int i = 1; i < 101; i++){
-    std::cout << "int " << i << std::endl;
-    em->printTree();
+  // delete all but root
+  for (int i = 1; i < 10000; i++){
     assert(em->unregisterStudent(i) == true);
   }
 
+  assert(em->report(1) == "Not Found");
+
+  // CM test
   for (int i = 0; i < 10000; i++){
     assert(em->addCourse(std::to_string(i), 10000) == true);;
   }
 
   assert(em->report(std::to_string(10000)) == "Not Found");
 
-  // std::cout << "*** Report Summary: " << std::endl;
-  // std::cout << em->reportSummary() << "\n" <<std::endl;
-
   for (int i = 0; i < 10000; i++){
     assert(em->report(std::to_string(i)) == std::to_string(i)+" (0/10000)"+"\n");
   }
+  // delete all but index 0
+  for (int i = 1; i < 10000; i++){
+    assert(em->cancelCourse(std::to_string(i)) == true);
+  }
+
+  assert(em->enroll(0, std::to_string(0)) == true);
+
+  std::cout << "*** Report Summary: " << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+  std::cout << "Report(student 0): " << std::endl;
+  std::cout << em->report(0) << std::endl;
+  std::cout << "Report(course 0)" << std::endl;
+  std::cout << em->report(std::to_string(0)) << std::endl;
+
+  // SD: delete all but last node
+  for (int i = 1; i < 10000; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
+  }
+
+  for (int i = 1; i < 10000; i++){
+    assert(em->report(i) == std::to_string(i)+" "+fname+" "+lname+"\n");
+  }
+
+  for (int i = 0; i < 9999; i++){
+    assert(em->unregisterStudent(i) == true);
+  }
+
+  std::cout << "*** Report Summary: " << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+  std::cout << "Report(student 9999): " << std::endl;
+  std::cout << em->report(9999) << std::endl;
+  std::cout << "Report(course 0)" << std::endl;
+  std::cout << em->report(std::to_string(0)) << std::endl;
+
+  // CM: delete all but last index
+  for (int i = 1; i < 10000; i++){
+    assert(em->addCourse(std::to_string(i), 10000) == true);;
+  }
+
+  for (int i = 1; i < 10000; i++){
+    assert(em->report(std::to_string(i)) == std::to_string(i)+" (0/10000)"+"\n");
+  }
+  // delete all but index 0
+  for (int i = 0; i < 9999; i++){
+    assert(em->cancelCourse(std::to_string(i)) == true);
+  }
+
+  assert(em->enroll(9999, std::to_string(9999)) == true);
+
+  std::cout << "*** Report Summary: " << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+  std::cout << "Report(student 9999): " << std::endl;
+  std::cout << em->report(9999) << std::endl;
+  std::cout << "Report(course 9999)" << std::endl;
+  std::cout << em->report(std::to_string(9999)) << std::endl;
 
   delete em;
 }

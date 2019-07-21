@@ -178,55 +178,8 @@ bool StudentDatabase::deleteBy(int studentID){
 			}
 			// current has both children
 			else{
-				BSTNode* to_swap = min_node(current->getRight());
-
-				std::cout << "current is " << current->getData()->getID() << std::endl;
-				std::cout << "to swap is " << to_swap->getData()->getID() << std::endl;
-
-				Student* data = new Student(*(to_swap->getData()));
-				BSTNode* newbie = new BSTNode(data);
-
-				BSTNode* to_swap_parent = find_parent(to_swap);
-				BSTNode* to_swap_child = nullptr;
-
-				// if to_swap has 1 child (it must be right child since to_swap is right subtree min_node), save it
-				if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
-					to_swap_child = to_swap->getRight();
-				}
-
-				if (to_swap == to_swap_parent->getRight()){
-					to_swap_parent->setRight(nullptr);
-				}
-				else if (to_swap == to_swap_parent->getLeft()){
-					to_swap_parent->setLeft(nullptr);
-				}
-
-				newbie->setLeft(current->getLeft());
-
-				// save to_swap_child
-				if (to_swap_child != nullptr and current->getRight() != nullptr){
-					if (to_swap_child->getData()->getID() < current->getRight()->getData()->getID()){
-						std::cout << "newbie right is swap child" << std::endl;
-						newbie->setRight(to_swap_child);
-						to_swap_child->setRight(current->getRight());
-					}
-					else{
-						std::cout << "newbie right is current right" << std::endl;
-						newbie->setRight(current->getRight());
-						current->getRight()->setRight(to_swap_child);
-					}
-				}
-				else if (to_swap_child != nullptr and current->getRight() == nullptr){
-					std::cout << "newbie right is swap child" << std::endl;
-					newbie->setRight(to_swap_child);
-				}
-				else {
-					std::cout << "newbie right is current right" << std::endl;
-					newbie->setRight(current->getRight());
-				}
-
-				delete to_swap;
-
+				BSTNode* newbie = create_newbie(current);
+				
 				// root
 				if (previous == nullptr){
 					root = newbie;
@@ -235,7 +188,6 @@ bool StudentDatabase::deleteBy(int studentID){
 				}
 				// current is prev left child
 				else if (previous->getLeft() == current){
-					std::cout << "newbie is " << newbie->getData()->getID() << std::endl;
 					previous->setLeft(newbie);
 					delete current;
 					break;
@@ -253,6 +205,51 @@ bool StudentDatabase::deleteBy(int studentID){
 
 	num_students--;
 	return true;
+}
+
+BSTNode* StudentDatabase::create_newbie(BSTNode* current){
+	BSTNode* to_swap = min_node(current->getRight());
+	Student* data = new Student(*(to_swap->getData()));
+	BSTNode* newbie = new BSTNode(data);
+
+	BSTNode* to_swap_parent = find_parent(to_swap);
+	BSTNode* to_swap_child = nullptr;
+
+	// if to_swap has 1 child (it must be right child since to_swap is right subtree min_node), save it
+	if (to_swap->getRight() != nullptr and to_swap->getLeft() == nullptr){
+		to_swap_child = to_swap->getRight();
+	}
+
+	if (to_swap == to_swap_parent->getRight()){
+		to_swap_parent->setRight(nullptr);
+	}
+	else if (to_swap == to_swap_parent->getLeft()){
+		to_swap_parent->setLeft(nullptr);
+	}
+
+	newbie->setLeft(current->getLeft());
+
+	// save to_swap_child
+	if (to_swap_child != nullptr and current->getRight() != nullptr){
+		if (to_swap_child->getData()->getID() < current->getRight()->getData()->getID()){
+			newbie->setRight(to_swap_child);
+			max_node(to_swap_child)->setRight(current->getRight());
+		}
+		else{
+			newbie->setRight(current->getRight());
+			current->getRight()->setRight(to_swap_child);
+		}
+	}
+	else if (to_swap_child != nullptr and current->getRight() == nullptr){
+		newbie->setRight(to_swap_child);
+	}
+	else {
+		newbie->setRight(current->getRight());
+	}
+
+	delete to_swap;
+
+	return newbie;
 }
 
 BSTNode* StudentDatabase::find_parent(BSTNode* child) const{
@@ -279,9 +276,18 @@ BSTNode* StudentDatabase::find_parent(BSTNode* child) const{
 	return nullptr;
 }
 
+BSTNode* StudentDatabase::max_node(BSTNode* current){
+	while (current and current->getRight() != nullptr){
+		current = current->getRight();
+	}
+
+	return current;
+}
+
 BSTNode* StudentDatabase::min_node(BSTNode* current){
-	while (current and current->getLeft() != nullptr)
+	while (current and current->getLeft() != nullptr){
 		current = current->getLeft();
+	}
 
 	return current;
 }
