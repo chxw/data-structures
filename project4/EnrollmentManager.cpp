@@ -71,12 +71,7 @@ bool EnrollmentManager::cancelCourse(std::string courseID){
 }
 
 bool EnrollmentManager::enroll(int studentID, std::string courseID){
-	if ((cm->getAllEnrolledCoursesStringOf(studentID)).find(courseID) != std::string::npos){
-		return false;
-	}
-
-	cm->enroll(studentID, courseID);
-	return true;
+	return cm->enroll(studentID, courseID);
 }
 
 bool EnrollmentManager::drop(int studentID, std::string courseID){

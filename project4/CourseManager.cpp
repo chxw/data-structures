@@ -125,11 +125,12 @@ std::string CourseManager::getAllEnrolledCoursesStringOf(int studentID){
 	for (int i = 0; i < size; i++){
 		if (array[i]->isHaving(studentID)){
 			s += array[i]->getID();
-			s += ",";
+			if (i != size - 1){
+				s += ",";
+			}
 		}
 	}
 
-	s.pop_back();
 	return s;
 }
 
@@ -142,9 +143,10 @@ std::string CourseManager::getCourseListString() const{
 
 	for (int i = 0; i < size; i++){
 		s += array[i]->getID();
-		s += ",";
+		if (i != size - 1){
+			s += ",";
+		}
 	}
 
-	s.pop_back();
 	return s;
 }

@@ -62,7 +62,6 @@ bool StudentDatabase::insert(Student* student){
 	}
 	
 	place(root, student);
-
 	return true;
 }
 
@@ -94,6 +93,8 @@ bool StudentDatabase::deleteBy(int studentID){
 		return false;
 	}
 	if (searchBy(studentID) == nullptr){
+		std::cout << "studentID " << studentID << " not found" << std::endl;
+		std::cout << "root is " << root->getData()->getID() << std::endl;
 		return false;
 	}
 	

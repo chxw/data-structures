@@ -176,12 +176,16 @@ void cmanager_test(){
   std::cout << cm->getCourseListString() << std::endl;
 
   // cancel
+  // random index
   cm->cancel(course5->getID());
   std::cout << "delete comp-19 \n" + cm->getCourseListString() << std::endl;
+  // random index
   cm->cancel(course2->getID());
   std::cout << "delete comp-16 \n" + cm->getCourseListString() << std::endl;
+  // at index 0
   cm->cancel(course1->getID());
   std::cout << "delete comp-15 \n" + cm->getCourseListString() << std::endl;
+  // at last index
   cm->cancel(course9->getID());
   std::cout << "delete comp-23 \n" + cm->getCourseListString() << std::endl;
 
@@ -190,7 +194,7 @@ void cmanager_test(){
 
   // enroll
   for (int i = 0; i < 50; i++){
-    cm->enroll(i, course3->getID());
+    assert(cm->enroll(i, course3->getID()) == true);
   }
 
   assert(course3->isFull() == true);
@@ -208,8 +212,23 @@ void cmanager_test(){
 
   // drop student from all courses
   cm->dropFromAllCourses(0);
-
+  
   delete cm;
+}
+
+void cm_enroll_test(){
+	CourseManager* cm = new CourseManager();
+	Course* course1 = new Course("COMP-15", 10000);
+	cm->add(course1);
+
+	for (int i = 0; i < 10000; i++){
+		std::cout << "i is " << i << std::endl;
+		assert(cm->enroll(i, course1->getID()) == true);
+	}
+
+	assert(cm->getAllEnrolledCoursesStringOf(0) == cm->getCourseListString());	
+
+	delete cm;
 }
 
 void toTreeString_test(){
@@ -244,26 +263,38 @@ void small_sdatabase_test(){
   Student* s6 = new Student(6, "Mary", "Joseph");
 
   //insert
-  studentDatabase->insert(s2);
-  assert(studentDatabase->getNumberOfStudents() == 1);
-  studentDatabase->insert(s1);
-  assert(studentDatabase->getNumberOfStudents() == 2);
-  studentDatabase->insert(s3);
-  assert(studentDatabase->getNumberOfStudents() == 3);
-  studentDatabase->insert(s4);
-  assert(studentDatabase->getNumberOfStudents() == 4);
+  std::cout << "** Insert in random order" << std::endl;
+  std::cout << "insert 5" << std::endl;
   studentDatabase->insert(s5);
-  assert(studentDatabase->getNumberOfStudents() == 5);
+  studentDatabase->printTree();
+  assert(studentDatabase->getNumberOfStudents() == 1);
+  std::cout << "insert 2" << std::endl;
+  studentDatabase->insert(s2);
+  studentDatabase->printTree();
+  assert(studentDatabase->getNumberOfStudents() == 2);
+  std::cout << "insert 1" << std::endl;
+  studentDatabase->insert(s1);
+  studentDatabase->printTree();
+  assert(studentDatabase->getNumberOfStudents() == 3);
+  std::cout << "insert 4" << std::endl;
+  studentDatabase->insert(s4);
+  studentDatabase->printTree();
+  assert(studentDatabase->getNumberOfStudents() == 4);
+  std::cout << "insert 6" << std::endl;
   studentDatabase->insert(s6);
+  studentDatabase->printTree();
+  assert(studentDatabase->getNumberOfStudents() == 5);
+   std::cout << "insert 3" << std::endl;
+  studentDatabase->insert(s3);
+  studentDatabase->printTree();
   assert(studentDatabase->getNumberOfStudents() == 6);
 
-  //inOrder traversal
-  std::string inOrder = studentDatabase->toStringInOrder();
-  std::cout << inOrder << std::endl;
-
+  std::cout << "** Balance fcn:" << std::endl;
   std::cout << "before " << std::endl;
+  studentDatabase->printTree();
   studentDatabase->balance();
   std::cout << "after " << std::endl;
+  studentDatabase->printTree();
 
   //searchBy
   const Student* ptr = studentDatabase->searchBy(s1->getID());
@@ -281,18 +312,133 @@ void small_sdatabase_test(){
   assert(studentDatabase->searchBy(0) == nullptr);
 
   //deleteBy test1
-  studentDatabase->deleteBy(s1->getID());
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  std::cout << "** Delete in random order" << std::endl;
+  std::cout << "delete 2" << std::endl;
   assert(studentDatabase->deleteBy(s2->getID()) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s3->getID()) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s4->getID()) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
-  assert(studentDatabase->deleteBy(s5->getID()) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->printTree();
+  std::cout << "delete 1" << std::endl;
+  assert(studentDatabase->deleteBy(s1->getID()) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 6" << std::endl;
   assert(studentDatabase->deleteBy(s6->getID()) == true);
-  std::cout << studentDatabase->toStringInOrder() << std::endl;
+  studentDatabase->printTree();
+  std::cout << "delete 3" << std::endl;
+  assert(studentDatabase->deleteBy(s3->getID()) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 5" << std::endl;
+  assert(studentDatabase->deleteBy(s5->getID()) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 4" << std::endl;
+  assert(studentDatabase->deleteBy(s4->getID()) == true);
+  studentDatabase->printTree();
+
+  assert(studentDatabase->getNumberOfStudents() == 0);
+
+  Student* s7 = new Student(7, "John", "Smith");
+  Student* s8 = new Student(8, "David", "Smith");
+  Student* s9 = new Student(9, "Mary", "Smith");
+  Student* s10 = new Student(10, "Mary", "J Blige");
+  Student* s11 = new Student(11, "Mary", "Magdalene");
+  Student* s12 = new Student(12, "Mary", "Joseph");
+
+  std::cout << "** Insert in order" << std::endl;
+  std::cout << "insert 7" << std::endl;
+  assert(studentDatabase->insert(s7) == true);
+  studentDatabase->printTree();
+  std::cout << "insert 8" << std::endl;
+  studentDatabase->insert(s8);
+  studentDatabase->printTree();
+  std::cout << "insert 9" << std::endl;
+  studentDatabase->insert(s9);
+  studentDatabase->printTree();
+  std::cout << "insert 10" << std::endl;
+  studentDatabase->insert(s10);
+  studentDatabase->printTree();
+  std::cout << "insert 11" << std::endl;
+  studentDatabase->insert(s11);
+  studentDatabase->printTree();
+  std::cout << "insert 12" << std::endl;
+  studentDatabase->insert(s12);
+  studentDatabase->printTree();
+
+  std::cout << "** Balance fcn:" << std::endl;
+  std::cout << "before " << std::endl;
+  studentDatabase->printTree();
+  studentDatabase->balance();
+  std::cout << "after " << std::endl;
+  studentDatabase->printTree();
+
+  std::cout << "** Delete in random order" << std::endl;
+  std::cout << "delete 8" << std::endl;
+  assert(studentDatabase->deleteBy(8) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 9" << std::endl;
+  assert(studentDatabase->deleteBy(9) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 12" << std::endl;
+  assert(studentDatabase->deleteBy(12) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 11" << std::endl;
+  assert(studentDatabase->deleteBy(11) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 10" << std::endl;
+  assert(studentDatabase->deleteBy(10) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 7" << std::endl;
+  assert(studentDatabase->deleteBy(7) == true);
+  studentDatabase->printTree();  
+
+  Student* s13 = new Student(13, "John", "Smith");
+  Student* s14 = new Student(14, "David", "Smith");
+  Student* s15 = new Student(15, "Mary", "Smith");
+  Student* s16 = new Student(16, "Mary", "J Blige");
+  Student* s17 = new Student(17, "Mary", "Magdalene");
+  Student* s18 = new Student(18, "Mary", "Joseph");
+
+  std::cout << "** Insert in random order" << std::endl;
+  std::cout << "insert 18" << std::endl;
+  studentDatabase->insert(s18);
+  studentDatabase->printTree();
+  std::cout << "insert 13" << std::endl;
+  studentDatabase->insert(s13);
+  studentDatabase->printTree();
+  std::cout << "insert 17" << std::endl;
+  studentDatabase->insert(s17);
+  studentDatabase->printTree();
+  std::cout << "insert 15" << std::endl;
+  studentDatabase->insert(s15);
+  studentDatabase->printTree();
+  std::cout << "insert 16" << std::endl;
+  studentDatabase->insert(s16);
+  studentDatabase->printTree();
+  std::cout << "insert 14" << std::endl;
+  studentDatabase->insert(s14);
+  studentDatabase->printTree();
+
+  std::cout << "** Delete in order" << std::endl;
+  std::cout << "delete 13" << std::endl;
+  assert(studentDatabase->deleteBy(13) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 14" << std::endl;
+  assert(studentDatabase->deleteBy(14) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 15" << std::endl;
+  assert(studentDatabase->deleteBy(15) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 16" << std::endl;
+  assert(studentDatabase->deleteBy(16) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 17" << std::endl;
+  assert(studentDatabase->deleteBy(17) == true);
+  studentDatabase->printTree();
+  std::cout << "delete 18" << std::endl;
+  assert(studentDatabase->deleteBy(18) == true);
+  studentDatabase->printTree();  
+
+  // //inOrder traversal
+  // std::cout << "** InOrder Traversal: " << std::endl;
+  // std::string inOrder = studentDatabase->toStringInOrder();
+  // std::cout << inOrder << std::endl;
 
   delete studentDatabase;
 }
@@ -481,15 +627,27 @@ void emanager_test(){
   std::cout << "Report(course 9999)" << std::endl;
   std::cout << em->report(std::to_string(9999)) << std::endl;
 
+  // EM: enroll all students to all courses
+  for (int i = 0; i < 9999; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
+  }
+  for (int i = 0; i < 9999; i++){
+    assert(em->addCourse(std::to_string(i), 10000) == true);;
+  }
+ for (int i = 0; i < 10000; i++){
+    assert(em->enroll(i, std::to_string(0)) == true);
+ }
+
   delete em;
 }
 
 int main(){
-  student_test();
-  course_test();
-  cmanager_test();
+  // student_test();
+  // course_test();
+  // cmanager_test();
+  // cm_enroll_test();
   small_sdatabase_test();
-  large_sdatabase_test();
-  emanager_test();
+  // large_sdatabase_test();
+  // emanager_test();
   return 0;
 }
