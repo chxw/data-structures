@@ -93,8 +93,6 @@ bool StudentDatabase::deleteBy(int studentID){
 		return false;
 	}
 	if (searchBy(studentID) == nullptr){
-		std::cout << "studentID " << studentID << " not found" << std::endl;
-		std::cout << "root is " << root->getData()->getID() << std::endl;
 		return false;
 	}
 	
@@ -391,7 +389,9 @@ std::string StudentDatabase::toStringInOrder() const{
 	std::string s = "";
 	inOrder(root, s);
 
-	s.pop_back();
+	if (s != ""){
+		s.pop_back();
+	}
 
 	return s;
 }
@@ -423,8 +423,9 @@ std::string StudentDatabase::toTreeString() const{
 	}
 
 	std::string s = "";
-
+	s += "[";
 	printString(root, s);
+	s += "]";
 
 	return s;
 }

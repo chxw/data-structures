@@ -61,6 +61,10 @@ bool Course::enroll(int studentID){
 	if (isFull()){
 		return false;
 	}
+	if (studentID < 0){
+		return false;
+	}
+
 	data[enrolled] = studentID;
 	enrolled += 1;
 	return true;

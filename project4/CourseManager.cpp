@@ -1,5 +1,7 @@
 #include "CourseManager.hpp"
 
+#include <iostream>
+
 
 CourseManager::CourseManager(){
 	size = 0;
@@ -91,6 +93,10 @@ bool CourseManager::cancel(std::string courseID){
 }
 
 bool CourseManager::enroll(int studentID, std::string courseID){
+	if (studentID < 0 or courseID.length() == 0){
+		return false;
+	}
+ 
 	for (int i = 0; i < size; i++){
 		if (array[i]->getID() == courseID){
 			return array[i]->enroll(studentID);
@@ -125,10 +131,12 @@ std::string CourseManager::getAllEnrolledCoursesStringOf(int studentID){
 	for (int i = 0; i < size; i++){
 		if (array[i]->isHaving(studentID)){
 			s += array[i]->getID();
-			if (i != size - 1){
-				s += ",";
-			}
+			s += ",";
 		}
+	}
+
+	if (s != ""){
+		s.pop_back();
 	}
 
 	return s;
@@ -139,13 +147,15 @@ int CourseManager::getNumberOfCourses() const{
 }
 
 std::string CourseManager::getCourseListString() const{
-	std::string s;
+	std::string s = "";
 
 	for (int i = 0; i < size; i++){
 		s += array[i]->getID();
-		if (i != size - 1){
-			s += ",";
-		}
+		s += ",";
+	}
+
+	if (s != ""){
+		s.pop_back();
 	}
 
 	return s;

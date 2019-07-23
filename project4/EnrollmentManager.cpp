@@ -39,12 +39,16 @@ bool EnrollmentManager::registerStudent(int studentID, std::string firstName, st
 
 	bool result;
 
-	Student* newbie = new Student(studentID, firstName, lastName);
+	try{
+		Student* newbie = new Student(studentID, firstName, lastName);
+		result = sd->insert(newbie);
 
-	result = sd->insert(newbie);
-
-	if (sd->getNumberOfStudents() % 100 == 0){
-		sd->balance();
+		if (sd->getNumberOfStudents() % 100 == 0){
+			sd->balance();
+		}
+	}
+	catch(std::runtime_error& e){
+		return false;
 	}
 
 	return result;
@@ -60,26 +64,53 @@ bool EnrollmentManager::addCourse(std::string courseID, int capacity){
 	if (cm->searchBy(courseID) != nullptr){
 		return false;
 	}
-
+	if (courseID.size() == 0 or capacity <= 0){
+		return false;
+	}	
+	
+	bool result;
 	Course* newbie = new Course(courseID, capacity);
-	cm->add(newbie);
-	return true;
+	result = cm->add(newbie);
+	
+	if (result){
+		return true;
+	}
+	else {
+		delete newbie;
+		return false;
+	}
 }
 
 bool EnrollmentManager::cancelCourse(std::string courseID){
+	if (cm->searchBy(courseID) == nullptr){
+		return false;
+	}
+
 	return cm->cancel(courseID);
 }
 
 bool EnrollmentManager::enroll(int studentID, std::string courseID){
+	if (studentID < 0 or courseID.length() == 0){
+		return false;
+	}
+	else if (sd->searchBy(studentID) == nullptr or cm->searchBy(courseID) == nullptr){
+		return false;
+	}
+
+
 	return cm->enroll(studentID, courseID);
 }
 
 bool EnrollmentManager::drop(int studentID, std::string courseID){
+	if (sd->searchBy(studentID) == nullptr or cm->searchBy(courseID) == nullptr){
+		return false;
+	}
+
 	return cm->drop(studentID, courseID);
 }
 
 std::string EnrollmentManager::reportSummary() const{
-	std::string s;
+	std::string s = "";
 
 	if (semester == Semester::SUMMER){
 		s += "Summer ";
@@ -93,12 +124,12 @@ std::string EnrollmentManager::reportSummary() const{
 
 	s += std::to_string(year);
 	s += "\n";
-	s += "Students: ";
+	s += "Students:";
 	s += std::to_string(sd->getNumberOfStudents());
 	s += "\n";
 	s += sd->toStringInOrder();
 	s += "\n";
-	s += "Courses: ";
+	s += "Courses:";
 	s += std::to_string(cm->getNumberOfCourses());
 	s += "\n";
 	s += cm->getCourseListString();
@@ -111,7 +142,7 @@ std::string EnrollmentManager::report(int studentID) const{
 		return "Not Found";
 	}
 
-	std::string s;
+	std::string s = "";
 
 	s += (sd->searchBy(studentID))->toString();
 	s += "\n";
@@ -125,13 +156,13 @@ std::string EnrollmentManager::report(std::string courseID) const{
 		return "Not Found";
 	}
 
-	std::string s;
+	std::string s = "";
 
 	const Course* course = cm->searchBy(courseID);
 	s += course->toString();
 	s += "\n";
 	for (int i = 0; i < course->getNumberOfEnrolledStudents(); i++){
-		s += std::to_string(course->getStudentIDAt(i));
+		s += sd->searchBy(course->getStudentIDAt(i))->toString();
 		if (i != course->getNumberOfEnrolledStudents() - 1){
 			s += "\n";
 		}

@@ -158,36 +158,44 @@ void cmanager_test(){
   Course* course8 = new Course("COMP-22", 50);
   Course* course9 = new Course("COMP-23", 50);
 
-  // add
-  cm->add(course1);
-  cm->add(course2);
-  cm->add(course3);
-  cm->add(course4);
-  cm->add(course5);
-  cm->add(course6);
-  cm->add(course7);
-  cm->add(course8);
-  cm->add(course9);
+  // add + searchBy not found
+  assert(cm->searchBy(course1->getID()) == nullptr);
+  assert(cm->add(course1) == true);
+  assert(cm->searchBy(course2->getID()) == nullptr);
+  assert(cm->add(course2) == true);
+  assert(cm->searchBy(course3->getID()) == nullptr);
+  assert(cm->add(course3) == true);
+  assert(cm->searchBy(course4->getID()) == nullptr);
+  assert(cm->add(course4) == true);
+  assert(cm->searchBy(course5->getID()) == nullptr);
+  assert(cm->add(course5) == true);
+  assert(cm->searchBy(course6->getID()) == nullptr);
+  assert(cm->add(course6) == true);
+  assert(cm->searchBy(course7->getID()) == nullptr);
+  assert(cm->add(course7) == true);
+  assert(cm->searchBy(course8->getID()) == nullptr);
+  assert(cm->add(course8) == true);
+  assert(cm->searchBy(course9->getID()) == nullptr);
+  assert(cm->add(course9) == true);
 
-  // searchBy
+  // searchBy found
   assert((cm->searchBy(course9->getID()))->getID() == course9->getID());
 
   // getCourseListString
   std::cout << cm->getCourseListString() << std::endl;
-
   // cancel
   // random index
   cm->cancel(course5->getID());
-  std::cout << "delete comp-19 \n" + cm->getCourseListString() << std::endl;
+  std::cout << "delete comp-19: " + cm->getCourseListString() << std::endl;
   // random index
   cm->cancel(course2->getID());
-  std::cout << "delete comp-16 \n" + cm->getCourseListString() << std::endl;
-  // at index 0
+  std::cout << "delete comp-16: " + cm->getCourseListString() << std::endl;
+  // index 0
   cm->cancel(course1->getID());
-  std::cout << "delete comp-15 \n" + cm->getCourseListString() << std::endl;
-  // at last index
+  std::cout << "delete comp-15: " + cm->getCourseListString() << std::endl;
+  // last index
   cm->cancel(course9->getID());
-  std::cout << "delete comp-23 \n" + cm->getCourseListString() << std::endl;
+  std::cout << "delete comp-23: " + cm->getCourseListString() << std::endl;
 
   // get number of courses
   assert(cm->getNumberOfCourses() == 5);
@@ -196,14 +204,20 @@ void cmanager_test(){
   for (int i = 0; i < 50; i++){
     assert(cm->enroll(i, course3->getID()) == true);
   }
-
+  // isFull
   assert(course3->isFull() == true);
 
-  // getAllEnrolledCoursesStringOf
+  // enroll
   cm->enroll(0, course4->getID());
   cm->enroll(0, course6->getID());
   cm->enroll(0, course7->getID());
   cm->enroll(0, course8->getID());
+
+  // catch exceptions
+  assert(cm->enroll(-1, course4->getID()) == false);
+  assert(cm->enroll(0, "") == false);
+
+  // getAllEnrolledCoursesStringOf
   assert(cm->getAllEnrolledCoursesStringOf(0) == cm->getCourseListString());
 
   // drop student from one course
@@ -217,18 +231,117 @@ void cmanager_test(){
 }
 
 void cm_enroll_test(){
-	CourseManager* cm = new CourseManager();
-	Course* course1 = new Course("COMP-15", 10000);
-	cm->add(course1);
+  std::string s = "course";
 
-	for (int i = 0; i < 10000; i++){
-		std::cout << "i is " << i << std::endl;
-		assert(cm->enroll(i, course1->getID()) == true);
+	CourseManager* cm = new CourseManager();
+
+	Course* course1 = new Course(s+"1", 20);
+  Course* course2 = new Course(s+"2", 20);
+  Course* course3 = new Course(s+"3", 20);
+  Course* course4 = new Course(s+"4", 20);
+  Course* course5 = new Course(s+"5", 20);
+  Course* course6 = new Course(s+"6", 20);
+  Course* course7 = new Course(s+"7", 20);
+  Course* course8 = new Course(s+"8", 20);
+  Course* course9 = new Course(s+"9", 20);
+  Course* course10 = new Course(s+"10", 20);
+  Course* course11 = new Course(s+"11", 20);
+  Course* course12 = new Course(s+"12", 20);
+  Course* course13 = new Course(s+"13", 20);
+  Course* course14 = new Course(s+"14", 20);
+  Course* course15 = new Course(s+"15", 20);
+  Course* course16 = new Course(s+"16", 20);
+  Course* course17 = new Course(s+"17", 20);
+  Course* course18 = new Course(s+"18", 20);
+  Course* course19 = new Course(s+"19", 20);
+  Course* course20 = new Course(s+"20", 20);
+
+	cm->add(course1);
+  assert(cm->searchBy(s+"1")->getID() == course1->getID());
+  cm->add(course2);
+  cm->add(course3);
+  cm->add(course4);
+  cm->add(course5);
+  cm->add(course6);
+  cm->add(course7);
+  cm->add(course8);
+  cm->add(course9);
+  cm->add(course10);
+  cm->add(course11);
+  cm->add(course12);
+  cm->add(course13);
+  cm->add(course14);
+  cm->add(course15);
+  cm->add(course16);
+  cm->add(course17);
+  cm->add(course18);
+  cm->add(course19);
+  cm->add(course20);
+
+	for (int i = 1; i <= 20; i++){
+		assert(cm->enroll(i, "course"+std::to_string(i)) == true);
 	}
 
-	assert(cm->getAllEnrolledCoursesStringOf(0) == cm->getCourseListString());	
+  assert(cm->getAllEnrolledCoursesStringOf(1) == "course1");
+  assert(cm->getNumberOfCourses() == 20);
+
+  //////////////////////////////////////////
+
+  CourseManager* cm1 = new CourseManager();
+
+  Course* course21 = new Course(s+"21", 20);
+  Course* course22 = new Course(s+"22", 20);
+  Course* course23 = new Course(s+"23", 20);
+  Course* course24 = new Course(s+"24", 20);
+  Course* course25 = new Course(s+"25", 20);
+  Course* course26 = new Course(s+"26", 20);
+  Course* course27 = new Course(s+"27", 20);
+  Course* course28 = new Course(s+"28", 20);
+  Course* course29 = new Course(s+"29", 20);
+  Course* course30 = new Course(s+"30", 20);
+  Course* course31 = new Course(s+"31", 20);
+  Course* course32 = new Course(s+"32", 20);
+  Course* course33 = new Course(s+"33", 20);
+  Course* course34 = new Course(s+"34", 20);
+  Course* course35 = new Course(s+"35", 20);
+  Course* course36 = new Course(s+"36", 20);
+  Course* course37 = new Course(s+"37", 20);
+  Course* course38 = new Course(s+"38", 20);
+  Course* course39 = new Course(s+"39", 20);
+  Course* course40 = new Course(s+"40", 20);
+
+  cm1->add(course21);
+  cm1->add(course22);
+  cm1->add(course23);
+  cm1->add(course24);
+  cm1->add(course25);
+  cm1->add(course26);
+  cm1->add(course27);
+  cm1->add(course28);
+  cm1->add(course29);
+  cm1->add(course30);
+  cm1->add(course31);
+  cm1->add(course32);
+  cm1->add(course33);
+  cm1->add(course34);
+  cm1->add(course35);
+  cm1->add(course36);
+  cm1->add(course37);
+  cm1->add(course38);
+  cm1->add(course39);
+  cm1->add(course40);
+
+  for (int i = 21; i <= 40; i++){
+    for (int j = 1; j <= 20; j++){
+      assert(cm1->enroll(j, "course"+std::to_string(i)) == true);
+    }
+  }
+
+  assert(cm1->getNumberOfCourses() == 20);
+	assert(cm1->getAllEnrolledCoursesStringOf(1) == cm1->getCourseListString());	
 
 	delete cm;
+  delete cm1;
 }
 
 void toTreeString_test(){
@@ -242,10 +355,12 @@ void toTreeString_test(){
   studentDatabase->insert(s2);
   studentDatabase->insert(s3);
 
-  std::string result = studentDatabase->toTreeString();
-  std::string expected = "[[[](1 John Smith)[]](2 David Smith)[[](3 Mary Smith)[]]]";
+  studentDatabase->printTree();
 
-  assert(result == expected);
+  std::string result = studentDatabase->toTreeString();
+  std::cout << result << std::endl;
+
+  assert(result == "[[](1 John Smith)[[](2 David Smith)[[](3 Mary Smith)[]]]]");
 
   delete studentDatabase;
 }
@@ -267,27 +382,34 @@ void small_sdatabase_test(){
   std::cout << "insert 5" << std::endl;
   studentDatabase->insert(s5);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(5) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 1);
   std::cout << "insert 2" << std::endl;
   studentDatabase->insert(s2);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(2) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 2);
   std::cout << "insert 1" << std::endl;
   studentDatabase->insert(s1);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(1) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 3);
   std::cout << "insert 4" << std::endl;
   studentDatabase->insert(s4);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(4) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 4);
   std::cout << "insert 6" << std::endl;
   studentDatabase->insert(s6);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(6) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 5);
    std::cout << "insert 3" << std::endl;
   studentDatabase->insert(s3);
   studentDatabase->printTree();
+  assert(studentDatabase->searchBy(3) != nullptr);
   assert(studentDatabase->getNumberOfStudents() == 6);
+
 
   std::cout << "** Balance fcn:" << std::endl;
   std::cout << "before " << std::endl;
@@ -315,21 +437,27 @@ void small_sdatabase_test(){
   std::cout << "** Delete in random order" << std::endl;
   std::cout << "delete 2" << std::endl;
   assert(studentDatabase->deleteBy(s2->getID()) == true);
+  assert(studentDatabase->searchBy(2) == nullptr);
   studentDatabase->printTree();
   std::cout << "delete 1" << std::endl;
   assert(studentDatabase->deleteBy(s1->getID()) == true);
+  assert(studentDatabase->searchBy(1) == nullptr);
   studentDatabase->printTree();
   std::cout << "delete 6" << std::endl;
   assert(studentDatabase->deleteBy(s6->getID()) == true);
+  assert(studentDatabase->searchBy(6) == nullptr);
   studentDatabase->printTree();
   std::cout << "delete 3" << std::endl;
   assert(studentDatabase->deleteBy(s3->getID()) == true);
+  assert(studentDatabase->searchBy(3) == nullptr);
   studentDatabase->printTree();
   std::cout << "delete 5" << std::endl;
   assert(studentDatabase->deleteBy(s5->getID()) == true);
+  assert(studentDatabase->searchBy(5) == nullptr);
   studentDatabase->printTree();
   std::cout << "delete 4" << std::endl;
   assert(studentDatabase->deleteBy(s4->getID()) == true);
+  assert(studentDatabase->searchBy(4) == nullptr);
   studentDatabase->printTree();
 
   assert(studentDatabase->getNumberOfStudents() == 0);
@@ -641,13 +769,83 @@ void emanager_test(){
   delete em;
 }
 
+void emanager_register_test(){
+  EnrollmentManager* em = new EnrollmentManager();
+
+  // SD test
+  std::string fname = "FIRST";
+  std::string lname = "LAST";
+
+  for (int i = 0; i < 10; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
+  }
+
+  for (int i = 0; i < 10; i++){
+    assert(em->registerStudent(i, fname, lname) == false);
+  }
+
+  for (int i = 10; i <= 99; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
+  }
+
+  std::cout << em->reportSummary() << std::endl;
+
+  assert(em->registerStudent(100, fname, lname) == true);
+
+}
+
+void emanager_report_test(){
+  EnrollmentManager* em = new EnrollmentManager();
+
+  assert(em->getYear() == 2019);
+  assert(em->getSemester() == Semester::SUMMER);
+
+  // SD test
+  std::string fname = "FIRST";
+  std::string lname = "LAST";
+
+  for (int i = 0; i < 20; i++){
+    assert(em->registerStudent(i, fname, lname) == true);
+  }
+
+  for (int i = 0; i < 20; i++){
+    for (int j = 0; j  < 20; j++){
+      assert(em->enroll(j, std::to_string(i)) == false);
+    }
+  }
+
+  for (int i = 0; i < 20; i++){
+    assert(em->addCourse(std::to_string(i), 20) == true);;
+  }
+
+  for (int i = 0; i < 20; i++){
+    for (int j = 0; j  < 20; j++){
+      assert(em->enroll(j, std::to_string(i)) == true);
+    }
+  }
+
+  assert(em->enroll(20, "0") == false);
+  assert(em->enroll(0, "20") == false);
+
+  std::cout << em->report(0) << std::endl;
+  std::cout << em->report("0") << std::endl;
+  std::cout << em->reportSummary() << std::endl;
+
+  assert(em->report(20) == "Not Found");
+  assert(em->report("20") == "Not Found");
+
+}
+
 int main(){
-  // student_test();
-  // course_test();
-  // cmanager_test();
-  // cm_enroll_test();
+  student_test();
+  course_test();
+  cmanager_test();
+  cm_enroll_test();
+  toTreeString_test();
   small_sdatabase_test();
-  // large_sdatabase_test();
-  // emanager_test();
+  large_sdatabase_test();
+  emanager_test();
+  emanager_register_test();
+  emanager_report_test();
   return 0;
 }
