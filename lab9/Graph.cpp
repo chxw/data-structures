@@ -19,13 +19,13 @@ void Graph::addVertex(int id){
 void Graph::addEdge(int fromID, int toID){
 	Vertex* to;
 
-	for (int i = 0; i < vertices.size(); i++){
+	for (size_t i = 0; i < vertices.size(); i++){
 		if (vertices[i]->getID() == toID){
 			to = vertices[i];
 		}
 	}
 
-	for (int i = 0; i < vertices.size(); i++){
+	for (size_t i = 0; i < vertices.size(); i++){
 		if (vertices[i]->getID() == fromID){
 			vertices[i]->addEdge(to);
 		}
@@ -33,11 +33,11 @@ void Graph::addEdge(int fromID, int toID){
 }
 
 bool Graph::isCyclic(){
-	for (int i = 0; i < vertices.size(); i++){
+	for (size_t i = 0; i < vertices.size(); i++){
 		vertices[i]->setColor(Color::WHITE);
 	}
 
-	for (int i = 0; i < vertices.size(); i++){
+	for (size_t i = 0; i < vertices.size(); i++){
 		if (DFS(vertices[i])){
 			return true;
 		}
