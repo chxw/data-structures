@@ -2,8 +2,6 @@
 #define GRAPH_HPP
 
 #include "Vertex.hpp"
-#include <stack>
-#include <queue>
 
 class Graph{
 public:
