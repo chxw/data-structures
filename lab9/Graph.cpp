@@ -11,9 +11,7 @@ Graph::~Graph(){
 }
 
 void Graph::addVertex(int id){
-	Vertex v = Vertex(id);
-	Vertex* vertex = &v;
-
+	Vertex* vertex = new Vertex(id);
 	vertices.push_back(vertex);
 }
 
@@ -37,7 +35,7 @@ bool Graph::isCyclic(){
 	for (size_t i = 0; i < vertices.size(); i++){
 		vertices[i]->setColor(Color::WHITE);
 	}
-	
+
 	for (size_t i = 0; i < vertices.size(); i++){
 		if (DFS(vertices[i])){
 			return true;
