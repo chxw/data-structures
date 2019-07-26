@@ -50,11 +50,10 @@ bool Graph::isCyclic(){
 bool Graph::DFS(Vertex* v){
 	v->setColor(Color::GRAY);
 	for (int i = 0; v->getNumberOfAdjacentVertices(); i++){
-		Vertex* adj = v->getAdjacentVertexAt(i);
-		if (adj->getColor() == Color::WHITE){
-			DFS(adj);
+		if (v->getAdjacentVertexAt(i)->getColor() == Color::WHITE){
+			DFS(v->getAdjacentVertexAt(i));
 		}
-		else if (adj->getColor() == Color::GRAY){
+		else if (v->getAdjacentVertexAt(i)->getColor() == Color::GRAY){
 			return true;
 		}
 	}
