@@ -7,6 +7,7 @@ Graph::Graph(){
 }
 
 Graph::~Graph(){
+	vertices.clear();
 }
 
 void Graph::addVertex(int id){

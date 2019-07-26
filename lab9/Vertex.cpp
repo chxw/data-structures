@@ -8,6 +8,7 @@ Vertex::Vertex(int given_id){
 }
 
 Vertex::~Vertex(){
+	adjacent.clear();
 }
 
 int Vertex::getID() const{
