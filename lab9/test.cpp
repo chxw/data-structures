@@ -2,6 +2,23 @@
 
 #include "Graph.hpp"
 #include "Vertex.hpp"
+#include <iostream>
+
+void vertex_test(){
+	Vertex v = Vertex(0);
+	// Vertex* vptr = &v;
+
+	Vertex e = Vertex(1);
+	Vertex* eptr = &e;
+
+	v.addEdge(eptr);
+	v.setColor(Color::GRAY);
+	for (int i = 0; i < v.getNumberOfAdjacentVertices(); i++){
+		if (v.getAdjacentVertexAt(i)->getColor() == Color::WHITE){
+			std::cout << "Adjacent Vertex white" << std::endl;
+		}
+	}
+}
 
 void test1(){
   Graph graph;
@@ -98,6 +115,7 @@ void test7(){
 }
 
 int main(){
+	// vertex_test();
   test1();
   test2();
   test3();
