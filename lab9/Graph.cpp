@@ -7,7 +7,9 @@ Graph::Graph(){
 }
 
 Graph::~Graph(){
-	vertices.clear();
+	for (size_t i = 0; i < vertices.size(); i++){
+		delete vertices[i];
+	}
 }
 
 void Graph::addVertex(int id){
