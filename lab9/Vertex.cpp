@@ -2,7 +2,7 @@
 
 Vertex::Vertex(int given_id){
 	id = given_id;
-	color = Color::UNKNOWN;
+	color = Color::WHITE;
 	num_vertices = 0;
 }
 

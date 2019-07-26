@@ -35,13 +35,13 @@ void Graph::addEdge(int fromID, int toID){
 
 bool Graph::isCyclic(){
 	for (size_t i = 0; i < vertices.size(); i++){
-		vertices[i]->setColor(Color::WHITE);
-	}
-
-	for (size_t i = 0; i < vertices.size(); i++){
 		if (DFS(vertices[i])){
 			return true;
 		}
+	}
+
+	for (size_t i = 0; i < vertices.size(); i++){
+		vertices[i]->setColor(Color::WHITE);
 	}
 
 	return false;
