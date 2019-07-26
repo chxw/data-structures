@@ -33,47 +33,30 @@ void Graph::addEdge(int fromID, int toID){
 }
 
 bool Graph::isCyclic(){
-	bool result = false;
-
-	std::stack<Vertex*> dfs;
+	for (int i = 0; i < vertices.size(); i++){
+		vertices[i]->setColor(Color::WHITE);
+	}
 
 	for (int i = 0; i < vertices.size(); i++){
-		if (isCyclicUtil(vertices[i], dfs)){
-			result = true;
+		if (DFS(vertices[i])){
+			return true;
 		}
 	}
 
-	return result;
+	return false;
 }
 
-bool Graph::isCyclicUtil(Vertex* vertex, std::stack<Vertex*> &dfs){
-	// no vertices 
-	if (vertex->getNumberOfAdjacentVertices() == 0){
-		vertex->setColor(Color::BLACK);
-		if (!dfs.empty()){
-			dfs.pop();
-			isCyclicUtil(dfs.top(), dfs);
+bool Graph::DFS(Vertex* v){
+	v->setColor(Color::GRAY);
+	for (int i = 0; v->getNumberOfAdjacentVertices(); i++){
+		Vertex* adj = v->getAdjacentVertexAt(i);
+		if (adj->getColor() == Color::WHITE){
+			DFS(adj);
+		}
+		else if (adj->getColor() == Color::GRAY){
+			return true;
 		}
 	}
-	// not visited
-	else if (vertex->getColor() == Color::WHITE){
-		dfs.push(vertex);
-		vertex->setColor(Color::GRAY);
-
-		for (int i = 0; i < vertex->getNumberOfAdjacentVertices(); i++){
-			Vertex* adj = vertex->getAdjacentVertexAt(i);
-			if (adj->getColor() != Color::WHITE){
-				std::cout << "if (adj->getColor() != Color::WHITE) " << std::endl;
-				return true;
-			}
-
-			dfs.push(adj);
-			adj->setColor(Color::GRAY);
-			if (!dfs.empty()){
-				isCyclicUtil(dfs.top(), dfs);
-			}
-		}
-		return false;
-	}
+	v->setColor(Color::BLACK);
 	return false;
 }

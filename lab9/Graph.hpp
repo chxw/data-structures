@@ -3,7 +3,7 @@
 
 #include "Vertex.hpp"
 #include <stack>
-
+#include <queue>
 
 class Graph{
 public:
@@ -21,7 +21,7 @@ private:
   //your design
 	std::vector <Vertex*> vertices;
 
-	bool isCyclicUtil(Vertex* vertex, std::stack<Vertex*> &dfs);
+	bool DFS(Vertex* v);
 };
 
 #endif
