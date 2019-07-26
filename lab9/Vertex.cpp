@@ -1,9 +1,8 @@
 #include "Vertex.hpp"
 
-
 Vertex::Vertex(int given_id){
 	id = given_id;
-	color = Color::WHITE;
+	color = Color::UNKNOWN;
 	num_vertices = 0;
 }
 
