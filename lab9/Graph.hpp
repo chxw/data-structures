@@ -2,6 +2,8 @@
 #define GRAPH_HPP
 
 #include "Vertex.hpp"
+#include <stack>
+
 
 class Graph{
 public:
@@ -17,6 +19,9 @@ public:
 
 private:
   //your design
+	std::vector <Vertex*> vertices;
+
+	bool isCyclicUtil(Vertex* vertex, std::stack<Vertex*> &dfs);
 };
 
 #endif

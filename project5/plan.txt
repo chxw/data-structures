@@ -1,0 +1,3 @@
+7/26: setup work environment - code skeleton, draw out hash table with chaining, think through how to approach project, read necessary information for implementing an application (i.e. makefile, database executable, etc.)
+7/27: implement modules for hash table
+
