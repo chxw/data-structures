@@ -4,10 +4,10 @@ X draw out hash table with chaining
 - read necessary information for implementing an application (i.e. makefile, database executable, etc.)
 X design hash table implementation
 X implement simplified hash table w/hashing fcn
-- try to implement "entry" modules
-- try to implement "overflow entries"
+X try to implement "entry" modules (Node)
+- try to implement "overflow entries" (Doubly Linked List)
 - work on T9
-7/30: hashing fcn
+7/30: Node + Doubly Linked List testing 
 7/31: testing with dataset_small 
 8/1: testing with dataset_large
 8/2-8/4: buffer + writing documentation/specification
