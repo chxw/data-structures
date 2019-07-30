@@ -12,9 +12,9 @@ public:
 	~Node();
 
 	std::string getWord() const;
-	void setWord();
+	void setWord(std::string w);
 	int getFreq() const;
-	void setFreq();
+	void setFreq(int f);
 
 	Node* getNext() const;
 	void setNext(Node* node);

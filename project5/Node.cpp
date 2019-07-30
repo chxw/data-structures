@@ -16,8 +16,16 @@ std::string Node::getWord() const{
 	return word;
 }
 
+void setWord(std::string w){
+	word = w;
+}
+
 int Node::getFreq() const{
 	return freq;
+}
+
+void setFreq(int f){
+	freq = f;	
 }
 
 Node* Node::getNext() const{

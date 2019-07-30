@@ -11,5 +11,11 @@ int main(){
 
 	h.print();
 
+	Node n;
+
+	n.setWord("james earl carter");
+	n.setFreq(1);
+	n.setWord()
+
   return 0;
 }
