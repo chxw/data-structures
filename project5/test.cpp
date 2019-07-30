@@ -2,8 +2,9 @@
 #include <iostream>
 
 #include "Hash.hpp"
+#include "Entries.hpp"
 
-void basics(){
+void Hash_basics(){
 	Hash h;
 
 	h.put("chelsea", 1);
@@ -12,7 +13,9 @@ void basics(){
 	h.put("test", 4);
 
 	h.print();
+}
 
+void Entries_basics(){
 	Node* n = new Node();
 
 	n->setWord("james earl carter");
@@ -33,10 +36,28 @@ void basics(){
 	n1->setNext(n1);
 	assert(n1->getNext()->getWord() == "alex turner");
 	assert(n1->getNext()->getFreq() == 2);
+
+	n1->setNext(nullptr);
+
+	Entries* e = new Entries();
+	e->add(n);
+	e->add(n1);
+	e->add("chelsea", 6);
+	e->add("johnny", 3);
+
+	if (e->top() == nullptr){
+		std::cout << "e is empty" << std::endl;
+	}
+	else{
+		std::cout << "e top is " << e->top()->getWord() << std::endl;
+	}
+
+	std::cout << e->toString() << std::endl;
 }
 
 int main(){
-	basics();
+	Hash_basics();
+	Entries_basics();
 
 	return 0;
 }

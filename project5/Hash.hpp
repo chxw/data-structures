@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Node.hpp"
+#include "Entries.hpp"
 
 class Hash{
 public:
