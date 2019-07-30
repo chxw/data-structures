@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "Node.hpp"
+
 class Hash{
 public:
 	Hash();
@@ -15,16 +17,17 @@ public:
 	int get(std::string word);
 	void remove(std::string word);
 
+	int getLoadFactor();
+
 	void print();
 
 private:
-	int* table;
+	Node** table;
 
 	int hasher(std::string word);
 
 	int num_words;
 	int num_buckets;
-	int load_factor;
 };
 
 #endif

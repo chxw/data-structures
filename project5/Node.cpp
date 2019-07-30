@@ -1,4 +1,4 @@
-#include "Node.cpp"
+#include "Node.hpp"
 
 Node::Node(){
 	next = nullptr;
@@ -7,16 +7,32 @@ Node::Node(){
 	freq = -1;
 }
 
-// Node::Node(std::string word, int freq);
+Node::Node(std::string given_word, int given_freq){
+	next = nullptr;
+	prev = nullptr;
+	word = given_word;
+	freq = given_freq;
+}
+
 // Node::Node(const Node& other);
-// Node::Node& operator=(const Node& other);
+
+// Node& Node::operator=(const Node& other){
+// 	if (&other != this){
+// 		next = other.getNext();
+// 		prev = other.getPrev();
+// 		word = other.getWord();
+// 		freq = other.getFreq();
+// 	}
+// 	return (*this);
+// }
+
 // Node::~Node();
 
 std::string Node::getWord() const{
 	return word;
 }
 
-void setWord(std::string w){
+void Node::setWord(std::string w){
 	word = w;
 }
 
@@ -24,7 +40,7 @@ int Node::getFreq() const{
 	return freq;
 }
 
-void setFreq(int f){
+void Node::setFreq(int f){
 	freq = f;	
 }
 

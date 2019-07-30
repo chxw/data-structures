@@ -3,13 +3,13 @@
 
 #include <string>
 
-class Hash{
+class Node{
 public:
 	Node();
-	Node(std::string word, int freq);
-	Node(const Node& other);
-	Node& operator=(const Node& other);
-	~Node();
+	Node(std::string given_word, int given_freq);
+	// Node(const Node& other);
+	// Node& operator=(const Node& other);
+	// ~Node();
 
 	std::string getWord() const;
 	void setWord(std::string w);
@@ -22,11 +22,11 @@ public:
 	void setPrev(Node* node);
 
 private:
-	Node* next;
-	Node* prev;
-
 	std::string word;
 	int freq;
+
+	Node* next;
+	Node* prev;
 };
 
 #endif
