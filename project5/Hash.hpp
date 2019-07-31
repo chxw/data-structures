@@ -8,7 +8,7 @@
 class Hash{
 public:
 	Hash();
-	Hash(std::string word, int freq);
+	Hash(int buckets);
 	// Hash(const Hash& other);
 	// Hash& operator=(const Hash& other);
 	// ~Hash();

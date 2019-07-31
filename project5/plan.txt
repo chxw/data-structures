@@ -4,13 +4,18 @@ X draw out hash table with chaining
 X design hash table implementation
 X implement simplified hash table w/hashing fcn
 X try to implement "entry" modules (Node)
-- work on T9
+X work on T9
 7/30:
-- try to implement "overflow entries" (Doubly Linked List)
-- Node + Doubly Linked List testing 
-7/31: testing with dataset_small 
-8/1: testing with dataset_large
+X try to implement "overflow entries" (Doubly Linked List)
+X Node + Doubly Linked List testing 
+7/31 - 8/1: 
+- testing on large scale
+- workout load factor / resizing
+	- multiply char->int value by base value of polynomial (an odd base number is often used).
+	- resize always to a prime number table size
+- testing with dataset_small 
 8/2-8/4: 
+- testing with dataset_small and dataset_large
 - buffer + writing documentation/specification
 - read necessary information for implementing an application (i.e. makefile, database executable, etc.)
 

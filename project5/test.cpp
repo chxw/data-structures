@@ -39,19 +39,8 @@ void Entries_basics(){
 
 	n1->setNext(nullptr);
 
-	if (n->getNext() == nullptr){
-		std::cout << "n->nullptr" << std::endl;
-	}
-	else{
-		std::cout << "n->" << n->getNext()->getWord() << std::endl;
-	}
-
-	if (n1->getNext() == nullptr){
-		std::cout << "n1->nullptr" << std::endl;
-	}
-	else{
-		std::cout << "n1->" << n1->getNext()->getWord() << std::endl;
-	}
+	assert(n->getNext() == nullptr);
+	assert(n1->getNext() == nullptr);
 
 	Entries* e = new Entries();
 	e->add(n);
@@ -66,12 +55,8 @@ void Entries_basics(){
 		std::cout << "e top is " << e->top()->getWord() << std::endl;
 	}
 
-	if (e->bottom() == nullptr){
-		std::cout << "e is empty" << std::endl;
-	}
-	else{
-		std::cout << "e bottom is " << e->bottom()->getWord() << std::endl;
-	}
+	assert(e->top()->getWord() == n->getWord());
+	assert(e->bottom()->getWord() == "johnny");
 
 	std::cout << e->toString() << std::endl;
 }

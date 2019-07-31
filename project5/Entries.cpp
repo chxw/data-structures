@@ -24,8 +24,6 @@ bool Entries::add(std::string w, int f){
 	Node* newbie = new Node(w, f);
 	newbie->setNext(nullptr);
 
-	std::cout << "adding " << newbie->getWord() << std::endl;
-
 	// empty
 	if (head == nullptr){
 		newbie->setPrev(nullptr);
@@ -34,8 +32,6 @@ bool Entries::add(std::string w, int f){
 		tail = newbie;
 
 		num_entries += 1;
-
-		std::cout << "adding to empty list" << std::endl;
 		return true;
 	}
 	// 1 node
@@ -45,8 +41,6 @@ bool Entries::add(std::string w, int f){
 
 		tail = newbie;
 		num_entries += 1;
-
-		std::cout << "adding to list w/ 1 node" << std::endl;
 		return true;
 	}
 	// not empty
@@ -57,8 +51,6 @@ bool Entries::add(std::string w, int f){
 
 		tail = newbie;
 		num_entries += 1;
-
-		std::cout << "adding to not empty list" << std::endl;
 		return true;
 	}
 	return false;
@@ -67,8 +59,6 @@ bool Entries::add(std::string w, int f){
 bool Entries::add(Node* newbie){
 	newbie->setNext(nullptr);
 
-	std::cout << "adding " << newbie->getWord() << std::endl;
-
 	// empty
 	if (head == nullptr){
 		newbie->setPrev(nullptr);
@@ -77,8 +67,6 @@ bool Entries::add(Node* newbie){
 		tail = newbie;
 
 		num_entries += 1;
-
-		std::cout << "adding to empty list" << std::endl;
 		return true;
 	}
 	// 1 node
@@ -88,8 +76,6 @@ bool Entries::add(Node* newbie){
 
 		tail = newbie;
 		num_entries += 1;
-
-		std::cout << "adding to list w/ 1 node" << std::endl;
 		return true;
 	}
 	// not empty
@@ -100,8 +86,6 @@ bool Entries::add(Node* newbie){
 
 		tail = newbie;
 		num_entries += 1;
-
-		std::cout << "adding to not empty list" << std::endl;
 		return true;
 	}
 	return false;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 #include "Hash.hpp"
 
@@ -13,21 +14,15 @@ Hash::Hash(){
 	}
 }
 
-Hash::Hash(std::string word, int freq){
+Hash::Hash(int buckets){
 	num_words = 0;
-	num_buckets = 5;
+	num_buckets = buckets;
 
 	table = new Entries*[num_buckets];
 
 	for (int i = 0; i < num_buckets; i++){
 		table[i] = nullptr;
 	}
-
-	Entries* newbie = new Entries(word, freq);
-
-	int index = hasher(word);
-
-	table[index] = newbie;
 }
 
 // Hash::Hash(const Hash& other);
@@ -72,10 +67,10 @@ void Hash::remove(std::string word){
 
 int Hash::hasher(std::string word){
 	int h = 0;
-	int partition = 3;
+	int base = 33;
 
 	for (std::string::size_type i = 0; i < word.size(); i++){
-		h += (word.at(i) - '0')*partition;
+		h += (word.at(i) - '0')* pow(base, word.size()-i);
 	}
 
 	std::cout << word << " hash code: " << h%num_buckets << std::endl;
