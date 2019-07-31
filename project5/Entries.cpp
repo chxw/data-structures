@@ -107,6 +107,17 @@ bool Entries::add(Node* newbie){
 	return false;
 }
 
+int Entries::findFreq(std::string word){
+	Node* current = head;
+	while (current != nullptr){
+		if (current->getWord() == word){
+			return current->getFreq();
+		}
+		current = current->getNext();
+	}
+	return -1;
+}
+
 void Entries::remove(std::string w){
 	if (head != nullptr){
 		if (head->getNext() == nullptr){
@@ -159,7 +170,6 @@ std::string Entries::toString() const{
 	s.pop_back();
 	s.pop_back();
 	s.pop_back();
-	s += "\n";
 
 	return s;
 }

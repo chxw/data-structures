@@ -6,7 +6,7 @@ Hash::Hash(){
 	num_words = 0;
 	num_buckets = 5;
 
-	table = new Node*[num_buckets];
+	table = new Entries*[num_buckets];
 
 	for (int i = 0; i < num_buckets; i++){
 		table[i] = nullptr;
@@ -17,9 +17,13 @@ Hash::Hash(std::string word, int freq){
 	num_words = 0;
 	num_buckets = 5;
 
-	table = new Node*[num_buckets];
+	table = new Entries*[num_buckets];
 
-	Node* newbie = new Node(word, freq);
+	for (int i = 0; i < num_buckets; i++){
+		table[i] = nullptr;
+	}
+
+	Entries* newbie = new Entries(word, freq);
 
 	int index = hasher(word);
 
@@ -31,17 +35,28 @@ Hash::Hash(std::string word, int freq){
 // Hash::~Hash();
 
 void Hash::put(std::string word, int freq){
-	Node* newbie = new Node(word, freq);
-
 	int index = hasher(word);
+
+	// no overfill
+	if (table[index] == nullptr){
+		Entries* newbie = new Entries(word, freq);
+		table[index] = newbie;
+	}
+	// overfill exists
+	else{
+		table[index]->add(word, freq);
+	}
 	
-	table[index] = newbie;
 }
 
 int Hash::get(std::string word){
 	int index = hasher(word);
 
-	return table[index]->getFreq();
+	if (table[index] == nullptr){
+		throw std::runtime_error("Entry does not exist");
+	}
+
+	return table[index]->findFreq(word);
 }
 
 int Hash::getLoadFactor(){
@@ -71,7 +86,7 @@ int Hash::hasher(std::string word){
 void Hash::print(){
 	for (int i = 0; i < num_buckets; i++){
 		if (table[i] != nullptr){
-			std::cout << i << ": " << table[i]->getWord() << " " << table[i]->getFreq() << std::endl;
+			std::cout << i << ": " << table[i]->toString() << std::endl;
 		}
 		else{
 			std::cout << i << ": nullptr " << std::endl;

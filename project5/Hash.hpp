@@ -22,7 +22,7 @@ public:
 	void print();
 
 private:
-	Node** table;
+	Entries** table;
 
 	int hasher(std::string word);
 
