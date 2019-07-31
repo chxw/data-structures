@@ -12,8 +12,8 @@ public:
   // Entries& operator=(const Entries& other);
   // ~Entries();
 
-  void add(std::string w, int f);
-  void add(Node* newbie);
+  bool add(std::string w, int f);
+  bool add(Node* newbie);
   void remove(std::string w);
 
   Node* top();

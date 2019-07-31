@@ -20,10 +20,12 @@ Entries::Entries(std::string word, int freq){
 // Entries& Entries::operator=(const Entries& other);
 // Entries::~Entries();
 
-void Entries::add(std::string w, int f){
+bool Entries::add(std::string w, int f){
 	Node* newbie = new Node(w, f);
 	newbie->setNext(nullptr);
 
+	std::cout << "adding " << newbie->getWord() << std::endl;
+
 	// empty
 	if (head == nullptr){
 		newbie->setPrev(nullptr);
@@ -32,6 +34,20 @@ void Entries::add(std::string w, int f){
 		tail = newbie;
 
 		num_entries += 1;
+
+		std::cout << "adding to empty list" << std::endl;
+		return true;
+	}
+	// 1 node
+	else if (head == tail){
+		head->setNext(newbie);
+		newbie->setPrev(head);
+
+		tail = newbie;
+		num_entries += 1;
+
+		std::cout << "adding to list w/ 1 node" << std::endl;
+		return true;
 	}
 	// not empty
 	else{
@@ -41,30 +57,54 @@ void Entries::add(std::string w, int f){
 
 		tail = newbie;
 		num_entries += 1;
+
+		std::cout << "adding to not empty list" << std::endl;
+		return true;
 	}
+	return false;
 }
 
-void Entries::add(Node* newbie){
+bool Entries::add(Node* newbie){
+	newbie->setNext(nullptr);
+
+	std::cout << "adding " << newbie->getWord() << std::endl;
+
 	// empty
 	if (head == nullptr){
-		newbie->setNext(nullptr);
 		newbie->setPrev(nullptr);
 
 		head = newbie;
 		tail = newbie;
 
 		num_entries += 1;
+
+		std::cout << "adding to empty list" << std::endl;
+		return true;
+	}
+	// 1 node
+	else if (head == tail){
+		head->setNext(newbie);
+		newbie->setPrev(head);
+
+		tail = newbie;
+		num_entries += 1;
+
+		std::cout << "adding to list w/ 1 node" << std::endl;
+		return true;
 	}
 	// not empty
 	else{
 		tail->setNext(newbie);
 
-		newbie->setNext(nullptr);
 		newbie->setPrev(tail);
 
 		tail = newbie;
 		num_entries += 1;
+
+		std::cout << "adding to not empty list" << std::endl;
+		return true;
 	}
+	return false;
 }
 
 void Entries::remove(std::string w){
@@ -110,18 +150,16 @@ std::string Entries::toString() const{
 
 	std::string s;
 
-	Node* previous = nullptr;
 	Node* current = head;
 	while (current != nullptr){
 		s += current->getWord()+"<->";
-		std::cout << s;
-		previous = current;
 		current = current->getNext();
 	}
 
 	s.pop_back();
 	s.pop_back();
 	s.pop_back();
+	s += "\n";
 
 	return s;
 }
