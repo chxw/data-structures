@@ -8,11 +8,15 @@ X work on T9
 7/30:
 X try to implement "overflow entries" (Doubly Linked List)
 X Node + Doubly Linked List testing 
-7/31 - 8/1: 
-- testing on large scale
-- workout load factor / resizing
-	- multiply char->int value by base value of polynomial (an odd base number is often used).
+7/31 - 8/1:
+- Hash 
+	- workout load factor / resizing
+	X multiply char->int value by base value of polynomial (an odd base number is often used).
 	- resize always to a prime number table size
+- Entries
+	- should overfill be sorted in some way?
+	- test adding removing rigorously / on larger scale
+	- should Entries keep track of # of nodes (i.e. # of collisions) as a means to decide whether or not to resize
 - testing with dataset_small 
 8/2-8/4: 
 - testing with dataset_small and dataset_large
