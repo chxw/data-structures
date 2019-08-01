@@ -9,3 +9,17 @@ https://www.cpp.edu/~ftang/courses/CS240/lectures/hashing.htm
 https://en.wikipedia.org/wiki/Doubly_linked_list
 https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
 http://www.algolist.net/Data_structures/Hash_table/Dynamic_resizing
+https://stackoverflow.com/questions/37957080/can-i-use-2-or-more-delimiters-in-c-function-getline
+https://en.cppreference.com/w/cpp/io/basic_stringstream
+http://www.cplusplus.com/reference/vector/vector/operator[]/
+https://stackoverflow.com/questions/351845/finding-the-type-of-an-object-in-c
+https://www.systutorials.com/131/convert-string-to-int-and-reverse/
+https://stackoverflow.com/questions/1075712/reading-delimited-files-in-c
+https://stackoverflow.com/questions/19989727/read-tabs-separated-file-into-arrays-in-c
+https://stackoverflow.com/questions/1120140/how-can-i-read-and-parse-csv-files-in-c
+http://www.cplusplus.com/forum/general/17771/
+https://www.geeksforgeeks.org/tokenizing-a-string-cpp/
+
+https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+https://stackoverflow.com/questions/40337177/c-how-to-use-fstream-to-read-tab-delimited-file-with-spaces
+https://en.cppreference.com/w/cpp/string/basic_string/getline
