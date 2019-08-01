@@ -48,22 +48,40 @@ void Entries_basics(){
 	e->add("chelsea", 6);
 	e->add("johnny", 3);
 
+	assert(e->top()->getWord() == "james earl carter");
+
 	if (e->top() == nullptr){
 		std::cout << "e is empty" << std::endl;
 	}
 	else{
-		std::cout << "e top is " << e->top()->getWord() << std::endl;
+		assert(e->top()->getWord() == "james earl carter");
 	}
 
 	assert(e->top()->getWord() == n->getWord());
 	assert(e->bottom()->getWord() == "johnny");
 
-	std::cout << e->toString() << std::endl;
+	assert(e->toString() == "james earl carter<->alex turner<->chelsea<->johnny");
+
+}
+
+void Integration_basics(){
+	Hash h(5);
+
+	h.put("chelsea", 1);
+	h.put("tomoki", 2);
+	h.put("matt", 3);
+	h.put("test", 4);
+	h.put("johnny", 5);
+	h.put("britneysbackbetch", 6);
+	h.put("dixiechicksandbeyonce", 7);
+
+	h.print();
 }
 
 int main(){
 	Hash_basics();
 	Entries_basics();
+	Integration_basics();
 
 	return 0;
 }

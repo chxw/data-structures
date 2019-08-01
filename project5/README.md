@@ -1,3 +1,11 @@
 https://stackoverflow.com/questions/4959466/when-to-resize-a-hash-table
 http://www.cs.columbia.edu/~allen/S14/NOTES/hash.pdf
 https://www.quora.com/What-is-a-polynomial-hash-function-for-a-string
+http://www.cplusplus.com/reference/cmath/pow/
+https://stackoverflow.com/questions/22437416/best-way-to-resize-a-hash-table
+https://stackoverflow.com/questions/4959466/when-to-resize-a-hash-table
+https://stackoverflow.com/questions/2369467/why-are-hash-table-expansions-usually-done-by-doubling-the-size
+https://www.cpp.edu/~ftang/courses/CS240/lectures/hashing.htm
+https://en.wikipedia.org/wiki/Doubly_linked_list
+https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
+http://www.algolist.net/Data_structures/Hash_table/Dynamic_resizing

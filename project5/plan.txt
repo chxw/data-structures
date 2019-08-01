@@ -8,7 +8,7 @@ X work on T9
 7/30:
 X try to implement "overflow entries" (Doubly Linked List)
 X Node + Doubly Linked List testing 
-7/31 - 8/1:
+7/31 - 8/2:
 - Hash 
 	- workout load factor / resizing
 	X multiply char->int value by base value of polynomial (an odd base number is often used).
@@ -18,6 +18,7 @@ X Node + Doubly Linked List testing
 	- test adding removing rigorously / on larger scale
 	- should Entries keep track of # of nodes (i.e. # of collisions) as a means to decide whether or not to resize
 - testing with dataset_small 
+- LAB 10
 8/2-8/4: 
 - testing with dataset_small and dataset_large
 - buffer + writing documentation/specification

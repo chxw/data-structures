@@ -24,6 +24,7 @@ public:
 private:
 	Entries** table;
 
+	int mod(int k, int n);
 	int hasher(std::string word);
 
 	int num_words;

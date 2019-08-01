@@ -65,17 +65,24 @@ void Hash::remove(std::string word){
 	table[index] = nullptr;
 }
 
+int Hash::mod(int k, int n){
+	return (k%n + n)%n;
+}
+
 int Hash::hasher(std::string word){
 	int h = 0;
+	int length = 0;
 	int base = 33;
 
 	for (std::string::size_type i = 0; i < word.size(); i++){
-		h += (word.at(i) - '0')* pow(base, word.size()-i);
+		length++;
 	}
 
-	std::cout << word << " hash code: " << h%num_buckets << std::endl;
+	for (int i = 0; i < length; i++){
+		h += (word.at(i) - '0') * pow(base, length - (i+1));
+	}
 
-	return h % num_buckets;
+	return mod(h, num_buckets);
 }
 
 void Hash::print(){
