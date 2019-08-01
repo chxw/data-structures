@@ -18,21 +18,22 @@ int main(int argc, char* argv[]){
   		std::cout << "Failed to open file" << std::endl;
   	}
   	else{
-  		std::string line;
+  		std::string cell;
 
-  		while(std::getline(file, line, '\t')){
-  			std::vector<std::string> row;
+  		std::vector<std::string> row;
 
-  			row.push_back(line);
-
-  			for(auto v: row){
-  				std::cout << v << ",";
-  			}
-
-  			std::cout << std::endl;
-	  		}
-	    // std::cout << argv[1] << std::endl;
+  		while(std::getline(file, cell, '\t')){
+  			row.push_back(cell);
 	  	}
-	  return 0;
+
+	  	
+	  	for (std::size_t i = 0; i < row.size(); i++){
+	  		std::cout << row[i] << ",";
+	  	}
+
+	  	std::cout << std::endl;
+	   	// std::cout << argv[1] << std::endl;
 	}
+	  return 0;
+  }
 }
