@@ -15,10 +15,11 @@ X Node + Doubly Linked List testing
 	- workout load factor / resizing (resize always to a prime number table size)
 	X multiply char->int value by base value of polynomial (an odd base number is often used).
 - Entries
-	- test adding removing rigorously / on larger scale (use dataset_small)
 	- should Entries keep track of # of nodes (i.e. # of collisions) as a means to decide whether or not to resize
-- Program
-	- reading files in main()
+- Integrated
+	X reading files in main()
+	- test adding rigorously / on smaller scale (use dataset_micro)
+	- test adding rigorously / on larger scale (use dataset_small)
 	- start writing documentation/specification
 - LAB 10
 
