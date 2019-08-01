@@ -6,15 +6,15 @@
 #include <vector>
 #include <iterator>
 
-#include <stdio.h>
-#include <string.h>
 
 int main(int argc, char* argv[]){
   if(argc != 2){
     std::cout << "Error" << std::endl;
   }else{
   	std::ifstream file;
-  	if (! file.open(argv[1], std::ios::in)){
+  	file.open(argv[1], std::ios::in);
+
+  	if (! file.is_open() ){
   		std::cout << "Failed to open file" << std::endl;
   	}
   	else{
