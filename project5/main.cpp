@@ -18,7 +18,6 @@ int main(int argc, char* argv[]){
   		std::cout << "Failed to open file" << std::endl;
   	}
   	else{
-  		file.open(argv[1], std::ios::in);
   		std::string line;
 
   		while(std::getline(file, line, '\t')){
