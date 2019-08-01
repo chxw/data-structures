@@ -4,8 +4,10 @@
 #include <string>
 
 #include <vector>
-#include <iterator>
 
+#include <typeinfo>
+
+#include "Hash.hpp"
 
 int main(int argc, char* argv[]){
   if(argc != 2){
@@ -14,26 +16,35 @@ int main(int argc, char* argv[]){
   	std::ifstream file;
   	file.open(argv[1], std::ios::in);
 
+  	Hash h;
+
   	if (! file.is_open() ){
   		std::cout << "Failed to open file" << std::endl;
   	}
   	else{
-  		std::string cell;
+  		std::string line;
 
-  		std::vector<std::string> row;
+  		while(std::getline(file, line)){
+  			std::stringstream ss(line);
+  			std::string cell;
+  			std::vector<std::string> row;
 
-  		while(std::getline(file, cell, '\t')){
-  			row.push_back(cell);
+  			while(getline(ss, cell, '\t')){
+  				row.push_back(cell);
+  			}
+	  		
+	  		std::string word = row[0];
+		  	int freq = std::stoi(row[1]);
+
+		  	h.put(word, freq);
 	  	}
 
-	  	
-	  	for (std::size_t i = 0; i < row.size(); i++){
-	  		std::cout << row[i] << ",";
-	  	}
+	  	// std::cout << std::endl;
 
-	  	std::cout << std::endl;
 	   	// std::cout << argv[1] << std::endl;
 	}
-	  return 0;
+
+	h.print();
+	return 0;
   }
 }
