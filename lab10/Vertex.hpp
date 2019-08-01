@@ -7,7 +7,7 @@
 class Vertex{
 public:
   Vertex();
-  Vertex(int id);
+  Vertex(int given_id);
   //  Vertex(const Vertex& other);
   //  Vertex& operator=(const Vertex& other);
   ~Vertex();
@@ -17,12 +17,18 @@ public:
   int getNumberOfOutgoingEdges() const;
   Pair<Vertex*, int>* getOutgoingEdgeAt(int index) const;
   int getDistance() const;
-  void setDistance(int distance);
+  void setDistance(int dist);
   Vertex* getPrevious() const;
-  void setPrevious(Vertex* previous);
+  void setPrevious(Vertex* prev);
 
 private:
   //your design
+  int id;
+  int num_edges;
+  int distance;
+
+  std::vector<Pair<Vertex*, int>*> edges;
+  Vertex* previous;
 };
 
 #endif

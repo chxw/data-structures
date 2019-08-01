@@ -837,13 +837,13 @@ void emanager_report_test(){
 }
 
 int main(){
-  student_test();
-  course_test();
-  cmanager_test();
-  cm_enroll_test();
-  toTreeString_test();
-  small_sdatabase_test();
-  large_sdatabase_test();
+//  student_test();
+//  course_test();
+  //cmanager_test();
+  //cm_enroll_test();
+  //toTreeString_test();
+  //small_sdatabase_test();
+  //large_sdatabase_test();
   emanager_test();
   emanager_register_test();
   emanager_report_test();
