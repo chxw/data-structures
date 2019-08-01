@@ -3,7 +3,11 @@
 #include <sstream>
 #include <string>
 
-#include<vector>
+#include <vector>
+#include <iterator>
+
+#include <stdio.h>
+#include <string.h>
 
 int main(int argc, char* argv[]){
   if(argc != 2){
@@ -14,21 +18,22 @@ int main(int argc, char* argv[]){
   		std::cout << "Failed to open file" << std::endl;
   	}
   	else{
-  		// file.open(argv[1], std::ios::in);
+  		file.open(argv[1], std::ios::in);
   		std::string line;
 
-  		while(std::getline(file, line)){
-  			std::vector<string> row;
-  			split(line, '\t', row);
+  		while(std::getline(file, line, '\t')){
+  			std::vector<std::string> row;
 
-  			std::string word = row.at(0);
-  			int freq = row.at(1);
+  			row.push_back(line);
 
-  			std::cout << "word is " << word << std::endl;
-  			std::cout << "freq is " << freq << std::endl;
-  		}
-  	}
-    std::cout << argv[1] << std::endl;
-  }
-  return 0;
+  			for(auto v: row){
+  				std::cout << v << ",";
+  			}
+
+  			std::cout << std::endl;
+	  		}
+	    // std::cout << argv[1] << std::endl;
+	  	}
+	  return 0;
+	}
 }
