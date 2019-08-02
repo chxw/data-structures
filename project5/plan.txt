@@ -16,8 +16,6 @@ X Node + Doubly Linked List testing
 		- resize only to prime numbers
 	X multiply char->int value by base value of polynomial (an odd base number is often used).
 	- load factor or # of collisions as determining factor of whether or not to resize?
-- Entries
-	- should Entries keep track of # of nodes (i.e. # of collisions) as a means to decide whether or not to resize
 - Integrated
 	X reading files in main()
 	X test adding rigorously / on smaller scale (use dataset_micro)
@@ -31,7 +29,6 @@ X Node + Doubly Linked List testing
         - test remove rigorously / on largest scale (use dataset_large)	
 - Main (i.e. program)
 	- stdout statements working correctly
-		- ":p james :30"
 		- ":p james 30" and ":p james 50" (the first should overwrite the latter)
 	- edge cases
 	X do-while loop of user input
@@ -42,3 +39,11 @@ X Node + Doubly Linked List testing
 
 8/3-8/4: 
 - buffer + writing documentation/specification
+
+TODO:
+- resizing doesn't work (std::bad_alloc() on homework server, and on local comp, hash table never increases in size)
+- determine for yourself when to resize
+- improve hash fcn
+- get / remove rigorous testing
+- overwriting pre-existing word-freq (see ":p james 30" and ":p james 50" - first should overwrite the latter)
+- user input edge cases
