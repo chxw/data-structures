@@ -12,8 +12,7 @@ X Node + Doubly Linked List testing
 
 7/31 - 8/3:
 - Hash 
-	- resize (currently std::bad_alloc() from the larger datasets but not the smaller ones)
-		- resize only to prime numbers
+	- resize 
 	X multiply char->int value by base value of polynomial (an odd base number is often used).
 	- load factor or # of collisions as determining factor of whether or not to resize?
 - Integrated
@@ -40,8 +39,9 @@ X Node + Doubly Linked List testing
 - buffer + writing documentation/specification
 
 TODO:
-X resizing doesn't work (std::bad_alloc() on homework server, and on local comp, hash table never increases in size)
-- database not responsive, since resize bug fixed
+- do some time tests on different parts of function
+- resizing causing program to timeout / take too long for dataset_large() on homework server
+- resize to only prime numbers
 - determine for yourself when to resize
 - improve hash fcn
 - get / remove rigorous testing
