@@ -5,3 +5,6 @@
 The number of buckets: 16384
 The total number of items: 479828
 The length of the longest chain (score): 2736
+### Duration:
+dataset_small: 2542736 microseconds
+dataset_large: 37495118 microseconds
