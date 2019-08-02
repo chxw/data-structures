@@ -45,6 +45,6 @@ TODO:
 - determine for yourself when to resize
 - improve hash fcn
 - get / remove rigorous testing
-X overwriting pre-existing word-freq (see ":p james 30" and ":p james 50" - first should overwrite the latter)
 - user input edge cases
 - make some void fcns => bool fcns
+- take out STL!!!!
