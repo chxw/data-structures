@@ -29,6 +29,12 @@ Hash::Hash(int buckets){
 // Hash::Hash& operator=(const Hash& other);
 // Hash::~Hash();
 
+void Hash::resize(){
+	int old_size = num_buckets;
+	num_buckets *= 2;
+	
+}
+
 void Hash::put(std::string word, int freq){
 	int index = hasher(word);
 

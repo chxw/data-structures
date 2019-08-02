@@ -9,6 +9,7 @@
 
 #include "Hash.hpp"
 
+// check if file exists
 inline bool exists (const std::string& name){
   struct stat buffer;
   return (stat (name.c_str(), &buffer) == 0);
@@ -24,10 +25,11 @@ int main(int argc, char* argv[]){
   std::ifstream file;
 	file.open(argv[1], std::ios::in);
 
-	Hash* h = new Hash(10);
+	Hash h(10);
 
 	std::string line;
 
+  // store (word, freq) in hash table
 	while(std::getline(file, line)){
 		std::stringstream ss(line);
 		std::string cell;
@@ -40,11 +42,10 @@ int main(int argc, char* argv[]){
 		std::string word = row[0];
   	int freq = std::stoi(row[1]);
 
-  	h->put(word, freq);
+  	h.put(word, freq);
 	}
 
-  std::cout << "done putting in h" << std::endl;
-
+  // prompt user until done
   bool done = false;
   do {
     std::string line;
@@ -70,14 +71,14 @@ int main(int argc, char* argv[]){
         std::cout << "Invalid" << std::endl;
       }
       else {
-        h->put(word, freq);
+        h.put(word, freq);
         std::cout << "Added" << std::endl;
-        h->print();
+        h.print();
       }
 
     } else if (command == ":g" and row.size() == 2){
       std::string word = row[1];
-      int freq = h->get(word);
+      int freq = h.get(word);
 
       if (freq == -1){
         std::cout << "Not found" << std::endl;
@@ -88,22 +89,22 @@ int main(int argc, char* argv[]){
 
     } else if (command == ":r" and row.size() == 2){
       std::string word = row[1];
-      int freq = h->get(word);
+      int freq = h.get(word);
 
       if (freq == -1){
         std::cout << "Not found" << std::endl;
       }
       else{
-        h->remove(word);
+        h.remove(word);
         std::cout << "Deleted" << std::endl;
-        h->print();
+        h.print();
       }
     } else{
       std::cout << "Unknown command" << std::endl;
     }
   } while (!done);
 
-	// h->print();
+	// h.print();
 
   return 0;
 }
