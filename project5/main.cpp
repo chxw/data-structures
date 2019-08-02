@@ -48,9 +48,38 @@ int main(int argc, char* argv[]){
 		  	h.put(word, freq);
 	  	}
 
-	  	// std::cout << std::endl;
+  bool done = false;
 
-	   	// std::cout << argv[1] << std::endl;
+  while(!done){
+    std::string command
+    std::getline(std::cin, command);
+
+    std::stringstream ss(line);
+    std::string arg;
+    std::vector<std::string> row;
+
+    while(getline(ss, arg, ' ')){
+      row.push_back(arg);
+    }
+
+    std::string command = arg[0];
+
+    if (command == ":q"){
+      done = true;
+    }
+    else if(command == ":p"){
+      if (row.size() != 3 an){
+        std::cout << 'Invalid' << std::endl;
+      }
+    }
+    else if (command == ":g"){
+
+    }
+    else if (command == ":r"){
+
+    }
+  }
+
 	}
 
 	h.print();
