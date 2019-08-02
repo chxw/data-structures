@@ -19,8 +19,10 @@ X Node + Doubly Linked List testing
 - Integrated
 	X reading files in main()
 	X test adding rigorously / on smaller scale (use dataset_micro)
-	X  test adding rigorously / on larger scale (use dataset_small)
-	- test adding rigorously / on largest scale (use dataset_larger)
+	X test adding rigorously / on larger scale (use dataset_small)
+	X test adding rigorously / on largest scale (use dataset_large)
+	- test get rigorously the same^
+	- test remove rigorously the same^
 	- start writing documentation/specification
 - LAB 10
 

@@ -12,6 +12,7 @@ void Hash_basics(){
 	h.put("matt", 3);
 	h.put("test", 4);
 
+	std::cout << "\n Hash basics testing ******" << std::endl;
 	h.print();
 }
 
@@ -67,6 +68,8 @@ void Entries_basics(){
 void Integration_basics(){
 	Hash h(5);
 
+	std::cout << "\n Integration basics testing ******" << std::endl;
+
 	h.put("chelsea", 1);
 	h.put("tomoki", 2);
 	h.put("matt", 3);
@@ -75,6 +78,26 @@ void Integration_basics(){
 	h.put("britneysbackbetch", 6);
 	h.put("dixiechicksandbeyonce", 7);
 
+	assert(h.get("chelsea") == 1);
+	assert(h.get("tomoki") == 2);
+	assert(h.get("matt") == 3);
+	assert(h.get("test") == 4);
+	assert(h.get("johnny") == 5);
+	assert(h.get("britneysbackbetch") == 6);
+	assert(h.get("dixiechicksandbeyonce") == 7);
+
+	std::cout << "\n add everything" << std::endl;
+	h.print();
+
+	h.remove("chelsea");
+	h.remove("tomoki");
+	h.remove("matt");
+	h.remove("test");
+	h.remove("johnny");
+	h.remove("britneysbackbetch");
+	h.remove("dixiechicksandbeyonce");
+
+	std::cout << "\n remove everything" << std::endl;
 	h.print();
 }
 
