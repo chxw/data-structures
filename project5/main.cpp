@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
   	std::ifstream file;
   	file.open(argv[1], std::ios::in);
 
-  	Hash h(100000);
+  	Hash h(1000000);
 
   	if (! file.is_open() ){
   		std::cout << "Failed to open file" << std::endl;
