@@ -26,9 +26,12 @@ private:
 
 	int mod(int k, int n);
 	int hasher(std::string word);
+	void resize();
 
 	int num_words;
 	int num_buckets;
+	float threshold;
+	int max;
 };
 
 #endif

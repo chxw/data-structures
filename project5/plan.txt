@@ -27,11 +27,15 @@ X Node + Doubly Linked List testing
 	X test get rigorously / on smaller scale (use dataset_micro)    	
         - test get rigorously / on larger scale (use dataset_small)
         - test get rigorously / on largest scale (use dataset_large)	
-	- start writing documentation/specification
 - Main (i.e. program)
 	- stdout statements working correctly
+		- ":p james :30"
+		- ":p james 30" and ":p james 50" (the first should overwrite the latter)
 	- edge cases
 	X do-while loop
+- Specs
+	X find template
+	- write
 - LAB 10
 
 8/3-8/4: 

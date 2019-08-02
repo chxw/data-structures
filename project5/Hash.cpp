@@ -32,10 +32,43 @@ Hash::Hash(int buckets){
 void Hash::resize(){
 	int old_size = num_buckets;
 	num_buckets *= 2;
-	
+	max = (int) (num_buckets * threshold);
+
+	// capture old
+	Entries** old_table = table;
+
+	//initialize new
+	num_words = 0;
+	table = new Entries*[num_buckets];
+	for (int i = 0; i < num_buckets; i++){
+		table[i] = nullptr;
+	}
+
+	// copy over everything
+	for (int i = 0; i < old_size; i++){
+		if (old_table[i] != nullptr){
+			Node* to_delete;
+			Node* current = old_table[i]->top();
+			// traverse through overfill entries
+			while (current != nullptr){
+				// rehash
+				put(current->getWord(), current->getFreq());
+				to_delete = current;
+				current = current->getNext();
+				delete to_delete;
+			}
+		}
+	}
+
+	// dicsard old
+	delete[] old_table;
 }
 
 void Hash::put(std::string word, int freq){
+	if (num_words == max){
+		resize();
+	}
+
 	int index = hasher(word);
 
 	// no overfill
