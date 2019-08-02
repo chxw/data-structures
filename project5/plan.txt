@@ -21,9 +21,17 @@ X Node + Doubly Linked List testing
 	X test adding rigorously / on smaller scale (use dataset_micro)
 	X test adding rigorously / on larger scale (use dataset_small)
 	X test adding rigorously / on largest scale (use dataset_large)
-	- test get rigorously the same^
-	- test remove rigorously the same^
+	X test get rigorously / on smaller scale (use dataset_micro)
+	- test get rigorously / on larger scale (use dataset_small)
+	- test get rigorously / on largest scale (use dataset_large)	
+	X test get rigorously / on smaller scale (use dataset_micro)    	
+        - test get rigorously / on larger scale (use dataset_small)
+        - test get rigorously / on largest scale (use dataset_large)	
 	- start writing documentation/specification
+- Main (i.e. program)
+	- stdout statements working correctly
+	- edge cases
+	X do-while loop
 - LAB 10
 
 8/3-8/4: 

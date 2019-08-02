@@ -48,7 +48,7 @@ int Hash::get(std::string word){
 	int index = hasher(word);
 
 	if (table[index] == nullptr){
-		throw std::runtime_error("Entry does not exist");
+		return -1;
 	}
 
 	return table[index]->findFreq(word);
