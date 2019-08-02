@@ -48,3 +48,4 @@ TODO:
 - user input edge cases
 - make some void fcns => bool fcns
 - take out STL!!!!
+- rewrite makefile to take out warning flags
