@@ -6,6 +6,7 @@
 Hash::Hash(){
 	num_words = 0;
 	num_buckets = 5;
+	threshold = 0.75f;
 	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
@@ -18,6 +19,7 @@ Hash::Hash(){
 Hash::Hash(int buckets){
 	num_words = 0;
 	num_buckets = buckets;
+	threshold = 0.75f;
 	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
@@ -67,11 +69,12 @@ void Hash::resize(){
 }
 
 void Hash::put(std::string word, int freq){
-	if (num_words == max){
+	if (num_words >= max){
 		resize();
 	}
-	if (get(word) != -1){
-		// set get(word)->freq() to new freq
+	// update freq if word already exists in table
+	if (setNewFreq(word, freq)){
+		return;
 	}
 
 	int index = hasher(word);
@@ -85,9 +88,10 @@ void Hash::put(std::string word, int freq){
 	else{
 		table[index]->add(word, freq);
 	}
-	
+	num_words++;
 }
 
+// if this returns -1, means not found
 int Hash::get(std::string word){
 	int index = hasher(word);
 
@@ -98,6 +102,21 @@ int Hash::get(std::string word){
 	return table[index]->findFreq(word);
 }
 
+// update freq of word
+bool Hash::setNewFreq(std::string word, int newFreq){
+	int index = hasher(word);
+
+	if (table[index] == nullptr){
+		return false;
+	}
+	else if (table[index]->findFreq(word) == -1){
+		return false;
+	}
+
+	table[index]->updateFreq(word, newFreq);
+	return true;
+}
+
 int Hash::getLoadFactor(){
 	return num_words/num_buckets;
 }
@@ -105,8 +124,7 @@ int Hash::getLoadFactor(){
 void Hash::remove(std::string word){
 	int index = hasher(word);
 
-	delete table[index];
-	table[index] = nullptr;
+	table[index]->remove(word);
 }
 
 int Hash::mod(int k, int n){
@@ -118,6 +136,7 @@ int Hash::hasher(std::string word){
 	int length = 0;
 	int base = 33;
 
+	// size_type -> int (may be unnecessary)
 	for (std::string::size_type i = 0; i < word.size(); i++){
 		length++;
 	}

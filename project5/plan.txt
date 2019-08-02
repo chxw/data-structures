@@ -29,7 +29,6 @@ X Node + Doubly Linked List testing
         - test remove rigorously / on largest scale (use dataset_large)	
 - Main (i.e. program)
 	- stdout statements working correctly
-		- ":p james 30" and ":p james 50" (the first should overwrite the latter)
 	- edge cases
 	X do-while loop of user input
 - Specs
@@ -41,9 +40,11 @@ X Node + Doubly Linked List testing
 - buffer + writing documentation/specification
 
 TODO:
-- resizing doesn't work (std::bad_alloc() on homework server, and on local comp, hash table never increases in size)
+X resizing doesn't work (std::bad_alloc() on homework server, and on local comp, hash table never increases in size)
+- database not responsive, since resize bug fixed
 - determine for yourself when to resize
 - improve hash fcn
 - get / remove rigorous testing
-- overwriting pre-existing word-freq (see ":p james 30" and ":p james 50" - first should overwrite the latter)
+X overwriting pre-existing word-freq (see ":p james 30" and ":p james 50" - first should overwrite the latter)
 - user input edge cases
+- make some void fcns => bool fcns

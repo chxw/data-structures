@@ -101,10 +101,29 @@ void Integration_basics(){
 	h.print();
 }
 
+void Resizing(){
+	Hash h(3);
+
+	h.put("chelsea", 1);
+	h.put("tomoki", 2);
+	std::cout << "2 words" << std::endl;
+	h.print();
+	h.put("matt", 3);
+	h.put("test", 4);
+	std::cout << "4 words" << std::endl;
+	h.print();
+	h.put("johnny", 5);
+	h.put("britneysbackbetch", 6);
+	std::cout << "6 words" << std::endl;
+	h.print();
+	h.put("dixiechicksandbeyonce", 7);
+}
+
 int main(){
-	Hash_basics();
-	Entries_basics();
-	Integration_basics();
+	// Hash_basics();
+	// Entries_basics();
+	// Integration_basics();
+	Resizing();
 
 	return 0;
 }

@@ -102,6 +102,16 @@ int Entries::findFreq(std::string word){
 	return -1;
 }
 
+void Entries::updateFreq(std::string word, int newFreq){
+	Node* current = head;
+	while (current != nullptr){
+		if (current->getWord() == word){
+			current->setFreq(newFreq);
+		}
+		current = current->getNext();
+	}
+}
+
 void Entries::remove(std::string w){
 	if (head != nullptr){
 		if (head->getNext() == nullptr){
