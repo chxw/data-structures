@@ -1,2 +1,7 @@
-runtime of 8/2/19 Fri. : doubly linked lists, polynomial hasher
-13.756u 2.845s 0:17.35 95.6%	0+0k 89312+0io 0pf+0w
+## 8/2/19 Fri. : doubly linked lists, polynomial hasher
+### Runtime:
+13.756u 2.845s 0:17.35 95.6%	0+0k 89312+0io 0pf+0 
+### Collision testing:
+The number of buckets: 16384
+The total number of items: 479828
+The length of the longest chain (score): 2736

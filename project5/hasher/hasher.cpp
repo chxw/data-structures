@@ -18,5 +18,5 @@ unsigned int generateHashCodeOf(const std::string& key){
 		h += (key.at(i) - '0') * pow(base, length - (i+1));
 	}
 
-	return (h%num_buckets + num_buckets)%n;
+	return (h%num_buckets + num_buckets)%num_buckets;
 }
