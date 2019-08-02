@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
   std::ifstream file;
 	file.open(argv[1], std::ios::in);
 
-	Hash h(10);
+	Hash h(3);
 
 	std::string line;
 
@@ -51,6 +51,11 @@ int main(int argc, char* argv[]){
     std::string line;
     std::getline(std::cin, line);
 
+    if (line == ""){
+      std::cout << "Unknown command" << std::endl;
+      continue;
+    }
+
     std::stringstream ss(line);
 
     std::string arg;
@@ -64,7 +69,7 @@ int main(int argc, char* argv[]){
 
     if (command == ":q"){
       done = true;
-    } else if(command == ":p" and row.size() == 3 and row[2].find_first_of("0123456789") != std::string::npos){
+    } else if(command == ":p" and row.size() == 3 and row[2].find_first_not_of("0123456789") == std::string::npos){
       std::string word = row[1];
       int freq = std::stoi(row[2]);
       if (freq < 0){

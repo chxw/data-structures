@@ -6,6 +6,7 @@
 Hash::Hash(){
 	num_words = 0;
 	num_buckets = 5;
+	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
 
@@ -17,6 +18,7 @@ Hash::Hash(){
 Hash::Hash(int buckets){
 	num_words = 0;
 	num_buckets = buckets;
+	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
 
@@ -67,6 +69,9 @@ void Hash::resize(){
 void Hash::put(std::string word, int freq){
 	if (num_words == max){
 		resize();
+	}
+	if (get(word) != -1){
+		// set get(word)->freq() to new freq
 	}
 
 	int index = hasher(word);
