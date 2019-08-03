@@ -26,6 +26,7 @@ Entries::~Entries(){
 		current = next;
 	}
 	head = nullptr;
+	tail = nullptr;
 }
 
 bool Entries::add(std::string w, int f){

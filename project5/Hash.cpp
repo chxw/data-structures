@@ -63,9 +63,9 @@ void Hash::resize(){
 			while (current != nullptr){
 				// rehash
 				put(current->getWord(), current->getFreq());
-				to_delete = current;
+				// to_delete = current;
 				current = current->getNext();
-				delete to_delete;
+				// delete to_delete;
 			}
 		}
 	}
