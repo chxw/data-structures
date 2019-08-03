@@ -146,7 +146,7 @@ int main(int argc, char* argv[]){
 	std::ifstream file;
 	file.open(argv[1], std::ios::in);
 
-	Hash h* = new Hash();
+	Hash* h = new Hash();
 
 	std::string line;
 	// store (word, freq) in hash table
