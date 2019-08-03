@@ -21,6 +21,7 @@ void Hash_basics(){
 
 	std::cout << "\n Hash basics testing ******" << std::endl;
 	h.print();
+	std::cout << "done with hash basics" << std::endl;
 }
 
 void Entries_basics(){
@@ -137,7 +138,7 @@ int main(int argc, char* argv[]){
 	// Entries_basics();
 	// Integration_basics();
 	// Resizing();
-
+	
 	// requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
 	if(argc != 2 or !exists(argv[1])){
 		std::cout << "Error" << std::endl;
