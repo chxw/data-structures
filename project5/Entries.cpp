@@ -127,6 +127,7 @@ bool Entries::remove(std::string w){
 		if (head->getWord() == w and head->getNext() == nullptr){
 			delete head;
 			head = nullptr;
+			tail = nullptr;
 			return true;
 		}
 		// case: not empty and head

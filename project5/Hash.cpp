@@ -54,7 +54,7 @@ void Hash::resize(){
 		table[i] = nullptr;
 	}
 
-	// copy over everything from old to new
+	// copy over everything from old to new & delete along the way
 	for (int i = 0; i < old_size; i++){
 		if (old[i] != nullptr){
 			Node* to_delete;
@@ -70,14 +70,6 @@ void Hash::resize(){
 		}
 	}
 
-	// clean up old
-	// for (int i = 0; i < num_buckets; i++){
-	//	if (old[i] != nullptr){
-	//		delete old[i];
-	//		old[i] = nullptr;
-	//	}
-	//}
-	
 	// discard old
 	delete[] old;
 	old = nullptr;
@@ -111,12 +103,12 @@ void Hash::put(std::string word, int freq){
 
 	int index = hasher(word);
 
-	// no overfill
+	// empty
 	if (table[index] == nullptr){
 		Entries* newbie = new Entries(word, freq);
 		table[index] = newbie;
 	}
-	// overfill exists
+	// not empty
 	else{
 		table[index]->add(word, freq);
 	}
