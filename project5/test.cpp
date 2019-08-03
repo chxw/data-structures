@@ -1,8 +1,15 @@
 #include <cassert>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 #include "Hash.hpp"
 #include "Entries.hpp"
+
+#include <vector>
+#include <sys/stat.h>
+#include <typeinfo>
 
 void Hash_basics(){
 	Hash h;
@@ -119,11 +126,73 @@ void Resizing(){
 	h.put("dixiechicksandbeyonce", 7);
 }
 
-int main(){
+inline bool exists (const std::string& name){
+  struct stat buffer;
+  return (stat (name.c_str(), &buffer) == 0);
+}
+
+int main(int argc, char* argv[]){
 	// Hash_basics();
 	// Entries_basics();
-	Integration_basics();
+	// Integration_basics();
 	// Resizing();
+
+	// requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
+	if(argc != 2 or !exists(argv[1])){
+		std::cout << "Error" << std::endl;
+	}
+
+	// open file (2nd arg)
+	std::ifstream file;
+	file.open(argv[1], std::ios::in);
+
+	Hash h;
+
+	std::string line;
+	// store (word, freq) in hash table
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::vector<std::string> row;
+
+		while(getline(ss, cell, '\t')){
+			row.push_back(cell);
+		}
+		
+		std::string word = row[0];
+	  	int freq = std::stoi(row[1]);
+
+	  	h.put(word, freq);
+	}
+	line = "";
+
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::vector<std::string> row;
+
+		while(getline(ss, cell, '\t')){
+			row.push_back(cell);
+		}
+		
+		std::string word = row[0];
+	  	assert(h.get(word) != -1);
+	}
+	line = "";
+
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::vector<std::string> row;
+
+		while(getline(ss, cell, '\t')){
+			row.push_back(cell);
+		}
+
+		std::string word = row[0];
+	  	assert(h.remove(word));
+	}
+
 
 	return 0;
 }
