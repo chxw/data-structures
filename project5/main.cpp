@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
   std::ifstream file;
 	file.open(argv[1], std::ios::in);
 
-	Hash h;
+	Hash h(5);
 
 	std::string line;
 

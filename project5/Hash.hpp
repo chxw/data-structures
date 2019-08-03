@@ -15,7 +15,7 @@ public:
 
 	void put(std::string word, int freq);
 	int get(std::string word);
-	void remove(std::string word);
+	bool remove(std::string word);
 
 	float getLoadFactor();
 

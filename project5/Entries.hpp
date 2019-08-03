@@ -16,7 +16,7 @@ public:
   bool add(Node* newbie);
   int findFreq(std::string word);
   void updateFreq(std::string word, int newFreq);
-  void remove(std::string w);
+  bool remove(std::string w);
 
   Node* top();
   Node* bottom();

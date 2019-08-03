@@ -38,14 +38,14 @@ void Hash::resize(){
 	// capture old
 	Entries** old = table;
 
-	//initialize new
+	// initialize new table
 	num_words = 0;
 	table = new Entries*[num_buckets];
 	for (int i = 0; i < num_buckets; i++){
 		table[i] = nullptr;
 	}
 
-	// copy over everything
+	// copy over everything from old to new
 	for (int i = 0; i < old_size; i++){
 		if (old[i] != nullptr){
 			Node* to_delete;
@@ -69,6 +69,7 @@ void Hash::put(std::string word, int freq){
 	if (getLoadFactor() > threshold){
 		resize();
 	}
+
 	// update freq if word already exists in table
 	if (setNewFreq(word, freq)){
 		return;
@@ -118,12 +119,17 @@ float Hash::getLoadFactor(){
 	return num_words/num_buckets;
 }
 
-void Hash::remove(std::string word){
+// use Entries->remove() to take out entry
+bool Hash::remove(std::string word){
 	int index = hasher(word);
-
-	table[index]->remove(word);
+	if(table[index]->remove(word)){
+		num_words--;
+		return true;
+	}
+	return false;
 }
 
+// mod fcn that does not return negative numbers
 int Hash::mod(int k, int n){
 	return (k%n + n)%n;
 }

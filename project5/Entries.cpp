@@ -112,32 +112,49 @@ void Entries::updateFreq(std::string word, int newFreq){
 	}
 }
 
-void Entries::remove(std::string w){
+bool Entries::remove(std::string w){
 	if (head != nullptr){
-		if (head->getNext() == nullptr){
+		// case: empty and head
+		if (head->getWord() == w and head->getNext() == nullptr){
 			delete head;
-			return;
+			head = nullptr;
+			return true;
 		}
+		// case: not empty and head
+		else if (head->getWord() == w){
+			Node* new_head = head->getNext();
+			new_head->setPrev(nullptr);
+			delete head;
+			head = new_head;
+			return true;
+		}
+		// case: tail 
 		else if (tail->getWord() == w){
-			Node* new_tail = tail->getNext();
+			// rework ptrs
+			Node* new_tail = tail->getPrev();
+			new_tail->setNext(nullptr);
 			delete tail;
 			tail = new_tail;
-			return;
+			return true;
 		}
+		// case: node with both ptrs (next, prev)
 		else{
 			Node* previous = head;
 			Node* current = head->getNext();
+			// traverse list
 			while (current != nullptr){
 				if (current->getWord() == w){
 					previous->setNext(current->getNext());
+					current->getNext()->setPrev(previous);
 					delete current;
-					return;
+					return true;
 				}
 				previous = current;
 				current = current->getNext();
 			}
 		}
 	}
+	return false;
 }
 
 Node* Entries::top(){
@@ -150,20 +167,18 @@ Node* Entries::bottom(){
 
 std::string Entries::toString() const{
 	if (head == nullptr){
-		return "empty";
+		return "nullptr";
 	}
 
 	std::string s;
 
 	Node* current = head;
 	while (current != nullptr){
-		s += current->getWord()+"<->";
+		s += current->getWord();
 		current = current->getNext();
+		if (current != nullptr){
+			s += "<->";
+		}
 	}
-
-	s.pop_back();
-	s.pop_back();
-	s.pop_back();
-
 	return s;
 }

@@ -89,13 +89,13 @@ void Integration_basics(){
 	std::cout << "\n add everything" << std::endl;
 	h.print();
 
-	h.remove("chelsea");
-	h.remove("tomoki");
-	h.remove("matt");
-	h.remove("test");
-	h.remove("johnny");
-	h.remove("britneysbackbetch");
-	h.remove("dixiechicksandbeyonce");
+	assert(h.remove("chelsea") == true);
+	assert(h.remove("tomoki") == true);
+	assert(h.remove("matt") == true);
+	assert(h.remove("test") == true);
+	assert(h.remove("johnny") == true);
+	assert(h.remove("britneysbackbetch") == true);
+	assert(h.remove("dixiechicksandbeyonce") == true);
 
 	std::cout << "\n remove everything" << std::endl;
 	h.print();
@@ -122,8 +122,8 @@ void Resizing(){
 int main(){
 	// Hash_basics();
 	// Entries_basics();
-	// Integration_basics();
-	Resizing();
+	Integration_basics();
+	// Resizing();
 
 	return 0;
 }
