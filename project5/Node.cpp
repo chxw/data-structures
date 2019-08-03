@@ -26,7 +26,10 @@ Node::Node(std::string given_word, int given_freq){
 // 	return (*this);
 // }
 
-// Node::~Node();
+Node::~Node(){
+	next = nullptr;
+	prev = nullptr;
+}
 
 std::string Node::getWord() const{
 	return word;

@@ -41,13 +41,12 @@ Hash::~Hash(){
 }
 
 void Hash::resize(){
-	int old_size = num_buckets;
-	num_buckets = nextPrime(2*num_buckets);
-
 	// capture old
+	int old_size = num_buckets;
 	Entries** old = table;
 
 	// initialize new table
+	num_buckets = nextPrime(2*num_buckets);
 	num_words = 0;
 	table = new Entries*[num_buckets];
 	for (int i = 0; i < num_buckets; i++){
@@ -66,10 +65,11 @@ void Hash::resize(){
 				to_delete = current;
 				current = current->getNext();
 				delete to_delete;
+				to_delete = nullptr;
 			}
 		}
 	}
-
+	
 	// discard old
 	delete[] old;
 	old = nullptr;
