@@ -10,7 +10,7 @@ public:
   Entries(std::string word, int freq);
   // Entries(const Entries& other);
   // Entries& operator=(const Entries& other);
-  // ~Entries();
+  ~Entries();
 
   bool add(std::string w, int f);
   bool add(Node* newbie);

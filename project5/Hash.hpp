@@ -11,7 +11,7 @@ public:
 	Hash(int buckets);
 	// Hash(const Hash& other);
 	// Hash& operator=(const Hash& other);
-	// ~Hash();
+	~Hash();
 
 	void put(std::string word, int freq);
 	int get(std::string word);

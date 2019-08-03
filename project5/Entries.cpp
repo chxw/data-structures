@@ -18,7 +18,15 @@ Entries::Entries(std::string word, int freq){
 
 // Entries::Entries(const Entries& other){}
 // Entries& Entries::operator=(const Entries& other);
-// Entries::~Entries();
+Entries::~Entries(){
+	Node* current = head;
+	while (current != nullptr){
+		Node* next = current->getNext();
+		delete current;
+		current = next;
+	}
+	head = nullptr;
+}
 
 bool Entries::add(std::string w, int f){
 	Node* newbie = new Node(w, f);

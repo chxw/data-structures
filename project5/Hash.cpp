@@ -29,7 +29,11 @@ Hash::Hash(int buckets){
 
 // Hash::Hash(const Hash& other);
 // Hash::Hash& operator=(const Hash& other);
-// Hash::~Hash();
+Hash::~Hash(){
+	for (int i = 0; i < num_buckets; i++){
+		delete table[i];
+	}
+}
 
 void Hash::resize(){
 	int old_size = num_buckets;

@@ -12,9 +12,9 @@ X Node + Doubly Linked List testing
 
 7/31 - 8/3:
 - Hash 
-	- resize 
+	X resize 
 	X multiply char->int value by base value of polynomial (an odd base number is often used).
-	- load factor or # of collisions as determining factor of whether or not to resize?
+	X load factor or # of collisions as determining factor of whether or not to resize?
 - Integrated
 	X reading files in main()
 	X test adding rigorously / on smaller scale (use dataset_micro)
@@ -41,7 +41,6 @@ X Node + Doubly Linked List testing
 TODO:
 - do some time tests on different parts of function
 - memory clean up (write destructors)
-- resize to only prime numbers
 - user input edge cases
 - make some void fcns => bool fcns
 - rewrite makefile to take out warning flags
