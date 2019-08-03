@@ -39,8 +39,8 @@ X Node + Doubly Linked List testing
 - buffer + writing documentation/specification
 
 TODO:
-- improve hash fcn
 - do some time tests on different parts of function
+- memory clean up (write destructors)
 - resize to only prime numbers
 - user input edge cases
 - make some void fcns => bool fcns

@@ -33,7 +33,8 @@ Hash::Hash(int buckets){
 
 void Hash::resize(){
 	int old_size = num_buckets;
-	num_buckets *= 2;
+	num_buckets = nextPrime(2*num_buckets);
+	std::cout << "Resize! new size : " << num_buckets << std::endl;
 
 	// capture old
 	Entries** old = table;
@@ -63,6 +64,22 @@ void Hash::resize(){
 
 	// dicsard old
 	delete[] old;
+}
+
+bool Hash::isPrime(int number){
+	for (int i = 2; i <= number / 2; ++i){
+		if (number % i == 0){
+			return false;
+		}
+	}
+	return true;
+}
+
+int Hash::nextPrime(int number){
+	while (!isPrime(++number)){
+
+	}
+	return number;
 }
 
 void Hash::put(std::string word, int freq){
@@ -132,7 +149,7 @@ bool Hash::remove(std::string word){
 // hashing function
 unsigned int Hash::hasher(std::string word){
 	unsigned int h = 0;
-	unsigned int base = 37;
+	unsigned int base = 33;
 
 	for (std::string::size_type i = 0; i < word.size(); i++){
 		h += (word.at(i) - '0') * pow(base, word.size() - (i+1));

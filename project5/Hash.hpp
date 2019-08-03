@@ -25,8 +25,12 @@ private:
 	Entries** table;
 
 	bool setNewFreq(std::string word, int newFreq);
+
 	unsigned int hasher(std::string word);
+	
 	void resize();
+	bool isPrime(int number);
+	int nextPrime(int number);
 
 	int num_words;
 	int num_buckets;
