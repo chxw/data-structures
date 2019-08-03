@@ -33,9 +33,11 @@ Hash::~Hash(){
 	for (int i = 0; i < num_buckets; i++){
 		if (table[i] != nullptr){
 			delete table[i];
+			table[i] = nullptr;
 		}
 	}
 	delete[] table;
+	table = nullptr;
 }
 
 void Hash::resize(){
@@ -61,9 +63,9 @@ void Hash::resize(){
 			while (current != nullptr){
 				// rehash
 				put(current->getWord(), current->getFreq());
-				to_delete = current;
+				// to_delete = current;
 				current = current->getNext();
-				delete to_delete;
+				// delete to_delete;
 			}
 		}
 	}
@@ -72,10 +74,12 @@ void Hash::resize(){
 	for (int i = 0; i < num_buckets; i++){
 		if (old[i] != nullptr){
 			delete old[i];
+			old[i] = nullptr;
 		}
 	}
-	// dicsard old
+	// discard old
 	delete[] old;
+	old = nullptr;
 }
 
 bool Hash::isPrime(int number){
