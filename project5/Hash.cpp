@@ -31,14 +31,16 @@ Hash::Hash(int buckets){
 // Hash::Hash& operator=(const Hash& other);
 Hash::~Hash(){
 	for (int i = 0; i < num_buckets; i++){
-		delete table[i];
+		if (table[i] != nullptr){
+			delete table[i];
+		}
 	}
+	delete[] table;
 }
 
 void Hash::resize(){
 	int old_size = num_buckets;
 	num_buckets = nextPrime(2*num_buckets);
-	std::cout << "Resize! new size : " << num_buckets << std::endl;
 
 	// capture old
 	Entries** old = table;
