@@ -78,7 +78,7 @@ int main(int argc, char* argv[]){
       else {
         h.put(word, freq);
         std::cout << "Added" << std::endl;
-        h.print();
+        // h.print();
       }
 
     } else if (command == ":g" and row.size() == 2){
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]){
       else{
         h.remove(word);
         std::cout << "Deleted" << std::endl;
-        h.print();
+        // h.print();
       }
     } else{
       std::cout << "Unknown command" << std::endl;
