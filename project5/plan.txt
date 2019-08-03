@@ -21,11 +21,11 @@ X Node + Doubly Linked List testing
 	X test adding rigorously / on larger scale (use dataset_small)
 	X test adding rigorously / on largest scale (use dataset_large)
 	X test get rigorously / on smaller scale (use dataset_micro)
-	- test get rigorously / on larger scale (use dataset_small)
-	- test get rigorously / on largest scale (use dataset_large)	
+	X test get rigorously / on larger scale (use dataset_small)
+	X test get rigorously / on largest scale (use dataset_large)	
 	X test remove rigorously / on smaller scale (use dataset_micro)    	
-        - test remove rigorously / on larger scale (use dataset_small)
-        - test remove rigorously / on largest scale (use dataset_large)	
+        X test remove rigorously / on larger scale (use dataset_small)
+        X test remove rigorously / on largest scale (use dataset_large)	
 - Main (i.e. program)
 	- stdout statements working correctly
 	- edge cases
@@ -41,7 +41,6 @@ X Node + Doubly Linked List testing
 TODO:
 - take out STL!!!!
 - improve hash fcn
-- get / remove rigorous testing
 - do some time tests on different parts of function
 - resize to only prime numbers
 - user input edge cases
