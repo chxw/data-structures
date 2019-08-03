@@ -2,6 +2,7 @@
 #define ENTRIES_HPP
 
 #include <string>
+
 #include "Node.hpp"
 
 class Entries{

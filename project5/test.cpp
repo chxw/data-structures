@@ -7,9 +7,7 @@
 #include "Hash.hpp"
 #include "Entries.hpp"
 
-#include <vector>
 #include <sys/stat.h>
-#include <typeinfo>
 
 void Hash_basics(){
 	Hash h;
