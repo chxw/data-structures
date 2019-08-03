@@ -107,12 +107,13 @@ int main(int argc, char* argv[]){
       if (freq == -1){
         std::cout << "Not found" << std::endl;
       }
-      else{
-        h.remove(word);
+      else if (h.remove(word)){
         std::cout << "Deleted" << std::endl;
         // h.print();
       }
-    } else{
+
+    } 
+    else{
       std::cout << "Unknown command" << std::endl;
     }
   } while (!done);
