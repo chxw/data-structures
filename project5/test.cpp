@@ -193,6 +193,19 @@ int main(int argc, char* argv[]){
 	  	assert(h.remove(word));
 	}
 
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::vector<std::string> row;
+
+		while(getline(ss, cell, '\t')){
+			row.push_back(cell);
+		}
+
+		std::string word = row[0];
+	  	assert(h.get(word) == -1);
+	}
+
 
 	return 0;
 }
