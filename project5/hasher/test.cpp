@@ -7,14 +7,14 @@
 void test1(){
   std::string key;
 
-  std::cin >> key;
+  while (std::cin >> key){
+    if (key == ":q"){
+    	return;
+    }
 
-  if (key == ""){
-  	return;
-  }
-
-  unsigned int hashCode = generateHashCodeOf(key);
-  std::cout << hashCode << std::endl;
+    unsigned int hashCode = generateHashCodeOf(key);
+    std::cout << hashCode << std::endl;
+}
 
   // unsigned int expected = 13226;
 

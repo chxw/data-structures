@@ -39,7 +39,6 @@ X Node + Doubly Linked List testing
 - buffer + writing documentation/specification
 
 TODO:
-- take out STL!!!!
 - improve hash fcn
 - do some time tests on different parts of function
 - resize to only prime numbers
