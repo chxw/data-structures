@@ -4,8 +4,6 @@
 #include <sstream>
 #include <string>
 
-#include <vector>
-
 #include "Hash.hpp"
 #include "Entries.hpp"
 
@@ -155,40 +153,31 @@ int main(int argc, char* argv[]){
 	while(std::getline(file, line)){
 		std::stringstream ss(line);
 		std::string cell;
-		std::vector<std::string> row;
+		std::string row[2];
 
+		int i = 0;
 		while(getline(ss, cell, '\t')){
-			row.push_back(cell);
+			row[i] = cell;
+			i++;
 		}
 		
 		std::string word = row[0];
 	  	int freq = std::stoi(row[1]);
 
 	  	h.put(word, freq);
+	  	assert(h.get(word) == freq);
 	}
 	line = "";
 
 	while(std::getline(file, line)){
 		std::stringstream ss(line);
 		std::string cell;
-		std::vector<std::string> row;
+		std::string row[2];
 
+		int i = 0;
 		while(getline(ss, cell, '\t')){
-			row.push_back(cell);
-		}
-		
-		std::string word = row[0];
-	  	assert(h.get(word) != -1);
-	}
-	line = "";
-
-	while(std::getline(file, line)){
-		std::stringstream ss(line);
-		std::string cell;
-		std::vector<std::string> row;
-
-		while(getline(ss, cell, '\t')){
-			row.push_back(cell);
+			row[i] = cell;
+			i++;
 		}
 
 		std::string word = row[0];
@@ -198,10 +187,12 @@ int main(int argc, char* argv[]){
 	while(std::getline(file, line)){
 		std::stringstream ss(line);
 		std::string cell;
-		std::vector<std::string> row;
+		std::string row[2];
 
+		int i = 0;
 		while(getline(ss, cell, '\t')){
-			row.push_back(cell);
+			row[i] = cell;
+			i++;
 		}
 
 		std::string word = row[0];
