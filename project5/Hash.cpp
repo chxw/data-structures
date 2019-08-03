@@ -5,9 +5,8 @@
 
 Hash::Hash(){
 	num_words = 0;
-	num_buckets = 5;
+	num_buckets = 199;
 	threshold = 0.75f;
-	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
 
@@ -20,7 +19,6 @@ Hash::Hash(int buckets){
 	num_words = 0;
 	num_buckets = buckets;
 	threshold = 0.75f;
-	max = (int) (num_buckets * threshold);
 
 	table = new Entries*[num_buckets];
 
@@ -36,10 +34,9 @@ Hash::Hash(int buckets){
 void Hash::resize(){
 	int old_size = num_buckets;
 	num_buckets *= 2;
-	max = (int) (num_buckets * threshold);
 
 	// capture old
-	Entries** old_table = table;
+	Entries** old = table;
 
 	//initialize new
 	num_words = 0;
@@ -50,9 +47,9 @@ void Hash::resize(){
 
 	// copy over everything
 	for (int i = 0; i < old_size; i++){
-		if (old_table[i] != nullptr){
+		if (old[i] != nullptr){
 			Node* to_delete;
-			Node* current = old_table[i]->top();
+			Node* current = old[i]->top();
 			// traverse through overfill entries
 			while (current != nullptr){
 				// rehash
@@ -65,11 +62,11 @@ void Hash::resize(){
 	}
 
 	// dicsard old
-	delete[] old_table;
+	delete[] old;
 }
 
 void Hash::put(std::string word, int freq){
-	if (num_words >= max){
+	if (getLoadFactor() > threshold){
 		resize();
 	}
 	// update freq if word already exists in table
@@ -117,7 +114,7 @@ bool Hash::setNewFreq(std::string word, int newFreq){
 	return true;
 }
 
-int Hash::getLoadFactor(){
+float Hash::getLoadFactor(){
 	return num_words/num_buckets;
 }
 

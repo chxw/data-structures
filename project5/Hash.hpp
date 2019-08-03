@@ -17,7 +17,7 @@ public:
 	int get(std::string word);
 	void remove(std::string word);
 
-	int getLoadFactor();
+	float getLoadFactor();
 
 	void print();
 
@@ -32,7 +32,6 @@ private:
 	int num_words;
 	int num_buckets;
 	float threshold;
-	int max;
 };
 
 #endif
