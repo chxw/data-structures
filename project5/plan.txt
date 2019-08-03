@@ -39,8 +39,8 @@ X Node + Doubly Linked List testing
 - buffer + writing documentation/specification
 
 TODO:
-- do some time tests on different parts of function
 - memory clean up (write destructors)
+- do some time tests on different parts of function
 - user input edge cases
 - make some void fcns => bool fcns
 - rewrite makefile to take out warning flags
