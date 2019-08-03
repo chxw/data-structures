@@ -3,9 +3,7 @@
 #include <sstream>
 #include <string>
 
-#include <vector>
 #include <sys/stat.h>
-#include <typeinfo>
 
 #include "Hash.hpp"
 

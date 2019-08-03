@@ -68,6 +68,12 @@ void Hash::resize(){
 		}
 	}
 
+	// clean up old
+	for (int i = 0; i < num_buckets; i++){
+		if (old[i] != nullptr){
+			delete old[i];
+		}
+	}
 	// dicsard old
 	delete[] old;
 }
