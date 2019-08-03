@@ -32,12 +32,10 @@ int main(int argc, char* argv[]){
 	while(std::getline(file, line)){
 		std::stringstream ss(line);
 		std::string cell;
-		// std::vector<std::string> row;
     std::string row[2];
     int i = 0;
 
 		while(getline(ss, cell, '\t')){
-			// row.push_back(cell);
       row[i] = cell;
       i++;
 		}
@@ -63,21 +61,21 @@ int main(int argc, char* argv[]){
 
     std::stringstream ss(line);
     std::string arg;
-    // std::vector<std::string> row;
     std::string row[3];
+    // capture number of arguments input
     int i = 0;
 
     while(getline(ss, arg, ' ')){
-      // row.push_back(arg);
       row[i] = arg;
       i++;
     }
 
     std::string command = row[0];
 
-    if (command == ":q"){
+    if (command == ":q" and i == 1){
       done = true;
-    } else if(command == ":p" and row[2].find_first_not_of("0123456789") == std::string::npos){
+    } 
+    else if(command == ":p" and i == 3 and row[2].find_first_not_of("0123456789") == std::string::npos){
       std::string word = row[1];
       int freq = std::stoi(row[2]);
       if (freq < 0){
@@ -89,7 +87,8 @@ int main(int argc, char* argv[]){
         // h.print();
       }
 
-    } else if (command == ":g"){
+    } 
+    else if (command == ":g" and i == 2){
       std::string word = row[1];
       int freq = h.get(word);
 
@@ -100,7 +99,8 @@ int main(int argc, char* argv[]){
         std::cout << word << " " << freq << std::endl;
       }
 
-    } else if (command == ":r"){
+    } 
+    else if (command == ":r" and i == 2){
       std::string word = row[1];
       int freq = h.get(word);
 
@@ -118,6 +118,5 @@ int main(int argc, char* argv[]){
   } while (!done);
 
   h.print();
-
   return 0;
 }
