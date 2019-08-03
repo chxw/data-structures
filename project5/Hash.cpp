@@ -129,26 +129,16 @@ bool Hash::remove(std::string word){
 	return false;
 }
 
-// mod fcn that does not return negative numbers
-int Hash::mod(int k, int n){
-	return (k%n + n)%n;
-}
+// hashing function
+unsigned int Hash::hasher(std::string word){
+	unsigned int h = 0;
+	unsigned int base = 37;
 
-int Hash::hasher(std::string word){
-	int h = 0;
-	int length = 0;
-	int base = 33;
-
-	// size_type -> int (may be unnecessary)
 	for (std::string::size_type i = 0; i < word.size(); i++){
-		length++;
+		h += (word.at(i) - '0') * pow(base, word.size() - (i+1));
 	}
 
-	for (int i = 0; i < length; i++){
-		h += (word.at(i) - '0') * pow(base, length - (i+1));
-	}
-
-	return mod(h, num_buckets);
+	return h % num_buckets; 
 }
 
 void Hash::print(){

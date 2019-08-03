@@ -49,6 +49,8 @@ int main(int argc, char* argv[]){
 
   	h.put(word, freq);
 	}
+  std::cout << "done inserting" << std::endl;  
+
 
   // prompt user until done
   bool done = false;
@@ -117,7 +119,7 @@ int main(int argc, char* argv[]){
     }
   } while (!done);
 
-	// h.print();
+  h.print();
 
   return 0;
 }

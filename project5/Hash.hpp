@@ -25,8 +25,7 @@ private:
 	Entries** table;
 
 	bool setNewFreq(std::string word, int newFreq);
-	int mod(int k, int n);
-	int hasher(std::string word);
+	unsigned int hasher(std::string word);
 	void resize();
 
 	int num_words;
