@@ -19,13 +19,14 @@ int main(int argc, char* argv[]){
   // requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
   if(argc != 2 or !exists(argv[1])){
     std::cout << "Error" << std::endl;
+    return 0;
   }
 
   // open file (2nd arg)
   std::ifstream file;
 	file.open(argv[1], std::ios::in);
 
-	Hash h(5);
+	Hash h;
 
 	std::string line;
 
@@ -73,7 +74,6 @@ int main(int argc, char* argv[]){
     }
 
     std::string command = row[0];
-    std::cout << "command is " << row[0] << std::endl;
 
     if (command == ":q"){
       done = true;
