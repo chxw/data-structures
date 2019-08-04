@@ -67,6 +67,9 @@ void Node_basics(){
 
 	assert(n2->getWord() == "a");
 	assert(n2->getFreq() == 1);	
+
+	delete n1;
+	delete n2;
 }
 
 void Entries_basics(){
@@ -188,6 +191,7 @@ inline bool exists (const std::string& name){
 
 int main(){
 	Hash_basics();
+	// Node_basics();
 	// Entries_basics();
 	// Integration_basics();
 	// Resizing();

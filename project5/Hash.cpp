@@ -35,6 +35,10 @@ Hash::Hash(const Hash& other){
 
 	table = new Entries*[num_buckets];
 
+	for (int i = 0; i < num_buckets; i++){
+		table[i] = nullptr;
+	}
+
 	// deep copy
 	for (int i = 0; i < num_buckets; i++){
 		if (other.table[i] != nullptr){
@@ -53,13 +57,24 @@ Hash& Hash::operator=(const Hash& other){
 	if (&other != this){
 		// free memory
 		for (int i = 0; i < num_buckets; i++){
-		if (table[i] != nullptr){
+			if (table[i] != nullptr){
 				delete table[i];
 				table[i] = nullptr;
 			}
 		}
 		delete[] table;
 		table = nullptr;
+
+		// get other's info
+		num_words = other.num_words;
+		num_buckets = other.num_buckets;
+		threshold = other.threshold;
+
+		table = new Entries*[num_buckets];
+
+		for (int i = 0; i < num_buckets; i++){
+			table[i] = nullptr;
+		}
 
 		// copy over
 		num_words = other.num_words;
