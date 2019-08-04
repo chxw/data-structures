@@ -111,7 +111,6 @@ int main(int argc, char* argv[]){
       }
       else if (h.remove(word)){
         std::cout << "Deleted" << std::endl;
-        // h.print();
       }
 
     } 
