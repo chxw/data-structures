@@ -199,6 +199,6 @@ int main(int argc, char* argv[]){
 	  	assert(h->get(word) == -1);
 	}
 
-
+	delete h;
 	return 0;
 }
