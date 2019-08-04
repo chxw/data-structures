@@ -18,32 +18,15 @@ Entries::Entries(std::string word, int freq){
 }
 
 Entries::Entries(const Entries& other){
-	head = other.head;
-	tail = other.tail;
-
-	num_entries = other.num_entries	;
+	// to suppress warnings
+	(void)other;
+	throw std::runtime_error("Not Implemented");
 }
 
 Entries& Entries::operator=(const Entries& other){
-	if (&other != this){
-		// free memory
-		Node* current = head;
-		while (current != nullptr){
-			Node* next = current->getNext();
-			delete current;
-			current = next;
-		}
-		head = nullptr;
-		tail = nullptr;
-
-		// deep copy
-		current = other.head;
-		while (current != nullptr){
-			add(current);
-			current = current->getNext();
-		}
-	}
-	return (*this);
+	// to suppress warnings
+	(void)other;
+	throw std::runtime_error("Not Implemented");
 }
 
 Entries::~Entries(){
@@ -125,9 +108,9 @@ bool Entries::add(Node* newbie){
 	}
 	// not empty
 	else{
-		tail->setNext(newbie);
-
 		newbie->setPrev(tail);
+
+		tail->setNext(newbie);
 
 		tail = newbie;
 		num_entries += 1;

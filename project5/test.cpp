@@ -96,21 +96,17 @@ void Entries_basics(){
 	e->add("chelsea", 6);
 	e->add("johnny", 3);
 
-	assert(e->top()->getWord() == "james earl carter");
-
-	if (e->top() == nullptr){
-		std::cout << "e is empty" << std::endl;
+	if (e->top() != nullptr){
+		assert(e->top()->getWord() == n->getWord());
 	}
-	else{
-		assert(e->top()->getWord() == "james earl carter");
+	if (e->bottom() != nullptr){
+		assert(e->bottom()->getWord() == "johnny");
 	}
-
-	assert(e->top()->getWord() == n->getWord());
-	assert(e->bottom()->getWord() == "johnny");
-
+	
 	assert(e->toString() == "james earl carter<->alex turner<->chelsea<->johnny");
 
 	delete e;
+
 }
 
 void Integration_basics(){
@@ -180,80 +176,80 @@ inline bool exists (const std::string& name){
   return (stat (name.c_str(), &buffer) == 0);
 }
 
-int main(){
+int main(int argc, char* argv[]){
 	Hash_basics();
 	Node_basics();
-	// Entries_basics();
-	// Integration_basics();
-	// Resizing();
+	Entries_basics();
+	Integration_basics();
+	Resizing();
 
 
 
-	// // requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
-	// if(argc != 2 or !exists(argv[1])){
-	// 	std::cout << "Error" << std::endl;
-	// }
+	// requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
+	if(argc != 2 or !exists(argv[1])){
+		std::cout << "Error" << std::endl;
+	}
 
-	// // open file (2nd arg)
-	// std::ifstream file;
-	// file.open(argv[1], std::ios::in);
+	// open file (2nd arg)
+	std::ifstream file;
+	file.open(argv[1], std::ios::in);
 
-	// Hash h;
+	Hash h;
 
-	// std::string line;
-	// // store (word, freq) in hash table
-	// while(std::getline(file, line)){
-	// 	std::stringstream ss(line);
-	// 	std::string cell;
-	// 	std::string row[2];
+	std::string line;
+	// store (word, freq) in hash table
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::string row[2];
 
-	// 	int i = 0;
-	// 	while(getline(ss, cell, '\t')){
-	// 		row[i] = cell;
-	// 		i++;
-	// 	}
+		int i = 0;
+		while(getline(ss, cell, '\t')){
+			row[i] = cell;
+			i++;
+		}
 		
-	// 	std::string word = row[0];
-	//   	int freq = std::stoi(row[1]);
+		std::string word = row[0];
+	  	int freq = std::stoi(row[1]);
 
-	//   	h.put(word, freq);
-	//   	assert(h.get(word) == freq);
-	// }
-	// line = "";
-	// std::cout << "finished with put" << std::endl;
+	  	h.put(word, freq);
+	  	assert(h.get(word) == freq);
+	}
+	line = "";
+	std::cout << "finished with put" << std::endl;
 
-	// while(std::getline(file, line)){
-	// 	std::stringstream ss(line);
-	// 	std::string cell;
-	// 	std::string row[2];
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::string row[2];
 
-	// 	int i = 0;
-	// 	while(getline(ss, cell, '\t')){
-	// 		row[i] = cell;
-	// 		i++;
-	// 	}
+		int i = 0;
+		while(getline(ss, cell, '\t')){
+			row[i] = cell;
+			i++;
+		}
 
-	// 	std::string word = row[0];
-	//   	assert(h.remove(word));
-	// }
-	// line = "";
-	// std::cout << "finished with remove" << std::endl;	
+		std::string word = row[0];
+	  	assert(h.remove(word));
+	}
+	line = "";
+	std::cout << "finished with remove" << std::endl;	
 
-	// while(std::getline(file, line)){
-	// 	std::stringstream ss(line);
-	// 	std::string cell;
-	// 	std::string row[2];
+	while(std::getline(file, line)){
+		std::stringstream ss(line);
+		std::string cell;
+		std::string row[2];
 
-	// 	int i = 0;
-	// 	while(getline(ss, cell, '\t')){
-	// 		row[i] = cell;
-	// 		i++;
-	// 	}
+		int i = 0;
+		while(getline(ss, cell, '\t')){
+			row[i] = cell;
+			i++;
+		}
 
-	// 	std::string word = row[0];
-	//   	assert(h.get(word) == -1);
-	// }
-	// std::cout << "finished with checking removed" << std::endl;	
+		std::string word = row[0];
+	  	assert(h.get(word) == -1);
+	}
+	std::cout << "finished with checking removed" << std::endl;	
 
-	// return 0;
+	return 0;
 }
