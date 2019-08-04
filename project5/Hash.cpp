@@ -56,21 +56,27 @@ void Hash::resize(){
 	// copy over everything from old to new & delete along the way
 	for (int i = 0; i < old_size; i++){
 		if (old[i] != nullptr){
-			Node* to_delete;
+			// Node* to_delete;
 			Node* current = old[i]->top();
 			// traverse through overfill entries
 			while (current != nullptr){
-				// rehash
+				// rehash and create new nodes in table
 				put(current->getWord(), current->getFreq());
-				to_delete = current;
+				// to_delete = current;
 				current = current->getNext();
-				delete to_delete;
-				to_delete = nullptr;
+				// delete to_delete;
+				// to_delete = nullptr;
 			}
 		}
 	}
-	
-	// discard old
+
+	// free old
+	for (int i = 0; i < num_buckets; i++){
+		if (old[i] != nullptr){
+			delete old[i];
+			old[i] = nullptr;
+		}
+	}
 	delete[] old;
 	old = nullptr;
 }
