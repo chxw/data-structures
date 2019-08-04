@@ -40,6 +40,75 @@ X Node + Doubly Linked List testing
 
 TODO:
 - memory clean up (write destructors)
+
+I think fixing the unsigned int fixed this.... unclear but here is the last valgrind report after running both
+
+1. `valgrind -v --leak-check=full ./test /comp/15/files/p5/dataset_large.tsv`
+2. `valgrind -v --leak-check=full ./test /comp/15/files/p5/dataset_small.tsv`
+
+--4664-- REDIR: 0x574f580 (libc.so.6:free) redirected to 0x4c2ac23 (free)
+==4664== 
+==4664== HEAP SUMMARY:
+==4664==     in use at exit: 72,848 bytes in 7 blocks
+==4664==   total heap usage: 121 allocs, 114 frees, 78,109 bytes allocated
+==4664== 
+==4664== Searching for pointers to 7 not-freed blocks
+==4664== Checked 110,800 bytes
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 1 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x4042D5: Integration_basics() (test.cpp:80)
+==4664==    by 0x4058BD: main (test.cpp:137)
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 2 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x40432A: Integration_basics() (test.cpp:81)
+==4664==    by 0x4058BD: main (test.cpp:137)
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 3 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x4043EC: Integration_basics() (test.cpp:83)
+==4664==    by 0x4058BD: main (test.cpp:137)
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 4 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x4053C4: Resizing() (test.cpp:114)
+==4664==    by 0x4058C2: main (test.cpp:138)
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 5 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x405419: Resizing() (test.cpp:115)
+==4664==    by 0x4058C2: main (test.cpp:138)
+==4664== 
+==4664== 24 bytes in 1 blocks are definitely lost in loss record 6 of 7
+==4664==    at 0x4C2A098: operator new(unsigned long) (vg_replace_malloc.c:333)
+==4664==    by 0x402AC8: Hash::put(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (Hash.cpp:108)
+==4664==    by 0x4054C6: Resizing() (test.cpp:118)
+==4664==    by 0x4058C2: main (test.cpp:138)
+==4664== 
+==4664== LEAK SUMMARY:
+==4664==    definitely lost: 144 bytes in 6 blocks
+==4664==    indirectly lost: 0 bytes in 0 blocks
+==4664==      possibly lost: 0 bytes in 0 blocks
+==4664==    still reachable: 72,704 bytes in 1 blocks
+==4664==         suppressed: 0 bytes in 0 blocks
+==4664== Reachable blocks (those to which a pointer was found) are not shown.
+==4664== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==4664== 
+==4664== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 6 from 6)
+--4664-- 
+--4664-- used_suppression:      6 dl-hack3-cond-1 /usr/sup/valgrind-3.11.0/lib/valgrind/default.supp:1218
+==4664== 
+==4664== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 6 from 6)
+
+
+
+
 - user input edge cases
 - make some void fcns => bool fcns
 - rewrite makefile to take out warning flags

@@ -104,6 +104,14 @@ void Integration_basics(){
 	assert(h.remove("britneysbackbetch") == true);
 	assert(h.remove("dixiechicksandbeyonce") == true);
 
+	assert(h.get("chelsea") == -1);
+	assert(h.get("tomoki") == -1);
+	assert(h.get("matt") == -1);
+	assert(h.get("test") == -1);
+	assert(h.get("johnny") == -1);
+	assert(h.get("britneysbackbetch") == -1);
+	assert(h.get("dixiechicksandbeyonce") == -1);
+
 	std::cout << "\n remove everything" << std::endl;
 	h.print();
 }
