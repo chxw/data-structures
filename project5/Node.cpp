@@ -23,17 +23,14 @@ Node::Node(const Node& other){
 }
 
 Node& Node::operator=(const Node& other){
-	if (&other != this){
-		next = other.getNext();
-		prev = other.getPrev();
-		word = other.getWord();
-		freq = other.getFreq();
-	}
-	return (*this);
+	// to suppress warnings
+	(void)other;
+	throw std::runtime_error("Not Implemented");
 }
 
 Node::~Node(){
-
+	next = nullptr;
+	prev = nullptr;
 }
 
 std::string Node::getWord() const{
