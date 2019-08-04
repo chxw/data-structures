@@ -172,8 +172,8 @@ int main(int argc, char* argv[]){
 		std::string word = row[0];
 	  	int freq = std::stoi(row[1]);
 
-	  	h->put(word, freq);
-	  	assert(h->get(word) == freq);
+	  	h.put(word, freq);
+	  	assert(h.get(word) == freq);
 	}
 	line = "";
 
@@ -189,7 +189,7 @@ int main(int argc, char* argv[]){
 		}
 
 		std::string word = row[0];
-	  	assert(h->remove(word));
+	  	assert(h.remove(word));
 	}
 
 	while(std::getline(file, line)){
@@ -204,7 +204,7 @@ int main(int argc, char* argv[]){
 		}
 
 		std::string word = row[0];
-	  	assert(h->get(word) == -1);
+	  	assert(h.get(word) == -1);
 	}
 
 	return 0;
