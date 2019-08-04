@@ -101,7 +101,7 @@ void Hash::put(std::string word, int freq){
 		return;
 	}
 
-	int index = hasher(word);
+	unsigned int index = hasher(word);
 
 	// empty
 	if (table[index] == nullptr){
@@ -117,7 +117,7 @@ void Hash::put(std::string word, int freq){
 
 // if this returns -1, means not found
 int Hash::get(std::string word){
-	int index = hasher(word);
+	unsigned int index = hasher(word);
 
 	if (table[index] == nullptr){
 		return -1;
@@ -128,7 +128,7 @@ int Hash::get(std::string word){
 
 // update freq of word
 bool Hash::setNewFreq(std::string word, int newFreq){
-	int index = hasher(word);
+	unsigned int index = hasher(word);
 
 	if (table[index] == nullptr){
 		return false;
@@ -147,7 +147,7 @@ float Hash::getLoadFactor(){
 
 // use Entries->remove() to take out entry
 bool Hash::remove(std::string word){
-	int index = hasher(word);
+	unsigned int index = hasher(word);
 	if(table[index]->remove(word)){
 		num_words--;
 		return true;

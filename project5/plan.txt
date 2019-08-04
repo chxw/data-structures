@@ -40,7 +40,6 @@ X Node + Doubly Linked List testing
 
 TODO:
 - memory clean up (write destructors)
-- do some time tests on different parts of function
 - user input edge cases
 - make some void fcns => bool fcns
 - rewrite makefile to take out warning flags

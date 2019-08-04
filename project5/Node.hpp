@@ -9,7 +9,7 @@ public:
 	Node(std::string given_word, int given_freq);
 	// Node(const Node& other);
 	// Node& operator=(const Node& other);
-	~Node();
+	// ~Node();
 
 	std::string getWord() const;
 	void setWord(std::string w);
