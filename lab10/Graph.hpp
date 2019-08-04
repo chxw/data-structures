@@ -24,6 +24,7 @@ private:
   //your design
 	std::vector<Vertex*> vertices;
 	int num_vertices;
+  int start;
 };
 
 #endif

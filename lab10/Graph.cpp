@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include <iostream>
+
 #include "Graph.hpp"
 #include "Vertex.hpp"
 #include "Pair.hpp"
@@ -43,9 +45,16 @@ void Graph::addEdge(int fromID, int toID, int weight){
 }
 
 void Graph::setShortestPathsFrom(int startID){
-
+	start = startID;	
 }
 
 std::string Graph::getShortestPath(int fromID, int toID){
+	if (fromID != start){
+		throw std::runtime_error("Invalid");
+	}
+
+	MinHeap m = MinHeap(vertices);
+	std::cout << "min is: " << m.extractMin() << std::endl;
+
 	return "";
 }

@@ -12,9 +12,9 @@ void test1(){
   graph.addEdge(1, 2, 1);
   graph.addEdge(2, 0, 1);
 
-//  graph.setShortestPathsFrom(0);
+ graph.setShortestPathsFrom(0);
 
-//  assert(graph.getShortestPath(0, 0) == "0 (0)");
+ assert(graph.getShortestPath(0, 0) == "0 (0)");
 //  assert(graph.getShortestPath(0, 1) == "0->1 (1)");
 //  assert(graph.getShortestPath(0, 2) == "0->1->2 (2)");
 }
