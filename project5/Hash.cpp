@@ -71,7 +71,7 @@ void Hash::resize(){
 	}
 
 	// free old
-	for (int i = 0; i < num_buckets; i++){
+	for (int i = 0; i < old_size; i++){
 		if (old[i] != nullptr){
 			delete old[i];
 			old[i] = nullptr;
