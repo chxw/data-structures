@@ -119,6 +119,5 @@ int main(int argc, char* argv[]){
       std::cout << "Unknown command" << std::endl;
     }
   } while (!done);
-
   return 0;
 }

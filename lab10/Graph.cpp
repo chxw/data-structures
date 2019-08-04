@@ -54,7 +54,8 @@ std::string Graph::getShortestPath(int fromID, int toID){
 	}
 
 	MinHeap m = MinHeap(vertices);
-	std::cout << "min is: " << m.extractMin() << std::endl;
+	std::cout << "min is: " << m.extractMin()->getID() << std::endl;
 
+	std::cout << "toID " << toID << std::endl;
 	return "";
 }

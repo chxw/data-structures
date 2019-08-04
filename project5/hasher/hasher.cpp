@@ -6,7 +6,7 @@
 
 unsigned int generateHashCodeOf(const std::string& key){
 	unsigned int h = 0;
-	unsigned int base = 17653;
+	unsigned int base = 1;
 	unsigned int num_buckets = 16384;
 
 	for (std::string::size_type i = 0; i < key.size(); i++){
