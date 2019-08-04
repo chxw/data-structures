@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <stdexcept>
 
 #include "Hash.hpp"
 
@@ -27,8 +28,62 @@ Hash::Hash(int buckets){
 	}
 }
 
-// Hash::Hash(const Hash& other);
-// Hash::Hash& operator=(const Hash& other);
+Hash::Hash(const Hash& other){
+	num_words = other.num_words;
+	num_buckets = other.num_buckets;
+	threshold = other.threshold;
+
+	table = new Entries*[num_buckets];
+
+	// deep copy
+	for (int i = 0; i < num_buckets; i++){
+		if (other.table[i] != nullptr){
+			Node* current = other.table[i]->top();
+			// traverse through overfill entries
+			while (current != nullptr){
+				// add
+				put(current->getWord(), current->getFreq());
+				current = current->getNext();
+			}
+		}
+	}
+}
+
+Hash& Hash::operator=(const Hash& other){
+	if (&other != this){
+		// free memory
+		for (int i = 0; i < num_buckets; i++){
+		if (table[i] != nullptr){
+				delete table[i];
+				table[i] = nullptr;
+			}
+		}
+		delete[] table;
+		table = nullptr;
+
+		// copy over
+		num_words = other.num_words;
+		num_buckets = other.num_buckets;
+		threshold = other.threshold;
+
+		table = new Entries*[num_buckets];
+
+		// deep copy
+		for (int i = 0; i < num_buckets; i++){
+			if (other.table[i] != nullptr){
+				Node* current = other.table[i]->top();
+				// traverse through overfill entries
+				while (current != nullptr){
+					// add
+					put(current->getWord(), current->getFreq());
+					current = current->getNext();
+				}
+			}
+		}
+	}
+	return (*this);
+}
+
 Hash::~Hash(){
 	for (int i = 0; i < num_buckets; i++){
 		if (table[i] != nullptr){
@@ -53,19 +108,15 @@ void Hash::resize(){
 		table[i] = nullptr;
 	}
 
-	// copy over everything from old to new & delete along the way
+	// copy over everything from old to new
 	for (int i = 0; i < old_size; i++){
 		if (old[i] != nullptr){
-			// Node* to_delete;
 			Node* current = old[i]->top();
 			// traverse through overfill entries
 			while (current != nullptr){
-				// rehash and create new nodes in table
+				// rehash
 				put(current->getWord(), current->getFreq());
-				// to_delete = current;
 				current = current->getNext();
-				// delete to_delete;
-				// to_delete = nullptr;
 			}
 		}
 	}
@@ -154,10 +205,16 @@ float Hash::getLoadFactor(){
 // use Entries->remove() to take out entry
 bool Hash::remove(std::string word){
 	unsigned int index = hasher(word);
+
+	if (table[index] == nullptr){
+		return false;
+	}
+
 	if(table[index]->remove(word)){
 		num_words--;
 		return true;
 	}
+
 	return false;
 }
 
@@ -173,13 +230,22 @@ unsigned int Hash::hasher(std::string word){
 	return h % num_buckets; 
 }
 
-void Hash::print(){
+std::string Hash::toString(){
+	std::string s = "";
+
 	for (int i = 0; i < num_buckets; i++){
 		if (table[i] != nullptr){
-			std::cout << i << ": " << table[i]->toString() << std::endl;
+			s += std::to_string(i);
+			s += ": ";
+			s += table[i]->toString();
 		}
 		else{
-			std::cout << i << ": nullptr " << std::endl;
+			s += std::to_string(i);
+			s += ": nullptr";
+
 		}
+		s += "\n";
 	}
+
+	return s;
 }

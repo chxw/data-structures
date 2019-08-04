@@ -1,4 +1,5 @@
 #include "Node.hpp"
+#include <stdexcept>
 
 Node::Node(){
 	next = nullptr;
@@ -14,22 +15,26 @@ Node::Node(std::string given_word, int given_freq){
 	freq = given_freq;
 }
 
-// Node::Node(const Node& other);
+Node::Node(const Node& other){
+	next = other.getNext();
+	prev = other.getPrev();
+	word = other.getWord();
+	freq = other.getFreq();
+}
 
-// Node& Node::operator=(const Node& other){
-// 	if (&other != this){
-// 		next = other.getNext();
-// 		prev = other.getPrev();
-// 		word = other.getWord();
-// 		freq = other.getFreq();
-// 	}
-// 	return (*this);
-// }
+Node& Node::operator=(const Node& other){
+	if (&other != this){
+		next = other.getNext();
+		prev = other.getPrev();
+		word = other.getWord();
+		freq = other.getFreq();
+	}
+	return (*this);
+}
 
-// Node::~Node(){
-// 	next = nullptr;
-// 	prev = nullptr;
-// }
+Node::~Node(){
+
+}
 
 std::string Node::getWord() const{
 	return word;

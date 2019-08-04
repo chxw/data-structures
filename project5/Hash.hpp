@@ -9,8 +9,8 @@ class Hash{
 public:
 	Hash();
 	Hash(int buckets);
-	// Hash(const Hash& other);
-	// Hash& operator=(const Hash& other);
+	Hash(const Hash& other);
+	Hash& operator=(const Hash& other);
 	~Hash();
 
 	void put(std::string word, int freq);
@@ -19,7 +19,7 @@ public:
 
 	float getLoadFactor();
 
-	void print();
+	std::string toString();
 
 private:
 	Entries** table;

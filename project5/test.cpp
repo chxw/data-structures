@@ -10,16 +10,63 @@
 #include <sys/stat.h>
 
 void Hash_basics(){
-	Hash h;
+	Hash* h = new Hash();
 
-	h.put("chelsea", 1);
-	h.put("tomoki", 2);
-	h.put("matt", 3);
-	h.put("test", 4);
+	h->put("chelsea", 1);
+	h->put("tomoki", 2);
+	h->put("matt", 3);
+	h->put("test", 4);
 
 	std::cout << "\n Hash basics testing ******" << std::endl;
-	h.print();
+	std::cout << h->toString() << std::endl;
+
+	Hash h1(*h);
+
+	assert(h1.get("chelsea") == 1);
+	assert(h1.get("tomoki") == 2);
+	assert(h1.get("matt") == 3);
+	assert(h1.get("test") == 4);
+
+	Hash h2 = (*h);
+	assert(h2.get("chelsea") == 1);
+	assert(h2.get("tomoki") == 2);
+	assert(h2.get("matt") == 3);
+	assert(h2.get("test") == 4);
+
+	delete h;
+
+	assert(h1.get("chelsea") == 1);
+	assert(h1.get("tomoki") == 2);
+	assert(h1.get("matt") == 3);
+	assert(h1.get("test") == 4);
+
+	assert(h2.get("chelsea") == 1);
+	assert(h2.get("tomoki") == 2);
+	assert(h2.get("matt") == 3);
+	assert(h2.get("test") == 4);
+
 	std::cout << "done with hash basics" << std::endl;
+}
+
+void Node_basics(){
+	Node* n = new Node("a", 1);
+
+	Node* n1 = new Node(*n);
+	assert(n1->getWord() == "a");
+	assert(n1->getFreq() == 1);
+
+	Node* n2 = new Node();
+	n2 = n;
+	assert(n2->getWord() == "a");
+	assert(n2->getFreq() == 1);
+
+	delete n;
+
+	assert(n1->getWord() == "a");
+	assert(n1->getFreq() == 1);
+
+	assert(n2->getWord() == "a");
+	assert(n2->getFreq() == 1);	
 }
 
 void Entries_basics(){
@@ -94,7 +141,7 @@ void Integration_basics(){
 	assert(h.get("dixiechicksandbeyonce") == 7);
 
 	std::cout << "\n add everything" << std::endl;
-	h.print();
+	std::cout << h.toString() << std::endl;
 
 	assert(h.remove("chelsea") == true);
 	assert(h.remove("tomoki") == true);
@@ -113,7 +160,7 @@ void Integration_basics(){
 	assert(h.get("dixiechicksandbeyonce") == -1);
 
 	std::cout << "\n remove everything" << std::endl;
-	h.print();
+	std::cout << h.toString() << std::endl;
 }
 
 void Resizing(){
@@ -122,15 +169,15 @@ void Resizing(){
 	h.put("chelsea", 1); // not freed
 	h.put("tomoki", 2); // not freed
 	std::cout << "2 words" << std::endl;
-	h.print();
+	std::cout << h.toString() << std::endl;
 	h.put("matt", 3); // not freed
 	h.put("test", 4);
 	std::cout << "4 words" << std::endl;
-	h.print();
+	std::cout << h.toString() << std::endl;
 	h.put("johnny", 5);
 	h.put("britneysbackbetch", 6);
 	std::cout << "6 words" << std::endl;
-	h.print();
+	std::cout << h.toString() << std::endl;
 	h.put("dixiechicksandbeyonce", 7);
 }
 
@@ -139,77 +186,79 @@ inline bool exists (const std::string& name){
   return (stat (name.c_str(), &buffer) == 0);
 }
 
-int main(int argc, char* argv[]){
-	// Hash_basics();
+int main(){
+	Hash_basics();
 	// Entries_basics();
 	// Integration_basics();
 	// Resizing();
 
-	// requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
-	if(argc != 2 or !exists(argv[1])){
-		std::cout << "Error" << std::endl;
-	}
 
-	// open file (2nd arg)
-	std::ifstream file;
-	file.open(argv[1], std::ios::in);
 
-	Hash h;
+	// // requires 2 arguments (i.e. ./database /path/to/input/file) && requires /path/to/input/file to exist
+	// if(argc != 2 or !exists(argv[1])){
+	// 	std::cout << "Error" << std::endl;
+	// }
 
-	std::string line;
-	// store (word, freq) in hash table
-	while(std::getline(file, line)){
-		std::stringstream ss(line);
-		std::string cell;
-		std::string row[2];
+	// // open file (2nd arg)
+	// std::ifstream file;
+	// file.open(argv[1], std::ios::in);
 
-		int i = 0;
-		while(getline(ss, cell, '\t')){
-			row[i] = cell;
-			i++;
-		}
+	// Hash h;
+
+	// std::string line;
+	// // store (word, freq) in hash table
+	// while(std::getline(file, line)){
+	// 	std::stringstream ss(line);
+	// 	std::string cell;
+	// 	std::string row[2];
+
+	// 	int i = 0;
+	// 	while(getline(ss, cell, '\t')){
+	// 		row[i] = cell;
+	// 		i++;
+	// 	}
 		
-		std::string word = row[0];
-	  	int freq = std::stoi(row[1]);
+	// 	std::string word = row[0];
+	//   	int freq = std::stoi(row[1]);
 
-	  	h.put(word, freq);
-	  	assert(h.get(word) == freq);
-	}
-	line = "";
-	std::cout << "finished with put" << std::endl;
+	//   	h.put(word, freq);
+	//   	assert(h.get(word) == freq);
+	// }
+	// line = "";
+	// std::cout << "finished with put" << std::endl;
 
-	while(std::getline(file, line)){
-		std::stringstream ss(line);
-		std::string cell;
-		std::string row[2];
+	// while(std::getline(file, line)){
+	// 	std::stringstream ss(line);
+	// 	std::string cell;
+	// 	std::string row[2];
 
-		int i = 0;
-		while(getline(ss, cell, '\t')){
-			row[i] = cell;
-			i++;
-		}
+	// 	int i = 0;
+	// 	while(getline(ss, cell, '\t')){
+	// 		row[i] = cell;
+	// 		i++;
+	// 	}
 
-		std::string word = row[0];
-	  	assert(h.remove(word));
-	}
-	line = "";
-	std::cout << "finished with remove" << std::endl;	
+	// 	std::string word = row[0];
+	//   	assert(h.remove(word));
+	// }
+	// line = "";
+	// std::cout << "finished with remove" << std::endl;	
 
-	while(std::getline(file, line)){
-		std::stringstream ss(line);
-		std::string cell;
-		std::string row[2];
+	// while(std::getline(file, line)){
+	// 	std::stringstream ss(line);
+	// 	std::string cell;
+	// 	std::string row[2];
 
-		int i = 0;
-		while(getline(ss, cell, '\t')){
-			row[i] = cell;
-			i++;
-		}
+	// 	int i = 0;
+	// 	while(getline(ss, cell, '\t')){
+	// 		row[i] = cell;
+	// 		i++;
+	// 	}
 
-		std::string word = row[0];
-	  	assert(h.get(word) == -1);
-	}
-	std::cout << "finished with checking removed" << std::endl;	
+	// 	std::string word = row[0];
+	//   	assert(h.get(word) == -1);
+	// }
+	// std::cout << "finished with checking removed" << std::endl;	
 
-	return 0;
+	// return 0;
 }

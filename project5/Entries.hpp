@@ -9,8 +9,8 @@ class Entries{
 public:
   Entries();
   Entries(std::string word, int freq);
-  // Entries(const Entries& other);
-  // Entries& operator=(const Entries& other);
+  Entries(const Entries& other);
+  Entries& operator=(const Entries& other);
   ~Entries();
 
   bool add(std::string w, int f);

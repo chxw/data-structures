@@ -1,6 +1,7 @@
 #include "Entries.hpp"
 
 #include <iostream>
+#include <stdexcept>
 
 Entries::Entries(){
 	head = nullptr;
@@ -16,8 +17,35 @@ Entries::Entries(std::string word, int freq){
 	num_entries = 0;
 }
 
-// Entries::Entries(const Entries& other){}
-// Entries& Entries::operator=(const Entries& other);
+Entries::Entries(const Entries& other){
+	head = other.head;
+	tail = other.tail;
+
+	num_entries = other.num_entries	;
+}
+
+Entries& Entries::operator=(const Entries& other){
+	if (&other != this){
+		// free memory
+		Node* current = head;
+		while (current != nullptr){
+			Node* next = current->getNext();
+			delete current;
+			current = next;
+		}
+		head = nullptr;
+		tail = nullptr;
+
+		// deep copy
+		current = other.head;
+		while (current != nullptr){
+			add(current);
+			current = current->getNext();
+		}
+	}
+	return (*this);
+}
+
 Entries::~Entries(){
 	Node* current = head;
 	while (current != nullptr){
