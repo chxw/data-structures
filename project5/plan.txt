@@ -27,8 +27,8 @@ X Node + Doubly Linked List testing
         X test remove rigorously / on larger scale (use dataset_small)
         X test remove rigorously / on largest scale (use dataset_large)	
 - Main (i.e. program)
-	- stdout statements working correctly
-	- edge cases
+	X stdout statements working correctly
+	X edge cases
 	X do-while loop of user input
 - Specs
 	X find template
@@ -40,10 +40,7 @@ X Node + Doubly Linked List testing
 	- user input edge cases
 	- public methods
 	- resizing to prime number
-	- bibliography
 
 TODO:
-- user input edge cases
-- make some void fcns => bool fcns
+- throw exceptions in functions that weren't implemented
 - rewrite makefile to take out warning flags
-- check large prime number and base 1 weren't switched

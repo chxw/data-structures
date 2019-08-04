@@ -30,6 +30,10 @@ Entries::~Entries(){
 }
 
 bool Entries::add(std::string w, int f){
+	if (f < 0){
+		return false;
+	}
+
 	Node* newbie = new Node(w, f);
 	newbie->setNext(nullptr);
 
@@ -66,6 +70,10 @@ bool Entries::add(std::string w, int f){
 }
 
 bool Entries::add(Node* newbie){
+	if(newbie->getFreq() < 0){
+		return false;
+	}
+
 	newbie->setNext(nullptr);
 
 	// empty
@@ -112,6 +120,10 @@ int Entries::findFreq(std::string word){
 }
 
 void Entries::updateFreq(std::string word, int newFreq){
+	if (newFreq < 0){
+		return;
+	}
+
 	Node* current = head;
 	while (current != nullptr){
 		if (current->getWord() == word){

@@ -45,8 +45,6 @@ int main(int argc, char* argv[]){
 
   	h.put(word, freq);
 	}
-  std::cout << "done inserting" << std::endl;  
-
 
   // prompt user until done
   bool done = false;
@@ -75,16 +73,20 @@ int main(int argc, char* argv[]){
     if (command == ":q" and i == 1){
       done = true;
     } 
-    else if(command == ":p" and i == 3 and row[2].find_first_not_of("0123456789") == std::string::npos){
+    else if(command == ":p" and i == 3 and row[2].find_first_not_of("-0123456789") == std::string::npos){
       std::string word = row[1];
       int freq = std::stoi(row[2]);
       if (freq < 0){
         std::cout << "Invalid" << std::endl;
       }
+      // case: "-" to the right of number (e.g. "1-")
+      else if (row[2].find_first_of("-") != std::string::npos)
+      {
+        std::cout << "Invalid" << std::endl;
+      }
       else {
         h.put(word, freq);
         std::cout << "Added" << std::endl;
-        // h.print();
       }
 
     } 
@@ -118,6 +120,5 @@ int main(int argc, char* argv[]){
     }
   } while (!done);
 
-  h.print();
   return 0;
 }
