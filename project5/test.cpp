@@ -77,10 +77,10 @@ void Integration_basics(){
 
 	std::cout << "\n Integration basics testing ******" << std::endl;
 
-	h.put("chelsea", 1);
-	h.put("tomoki", 2);
+	h.put("chelsea", 1); // not freed
+	h.put("tomoki", 2); //not freed
 	h.put("matt", 3);
-	h.put("test", 4);
+	h.put("test", 4); // not freed
 	h.put("johnny", 5);
 	h.put("britneysbackbetch", 6);
 	h.put("dixiechicksandbeyonce", 7);
@@ -119,11 +119,11 @@ void Integration_basics(){
 void Resizing(){
 	Hash h(3);
 
-	h.put("chelsea", 1);
-	h.put("tomoki", 2);
+	h.put("chelsea", 1); // not freed
+	h.put("tomoki", 2); // not freed
 	std::cout << "2 words" << std::endl;
 	h.print();
-	h.put("matt", 3);
+	h.put("matt", 3); // not freed
 	h.put("test", 4);
 	std::cout << "4 words" << std::endl;
 	h.print();
