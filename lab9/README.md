@@ -1,7 +1,9 @@
 ## Name:
-Chelsea
+chxw
+
 ## Date: 
 07/26/19
+
 ## Summary:
 An implementation of a graph using 2 classes: Graph and Vertex. The Graph class hold vertices in a vector (from STL) and has the ability to add directed edges between 2 vertices. The Graph class can check whether there exists a cycle in the graph. The Vertex class holds int id, int number of vertices, and enum class Color color. The enum class Color is used for detecting a cycle (Black = "done", White = "not visited", Gray = "visited"). The isCyclic() fcn in the Graph class is implemented using a depth-first search. This is the algorithm:
 

@@ -1,14 +1,19 @@
 ## Name:
-Chelsea
+chxw
+
 ## Date:
 07/21/2019
+
 ## Summary:
 The program is an implementation of an "enrollment manager", a class that contains a "student database" and "course manager". The enrollment manager controls (un)registering students to the database, adding/cancelling courses, (un)enrolling students to courses, and (de)allocating memory. The student database is a binary search tree of student data (pointers). A course holds an array of student IDS. A course maanger holds an array of course data (pointers). All instances of the student class sent to a student database live in heap memory space, and after they're added ot the student database, the student database is responsible for them. All instance of course class sent to a course manager live in heap memory space, and after they're held by the course manager, the course manager is responsible for them. 
+
 ## Files:
 `test.cpp StudentDatabase.hpp StudentDatabase.cpp Student.hpp Student.cpp EnrollmentManager.hpp EnrollmentManager.cpp CourseManager.hpp CourseManager.cpp Course.hpp Course.cpp BSTNode.hpp BSTNode.cpp`
+
 ## Instructions:
 `clang++ -std=c++11 *.cpp -o test`
 `./test`
+
 ## References:
 - N.A. (N.A.). *Deleting a node from a BST -- Part 2 (the hard case)*. Retrieved from [http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/BST-delete2.html](http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/BST-delete2.html).
 - N.A. (N.A.). *Binary search tree. Removing a node.* Retrieved from [http://www.algolist.net/Data_structures/Binary_search_tree/Removal](http://www.algolist.net/Data_structures/Binary_search_tree/Removal).
