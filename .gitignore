@@ -31,7 +31,7 @@
 *.app
 
 # Class notes
-class*/
+/class*/*
 
 # Scripts
 *.sh
