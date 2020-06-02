@@ -30,8 +30,5 @@
 *.out
 *.app
 
-# Class notes
-/class*/*
-
 # Scripts
 *.sh
